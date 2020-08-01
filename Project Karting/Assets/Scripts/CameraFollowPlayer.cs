@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
+
+public abstract class CameraTarget : MonoBehaviour
+{
+    public abstract Vector3 GetRoadDirection();
+}
+
+
 public class CameraFollowPlayer : MonoBehaviour
 {
     public float smoothedSpeed = 10.0f;
@@ -8,7 +15,7 @@ public class CameraFollowPlayer : MonoBehaviour
     public float rotationLerpCoeff;
     public float lookAtOffset = 1f;
     public Vector3 dist;
-    public KartController target;
+    public CameraTarget target;
 
     private void Update()
     {
@@ -18,10 +25,10 @@ public class CameraFollowPlayer : MonoBehaviour
         Vector3 pos = kartPosition + kartTransform.rotation * dist;
         Vector3 smoothedPos = Vector3.Lerp(cameraTransform.position, pos, smoothedSpeed * Time.deltaTime);
         transform.position = smoothedPos;
-        Debug.Log("target.roadNormal = " + target.gravityDirection);
-        transform.LookAt(kartPosition + target.gravityDirection*lookAtOffset);
+        Debug.Log("target.roadNormal = " + target.GetRoadDirection());
+        transform.LookAt(kartPosition + target.GetRoadDirection()*lookAtOffset);
         var forward = cameraTransform.forward;
-        var up = target.roadNormal;
+        var up = target.GetRoadDirection();
         Quaternion oldRotation = cameraTransform.rotation;
         cameraTransform.rotation = Quaternion.LookRotation(up.normalized, -forward.normalized);
         cameraTransform.Rotate(Vector3.right, 90f, Space.Self);
@@ -35,6 +42,6 @@ public class CameraFollowPlayer : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawRay(cameraPosition, cameraTransform.up);
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(cameraPosition, target.roadNormal);
+        Gizmos.DrawRay(cameraPosition, target.GetRoadDirection());
     }
 }
