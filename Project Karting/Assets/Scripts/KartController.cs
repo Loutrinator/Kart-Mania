@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
-using UnityEngine.PlayerLoop;
 
 public class KartController : MonoBehaviour
 {
-    [SerializeField] private Transform kart;
+    [SerializeField] private Rigidbody kart;
 
-    [SerializeField] private Vector2 roadDetectionColliderSize;
-    [SerializeField] private Vector3 roadDetectionColliderOffset;
+    //[SerializeField] private Vector2 roadDetectionColliderSize;
+    //[SerializeField] private Vector3 roadDetectionColliderOffset;
     [SerializeField] private float roadDetectionDistance;
     
-    [SerializeField] private float steering;//the steering amount
-    [SerializeField] private float acceleration;//the acceleration amount
-
     [HideInInspector] public Vector3 gravityDirection = Vector3.down;//the rotation of the vehicle
     [SerializeField] private float gravityForce = 9.81f;//the rotation computed for the current frame
     
@@ -24,67 +17,74 @@ public class KartController : MonoBehaviour
     private Vector3 direction;
     private bool isOnRoad = true;
     
-    private Vector3[] roadDetectionPoints = new Vector3[4];
-
-    private float velocity;
     public float speed;
-
     public float steerMaxAngle;
     public float steerSpeed;
+    
+    private float velocity;
+
+    //private Vector3[] roadDetectionPoints;
+
     void Start()
     {
+        //roadDetectionPoints = new Vector3[4];
+        if (!kart)
+        {
+            kart = this.GetComponent<Rigidbody>();
+        }
         //setupRoadDetection();
     }
 
 
     void Update()
     {
-        //getRoadNormal();
-        move();
-        steer();
-        setKartOnRoad();
-        alignKartToRoad();
+        kart.velocity = Vector3.zero;
+        Move();
+        Steer();
+        SetKartOnRoad();
+        AlignKartToRoad();
     }
 
-    private void steer()
+    private void Steer()
     {
         float steerAngle = 0;
-        if (Input.GetAxis("Horizontal") != 0)
+        float steerAxis = Input.GetAxis("Horizontal");
+        if (Math.Abs(steerAxis) > 0)
         {
-            steerAngle = Input.GetAxis("Horizontal") * steerMaxAngle;
+            steerAngle = steerAxis * steerMaxAngle;
         }
         transform.Rotate(transform.up,steerAngle*Time.deltaTime*steerSpeed);
         //direction = direction + transform.right
         //    movingDirection = (sine * transform.right * directionNoiseCoeff + transform.forward).normalized;
     }
 
-    private void move()
+    private void Move()
     {
         float newVelocity = 0;
-        if (Input.GetAxis("Vertical") != 0)
+        float speedAxis = Input.GetAxis("Vertical");
+        if (Mathf.Abs(speedAxis) > 0)
         {
-            newVelocity = Input.GetAxis("Vertical") * speed;
+            newVelocity = speedAxis * speed;
         }
 
         velocity = Mathf.Lerp(velocity, newVelocity, 0.01f);
-        transform.position += transform.forward * velocity * Time.deltaTime;
+        kart.velocity += Time.deltaTime * velocity * transform.forward;
     }
 
-    private void alignKartToRoad()
+    private void AlignKartToRoad()
     {
         //if (Physics.SphereCast(transform.position, positionHeightOffset*1.2f, Vector3.up, out hit, 0, 1 << LayerMask.NameToLayer("Ground"))) //Doesnt Work
         //if (Physics.Raycast(transform.position + transform.up*0.1f, -transform.up, out hit, detectionDistance, 1 << LayerMask.NameToLayer("Ground")))
 
         if (isOnRoad)
         {
-            var forward = transform.forward;
-            var Up = gravityDirection =roadNormal;
-            transform.rotation = Quaternion.LookRotation(Up.normalized, -forward.normalized);
+            gravityDirection =-roadNormal;
+            transform.rotation = Quaternion.LookRotation(roadNormal.normalized, -transform.forward.normalized);
             transform.Rotate(Vector3.right, 90f, Space.Self);
         }
         else
         {
-            transform.position -= gravityDirection * gravityForce * Time.deltaTime / 10f;
+            kart.velocity += Time.deltaTime * gravityForce * gravityDirection;
         }
         //transform.Rotate(Vector3.up, 180f, Space.Self);
         /*
@@ -97,24 +97,22 @@ public class KartController : MonoBehaviour
         }*/
         //transform.Rotate(Vector3.right, 90f, Space.Self);
     }
-    private void setKartOnRoad()
+    private void SetKartOnRoad()
     {
-        RaycastHit hit;
-    
-        if (Physics.Raycast(transform.position, -transform.up, out hit, roadDetectionDistance)){
+        if (Physics.Raycast(transform.position, -transform.up, out var hit, roadDetectionDistance)){
         
             isOnRoad = true;
-            transform.position = hit.point + hit.normal * 0.5f;
-            roadNormal = Vector3.Lerp(transform.up,hit.normal, 0.1f);
+            var kartTransform = transform;
+            kartTransform.position = hit.point + hit.normal * 0.5f;
+            roadNormal = Vector3.Lerp(kartTransform.up,hit.normal, 0.1f);
             //il faut pouvoir rotate autour de hit.normal
         }
-        else
-        {
+        else {
             isOnRoad = false;
         }
 
     }
-    
+    /*
     private void setupRoadDetection()
     {
         roadDetectionPoints[0] = transform.position + transform.rotation*(new Vector3(-roadDetectionColliderSize[0] / 2, 0, roadDetectionColliderSize[1] / 2) +
@@ -146,12 +144,21 @@ public class KartController : MonoBehaviour
         //roadPosition /= countHits > 0 ? (float)countHits : 1f
         isOnRoad = countHits > 0;
     }
+    */
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         //setupRoadDetection();
-        Vector3 direction = transform.position-transform.up * roadDetectionDistance;
-        Gizmos.DrawLine(transform.position, direction);
+        
+        var kartTransform = transform;
+        var kartPosition = kartTransform.position;
+        Vector3 rayDirection = kartPosition-kartTransform.up * roadDetectionDistance;
+        Gizmos.DrawLine(kartPosition, rayDirection);
+        
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(kartPosition, kartPosition+roadNormal);
+        
     }
     
     /*
