@@ -12,7 +12,7 @@ public class KartController : MonoBehaviour
     [HideInInspector] public Vector3 gravityDirection = Vector3.down;//the rotation of the vehicle
     [SerializeField] private float gravityForce = 9.81f;//the rotation computed for the current frame
     
-    private Vector3 roadNormal;
+    public Vector3 roadNormal;
     private Vector3 roadPosition;
     private Vector3 direction;
     private bool isOnRoad = true;

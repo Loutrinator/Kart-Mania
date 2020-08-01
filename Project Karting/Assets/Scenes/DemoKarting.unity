@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: a123fc0ac58cb774e8592c925f167e7c, type: 2}
   m_StaticLightingSkyUniqueID: 1
-  m_SkySettings: {fileID: 761729557}
+  m_SkySettings: {fileID: 818283509}
   m_SkySettingsFromProfile: {fileID: -1658960478407648048, guid: a123fc0ac58cb774e8592c925f167e7c,
     type: 2}
 --- !u!4 &313761475
@@ -566,7 +566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afd38cd6ffd068b4893fdc0d5a0f3496, type: 3}
---- !u!114 &761729557
+--- !u!114 &818283509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -918,6 +918,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1346650226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9161020816715519727, guid: afd38cd6ffd068b4893fdc0d5a0f3496,
+    type: 3}
+  m_PrefabInstance: {fileID: 673278113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1346650230
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346650226}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5456635522744069477, guid: afd38cd6ffd068b4893fdc0d5a0f3496, type: 3}
 --- !u!1 &1547029145
 GameObject:
   m_ObjectHideFlags: 0
