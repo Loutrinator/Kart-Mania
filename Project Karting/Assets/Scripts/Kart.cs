@@ -86,7 +86,7 @@ public class Kart : CameraTarget{
     {
         topSpeed            = 10f,
         acceleration        = 5f,
-        accelerationCurve   = 4f,
+        accelerationCurve   = .4f,
         braking             = 10f,
         reverseAcceleration = 5f,
         reverseSpeed        = 5f,
