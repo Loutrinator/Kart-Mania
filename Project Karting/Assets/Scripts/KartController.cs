@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class KartController : MonoBehaviour
+public class KartController : CameraTarget
 {
     [SerializeField] private Rigidbody kart;
 
@@ -12,7 +12,7 @@ public class KartController : MonoBehaviour
     [HideInInspector] public Vector3 gravityDirection = Vector3.down;//the rotation of the vehicle
     [SerializeField] private float gravityForce = 9.81f;//the rotation computed for the current frame
     
-    public Vector3 roadNormal;
+    private Vector3 roadNormal;
     private Vector3 roadPosition;
     private Vector3 direction;
     private bool isOnRoad = true;
@@ -179,4 +179,8 @@ public class KartController : MonoBehaviour
      *
      * une fois que le player a changé de position, on peut
      */
+    public override Vector3 GetRoadDirection()
+    {
+        return roadNormal;
+    }
 }
