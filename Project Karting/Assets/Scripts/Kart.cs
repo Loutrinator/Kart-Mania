@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class KartController : CameraTarget
+public class Kart : CameraTarget
 {
     [SerializeField] private Rigidbody kart;
 
