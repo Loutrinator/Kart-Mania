@@ -114,11 +114,11 @@ public class Kart : CameraTarget{
     [Tooltip("How high to keep the kart above the ground.")]
     public float minHeightThreshold = 0.02f;
 
-    //public Transform SuspensionBody;
+    public Transform suspensionBody;
 
     // saved transforms of where the suspension's neutral positions are
-    //Vector3 suspensionNeutralPos;
-    //Quaternion suspensionNeutralRot;
+    Vector3 suspensionNeutralPos;
+    Quaternion suspensionNeutralRot;
 
     // the input sources that can control the kart
     IInput[] m_Inputs;
@@ -135,8 +135,8 @@ public class Kart : CameraTarget{
         Rigidbody = GetComponent<Rigidbody>();
         m_Inputs = GetComponents<IInput>();
         roadDirection = Vector3.down;
-        //suspensionNeutralPos = SuspensionBody.transform.localPosition;
-        //suspensionNeutralRot = SuspensionBody.transform.localRotation;
+        suspensionNeutralPos = suspensionBody.transform.localPosition;
+        suspensionNeutralRot = suspensionBody.transform.localRotation;
     }
 
     void FixedUpdate()
@@ -169,9 +169,35 @@ public class Kart : CameraTarget{
         GravityPhysics();
 
         // animation
-        //AnimateSuspension();
+        AnimateSuspension();
     }
     
+    
+    void AnimateSuspension()
+    {
+        // simple suspension animation
+        var suspensionTargetPos = suspensionNeutralPos;
+        var suspensionTargetRot = suspensionNeutralRot;
+        var bodyRot = transform.rotation.eulerAngles;
+
+        var maxXTilt = finalStats.suspension * 45;
+        var closestNeutralRot = Mathf.Abs(360 - bodyRot.x) < Mathf.Abs(bodyRot.x) ? 360 : 0;
+        var xTilt = Mathf.DeltaAngle(closestNeutralRot, bodyRot.x);
+
+        var suspensionT = Mathf.InverseLerp(0, maxXTilt, xTilt);
+        suspensionT = suspensionT * suspensionT;
+
+        //Debug.Log("Suspension: " + suspensionT + " bodyRot: "  + bodyRot.x + " neutral: " + closestNeutralRot);
+        bodyRot.x = Mathf.Lerp(closestNeutralRot, bodyRot.x, suspensionT);
+
+        // transform bodyRot to suspension local space
+        suspensionTargetRot = Quaternion.Inverse(suspensionBody.transform.rotation) * Quaternion.Euler(bodyRot);
+
+        // apply the new transforms
+        suspensionBody.transform.localPosition = Vector3.Lerp(suspensionBody.transform.localPosition, suspensionTargetPos, Time.deltaTime * 5f);
+        suspensionBody.transform.localRotation = Quaternion.Slerp(suspensionBody.transform.localRotation, suspensionTargetRot, Time.deltaTime * 5f);
+    }
+
     void MoveVehicle(float accelInput, float turnInput)
     {
         // coefficient scalaire de la courbe manuelle d'accélération
@@ -253,13 +279,12 @@ public class Kart : CameraTarget{
             //alors on calcule une vélocité qui n'inclue que la gravité
             Vector3 restVelocity = new Vector3(0, Rigidbody.velocity.y, 0);
             //TODO: A REVOIR
-            //
             adjustedVelocity = Vector3.MoveTowards(adjustedVelocity, restVelocity, Time.deltaTime * finalStats.coastingDrag);
         }
 
         Rigidbody.velocity = adjustedVelocity;
 
-        //ApplyAngularSuspension();
+        ApplyAngularSuspension();
         
         // si on est au sol
         if (onGroundPercent > 0)

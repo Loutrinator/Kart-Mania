@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa266a47-97e4-4d7f-8fe9-a6b1d7ee84f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/NewKart.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/NewKart.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoKarting.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoKarting.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Kart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Kart.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +27,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Motor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../Spelunca/Unity/Assets/Entities/old/EnemyComponent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/KartInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scenes/DemoKarting.unity" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -43,8 +42,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/CameraFollowPlayer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/KartController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/BaseInput.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Kart.cs" />
         <option value="$PROJECT_DIR$/Assets/KartInput.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kart.cs" />
       </list>
     </option>
   </component>
@@ -105,7 +104,9 @@
       <workItem from="1596054315827" duration="6570000" />
       <workItem from="1596143126934" duration="7118000" />
       <workItem from="1596212537585" duration="4798000" />
-      <workItem from="1596291689674" duration="18832000" />
+      <workItem from="1596291689674" duration="19179000" />
+      <workItem from="1596542570348" duration="1058000" />
+      <workItem from="1598102291144" duration="598000" />
     </task>
     <servers />
   </component>
@@ -137,6 +138,19 @@
           <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Kart.cs</url>
+          <line>172</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Kart.cs" initialLine="172">
+            <startOffsets>
+              <option value="5770" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5771" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
