@@ -4,13 +4,8 @@
     <list default="true" id="fa266a47-97e4-4d7f-8fe9-a6b1d7ee84f8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/KartController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/KartController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Environment/Ground.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Environment/Ground.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Environment/Road.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Environment/Road.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Environment/borders.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Environment/borders.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Vehicle/Backlight.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Vehicle/Backlight.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Vehicle/Metal.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Vehicle/Metal.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Vehicle/Phare.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Vehicle/Phare.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Vehicle/Rubber.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Vehicle/Rubber.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/KartInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/KartInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoKarting.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoKarting.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,16 +17,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/controller.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/VehicleEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraFollowPlayer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Vehicle.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/MotorEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kart.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Motor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../Spelunca/Unity/Assets/Entities/old/EnemyComponent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/KartInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/DemoKarting.unity" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/controller.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Editor/VehicleEditor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Editor/MotorEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/KartController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/KartStats.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -50,8 +45,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/BaseInput.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Kart.cs" />
         <option value="$PROJECT_DIR$/Assets/KartStats.cs" />
-        <option value="$PROJECT_DIR$/Assets/KartInput.cs" />
         <option value="$PROJECT_DIR$/Assets/DebugDrawForward.cs" />
+        <option value="$PROJECT_DIR$/Assets/KartInput.cs" />
         <option value="$PROJECT_DIR$/Assets/KartController.cs" />
       </list>
     </option>
@@ -69,6 +64,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
   </component>
   <component name="RunDashboard">
@@ -116,7 +112,8 @@
       <workItem from="1596212537585" duration="4798000" />
       <workItem from="1596291689674" duration="19179000" />
       <workItem from="1596542570348" duration="1058000" />
-      <workItem from="1598102291144" duration="12780000" />
+      <workItem from="1598102291144" duration="19647000" />
+      <workItem from="1598248886909" duration="6633000" />
     </task>
     <servers />
   </component>
