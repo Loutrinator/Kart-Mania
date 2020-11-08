@@ -43,8 +43,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   intensity:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.8
     min: 0
     max: 4
   directLightingStrength:
@@ -53,16 +53,16 @@ MonoBehaviour:
     min: 0
     max: 1
   radius:
-    m_OverrideState: 0
-    m_Value: 2
+    m_OverrideState: 1
+    m_Value: 2.29
     min: 0.25
     max: 5
   temporalAccumulation:
     m_OverrideState: 0
     m_Value: 1
   ghostingReduction:
-    m_OverrideState: 0
-    m_Value: 0.5
+    m_OverrideState: 1
+    m_Value: 0.676
     min: 0
     max: 1
   blurSharpness:
@@ -232,6 +232,7 @@ MonoBehaviour:
   - {fileID: -1658960478407648048}
   - {fileID: 5321722785694334585}
   - {fileID: -6997717616824770254}
+  - {fileID: -1938380895274927459}
 --- !u!114 &3912485203739470195
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -267,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953beb541740ddc499d005ee80c9ff29, type: 3}
   m_Name: Fog
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   enabled:
     m_OverrideState: 1
