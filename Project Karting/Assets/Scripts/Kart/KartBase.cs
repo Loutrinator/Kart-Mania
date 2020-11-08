@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class KartBase : MonoBehaviour {
     public Rigidbody rigidBody;
-
+    public float accelCoeff = 5f;
+    public float speedCoeff = 1f;
+    public Vector3 roadDirection = Vector3.up;
     public Stats vehicleStats = new Stats {
         topSpeed = 10f,
         acceleration = 5f,
@@ -52,7 +54,7 @@ public class KartBase : MonoBehaviour {
         
         // ***** CALCUL ACCELERATION *****
         // coefficient scalaire de la courbe manuelle d'accélération
-        float accelerationCurveCoeff = 5;
+        float accelerationCurveCoeff = accelCoeff;
         //on convertis la vélocité du véhicule en vélocité locale
         Vector3 localVel = transform.InverseTransformVector(rigidBody.velocity);
 
@@ -79,7 +81,7 @@ public class KartBase : MonoBehaviour {
         float finalAccelPower = isBraking ? vehicleStats.braking : accelPower;
 
         //on applique accelRamp à finalAccelPower pour augmenter ou non l'accélération
-        float finalAcceleration = finalAccelPower * accelRamp;
+        float finalAcceleration = finalAccelPower * accelRamp * speedCoeff;
         // ***** FIN CALCUL ACCELERATION *****
         // ***** CALCUL ANGLE *****
         // on calcule la force de rotation du Kart
@@ -99,7 +101,8 @@ public class KartBase : MonoBehaviour {
         return _currentSpeed;
     }
     
-    public Vector3 GetRoadDirection() {
-        return Vector3.up;
+    public Vector3 GetRoadDirection()
+    {
+        return roadDirection;
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine;
 public class Keyhole : MonoBehaviour
 {
 
+    public bool insertKey = false;
     public float baseSpeed = 300f;
     public float lerpSpeed = 2f;
     public Transform keyhole;
@@ -20,16 +21,17 @@ public class Keyhole : MonoBehaviour
     }
     [SerializeField]
     public RewindSTATE rewindSTATE;
+
+    public float rewindDuration = 1f;
+    public float idleDuration = 3f;
     
     [Header("Key insertion animation")]
-    public bool insertKey = false;
     public float insertionDuration = 1f;
     public AnimationCurve insertionPositionAC;
     public AnimationCurve insertionRotationAC;
     public AnimationCurve insertionScaleAC;
 
     [Header("Key extraction animation")]
-    public bool extractKey = false;
     public float extractionDuration = 1f;
     public AnimationCurve extractionPositionAC;
     public AnimationCurve extractionRotationAC;
@@ -65,11 +67,6 @@ public class Keyhole : MonoBehaviour
             insertKey = false;
             InsertKey();
         }
-        if (extractKey)
-        {
-            extractKey = false;
-            RemoveKey();
-        }
 
         currentSpeed = Mathf.Lerp(currentSpeed, baseSpeed, lerpSpeed * Time.deltaTime);
         float animationPercent;
@@ -86,10 +83,16 @@ public class Keyhole : MonoBehaviour
             
             // ------ INSERTED STATE ------
             case KeyHoleState.inserted:
+                elapsed = Time.time - currentStateStartTime;
                 Vector3 oldRotation = keyhole.localEulerAngles;
                 float newZRotation = oldRotation.z + currentSpeed * Time.deltaTime;
                 newZRotation = newZRotation % 360f;
                 keyhole.localEulerAngles = new Vector3(oldRotation.x, oldRotation.y, newZRotation);
+                if (elapsed >= idleDuration)
+                {
+                    currentStateStartTime = Time.time;
+                    keyHoleState = KeyHoleState.extraction;
+                }
                 break;
             
             // ------ REWIND STATE ------
@@ -126,7 +129,12 @@ public class Keyhole : MonoBehaviour
                     case RewindSTATE.manual:
                         break;
                 }
-                
+
+                if (elapsed >= rewindDuration)
+                {
+                    currentStateStartTime = Time.time;
+                    keyHoleState = KeyHoleState.inserted;
+                }
                 break;
             
             // ------ INSERTION STATE ------
@@ -147,13 +155,16 @@ public class Keyhole : MonoBehaviour
                 key.transform.localEulerAngles =newRot;
                 if (elapsed >= insertionDuration)
                 { 
+                    currentStateStartTime = Time.time;
                     keyHoleState = KeyHoleState.rewind;
                 }
                 break;
             
             // ------ EXTRACTION STATE ------
             case KeyHoleState.extraction:
+                Debug.Log("EXTRACTION");
                 elapsed = Time.time - currentStateStartTime;
+                Debug.Log("elapsed " + elapsed);
                 animationPercent = elapsed / extractionDuration;
                 position = extractionPositionAC.Evaluate(animationPercent);
                 newPos = new Vector3(0,0,position+keyPositionOffset);
@@ -168,6 +179,8 @@ public class Keyhole : MonoBehaviour
                 key.transform.localEulerAngles =newRot;
                 if (elapsed >= extractionDuration)
                 {
+                    currentStateStartTime = Time.time;
+                    Debug.Log("elapsed " + elapsed);
                     keyHoleState = KeyHoleState.empty;
                     keyMeshRenderer.enabled = false;
                 }
