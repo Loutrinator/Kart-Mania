@@ -1,13 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-
-public abstract class CameraTarget : MonoBehaviour
-{
-    public abstract Vector3 GetRoadDirection();
-}
-
-
 public class CameraFollowPlayer : MonoBehaviour
 {
     public float smoothedSpeed = 10.0f;
@@ -15,7 +8,7 @@ public class CameraFollowPlayer : MonoBehaviour
     public float rotationLerpCoeff;
     public float lookAtOffset = 1f;
     public Vector3 dist;
-    public CameraTarget target;
+    public KartBase target;
 
     private void Update()
     {
