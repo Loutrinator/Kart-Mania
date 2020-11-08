@@ -98,4 +98,8 @@ public class KartBase : MonoBehaviour {
     public float CurrentSpeed() {
         return _currentSpeed;
     }
+    
+    public Vector3 GetRoadDirection() {
+        return Vector3.up;
+    }
 }

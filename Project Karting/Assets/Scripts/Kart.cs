@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kart : CameraTarget{
+public class Kart : MonoBehaviour{
     /// <summary>
     /// Contains parameters that can adjust the kart's behaviors temporarily.
     /// </summary>
@@ -496,10 +496,6 @@ public class Kart : CameraTarget{
         }
     }
     
-    public override Vector3 GetRoadDirection()
-    {
-        return roadDirection;
-    }
     
     /*
     [SerializeField] private Rigidbody kart;

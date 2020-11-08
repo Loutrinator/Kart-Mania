@@ -131,7 +131,6 @@ public class Keyhole : MonoBehaviour
             
             // ------ INSERTION STATE ------
             case KeyHoleState.insertion:
-                Debug.Log("INSERTION");
                 elapsed = Time.time - currentStateStartTime;
                 animationPercent = elapsed / insertionDuration;
                 
