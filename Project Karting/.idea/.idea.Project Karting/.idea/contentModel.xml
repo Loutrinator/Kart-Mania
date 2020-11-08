@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Antoine\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Antoine\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Project Karting.1592437895.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Antoine\AppData\local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Antoine\AppData\local\JetBrains\Rider2020.2\resharper-host\local\Transient\Rider\v202\SolutionCaches\_Project Karting.1592437895.00" t="ExcludeRecursive" />
     <e p="D:\0-Workspace\Unity\Projects\Project-Karting\Project Karting" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
@@ -15,14 +15,32 @@
         <e p="KartController.cs" t="Include" />
         <e p="KartInput.cs" t="Include" />
         <e p="KartStats.cs" t="Include" />
+        <e p="Keyhole.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="CameraFollowPlayer.cs" t="Include" />
           <e p="controller.cs" t="Include" />
           <e p="HUD.cs" t="Include" />
+          <e p="Kart" t="Include">
+            <e p="KartBase.cs" t="Include" />
+            <e p="KartPlayer.cs" t="Include" />
+            <e p="StatPowerup.cs" t="Include" />
+            <e p="Stats.cs" t="Include" />
+          </e>
           <e p="Kart.cs" t="Include" />
           <e p="Motor.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
+          <e p="SphereKart.cs" t="Include" />
           <e p="Vehicle.cs" t="Include" />
+        </e>
+        <e p="Stylized Water" t="Include">
+          <e p="Shaders" t="Include">
+            <e p="ShadowUtilities.cginc" t="Include" />
+            <e p="Stylized Water.shader" t="Include" />
+            <e p="WaterUtilities.cginc" t="Include" />
+          </e>
+          <e p="Textures" t="Include">
+            <e p="README.txt" t="Include" />
+          </e>
         </e>
         <e p="TutorialInfo" t="Include">
           <e p="Scripts" t="Include">
