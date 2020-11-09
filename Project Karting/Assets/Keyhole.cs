@@ -7,7 +7,7 @@ using UnityEngine;
 public class Keyhole : MonoBehaviour
 {
 
-    public bool insertKey = false;
+    public bool insertKey;
     public float baseSpeed = 300f;
     public float lerpSpeed = 2f;
     public Transform keyhole;
