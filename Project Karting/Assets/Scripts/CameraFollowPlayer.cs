@@ -10,7 +10,7 @@ public class CameraFollowPlayer : MonoBehaviour
     public Vector3 dist;
     public KartBase target;
 
-    private void Update()
+    private void LateUpdate()
     {
         Transform kartTransform = target.transform;
         Transform cameraTransform = transform;
@@ -18,10 +18,10 @@ public class CameraFollowPlayer : MonoBehaviour
         Vector3 pos = kartPosition + kartTransform.rotation * dist;
         Vector3 smoothedPos = Vector3.Lerp(cameraTransform.position, pos, smoothedSpeed * Time.deltaTime);
         transform.position = smoothedPos;
-        Debug.Log("target.roadNormal = " + target.GetRoadDirection());
-        transform.LookAt(kartPosition + target.GetRoadDirection()*lookAtOffset);
+        //Debug.Log("target.roadNormal = " + target.GetRoadDirection());
+        transform.LookAt(kartPosition + target.getRoadDirection()*lookAtOffset);
         var forward = cameraTransform.forward;
-        var up = target.GetRoadDirection();
+        var up = target.getRoadDirection();
         Quaternion oldRotation = cameraTransform.rotation;
         cameraTransform.rotation = Quaternion.LookRotation(up.normalized, -forward.normalized);
         cameraTransform.Rotate(Vector3.right, 90f, Space.Self);
@@ -35,6 +35,6 @@ public class CameraFollowPlayer : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawRay(cameraPosition, cameraTransform.up);
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(cameraPosition, target.GetRoadDirection());
+        Gizmos.DrawRay(cameraPosition, target.getRoadDirection());
     }
 }

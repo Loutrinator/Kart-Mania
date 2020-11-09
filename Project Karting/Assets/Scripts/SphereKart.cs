@@ -13,13 +13,10 @@ public class SphereKart : MonoBehaviour
     {
         topSpeed            = 10f,
         acceleration        = 5f,
-        accelerationCurve   = .4f,
         braking             = 10f,
         reverseAcceleration = 5f,
         reverseSpeed        = 5f,
         steer               = 5f,
-        coastingDrag        = 4f,
-        grip                = .95f,
         addedGravity        = 1f,
         suspension          = .2f
     };
@@ -121,8 +118,8 @@ public class SphereKart : MonoBehaviour
         
         //JE CAPTE R
         float accelRampT = RB.velocity.magnitude / maxSpeed;
-        float multipliedAccelerationCurve = finalStats.accelerationCurve * accelerationCurveCoeff;
-        float accelRamp = Mathf.Lerp(multipliedAccelerationCurve, 1, accelRampT * accelRampT);
+        //float multipliedAccelerationCurve = finalStats.accelerationCurve * accelerationCurveCoeff;
+        //float accelRamp = Mathf.Lerp(multipliedAccelerationCurve, 1, accelRampT * accelRampT);
         
         //si l'utilisateur veut reculer mais qu'on va en avant, alors on freine
         bool isBraking = accelDirectionIsFwd != localVelDirectionIsFwd;
@@ -132,7 +129,7 @@ public class SphereKart : MonoBehaviour
         float finalAccelPower = isBraking ? finalStats.braking : accelPower;
         
         //on applique accelRamp à finalAccelPower pour augmenter ou non l'accélération
-        float finalAcceleration = finalAccelPower * accelRamp;
+        //float finalAcceleration = finalAccelPower * accelRamp;
 
         // on calcule la force de rotation du Kart
         float turningPower = movingAxis.x * finalStats.steer;
@@ -147,7 +144,7 @@ public class SphereKart : MonoBehaviour
         // accelInput c'est l'input utilisateur donc ca permet d'avancer plus ou moins vite en fonction du joystick
         // finalAcceleration c'est l'accélération actuelle
         // fwd c'est la direction du mouvement
-        Vector3 movement = movingAxis.y * finalAcceleration * fwd;
+        //Vector3 movement = movingAxis.y * finalAcceleration * fwd;
         
         // simple suspension allows us to thrust forward even when on bumpy terrain
         fwd.y = Mathf.Lerp(fwd.y, 0, finalStats.suspension);
@@ -157,11 +154,11 @@ public class SphereKart : MonoBehaviour
         bool wasOverMaxSpeed = currentSpeed >= maxSpeed;
 
         // si on a dépassé la vitesse max alors on n'accélèrera pas pendant cette update
-        if (wasOverMaxSpeed && !isBraking) movement *= 0;
+        //if (wasOverMaxSpeed && !isBraking) movement *= 0;
         //On obtient donc une nouvelle vélocité
-        Vector3 adjustedVelocity = RB.velocity + movement * (Time.deltaTime * onGroundPercent);
+        //Vector3 adjustedVelocity = RB.velocity + movement * (Time.deltaTime * onGroundPercent);
 
-        adjustedVelocity.y = RB.velocity.y;
+        /*adjustedVelocity.y = RB.velocity.y;
         //TODO: TROUVER UN EQUIVALENT AVEC ROUTE INCLINEE
         
         //si on était pas au dessus de la vitesse max a la frame précédente et que la nouvelle vélocité est au dessus de la vitesse max
@@ -209,7 +206,7 @@ public class SphereKart : MonoBehaviour
             // on fait tourner la vélocité en se basant sur la vélocité de rotation
             RB.velocity = Quaternion.Euler(0f, turningPower * velocitySteering * Time.deltaTime, 0f) * RB.velocity;
             //TODO: faire tourner autrement que sur y
-        }
+        }*/
     }
 
     void ApplyPowerups()
@@ -231,7 +228,6 @@ public class SphereKart : MonoBehaviour
         finalStats = baseStats + powerups;
 
         // on clamp toutes les valeurs des stats qui nécessitent de pas dépasser [0,1]
-        finalStats.grip = Mathf.Clamp(finalStats.grip, 0, 1);
         finalStats.suspension = Mathf.Clamp(finalStats.suspension, 0, 1);
     }
 

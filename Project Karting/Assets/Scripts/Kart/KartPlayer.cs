@@ -2,10 +2,13 @@
 
 public class KartPlayer : KartBase {
     private void Update() {
-        float hMove = Input.GetAxis("Horizontal");
-        float vMove = Input.GetAxis("Vertical");
-
-        CurrentMoveInput.x = hMove;
-        CurrentMoveInput.y = vMove;
+        float forwardInput = Input.GetAxis("Vertical");
+        if (forwardInput > 0.001f)
+            forwardMove = 1;
+        else if (forwardInput < -0.001f)
+            forwardMove = -1;
+        else forwardMove = 0;
+        
+        hMove = Input.GetAxis("Horizontal");
     }
 }
