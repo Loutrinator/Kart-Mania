@@ -26,7 +26,8 @@ public class KartBase : MonoBehaviour {
     [Header("Drift")]
     [Range(0f, 1f)] public float minDriftAngle = 0.2f;
     [Range(1f, 2f)] public float maxDriftAngle = 2f; 
-    public List<TrailRenderer> skidEmitters; 
+    public List<TrailRenderer> skidEmitters;
+    public List<ParticleSystem> smokeEmitters; 
 
     public float kartRotationCoeff = 10f; //how much the 3d model turns
     public float kartRollCoeff = 10f; //how much the 3d model rolls
@@ -45,9 +46,11 @@ public class KartBase : MonoBehaviour {
     private float _currentSpeed;
     private float _currentAngularSpeed;
     private float _lerpedWheelDirection;
+    private float _lerpedKartRotation;
     private void Awake() {
         _firstPos = transform.position;
         _firstPosTime = Time.time;
+        stopDrifting();
     }
 
     private void FixedUpdate() {
@@ -96,14 +99,24 @@ public class KartBase : MonoBehaviour {
     {
         lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
         float steerAngle = lerpedAngle * (vehicleStats.steer*2 + 70) * Time.fixedDeltaTime;
-        //currentRotation.y += addedSteerAngle;
-        //Debug.Log("angle " + angle + " addedSteerAngle " + addedSteerAngle);
         transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
         
         Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
-        //kartRootModel.RotateAround(rotationAxis.position, kartRootModel.up, -currentRotation.y);
-        //kartRootModel.RotateAround(rotationAxis.position, rotationAxis.up, kartRotationCoeff);
+        
+        
+        /*
+        _lerpedKartRotation = Mathf.Lerp(lerpedAngle, driftDirection, kartRotationLerpSpeed * Time.fixedDeltaTime);
+
+        if (drifting)
+        {   
+            kartRootModel.localEulerAngles = Vector3.up * (_lerpedKartRotation * 70 * kartRotationCoeff);
+        }
+        else
+        {
+            kartRootModel.localEulerAngles = Vector3.up * (steerAngle * kartRotationCoeff);
+        }*/
         kartRootModel.localEulerAngles = Vector3.up * (steerAngle * kartRotationCoeff);
+
         kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * kartRollCoeff);
     }
 
@@ -132,6 +145,10 @@ public class KartBase : MonoBehaviour {
         {
             skid.emitting = true;
         }
+        foreach(var smoke in smokeEmitters)
+        {
+            smoke.Play();
+        }
     }
 
     private void stopDrifting()
@@ -141,6 +158,12 @@ public class KartBase : MonoBehaviour {
             skid.emitting = false;
         }
 
+        foreach(var smoke in smokeEmitters)
+        {
+            smoke.Stop();
+        }
+        driftDirection = 0;
+        _lerpedKartRotation = 0f;
         drifting = false;
     }
     
