@@ -11,7 +11,8 @@ public class KartBase : MonoBehaviour {
     public List<Transform> wheels;        // The wheels of the kart
     public List<Transform> turningWheels;        // The turning wheels of the kart
     public Transform rotationAxis;
-    
+    public KartEffects effects;
+
     public Stats vehicleStats = new Stats {
         topSpeed = 10f,    //
         acceleration = 5f,    //
@@ -26,13 +27,13 @@ public class KartBase : MonoBehaviour {
     [Header("Drift")]
     [Range(0f, 1f)] public float minDriftAngle = 0.2f;
     [Range(1f, 2f)] public float maxDriftAngle = 2f; 
-    public List<TrailRenderer> skidEmitters;
-    public List<ParticleSystem> smokeEmitters; 
-
     public float kartRotationCoeff = 10f; //how much the 3d model turns
     public float kartRollCoeff = 10f; //how much the 3d model rolls
     public float kartRotationLerpSpeed = 1f; //how much the 3d model turns
     public float kartWheelAngle = 15f; //how much the wheels turn
+
+    public float boostLength = 2f;
+    public float boostStrength = 1f;
     
     protected float hMove;
     protected float lerpedAngle;
@@ -72,7 +73,6 @@ public class KartBase : MonoBehaviour {
                 }else{   
                     float driftAngle = (1 + hMove*driftDirection)  / 2 * (maxDriftAngle - minDriftAngle) + minDriftAngle;
                     driftAngle *= driftDirection;
-                    Debug.Log("driftAngle " + driftAngle);
                     rotate(driftAngle);
                 } 
             }else{
@@ -141,30 +141,16 @@ public class KartBase : MonoBehaviour {
     {
         driftDirection = direction > 0 ? 1 : direction < 0 ? -1 : 0;
         drifting = true;
-        foreach(var skid in skidEmitters)
-        {
-            skid.emitting = true;
-        }
-        foreach(var smoke in smokeEmitters)
-        {
-            smoke.Play();
-        }
+        effects.startDrift();
     }
 
     private void stopDrifting()
     {
-        foreach (var skid in skidEmitters)
-        {
-            skid.emitting = false;
-        }
-
-        foreach(var smoke in smokeEmitters)
-        {
-            smoke.Stop();
-        }
         driftDirection = 0;
         _lerpedKartRotation = 0f;
         drifting = false;
+        effects.stopDrift();
+        effects.startBoost(boostLength,boostStrength);
     }
     
     public float currentSpeed() {
@@ -174,5 +160,9 @@ public class KartBase : MonoBehaviour {
     public Vector3 getRoadDirection()
     {
         return roadDirection;
+    }
+    public float getHorizontalAxis()
+    {
+        return hMove;
     }
 }
