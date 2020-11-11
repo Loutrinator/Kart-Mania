@@ -21,20 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fa266a47-97e4-4d7f-8fe9-a6b1d7ee84f8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Karting/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/KartPhysicMaterial.physicMaterial" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/KartPhysicMaterial.physicMaterial" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/New/TheTuture.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/New/TheTuture.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/KartAssets.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KartAssets.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraFollowPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraFollowPlayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Kart/KartBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Kart/KartBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Kart/KartPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Kart/KartPlayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Kart/Stats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Kart/Stats.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SphereKart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SphereKart.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/HDRPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/HDRPProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,20 +33,22 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Keyhole.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kart/Stats.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kart/StatPowerup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/KartInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/VehicleEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/KartStats.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/controller.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../Spelunca/Unity/Assets/Entities/old/EnemyComponent.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/MotorEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kart/StatPowerup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/KartController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Keyhole.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kart.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Vehicle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraFollowPlayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/KartInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/DemoKarting.unity" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kart/Stats.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Motor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kart.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/controller.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Editor/VehicleEditor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Editor/MotorEditor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/KartController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -77,14 +67,17 @@
         <option value="$PROJECT_DIR$/Assets/KartInput.cs" />
         <option value="$PROJECT_DIR$/Assets/KartController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Kart/StatPowerup.cs" />
-        <option value="$PROJECT_DIR$/Assets/Exhaust.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Kart.cs" />
-        <option value="$PROJECT_DIR$/Assets/Keyhole.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CameraFollowPlayer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Kart/KartPlayer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Kart/Stats.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SphereKart.cs" />
+        <option value="$PROJECT_DIR$/Assets/Keyhole.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kart/KartPlayer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Exhaust.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CameraFollowPlayer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kart/KartEffects.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Kart/KartBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerRaceInfo.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
       </list>
     </option>
   </component>
@@ -159,6 +152,8 @@
       <workItem from="1604842176831" duration="18936000" />
       <workItem from="1604876115865" duration="3000" />
       <workItem from="1604876135307" duration="3730000" />
+      <workItem from="1604933562369" duration="10549000" />
+      <workItem from="1605005699133" duration="10928000" />
     </task>
     <servers />
   </component>
