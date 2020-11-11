@@ -23,7 +23,9 @@ public class KartBase : MonoBehaviour {
         addedGravity = 1f,
         suspension = .2f
     };
-
+    
+    public float steeringSpeed = 70f;
+    
     [Header("Drift")]
     [Range(0f, 1f)] public float minDriftAngle = 0.2f;
     [Range(1f, 2f)] public float maxDriftAngle = 2f; 
@@ -98,7 +100,7 @@ public class KartBase : MonoBehaviour {
     protected void rotate(float angle)
     {
         lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
-        float steerAngle = lerpedAngle * (vehicleStats.steer*2 + 70) * Time.fixedDeltaTime;
+        float steerAngle = lerpedAngle * (vehicleStats.steer*2 + steeringSpeed) * Time.fixedDeltaTime;
         transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
         
         Vector3 currentRotation = kartRootModel.rotation.eulerAngles;

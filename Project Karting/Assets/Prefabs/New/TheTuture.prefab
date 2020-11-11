@@ -1156,7 +1156,7 @@ MonoBehaviour:
   rotationAxis: {fileID: 1229019990198417434}
   effects: {fileID: 6671327005639688407}
   vehicleStats:
-    topSpeed: 20
+    topSpeed: 40
     acceleration: 20
     reverseSpeed: 5
     reverseAcceleration: 5
@@ -1164,10 +1164,11 @@ MonoBehaviour:
     steer: 5
     addedGravity: 1
     suspension: 0.2
-  minDriftAngle: 0.3
+  steeringSpeed: 40
+  minDriftAngle: 0.1
   maxDriftAngle: 1.8
   kartRotationCoeff: 10
-  kartRollCoeff: 2
+  kartRollCoeff: 4
   kartRotationLerpSpeed: 5
   kartWheelAngle: 25
   boostLength: 2
@@ -1209,12 +1210,48 @@ MonoBehaviour:
   boostTimeToSwitch: 1
   boostCameraEffect:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.1448343
+      outSlope: 3.1448343
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078014165
+    - serializedVersion: 3
+      time: 0.17205
+      value: 0.9955709
+      inSlope: 0.04279783
+      outSlope: 0.04279783
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.70567346
+      value: 1.0031213
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: -0.0031051636
+      inSlope: -3.4187417
+      outSlope: -3.4187417
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  boostFOVOffset: 0
-  boostZOffset: 0
+  boostFOVOffset: 5
+  boostZOffset: 1.5
   driftLevel: 0
 --- !u!54 &7072082925053140395
 Rigidbody:
