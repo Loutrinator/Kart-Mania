@@ -9,6 +9,6 @@ public class KartPlayer : KartBase {
             forwardMove = -1;
         else forwardMove = 0;
         hMove = Input.GetAxis("Horizontal");
-        drift = Input.GetAxis("Drift") > 0; 
+        drift = Input.GetAxis("Drift") > 0;
     }
 }

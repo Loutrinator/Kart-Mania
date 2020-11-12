@@ -43,8 +43,8 @@ public class KartEffects : MonoBehaviour
 
     public void LateUpdate()
     {
-        Debug.Log("currentIntensity = " + currentIntensity);
-        Debug.Log("driftLevel = " + driftLevel);
+        //Debug.Log("currentIntensity = " + currentIntensity);
+        //Debug.Log("driftLevel = " + driftLevel);
         currentIntensity = Mathf.Lerp(currentIntensity, boostIntensity[driftLevel], Time.fixedDeltaTime * boostSwitchSpeed);
         if (Mathf.Abs(currentIntensity - boostIntensity[driftLevel]) > 0.1f)
         {

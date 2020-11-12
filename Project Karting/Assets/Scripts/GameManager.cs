@@ -12,15 +12,25 @@ public class GameManager : MonoBehaviour
 
     private bool raceBegan;
 
-    public static GameManager instance;
+    private static GameManager _instance;
+
+    public static GameManager Instance => _instance;
 
     private GameManager()
     {}
 
-
-    private void Start()
+    private void Awake()
     {
-        DontDestroyOnLoad(this);
+        if (_instance == null){
+
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
+
+            //Rest of your Awake code
+
+        } else {
+            Destroy(this);
+        }
     }
 
     private void Update()
@@ -28,23 +38,36 @@ public class GameManager : MonoBehaviour
         if (!raceBegan && Input.GetKeyDown("space"))
         {
             initRace();
-            startRace();
+            StartCoroutine(startRace());
         }
     }
 
-    private void startRace()
+    private IEnumerator startRace()
     {
+        WaitForSeconds wait = new WaitForSeconds(1f);
+        Debug.Log("start of race");
+        Debug.Log("3");
+        yield return wait;
+        Debug.Log("2");
+        yield return wait;
+        Debug.Log("1");
+        yield return wait;
+        Debug.Log("GO");
         raceBegan = true;
+        
     }
 
     private void initRace()
     {
+        Debug.Log("init of race");
+        playersInfo = new PlayerRaceInfo[nbPlayerRacing];
         if (spawnPoints.Length >= nbPlayerRacing)
         {
             for (int id = 0; id < nbPlayerRacing; ++id)
             {
+                Debug.Log("spawning kart " + id);
                 Transform spawn = spawnPoints[id];
-                KartBase kart = Instantiate(kartPrefab, spawn.position, Quaternion.identity);
+                KartBase kart = Instantiate(kartPrefab, spawn.position, spawn.rotation);
                 PlayerRaceInfo info = new PlayerRaceInfo(kart, id);
                 playersInfo[id] = info;
             }
@@ -54,6 +77,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Attempting to spawn " + nbPlayerRacing + " but only " + spawnPoints.Length + " availables.");
         }
     }
+    
     public PlayerRaceInfo? getPlayerRaceInfo(int id)
     {
         foreach (var info in playersInfo)
@@ -75,5 +99,9 @@ public class GameManager : MonoBehaviour
             //call d'effets sur la HUD du joueur "nouveau meilleur score !"
         }
     }
-    
+
+    public bool raceHasBegan()
+    {
+        return raceBegan;
+    }
 }

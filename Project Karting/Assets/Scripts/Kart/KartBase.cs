@@ -56,13 +56,15 @@ public class KartBase : MonoBehaviour {
         stopDrifting();
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
+        if (!GameManager.Instance.raceHasBegan()) return;
         move(forwardMove);
         animateWheels();
         
         if (drift && !drifting && (hMove < 0 ||hMove > 0))
         {
-            Debug.Log("Start drift");
+            //Debug.Log("Start drift");
             startDrift(hMove);
         }
 
@@ -102,7 +104,6 @@ public class KartBase : MonoBehaviour {
         lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
         float steerAngle = lerpedAngle * (vehicleStats.steer*2 + steeringSpeed) * Time.fixedDeltaTime;
         transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
-        
         Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
         
         
