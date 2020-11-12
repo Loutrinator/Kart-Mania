@@ -11,7 +11,18 @@ public class GameManager : MonoBehaviour
     private PlayerRaceInfo[] playersInfo;
 
     private bool raceBegan;
-    
+
+    public static GameManager instance;
+
+    private GameManager()
+    {}
+
+
+    private void Start()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     private void Update()
     {
         if (!raceBegan && Input.GetKeyDown("space"))
@@ -23,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void startRace()
     {
-        
+        raceBegan = true;
     }
 
     private void initRace()
@@ -33,14 +44,14 @@ public class GameManager : MonoBehaviour
             for (int id = 0; id < nbPlayerRacing; ++id)
             {
                 Transform spawn = spawnPoints[id];
-                PlayerRaceInfo info = new PlayerRaceInfo();
-                info.kart = Instantiate(kartPrefab, spawn.position, Quaternion.identity);
-                info.playerId = id;
-                info.lap = 1;
-                info.position = id;
-                info.currentCheckpoint = 0;
+                KartBase kart = Instantiate(kartPrefab, spawn.position, Quaternion.identity);
+                PlayerRaceInfo info = new PlayerRaceInfo(kart, id);
                 playersInfo[id] = info;
             }
+        }
+        else
+        {
+            Debug.LogError("Attempting to spawn " + nbPlayerRacing + " but only " + spawnPoints.Length + " availables.");
         }
     }
     public PlayerRaceInfo? getPlayerRaceInfo(int id)
@@ -51,6 +62,18 @@ public class GameManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void checkpointPassed(int checkpointId, int playerId)
+    {
+        PlayerRaceInfo player = playersInfo[playerId];
+        player.lap += 1;
+        player.previousLapTime = Time.time - player.currentLapStartTime;
+        if (player.previousLapTime < player.bestLapTime)
+        {
+            player.bestLapTime = player.previousLapTime;
+            //call d'effets sur la HUD du joueur "nouveau meilleur score !"
+        }
     }
     
 }
