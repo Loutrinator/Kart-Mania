@@ -3,7 +3,6 @@
 public class KartBase : MonoBehaviour {
     public Rigidbody rigidBody;
     public Vector3 roadDirection = Vector3.up;
-    public Transform raycastCenter;    // Use for gravity & ground check
     public Transform rotationAxis;
     
     public Stats vehicleStats = new Stats {
@@ -20,17 +19,11 @@ public class KartBase : MonoBehaviour {
     protected float hMove;
     protected int forwardMove;    // -1; 0; 1
 
-    private Vector3 _firstPos;
-    private float _firstPosTime;
     private float _currentSpeed;
     private float _currentAngularSpeed;
+    private float _yVelocity;
 
-    private void Awake() {
-        _firstPos = transform.position;
-        _firstPosTime = Time.time;
-    }
-
-    protected void move(float direction) {
+    private void move(float direction) {
         if (direction > 0) {
             _currentSpeed += vehicleStats.acceleration * Time.fixedDeltaTime;
             _currentSpeed = Mathf.Min(vehicleStats.topSpeed, _currentSpeed);
@@ -45,15 +38,29 @@ public class KartBase : MonoBehaviour {
         t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
     }
 
-    protected void rotate(float angle) {
+    private void rotate(float angle) {
         Vector3 currentRotation = transform.rotation.eulerAngles;
         currentRotation.y += angle * Time.fixedDeltaTime;
         transform.RotateAround(rotationAxis.position, rotationAxis.up, angle);
     }
     
+    private void applyGravity() {
+        Transform t = transform;
+        if (Physics.Raycast(t.position + t.up * 1f, -t.up, out var hit, 1.1f,
+            1 << LayerMask.NameToLayer("Ground"))) {
+            t.position += (hit.point.y - t.position.y) * t.up;
+            _yVelocity = 0;
+        }
+        else {
+            _yVelocity += Physics.gravity.y * Time.fixedDeltaTime;
+        }
+        transform.position += transform.up * (_yVelocity * Time.fixedDeltaTime);
+    }
+    
     private void FixedUpdate() {
         move(forwardMove);
         rotate(hMove);
+        applyGravity();
     }
 
     public float currentSpeed() {
