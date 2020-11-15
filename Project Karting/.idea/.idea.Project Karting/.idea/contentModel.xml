@@ -20,16 +20,23 @@
         <e p="Scripts" t="Include">
           <e p="CameraFollowPlayer.cs" t="Include" />
           <e p="controller.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
           <e p="HUD.cs" t="Include" />
           <e p="Kart" t="Include">
             <e p="KartBase.cs" t="Include" />
+            <e p="KartEffects.cs" t="Include" />
             <e p="KartPlayer.cs" t="Include" />
             <e p="StatPowerup.cs" t="Include" />
             <e p="Stats.cs" t="Include" />
           </e>
-          <e p="Kart.cs" t="Include" />
           <e p="Motor.cs" t="Include" />
+          <e p="PlayerRaceInfo.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
+          <e p="Skidmarks" t="Include">
+            <e p="Skidmarks.cs" t="Include" />
+            <e p="Skidmarks.shader" t="Include" />
+            <e p="WheelSkid.cs" t="Include" />
+          </e>
           <e p="SphereKart.cs" t="Include" />
           <e p="Vehicle.cs" t="Include" />
         </e>
