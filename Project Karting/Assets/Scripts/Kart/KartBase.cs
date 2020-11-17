@@ -44,6 +44,8 @@ public class KartBase : MonoBehaviour {
     protected int driftDirection;
     private bool drifting;
 
+    [HideInInspector] public PlayerRaceInfo raceInfo;
+    
     private Vector3 _firstPos;
     private float _firstPosTime;
     private float _currentSpeed;
@@ -55,7 +57,7 @@ public class KartBase : MonoBehaviour {
         _firstPosTime = Time.time;
         stopDrifting();
     }
-
+    
     private void FixedUpdate()
     {
         if (!GameManager.Instance.raceHasBegan()) return;

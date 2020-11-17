@@ -2,12 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public KartBase kartPrefab;
     [Range(1,10)] public int nbPlayerRacing = 1;
+    public int checkpointAmount;
     public Transform[] spawnPoints;
+    public Text bestTime;
+    public Text currentTime;
+    public Text timeDiff;
+    public Text lap;
+    public Text checkpoint;
+    public Text timeInfo;
+    
     private PlayerRaceInfo[] playersInfo;
 
     private bool raceBegan;
@@ -35,7 +44,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!raceBegan && Input.GetKeyDown("space"))
+        if (raceBegan)
+        {
+            PlayerRaceInfo player = playersInfo[0];
+            currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
+            lap.text = player.lap.ToString();
+            checkpoint.text = player.currentCheckpoint.ToString();
+            float diff = Time.time - player.currentLapStartTime;
+            string info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " + floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
+            timeInfo.text = info;
+        }else if (Input.GetKeyDown("space"))
         {
             initRace();
             StartCoroutine(startRace());
@@ -54,7 +72,12 @@ public class GameManager : MonoBehaviour
         yield return wait;
         Debug.Log("GO");
         raceBegan = true;
-        
+        for(int i = 0; i < playersInfo.Length;++i )
+        {
+            playersInfo[i].currentLapStartTime = Time.time;
+            playersInfo[i].lap = 1;
+            
+        }
     }
 
     private void initRace()
@@ -69,6 +92,7 @@ public class GameManager : MonoBehaviour
                 Transform spawn = spawnPoints[id];
                 KartBase kart = Instantiate(kartPrefab, spawn.position, spawn.rotation);
                 PlayerRaceInfo info = new PlayerRaceInfo(kart, id);
+                kart.raceInfo = info;
                 playersInfo[id] = info;
             }
         }
@@ -90,16 +114,68 @@ public class GameManager : MonoBehaviour
 
     public void checkpointPassed(int checkpointId, int playerId)
     {
+        
+        Debug.Log("Checkpoint passed");
         PlayerRaceInfo player = playersInfo[playerId];
-        player.lap += 1;
-        player.previousLapTime = Time.time - player.currentLapStartTime;
-        if (player.previousLapTime < player.bestLapTime)
+        //permet de vérifier si premièrement le checkpoint est valide et si il est après le checkpoint actuel
+        if (checkpointId < checkpointAmount )
         {
-            player.bestLapTime = player.previousLapTime;
-            //call d'effets sur la HUD du joueur "nouveau meilleur score !"
+            if (checkpointId - player.currentCheckpoint == 1)
+            {
+                playersInfo[playerId].currentCheckpoint = checkpointId;
+            }
+            else if(player.currentCheckpoint == checkpointAmount - 1 && checkpointId == 0){
+                playersInfo[playerId].currentCheckpoint = checkpointId;
+                newLap(playerId);
+            }
         }
+        //si le checkpoint validé est le dernier de la liste
+        
     }
 
+    private void newLap(int playerId)
+    {
+        Debug.Log("LAP");
+        //on calcule le temps du lap
+        playersInfo[playerId].previousLapTime = Time.time - playersInfo[playerId].currentLapStartTime;
+        playersInfo[playerId].currentLapStartTime = Time.time;
+
+        float diff =  playersInfo[playerId].previousLapTime - playersInfo[playerId].bestLapTime;
+
+        if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime)
+        {
+            Debug.Log("MEILLEUR TEMPS");
+            playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
+        }
+
+        bestTime.text = floatToTimeString(playersInfo[playerId].bestLapTime);
+        currentTime.text = floatToTimeString(playersInfo[playerId].previousLapTime);
+        if (playersInfo[playerId].lap != 1)
+        {
+            timeDiff.text = floatToTimeString(diff);
+            if (diff > 0)
+            {
+                timeDiff.color = Color.red;
+            }
+            else
+            {
+                timeDiff.color = Color.green;
+            }
+        }
+        
+        playersInfo[playerId].lap += 1;
+    }
+
+    private string floatToTimeString(float time)
+    {
+        string prefix = "";
+        if (time < 0) prefix = "-";
+        time = Mathf.Abs(time);
+        int minutes = (int) time / 60 ;
+        int seconds = (int) time - 60 * minutes;
+        int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
+        return prefix + string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds );
+    }
     public bool raceHasBegan()
     {
         return raceBegan;
