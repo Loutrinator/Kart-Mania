@@ -43,16 +43,30 @@ namespace Kart {
         protected int driftDirection;
         private bool drifting;
 
-        private float _currentSpeed;
-        private float _currentAngularSpeed;
+    [HideInInspector] public PlayerRaceInfo raceInfo;
     
-        private float _yVelocity;
-
-        private float _lerpedWheelDirection;
-        private float _lerpedKartRotation;
+    private Vector3 _firstPos;
+    private float _firstPosTime;
+    private float _currentSpeed;
+    private float _currentAngularSpeed;
+    private float _lerpedWheelDirection;
+    private float _lerpedKartRotation;
+    private void Awake() {
+        _firstPos = transform.position;
+        _firstPosTime = Time.time;
+        stopDrifting();
+    }
     
-        private void Awake() {
-            stopDrifting();
+    private void FixedUpdate()
+    {
+        if (!GameManager.Instance.raceHasBegan()) return;
+        move(forwardMove);
+        animateWheels();
+        
+        if (drift && !drifting && (hMove < 0 ||hMove > 0))
+        {
+            //Debug.Log("Start drift");
+            startDrift(hMove);
         }
 
         protected void move(float direction) {
@@ -113,15 +127,16 @@ namespace Kart {
             applyGravity();
         }
 
-        protected void rotate(float angle)
-        {
-            /*Vector3 currentRotation = transform.rotation.eulerAngles;
-        currentRotation.y += angle * Time.fixedDeltaTime;
-        transform.RotateAround(rotationAxis.position, rotationAxis.up, angle);*/
-        
-            lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
-            float steerAngle = lerpedAngle * (vehicleStats.steer*2 + steeringSpeed) * Time.fixedDeltaTime;
-            transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
+        var t = transform;
+        t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
+    }
+
+    protected void rotate(float angle)
+    {
+        lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
+        float steerAngle = lerpedAngle * (vehicleStats.steer*2 + steeringSpeed) * Time.fixedDeltaTime;
+        transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
+        Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
         
             Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
         

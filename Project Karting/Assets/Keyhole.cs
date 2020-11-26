@@ -162,9 +162,9 @@ public class Keyhole : MonoBehaviour
             
             // ------ EXTRACTION STATE ------
             case KeyHoleState.extraction:
-                Debug.Log("EXTRACTION");
+                //Debug.Log("EXTRACTION");
                 elapsed = Time.time - currentStateStartTime;
-                Debug.Log("elapsed " + elapsed);
+                //Debug.Log("elapsed " + elapsed);
                 animationPercent = elapsed / extractionDuration;
                 position = extractionPositionAC.Evaluate(animationPercent);
                 newPos = new Vector3(0,0,position+keyPositionOffset);
@@ -180,7 +180,7 @@ public class Keyhole : MonoBehaviour
                 if (elapsed >= extractionDuration)
                 {
                     currentStateStartTime = Time.time;
-                    Debug.Log("elapsed " + elapsed);
+                    //Debug.Log("elapsed " + elapsed);
                     keyHoleState = KeyHoleState.empty;
                     keyMeshRenderer.enabled = false;
                 }

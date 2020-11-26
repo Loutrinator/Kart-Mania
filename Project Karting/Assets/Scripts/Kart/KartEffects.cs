@@ -31,8 +31,22 @@ namespace Kart {
     
         //BoostEffect
     
-        [HideInInspector] public int driftLevel;
-        public void Start()
+    [HideInInspector] public int driftLevel;
+    public void Start()
+    {
+        stopBoost();
+        stopDrift();
+        driftLevel = 0;
+        baseFOV = camera.fieldOfView;
+        baseZ = camera.transform.localPosition.z;
+    }
+
+    public void LateUpdate()
+    {
+        //Debug.Log("currentIntensity = " + currentIntensity);
+        //Debug.Log("driftLevel = " + driftLevel);
+        currentIntensity = Mathf.Lerp(currentIntensity, boostIntensity[driftLevel], Time.fixedDeltaTime * boostSwitchSpeed);
+        if (Mathf.Abs(currentIntensity - boostIntensity[driftLevel]) > 0.1f)
         {
             stopBoost();
             stopDrift();
