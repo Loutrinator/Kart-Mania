@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KartCollider : MonoBehaviour
+namespace Kart
 {
-    public KartBase kartBase;
+    public class KartCollider : MonoBehaviour
+    {
+        public KartBase kartBase;
+    }
+
 }

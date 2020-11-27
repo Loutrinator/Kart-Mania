@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Kart;
 public class GameManager : MonoBehaviour
 {
     public KartBase kartPrefab;
