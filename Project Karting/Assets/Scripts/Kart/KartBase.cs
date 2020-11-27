@@ -5,16 +5,16 @@ public class KartBase : MonoBehaviour {
     public Transform kartRootModel;        // The kart's root 3D model
     public Transform kartBodyModel;        // The main kart 3D model (no wheels)
     public List<Transform> wheels;        // The wheels of the kart
-    public List<Transform> turningWheels;        // T
+    public List<Transform> turningWheels;        // The turning wheels of the kart
 
     public Transform rotationAxis;
     public KartEffects effects;
 
     public Stats vehicleStats = new Stats {
-        topSpeed = 10f,    //
-        acceleration = 5f,    //
+        topSpeed = 10f,   
+        acceleration = 5f,  
         braking = 10f,
-        reverseAcceleration = 5f,    //
+        reverseAcceleration = 5f, 
         reverseSpeed = 5f,
         steer = 5f,
         addedGravity = 1f,
@@ -50,43 +50,17 @@ public class KartBase : MonoBehaviour {
     private float _currentAngularSpeed;
     private float _lerpedWheelDirection;
     private float _lerpedKartRotation;
+
     private void Awake() {
         _firstPos = transform.position;
         _firstPosTime = Time.time;
         stopDrifting();
     }
-
-
-    protected void move(float direction) {
-        if (direction > 0) {
-            _currentSpeed += vehicleStats.acceleration * Time.fixedDeltaTime;
-            _currentSpeed = Mathf.Min(vehicleStats.topSpeed, _currentSpeed);
-        }
-        else if (direction < 0) {
-            _currentSpeed -= vehicleStats.reverseAcceleration * Time.fixedDeltaTime;
-            _currentSpeed = Mathf.Max(-vehicleStats.reverseSpeed, _currentSpeed);
-        }
-        else _currentSpeed = 0;
-
-        var t = transform;
-        t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
-    }
-
-    private void applyGravity() {
-        Transform t = transform;
-        if (Physics.Raycast(t.position + t.up * 1f, -t.up, out var hit, 1.1f,
-            1 << LayerMask.NameToLayer("Ground"))) {
-            t.position += (hit.point.y - t.position.y) * t.up;
-            _yVelocity = 0;
-        }
-        else {
-            _yVelocity += Physics.gravity.y * Time.fixedDeltaTime;
-        }
-        transform.position += transform.up * (_yVelocity * Time.fixedDeltaTime);
-    }
-
+	
     private void FixedUpdate() {
-        move(forwardMove);
+        if (!GameManager.Instance.raceHasBegan()) return;
+        
+	move(forwardMove);
         animateWheels();
 
         if (drift && !drifting && (hMove < 0 ||hMove > 0))
@@ -113,6 +87,22 @@ public class KartBase : MonoBehaviour {
             }
         }
         applyGravity();
+        //var t = transform;
+        //t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
+    }
+
+
+    protected void move(float direction) {
+        if (direction > 0) {
+            _currentSpeed += vehicleStats.acceleration * Time.fixedDeltaTime;
+            _currentSpeed = Mathf.Min(vehicleStats.topSpeed, _currentSpeed);
+        }
+        else if (direction < 0) {
+            _currentSpeed -= vehicleStats.reverseAcceleration * Time.fixedDeltaTime;
+            _currentSpeed = Mathf.Max(-vehicleStats.reverseSpeed, _currentSpeed);
+        }
+        else _currentSpeed = 0;
+
         var t = transform;
         t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
     }
@@ -140,6 +130,20 @@ public class KartBase : MonoBehaviour {
 
         kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * kartRollCoeff);
     }
+
+    private void applyGravity() {
+        Transform t = transform;
+        if (Physics.Raycast(t.position + t.up * 1f, -t.up, out var hit, 1.1f,
+            1 << LayerMask.NameToLayer("Ground"))) {
+            t.position += (hit.point.y - t.position.y) * t.up;
+            _yVelocity = 0;
+        }
+        else {
+            _yVelocity += Physics.gravity.y * Time.fixedDeltaTime;
+        }
+        transform.position += transform.up * (_yVelocity * Time.fixedDeltaTime);
+    }
+
 
     private void animateWheels()
     {
