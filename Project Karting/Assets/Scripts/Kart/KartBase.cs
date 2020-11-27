@@ -22,7 +22,7 @@ public class KartBase : MonoBehaviour {
     };
 
     public float steeringSpeed = 70f;
-
+    public float yAxisOffset = 1f;
     [Header("Drift")]
     [Range(0f, 1f)] public float minDriftAngle = 0.2f;
     [Range(1f, 2f)] public float maxDriftAngle = 2f; 
@@ -133,9 +133,9 @@ public class KartBase : MonoBehaviour {
 
     private void applyGravity() {
         Transform t = transform;
-        if (Physics.Raycast(t.position + t.up * 1f, -t.up, out var hit, 1.1f,
+        if (Physics.Raycast(t.position + t.up * 1f, -t.up, out var hit, 1.1f+yAxisOffset,
             1 << LayerMask.NameToLayer("Ground"))) {
-            t.position += (hit.point.y - t.position.y) * t.up;
+            t.position += (hit.point.y - t.position.y+yAxisOffset) * t.up;
             _yVelocity = 0;
         }
         else {

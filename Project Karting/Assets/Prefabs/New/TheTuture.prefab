@@ -374,7 +374,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7069297237529014134}
   m_LocalRotation: {x: 0.13052596, y: -0, z: -0, w: 0.99144495}
-  m_LocalPosition: {x: 0, y: 3.75, z: -6.49}
+  m_LocalPosition: {x: -0.0032851496, y: 7.18, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7072082925053140393}
@@ -405,7 +405,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 85
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpSpeed: 0.05
-  xOffset: 2
+  xOffset: 10
   target: {fileID: 7072082925053140394}
 --- !u!1 &7072082923330480132
 GameObject:
@@ -1162,9 +1162,10 @@ MonoBehaviour:
     addedGravity: 1
     suspension: 0.2
   steeringSpeed: 40
+  yAxisOffset: 1.14
   minDriftAngle: 0.182
   maxDriftAngle: 1.8
-  kartRotationCoeff: 10
+  kartRotationCoeff: 15
   kartRollCoeff: 4
   kartRotationLerpSpeed: 5
   kartWheelAngle: 25
