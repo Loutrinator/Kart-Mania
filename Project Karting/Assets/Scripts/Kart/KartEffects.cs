@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Kart {
-    public class KartEffects : MonoBehaviour
+namespace Kart
+{
+        public class KartEffects : MonoBehaviour
     {
         public Camera camera;
         public List<TrailRenderer> skidEmitters;
         public List<ParticleSystem> driftSmokeEmitters;
-    
-    
+
+
         public List<ParticleSystem> boostSparksEmitters;
         public Light boostLight;
         public Color[] boostColors;
@@ -23,30 +24,16 @@ namespace Kart {
         private float boostStrength;
         private float boostLength;
         private float boostStartTime;
-    
-    
+
+
         private float currentIntensity;
         private float baseFOV;
         private float baseZ;
-    
-        //BoostEffect
-    
-    [HideInInspector] public int driftLevel;
-    public void Start()
-    {
-        stopBoost();
-        stopDrift();
-        driftLevel = 0;
-        baseFOV = camera.fieldOfView;
-        baseZ = camera.transform.localPosition.z;
-    }
 
-    public void LateUpdate()
-    {
-        //Debug.Log("currentIntensity = " + currentIntensity);
-        //Debug.Log("driftLevel = " + driftLevel);
-        currentIntensity = Mathf.Lerp(currentIntensity, boostIntensity[driftLevel], Time.fixedDeltaTime * boostSwitchSpeed);
-        if (Mathf.Abs(currentIntensity - boostIntensity[driftLevel]) > 0.1f)
+        //BoostEffect
+
+        [HideInInspector] public int driftLevel;
+        public void Start()
         {
             stopBoost();
             stopDrift();
@@ -54,6 +41,22 @@ namespace Kart {
             baseFOV = camera.fieldOfView;
             baseZ = camera.transform.localPosition.z;
         }
+        /*
+        public void LateUpdate()
+        {
+            //Debug.Log("currentIntensity = " + currentIntensity);
+            //Debug.Log("driftLevel = " + driftLevel);
+            currentIntensity = Mathf.Lerp(currentIntensity, boostIntensity[driftLevel],
+                Time.fixedDeltaTime * boostSwitchSpeed);
+            if (Mathf.Abs(currentIntensity - boostIntensity[driftLevel]) > 0.1f)
+            {
+                stopBoost();
+                stopDrift();
+                driftLevel = 0;
+                baseFOV = camera.fieldOfView;
+                baseZ = camera.transform.localPosition.z;
+            }
+        }*/
 
         public void LateUpdate()
         {
@@ -133,7 +136,7 @@ namespace Kart {
             boostLight.gameObject.SetActive(true);
             driftLevel = 0;
         }
-    
+
         public void startBoost(float length, float force)
         {
             foreach(var spark in boostSparksEmitters)
@@ -155,7 +158,7 @@ namespace Kart {
 
             boostActivated = false;
         }
-    
+
         public void startDriftLoading(int level)
         {
         

@@ -1,7 +1,6 @@
-﻿using Kart;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SocialPlatforms;
-
+using Kart;
 public class CameraFollowPlayer : MonoBehaviour
 {
     public float lerpSpeed = 10.0f;

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Kart;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Kart;
 public class GameManager : MonoBehaviour
 {
     public KartBase kartPrefab;

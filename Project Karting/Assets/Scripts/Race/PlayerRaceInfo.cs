@@ -1,5 +1,4 @@
 ﻿using Kart;
-
 public struct PlayerRaceInfo
 {
     public KartBase kart;
