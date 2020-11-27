@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
-using Kart;
 using UnityEngine;
 
 public class Exhaust : MonoBehaviour

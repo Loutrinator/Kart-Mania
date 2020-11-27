@@ -1,6 +1,4 @@
-﻿using Kart;
-
-public struct PlayerRaceInfo
+﻿public struct PlayerRaceInfo
 {
     public KartBase kart;
     public int playerId;//on sait jamais
