@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Kart;
 public class Checkpoint : MonoBehaviour
 {
     public int checkpointId;
