@@ -4,6 +4,9 @@ namespace Items
 {
     public abstract class Item : MonoBehaviour
     {
-        public string name;
+        public string GetName()
+        {
+            return gameObject.name;
+        }
     }
 }
