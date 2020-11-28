@@ -48,7 +48,7 @@ namespace Items
 
         private void Start()
         {
-            GenerateProbabilities();
+            //GenerateProbabilities();
         }
 
         private void GenerateProbabilities()
