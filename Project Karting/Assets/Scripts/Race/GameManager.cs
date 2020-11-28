@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Kart;
+using Items;
 public class GameManager : MonoBehaviour
 {
     public KartBase kartPrefab;
     [Range(1,10)] public int nbPlayerRacing = 1;
+    public ItemManager itemManager;
     public int checkpointAmount;
     public Transform[] spawnPoints;
     public Text bestTime;
