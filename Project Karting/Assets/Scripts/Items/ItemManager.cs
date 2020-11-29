@@ -10,20 +10,22 @@ using UnityEditor;
 #endif
 namespace Items
 {
-    public struct ItemProbability
+    [Serializable]
+    public class ItemProbability
     {
         public float probability;
         public int itemId;
     }
+    
     #region ItemManager
     public class ItemManager : MonoBehaviour
     {
         [HideInInspector, SerializeField] public int nbItems;
         [HideInInspector, SerializeField] public int nbPositions;
         [HideInInspector, SerializeField] public List<Item> items;
+        [HideInInspector, SerializeField] public List<ListProbability> itemProba;
         //[HideInInspector, SerializeField] public List<List<float>> probabilities = new List<List<float>>();
-        
-        [HideInInspector, SerializeField] public List<List<ItemProbability>> itemProba;
+
 
         //private static ItemManager _instance;
 
@@ -91,8 +93,9 @@ namespace Items
         {
             float rnd = Random.value;
             Debug.Log("Random : " + rnd);
-            foreach (var proba in itemProba[position])
+            for (int i = 0; i < itemProba[position].Count; i++)
             {
+                ItemProbability proba = itemProba[position][i];
                 Debug.Log("proba.id " + proba.itemId + " proba.probability " + proba.probability);
                 if (rnd <= proba.probability)
                 {
@@ -117,7 +120,7 @@ namespace Items
             base.OnInspectorGUI();
             var itemManager = (ItemManager) target;
             if (itemManager == null) return;
-            if (itemManager.itemProba == null) itemManager.itemProba = new List<List<ItemProbability>>();
+            if (itemManager.itemProba == null) itemManager.itemProba = new List<ListProbability>();
             if (itemManager.items == null) itemManager.items = new List<Item>();
             if (itemColors == null) itemColors = new  Color[itemManager.items.Count];
             EditorGUILayout.Space();
@@ -127,7 +130,7 @@ namespace Items
             while (itemManager.nbPositions > positionString.Count)
             {
                 positionString.Add("Position "+ (positionString.Count+1));
-                itemManager.itemProba.Add(new List<ItemProbability>());
+                itemManager.itemProba.Add(new ListProbability());
             }
 
             while (itemManager.nbPositions < positionString.Count)
