@@ -61,8 +61,8 @@ namespace Kart
         public void LateUpdate()
         {
             #if UNITY_EDITOR
-            Debug.Log("currentIntensity = " + currentIntensity);
-            Debug.Log("driftLevel = " + driftLevel);
+            //Debug.Log("currentIntensity = " + currentIntensity);
+            //Debug.Log("driftLevel = " + driftLevel);
             #endif
             currentIntensity = Mathf.Lerp(currentIntensity, boostIntensity[driftLevel], Time.fixedDeltaTime * boostSwitchSpeed);
             if (Mathf.Abs(currentIntensity - boostIntensity[driftLevel]) > 0.1f)

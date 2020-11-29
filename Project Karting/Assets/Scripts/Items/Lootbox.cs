@@ -14,7 +14,7 @@ namespace Items
         public AnimationCurve fadeInSize;
         public float fadeInDuration = 1f;
 
-        private LootBoxState state;
+        public LootBoxState state;
         private float fadeInStartTime;
         private void Update()
         {
@@ -40,24 +40,37 @@ namespace Items
 
         private void GiveItem(int position, KartBase kart)
         {
+            Debug.Log("GIVE ITEM TO " + position);
             Item item = GameManager.Instance.itemManager.GetRandomItem(position);
-            Debug.Log("ITEM : " + item.name);
+            if (item != null)
+            {
+                Debug.Log("ITEM : " + item.name);
+            }
+            else
+            {
+                Debug.LogError("NO ITEM");
+            }
         }
 
         IEnumerator WaitToRespawn()
         {
+            Debug.Log("WAIT");
             yield return new WaitForSeconds(timeToRespawn);
+            Debug.Log("RESPAWN");
             state = LootBoxState.fadeIn;
             fadeInStartTime = Time.time;
         }
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("TriggerEnter");
             if (state == LootBoxState.available)
             {
-                KartBase kart = other.GetComponent<KartBase>();
+                Debug.Log("Available");
+                KartBase kart = other.GetComponent<KartCollider>().kartBase;
                 if (kart != null)
                 {
+                    Debug.Log("Kart not null");
                     BreakLootBox(1,kart);
                 }
             }

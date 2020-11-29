@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 7310443378214648840}
   - component: {fileID: 3185097002808391226}
   - component: {fileID: 5824941456372237421}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: prism
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41f2926b6399104da4dccf8dfd0e3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakLoot: 0
   timeToRespawn: 3
   prism: {fileID: 1089461754300398490}
   fadeInSize:
@@ -313,6 +312,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fadeInDuration: 0.5
+  state: 0
 --- !u!135 &5824941456372237421
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -321,7 +321,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7310443378214648841}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.48

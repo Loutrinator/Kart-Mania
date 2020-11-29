@@ -18,12 +18,12 @@ namespace Items
     #region ItemManager
     public class ItemManager : MonoBehaviour
     {
-        [HideInInspector] public int nbItems;
-        [HideInInspector] public int nbPositions;
-        [HideInInspector] public List<Item> items;
-        [HideInInspector] public List<List<float>> probabilities = new List<List<float>>();
+        [HideInInspector, SerializeField] public int nbItems;
+        [HideInInspector, SerializeField] public int nbPositions;
+        [HideInInspector, SerializeField] public List<Item> items;
+        //[HideInInspector, SerializeField] public List<List<float>> probabilities = new List<List<float>>();
         
-        [HideInInspector] public List<List<ItemProbability>> itemProba;
+        [HideInInspector, SerializeField] public List<List<ItemProbability>> itemProba;
 
         //private static ItemManager _instance;
 
@@ -45,7 +45,7 @@ namespace Items
                 Destroy(this);
             }
         }*/
-
+/*
         private void Start()
         {
             //GenerateProbabilities();
@@ -84,14 +84,16 @@ namespace Items
                 //TODO: TRIER LES LISTES D'ITEMPROBABILITY PAR PROBABILITE
             }
         }
-
+*/
 
         [CanBeNull]
         public Item GetRandomItem(int position)
         {
             float rnd = Random.value;
+            Debug.Log("Random : " + rnd);
             foreach (var proba in itemProba[position])
             {
+                Debug.Log("proba.id " + proba.itemId + " proba.probability " + proba.probability);
                 if (rnd <= proba.probability)
                 {
                     return items[proba.itemId];
@@ -196,34 +198,35 @@ namespace Items
                 if(item != null) itemNames.Add(item.GetName());
             }
             
-            List<ItemProbability> probas = itemManager.itemProba[currentPosition];
+            
+            //List<ItemProbability> probas = itemManager.itemProba[currentPosition];
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("+", GUILayout.MaxWidth(20)))
             {
-                probas.Add(new ItemProbability());
+                itemManager.itemProba[currentPosition].Add(new ItemProbability());
             }
             EditorGUILayout.EndHorizontal();
             float sumProba = 0f;
             string promptProba = "";
-            for (int i = 0; i < probas.Count; i++)
+            for (int i = 0; i < itemManager.itemProba[currentPosition].Count; i++)
             {
                 bool removed = false;
-                ItemProbability p = probas[i];EditorGUILayout.BeginHorizontal();
+                ItemProbability p = itemManager.itemProba[currentPosition][i];EditorGUILayout.BeginHorizontal();
                 GUIContent itemList = new GUIContent("Item");
                 p.itemId = EditorGUILayout.Popup(itemList, p.itemId, itemNames.ToArray());
                 if (GUILayout.Button("-", GUILayout.MaxWidth(20)))
                 {
-                    probas.RemoveAt(i);
+                    itemManager.itemProba[currentPosition].RemoveAt(i);
                     removed = true;
                 }
                 EditorGUILayout.EndHorizontal();
                 if (!removed)
                 {
-                    float value = Math.Min(1-sumProba,EditorGUILayout.Slider("Probability", probas[i].probability-sumProba, 0f, 1f));
+                    float value = Math.Min(1-sumProba,EditorGUILayout.Slider("Probability", itemManager.itemProba[currentPosition][i].probability-sumProba, 0f, 1f));
                     sumProba += value; 
                     p.probability = sumProba;
                     promptProba += "| " + i + " : " + p.probability + " ";
-                    probas[i] = p;
+                    itemManager.itemProba[currentPosition][i] = p;
                     EditorGUILayout.Separator();
                 }
                 
