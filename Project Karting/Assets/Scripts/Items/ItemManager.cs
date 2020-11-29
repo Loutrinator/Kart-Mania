@@ -18,35 +18,18 @@ namespace Items
     }
     
     #region ItemManager
-    public class ItemManager : MonoBehaviour
+    [CreateAssetMenu(fileName="ItemManagerPreset",menuName="ScriptableObject/ItemManager",order=0)]
+    public class ItemManager : ScriptableObject
     {
         [HideInInspector, SerializeField] public int nbItems;
         [HideInInspector, SerializeField] public int nbPositions;
         [HideInInspector, SerializeField] public List<Item> items;
         [HideInInspector, SerializeField] public List<ListProbability> itemProba;
         //[HideInInspector, SerializeField] public List<List<float>> probabilities = new List<List<float>>();
-
-
-        //private static ItemManager _instance;
-
-        //public static ItemManager Instance => _instance;
-
+        
         public ItemManager()
         {}
 
-        /*private void Awake()
-        {
-            if (_instance == null){
-
-                _instance = this;
-                DontDestroyOnLoad(this.gameObject);
-
-                //Rest of your Awake code
-
-            } else {
-                Destroy(this);
-            }
-        }*/
 /*
         private void Start()
         {
