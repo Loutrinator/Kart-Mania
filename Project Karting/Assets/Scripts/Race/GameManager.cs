@@ -5,13 +5,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using Kart;
 using Items;
+
 public class GameManager : MonoBehaviour
 {
     public KartBase kartPrefab;
     [Range(1,10)] public int nbPlayerRacing = 1;
+    [Range(1,10)] public int nbLap = 1;
     public ItemManager itemManager;
     public int checkpointAmount;
     public Transform[] spawnPoints;
+
+    [SerializeField] private GameObject HUDvsClockPrefab = null;
+    
+    [Header("Debug")]
     public Text bestTime;
     public Text currentTime;
     public Text timeDiff;
@@ -96,6 +102,7 @@ public class GameManager : MonoBehaviour
                 PlayerRaceInfo info = new PlayerRaceInfo(kart, id);
                 kart.raceInfo = info;
                 playersInfo[id] = info;
+                Instantiate(HUDvsClockPrefab); // id automatically set inside the class
             }
         }
         else
@@ -104,7 +111,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public PlayerRaceInfo? getPlayerRaceInfo(int id)
+    public PlayerRaceInfo getPlayerRaceInfo(int id)
     {
         foreach (var info in playersInfo)
         {
@@ -143,6 +150,7 @@ public class GameManager : MonoBehaviour
         playersInfo[playerId].currentLapStartTime = Time.time;
 
         float diff =  playersInfo[playerId].previousLapTime - playersInfo[playerId].bestLapTime;
+        playersInfo[playerId].lap += 1; // doit être appelé ici pour mettre à jour la diff dans la HUD
 
         if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime)
         {
@@ -165,7 +173,6 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        playersInfo[playerId].lap += 1;
     }
 
     private string floatToTimeString(float time)
