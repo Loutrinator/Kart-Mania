@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Kart;
 using Items;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,8 +16,10 @@ public class GameManager : MonoBehaviour
     public int checkpointAmount;
     public Transform[] spawnPoints;
 
+    [Header("UI and HUD")]
     [SerializeField] private GameObject HUDvsClockPrefab = null;
-    
+    [SerializeField] private GameObject StartUIPrefab = null;
+
     [Header("Debug")]
     public Text bestTime;
     public Text currentTime;
@@ -28,6 +31,8 @@ public class GameManager : MonoBehaviour
     private PlayerRaceInfo[] playersInfo;
 
     private bool raceBegan;
+    private bool raceIsInit;
+    private StartMsgAnimation startMessage;
 
     private static GameManager _instance;
 
@@ -50,6 +55,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    private void Start()
+    {
+        raceIsInit = false;
+        initRace();
+    }
+
     private void Update()
     {
         if (raceBegan)
@@ -61,31 +73,21 @@ public class GameManager : MonoBehaviour
             float diff = Time.time - player.currentLapStartTime;
             string info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " + floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
             timeInfo.text = info;
-        }else if (Input.GetKeyDown("space"))
-        {
-            initRace();
-            StartCoroutine(startRace());
         }
     }
 
-    private IEnumerator startRace()
+    public IEnumerator startRace()
     {
-        WaitForSeconds wait = new WaitForSeconds(1f);
-        Debug.Log("start of race");
-        Debug.Log("3");
-        yield return wait;
-        Debug.Log("2");
-        yield return wait;
-        Debug.Log("1");
-        yield return wait;
-        Debug.Log("GO");
-        raceBegan = true;
+       
+        yield return new WaitForSeconds(1f);
         for(int i = 0; i < playersInfo.Length;++i )
         {
             playersInfo[i].currentLapStartTime = Time.time;
             playersInfo[i].lap = 1;
-            
         }
+
+        Destroy( startMessage.gameObject );
+        raceBegan = true;
     }
 
     private void initRace()
@@ -103,6 +105,9 @@ public class GameManager : MonoBehaviour
                 kart.raceInfo = info;
                 playersInfo[id] = info;
                 Instantiate(HUDvsClockPrefab); // id automatically set inside the class
+                startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
+                startMessage.startTime = Time.time;
+                raceIsInit = true;
             }
         }
         else
