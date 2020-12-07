@@ -1,14 +1,69 @@
-﻿using Kart;
-public struct PlayerRaceInfo
+﻿using System;
+using Kart;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class PlayerRaceInfo
 {
-    public KartBase kart;
-    public int playerId;//on sait jamais
-    public int lap;//the current lap
-    public int position;//the kart's position in te race (1rst, 2nd etc)
+    private KartBase _kart;
+
+    public KartBase kart
+    {
+        get { return _kart; }
+        set
+        {
+            _kart = value;
+            onKartChange?.Invoke();
+        }
+    }
+
+    public int playerId; //on sait jamais
+    private int _lap;
+
+    public int lap
+    {
+        get { return _lap; }
+        set
+        {
+            _lap = value;
+            onNewLap?.Invoke();
+        }
+    } //the current lap
+
+    private int _position;
+
+    public int position
+    {
+        get { return _position; }
+        set
+        {
+            _position = value;
+            onPositionChange?.Invoke();
+        }
+    } //the kart's position in te race (1rst, 2nd etc)
+
+
     public int currentCheckpoint;//the previous checkpoint passed
-    public float bestLapTime;
+
+    private float _bestLapTime;
+
+    public float bestLapTime
+    {
+        get { return _bestLapTime; }
+        set
+        {
+            _bestLapTime = value;
+            onBestLapTimeChange?.Invoke();
+        }
+    }
+
     public float previousLapTime;
     public float currentLapStartTime;
+
+    public event Action onPositionChange;
+    public event Action onNewLap;
+    public event Action onBestLapTimeChange;
+    public event Action onKartChange;    
 
     public PlayerRaceInfo(KartBase k, int id)
     {
