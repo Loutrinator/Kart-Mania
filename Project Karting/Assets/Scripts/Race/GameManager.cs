@@ -84,8 +84,9 @@ public class GameManager : MonoBehaviour
             playersInfo[i].lap = 1;
         }
         raceBegan = true;
-        Destroy( startMessage.gameObject );
     }
+
+ 
 
     private void initRace()
     {
