@@ -17,6 +17,7 @@ public class StartMsgAnimation : MonoBehaviour
     [SerializeField] private AnimationCurve rotationCurve = null;
     [SerializeField] private AnimationCurve scaleCurve = null;
     [SerializeField] private AnimationCurve goScaleCurve = null;
+    [SerializeField] private AnimationCurve goAlphaCurve = null;
     [SerializeField] private float fadeInDuration = 1f;
     [SerializeField] private float goFadeInDuration = 1f;
     [SerializeField] private float startSFX = 0.2f;
@@ -70,14 +71,15 @@ public class StartMsgAnimation : MonoBehaviour
             _placeholder.rectTransform.rotation = Quaternion.identity;
             _audioSource.pitch = 1.65f;
             _step = _elpasedTime / goFadeInDuration;
+            tmp.a = goAlphaCurve.Evaluate(_step);
         }
         else
         {
             _scale = scaleCurve.Evaluate(_step) * Vector3.one;
             _placeholder.rectTransform.rotation = Quaternion.Euler(0, 0, rotationCurve.Evaluate(_step));
             _audioSource.pitch = 1;
+            tmp.a = alphaCurve.Evaluate(_step);
         }
-        tmp.a = alphaCurve.Evaluate(_step);
         _placeholder.transform.localScale = _scale;
         _placeholder.color = tmp;
 
@@ -91,7 +93,7 @@ public class StartMsgAnimation : MonoBehaviour
         // if it display "GO!" the race begun
         if (_iconIndex == 3)
         {
-            GameManager.Instance.startRace();
+            if (!GameManager.Instance.raceHasBegan()) GameManager.Instance.startRace();
             if (_step < 2) return; // execution repeat until we reach the end of animation curves
             Destroy(gameObject);
         }
