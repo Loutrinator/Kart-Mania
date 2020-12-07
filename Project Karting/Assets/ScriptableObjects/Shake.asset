@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d66417a2f1ebf42b9c15a9f3b51769, type: 3}
+  m_Name: Shake
+  m_EditorClassIdentifier: 
+  target: 1
+  amplitude: 5.64
+  frequency: 17.64
+  duration: 5
+  blendOverLifeTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.009429932
+      inSlope: 20.943089
+      outSlope: 20.943089
+      tangentMode: 0
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.073999815
+    - serializedVersion: 3
+      time: 0.02092284
+      value: 0.99990463
+      inSlope: -5.232286
+      outSlope: -5.232286
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.24236245
+      outWeight: 0.14870249
+    - serializedVersion: 3
+      time: 0.24984765
+      value: 0.06822909
+      inSlope: -0.075066105
+      outSlope: -0.075066105
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.6534413
+      outWeight: 0.7210966
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
