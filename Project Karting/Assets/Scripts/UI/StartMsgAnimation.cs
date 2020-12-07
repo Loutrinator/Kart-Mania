@@ -12,12 +12,14 @@ public class StartMsgAnimation : MonoBehaviour
     [SerializeField] private AnimationCurve scaleCurve = null;
     [SerializeField] private AnimationCurve goScaleCurve = null;
     [SerializeField] private float fadeInDuration = 1f;
+    [SerializeField] private float startSFX = 0.2f;
     private float _elpasedTime;
-    [HideInInspector] public float startTime;
+    [HideInInspector] public float _startTime;
     private int _iconIndex;
     private Image _placeholder;
     private float _step;
     private Vector3 _scale;
+    private AudioSource _audioSource;
     public State state
     {
         get
@@ -37,6 +39,7 @@ public class StartMsgAnimation : MonoBehaviour
     {
         _iconIndex = 0;
         _placeholder = GetComponent<Image>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -49,11 +52,12 @@ public class StartMsgAnimation : MonoBehaviour
       
         if(GameManager.Instance.raceHasBegan()) return;
         _placeholder.sprite = icons[_iconIndex];
-        _elpasedTime = Time.time - startTime;
+        _elpasedTime = Time.time - _startTime;
         _step = _elpasedTime / fadeInDuration;
         if (_iconIndex == 3)
         {
             _scale = goScaleCurve.Evaluate(_step) * Vector3.one;
+            _audioSource.pitch += 0.02f;
         }
         else
         {
@@ -65,14 +69,20 @@ public class StartMsgAnimation : MonoBehaviour
         var tmp = _placeholder.color;
         tmp.a = alphaCurve.Evaluate(_step);
         _placeholder.color = tmp;
+        if (  _step > startSFX && _step < _audioSource.clip.length && !_audioSource.isPlaying)
+        {
+            _audioSource.Play();
+        }
         if (_step < 1) return;
+
         if (_iconIndex > 2)
         {
             StartCoroutine(GameManager.Instance.startRace());
+            _audioSource.Stop();
           return;
         }
         _iconIndex = (_iconIndex + 1) % icons.Count;
-        startTime = Time.time;
+        _startTime = Time.time;
     }
    
 }

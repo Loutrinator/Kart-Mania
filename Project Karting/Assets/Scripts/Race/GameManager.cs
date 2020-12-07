@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
                 playersInfo[id] = info;
                 Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                 startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
-                startMessage.startTime = Time.time;
+                startMessage._startTime = Time.time;
                 raceIsInit = true;
             }
         }
