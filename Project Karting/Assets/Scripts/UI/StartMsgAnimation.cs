@@ -77,7 +77,7 @@ public class StartMsgAnimation : MonoBehaviour
 
         if (_iconIndex > 2)
         {
-            StartCoroutine(GameManager.Instance.startRace());
+            GameManager.Instance.startRace();
             _audioSource.Stop();
           return;
         }

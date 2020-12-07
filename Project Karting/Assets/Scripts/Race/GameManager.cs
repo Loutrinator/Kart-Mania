@@ -76,18 +76,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator startRace()
+    public void startRace()
     {
-       
-        yield return new WaitForSeconds(1f);
         for(int i = 0; i < playersInfo.Length;++i )
         {
             playersInfo[i].currentLapStartTime = Time.time;
             playersInfo[i].lap = 1;
         }
-
-        Destroy( startMessage.gameObject );
         raceBegan = true;
+        Destroy( startMessage.gameObject );
     }
 
     private void initRace()
