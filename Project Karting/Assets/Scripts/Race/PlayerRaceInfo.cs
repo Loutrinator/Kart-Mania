@@ -1,13 +1,19 @@
 ﻿using System;
 using Items;
 using Kart;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerRaceInfo
 {
-    private KartBase _kart;
     public Item item;
+
+    private PlayerController _controller;
+
+    public PlayerController Controller => _controller;
+
+    private KartBase _kart;
     public KartBase kart
     {
         get { return _kart; }
@@ -66,7 +72,7 @@ public class PlayerRaceInfo
     public event Action onBestLapTimeChange;
     public event Action onKartChange;    
 
-    public PlayerRaceInfo(KartBase k, int id)
+    public PlayerRaceInfo(KartBase k, int id, PlayerAction action)
     {
         bestLapTime = float.MaxValue;
         previousLapTime = float.MaxValue;
@@ -76,5 +82,6 @@ public class PlayerRaceInfo
         position = id;
         currentCheckpoint = 0;
         currentLapStartTime = 0f;
+        _controller = new PlayerController(this, action);
     }
 }

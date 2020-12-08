@@ -29,9 +29,6 @@ public class GameManager : MonoBehaviour
     public Text checkpoint;
     public Text timeInfo;
     
-    //TODO : TEEEEST
-    private PlayerController p;
-    
     private PlayerRaceInfo[] playersInfo;
 
     private bool raceBegan;
@@ -77,7 +74,7 @@ public class GameManager : MonoBehaviour
             float diff = Time.time - player.currentLapStartTime;
             string info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " + floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
             timeInfo.text = info;
-            p.Update();
+            player.Controller.Update(); // listen player inputs 
         }
     }
 
@@ -105,10 +102,8 @@ public class GameManager : MonoBehaviour
                 Transform spawn = spawnPoints[id];
                 KartBase kart = Instantiate(kartPrefab, spawn.position, spawn.rotation);
                 
-                //TODO: instanciate Player p, set p.info just to test because players will come from kart selection menu
 
-                PlayerRaceInfo info = new PlayerRaceInfo(kart, id);
-                p = new PlayerController(info, new PlayerAction());
+                PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
                 kart.raceInfo = info; //TODO : delete because I think it's useless
                 playersInfo[id] = info;
                 Instantiate(HUDvsClockPrefab); // id automatically set inside the class
