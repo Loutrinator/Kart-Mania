@@ -1,4 +1,5 @@
 ﻿using System;
+using Items;
 using Kart;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,7 +7,7 @@ using UnityEngine.Events;
 public class PlayerRaceInfo
 {
     private KartBase _kart;
-
+    public Item item;
     public KartBase kart
     {
         get { return _kart; }

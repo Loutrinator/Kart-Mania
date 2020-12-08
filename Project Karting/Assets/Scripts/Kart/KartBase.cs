@@ -37,10 +37,10 @@ namespace Kart
         public float boostLength = 2f;
         public float boostStrength = 1f;
 
-        protected float hMove;
+        public float hMove;
         protected float lerpedAngle;
-        protected int forwardMove;    // -1; 0; 1
-        protected bool drift;
+        public int forwardMove;    // -1; 0; 1
+        public bool drift;
         protected int driftDirection;
         private bool drifting;
 

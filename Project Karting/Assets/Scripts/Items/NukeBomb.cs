@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Items;
 using UnityEngine;
 using UnityEngine.WSA;
 
-public class NukeBomb : MonoBehaviour
+public class NukeBomb : Item
 {
     public GameObject explosion;
     public float timeBeforeLaunch = 1f;
@@ -18,7 +19,7 @@ public class NukeBomb : MonoBehaviour
 
     private float startLauchTime;
     private float startAnimationTime;
-
+    private bool _playerInitLaunch;
     private bool launched;
     private void Start()
     {
@@ -27,7 +28,7 @@ public class NukeBomb : MonoBehaviour
 
     private void Update()
     {
-
+        if (!_playerInitLaunch) return;
         if (!launched)
         {
             float elapsed = Time.time - startAnimationTime;
@@ -69,4 +70,13 @@ public class NukeBomb : MonoBehaviour
         camera.AddShakeEvent(nukeShake);
         Destroy(gameObject);
     }
+
+    public override void Use()
+    {
+        _playerInitLaunch = true;
+    }
+
+
+    public override void onKeyDown() => Use();
+
 }

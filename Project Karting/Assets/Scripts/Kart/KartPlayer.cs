@@ -3,7 +3,7 @@
 namespace Kart
 {
     public class KartPlayer : KartBase {
-        private void Update() {
+       /* private void Update() {
             float forwardInput = Input.GetAxis("Vertical");
             if (forwardInput > 0.001f)
                 forwardMove = 1;
@@ -12,6 +12,6 @@ namespace Kart
             else forwardMove = 0;
             hMove = Input.GetAxis("Horizontal");
             drift = Input.GetAxis("Drift") > 0;
-        }
+        }*/
     }
 }
