@@ -10,7 +10,7 @@ namespace Items
         public string GetName() =>  name;
         public virtual void Use(PlayerRaceInfo info)
         {
-            info.itemIsUsing = false;
+            info.ItemIsInUse = false;
             info.Item = null;
         }
         public virtual void OnKeyHold(PlayerRaceInfo info){return;}
