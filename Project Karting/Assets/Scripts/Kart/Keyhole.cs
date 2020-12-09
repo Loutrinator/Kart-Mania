@@ -7,7 +7,6 @@ using UnityEngine;
 public class Keyhole : MonoBehaviour
 {
 
-    public bool insertKey;
     public float baseSpeed = 300f;
     public float lerpSpeed = 2f;
     public Transform keyhole;
@@ -15,12 +14,12 @@ public class Keyhole : MonoBehaviour
     public MeshRenderer keyMeshRenderer;
     public float keyPositionOffset = -0.2f;
 
-    public enum RewindSTATE
+    public enum RewindMode
     {
         auto, hand, manual
     }
     [SerializeField]
-    public RewindSTATE rewindSTATE;
+    public RewindMode rewindMode;
 
     public float rewindDuration = 1f;
     public float idleDuration = 3f;
@@ -48,6 +47,7 @@ public class Keyhole : MonoBehaviour
     public AnimationCurve autoRewindSpeedAC;
 
     private float currentSpeed;
+    private Action powerupCallback;
     private enum KeyHoleState
     {
         empty,insertion,rewind,inserted,extraction
@@ -62,12 +62,6 @@ public class Keyhole : MonoBehaviour
 
     void Update()
     {
-        if (insertKey)
-        {
-            insertKey = false;
-            InsertKey();
-        }
-
         currentSpeed = Mathf.Lerp(currentSpeed, baseSpeed, lerpSpeed * Time.deltaTime);
         float animationPercent;
         float elapsed;
@@ -99,17 +93,17 @@ public class Keyhole : MonoBehaviour
             case KeyHoleState.rewind:
                 elapsed = Time.time - currentStateStartTime;
                 float newZR;
-                switch (rewindSTATE)
+                switch (rewindMode)
                 {
                     // ------ AUTO REWIND ------
-                    case RewindSTATE.auto:
+                    case RewindMode.auto:
                         float autoSpeed = autoRewindSpeed * autoRewindSpeedAC.Evaluate(elapsed/autoRewindTimeToMaxSpeed);
                         newZR = keyhole.localEulerAngles.z - autoSpeed * Time.deltaTime;
                         keyhole.localEulerAngles = new Vector3(0, 0, +newZR);
                         break;
                     
                     // ------ HAND REWIND ------
-                    case RewindSTATE.hand:
+                    case RewindMode.hand:
                         if (!HandRewindHoldPosition)
                         {
                             Vector3 oldR = keyhole.localEulerAngles;
@@ -126,7 +120,7 @@ public class Keyhole : MonoBehaviour
                         break;
                     
                     // ------ MANUAL REWIND ------
-                    case RewindSTATE.manual:
+                    case RewindMode.manual:
                         break;
                 }
 
@@ -134,6 +128,7 @@ public class Keyhole : MonoBehaviour
                 {
                     currentStateStartTime = Time.time;
                     keyHoleState = KeyHoleState.inserted;
+                    powerupCallback();
                 }
                 break;
             
@@ -194,7 +189,7 @@ public class Keyhole : MonoBehaviour
         HandRewindHoldPosition = false;
     }
 
-    void InsertKey()
+    public bool InsertKey(Action callback)
     {
         if (keyHoleState == KeyHoleState.empty)
         {
@@ -202,10 +197,13 @@ public class Keyhole : MonoBehaviour
             keyHoleState = KeyHoleState.insertion;
             ResetKeyhole();
             keyMeshRenderer.enabled = true;
+            powerupCallback = callback;
+            return true;
         }
+        return false;
     }
     
-    void RemoveKey()
+    public void RemoveKey()
     {
         currentStateStartTime = Time.time;
         keyHoleState = KeyHoleState.extraction;

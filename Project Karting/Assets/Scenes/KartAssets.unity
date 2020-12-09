@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2035111234}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 131.16855, g: 162.52502, b: 215.10977, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23233,13 +23233,18 @@ MonoBehaviour:
   kartPrefab: {fileID: 7072082925053140394, guid: db4b9d1ae0d2e79458fc6340fc0be48b,
     type: 3}
   nbPlayerRacing: 1
-  itemManager: {fileID: 0}
+  nbLap: 1
+  itemManager: {fileID: 11400000, guid: 4a4bb616e5b0d0244aaf6dae3cd4cc2d, type: 2}
   checkpointAmount: 5
   spawnPoints:
   - {fileID: 885654792}
   - {fileID: 409411516}
   - {fileID: 1032560178}
   - {fileID: 665787008}
+  HUDvsClockPrefab: {fileID: 8088969956587258211, guid: c88fc4398f416c340b9898c29a056315,
+    type: 3}
+  StartUIPrefab: {fileID: 4545681373983826033, guid: 24b9c1952b0ed7742a40ee0a11942240,
+    type: 3}
   bestTime: {fileID: 574779312}
   currentTime: {fileID: 523826965}
   timeDiff: {fileID: 1225838675}

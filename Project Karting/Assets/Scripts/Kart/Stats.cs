@@ -47,4 +47,18 @@ public struct Stats
             suspension          = a.suspension + b.suspension
         };
     }
+    public static Stats operator *(Stats a, float c)
+    {
+        return new Stats
+        {
+            acceleration        = a.acceleration * c,
+            braking             = a.braking * c,
+            addedGravity        = a.addedGravity * c,
+            reverseAcceleration = a.reverseAcceleration * c,
+            reverseSpeed        = a.reverseSpeed * c,
+            topSpeed            = a.topSpeed * c,
+            steer               = a.steer * c,
+            suspension          = a.suspension * c
+        };
+    }
 }
