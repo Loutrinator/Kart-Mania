@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class PlayerRaceInfo
 {
-    public ItemTomVersion itemTomVersion;
+    public Item item;
 
     private PlayerController _controller;
 
@@ -79,9 +79,10 @@ public class PlayerRaceInfo
         kart = k;
         playerId = id;
         lap = 1;
-        position = id;
+        position = playerId;
         currentCheckpoint = 0;
         currentLapStartTime = 0f;
         _controller = new PlayerController(this, action);
+        kart.GetPlayerID += () => playerId;
     }
 }

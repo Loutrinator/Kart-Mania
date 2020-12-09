@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Items;
 using UnityEngine;
 
 namespace Kart
@@ -48,7 +49,8 @@ namespace Kart
         protected int driftDirection;
         private bool drifting;
 
-        [HideInInspector] public PlayerRaceInfo raceInfo;
+        // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
+        public Func<int> GetPlayerID;
 
         private Vector3 _firstPos;
         private float _firstPosTime;

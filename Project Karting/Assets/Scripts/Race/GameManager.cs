@@ -104,7 +104,6 @@ public class GameManager : MonoBehaviour
                 
 
                 PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
-                kart.raceInfo = info; //TODO : delete because I think it's useless
                 playersInfo[id] = info;
                 Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                 startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();

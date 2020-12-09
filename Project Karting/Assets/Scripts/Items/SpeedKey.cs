@@ -6,7 +6,7 @@ namespace Items
 {
     
     [CreateAssetMenu(fileName="SpeedKey",menuName="ScriptableObject/SpeedKey",order=0)]
-    public class SpeedKey : Item
+    public class SpeedKey : ItemAntoineVersion
     {
         public StatPowerup powerup;
         private bool activated;

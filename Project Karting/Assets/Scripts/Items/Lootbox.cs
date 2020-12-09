@@ -33,6 +33,7 @@ namespace Items
         private void BreakLootBox(int position,KartBase kart)
         {
             state = LootBoxState.opened;
+            GiveItem(position, kart);
             StartCoroutine(WaitToRespawn());
             prism.localScale = Vector3.zero;
         }
@@ -40,10 +41,11 @@ namespace Items
         private void GiveItem(int position, KartBase kart)
         {
             Debug.Log("GIVE ITEM TO " + position);
-            ItemTomVersion itemTomVersion = GameManager.Instance.itemManager.GetRandomItem(position);
-            if (itemTomVersion != null)
+            Item item = GameManager.Instance.itemManager.GetRandomItem(position);
+            if (item != null)
             {
-                Debug.Log("ITEM : " + itemTomVersion.name);
+                GameManager.Instance.getPlayerRaceInfo(kart.GetPlayerID.Invoke()).item = item;
+                Debug.Log("ITEM : " + item.name);
             }
             else
             {

@@ -1,24 +1,25 @@
 using System;
 using UnityEngine;
 using Kart;
+using UnityEngine.Serialization;
 
 namespace Items
 {
     public class ItemSlot : MonoBehaviour
     {
         public KartBase owner;
-        public Item currentItem;
+        [FormerlySerializedAs("currentItem")] public ItemAntoineVersion currentItemAntoineVersion;
 
         private void Start()
         {
-            currentItem.owner = owner;
+            currentItemAntoineVersion.owner = owner;
         }
 
         private void Update()
         {
             if (Input.GetKeyDown("i"))
             {
-                currentItem.Use();
+                currentItemAntoineVersion.Use();
             }
         }
     }
