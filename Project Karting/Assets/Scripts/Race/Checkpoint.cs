@@ -9,11 +9,11 @@ public class Checkpoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Checkpoint touché");
-        KartCollider kart = other.gameObject.GetComponent<KartCollider>();
+        KartBase kart = other.gameObject.GetComponent<KartBase>();
         if (kart != null)
         {
             Debug.Log("kart pas null");
-            GameManager.Instance.checkpointPassed(checkpointId,kart.kartBase.raceInfo.playerId);
+            GameManager.Instance.checkpointPassed(checkpointId,kart.GetPlayerID.Invoke());
         }
     }
 }

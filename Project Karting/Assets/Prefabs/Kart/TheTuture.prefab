@@ -547,8 +547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f713bb3156e0634fa0c9fc2b876e8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpSpeed: 2
-  xOffset: 4.5
+  lerpSpeed: 3
+  xOffset: 3.5
   target: {fileID: 7072082925053140394}
 --- !u!1 &7072082923330480132
 GameObject:
@@ -610,7 +610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7072082923481296567}
   m_LocalRotation: {x: -0.9868698, y: -0, z: -0, w: 0.16151771}
-  m_LocalPosition: {x: 0, y: 0.22415821, z: -1.822}
+  m_LocalPosition: {x: 0, y: 0.336, z: -2.712}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7010591338286358334}
@@ -630,14 +630,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0364e4e83288cc43854c3eb937869e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  insertKey: 0
   baseSpeed: 600
   lerpSpeed: 2
   keyhole: {fileID: 7010591338286358334}
   key: {fileID: 7270244340812128787}
   keyMeshRenderer: {fileID: 9216023748632183750}
   keyPositionOffset: -0.2
-  rewindSTATE: 0
+  rewindMode: 0
   rewindDuration: 2
   idleDuration: 10
   insertionDuration: 0.5
@@ -819,28 +818,28 @@ MonoBehaviour:
   handRewindDuration: 0.3
   handRewindWait: 0.2
   handRewindStopAngle: 180
-  autoRewindSpeed: 1000
-  autoRewindTimeToMaxSpeed: 1
+  autoRewindSpeed: 2000
+  autoRewindTimeToMaxSpeed: 0.5
   autoRewindSpeedAC:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 6.2972507
+      outSlope: 6.2972507
       tangentMode: 0
-      weightedMode: 0
+      weightedMode: 3
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.22340421
     - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
+      weightedMode: 1
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1104,6 +1103,7 @@ GameObject:
   - component: {fileID: 7072082925053140394}
   - component: {fileID: 6671327005639688407}
   - component: {fileID: 7072082925053140395}
+  - component: {fileID: 4581429040044081701}
   m_Layer: 0
   m_Name: TheTuture
   m_TagString: Untagged
@@ -1152,6 +1152,7 @@ MonoBehaviour:
   - {fileID: 8609656235578777857}
   rotationAxis: {fileID: 1229019990198417434}
   effects: {fileID: 6671327005639688407}
+  keyhole: {fileID: 7072082923481296565}
   vehicleStats:
     topSpeed: 40
     acceleration: 20
@@ -1248,8 +1249,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  boostFOVOffset: 5
-  boostZOffset: 1.5
+  boostFOVOffset: 7
+  boostZOffset: 0
   driftLevel: 0
 --- !u!54 &7072082925053140395
 Rigidbody:
@@ -1267,6 +1268,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4581429040044081701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072082925053140372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708fafe195ee421e8dfb2d3068bf188c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 7072082925053140394}
+  currentItem: {fileID: 11400000, guid: aad2748c57f115245ababcb5f2fbbdf5, type: 2}
 --- !u!1 &7072082925228471994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,7 +1368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7270244340812128787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0, z: -0.2}
+  m_LocalPosition: {x: 0, y: 0, z: -0.2}
   m_LocalScale: {x: 0.22660616, y: 0.22660613, z: 0.22660619}
   m_Children: []
   m_Father: {fileID: 7010591338286358334}
@@ -1374,7 +1389,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7270244340812128787}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1432,8 +1447,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7638473309604889988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0.112}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 8047589598132893865}
   m_Father: {fileID: 7072082923481296566}

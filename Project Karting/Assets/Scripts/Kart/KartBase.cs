@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using Items;
 using UnityEngine;
 
 namespace Kart
@@ -12,7 +14,7 @@ namespace Kart
 
         public Transform rotationAxis;
         public KartEffects effects;
-
+        public Keyhole keyhole;
         public Stats vehicleStats = new Stats {
             topSpeed = 10f,   
             acceleration = 5f,  
@@ -23,6 +25,9 @@ namespace Kart
             addedGravity = 1f,
             suspension = .2f
         };
+        
+        List<StatPowerup> activePowerupList = new List<StatPowerup>();
+        private Stats finalStats;
 
         public float steeringSpeed = 70f;
         public float yAxisOffset = 1f;
@@ -44,7 +49,8 @@ namespace Kart
         protected int driftDirection;
         private bool drifting;
 
-        [HideInInspector] public PlayerRaceInfo raceInfo;
+        // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
+        public Func<int> GetPlayerID;
 
         private Vector3 _firstPos;
         private float _firstPosTime;
@@ -62,8 +68,8 @@ namespace Kart
 	    
         private void FixedUpdate() {
             if (!GameManager.Instance.raceHasBegan()) return;
-            
-	    move(forwardMove);
+            applyPowerups();
+	        move(forwardMove);
             animateWheels();
 
             if (drift && !drifting && (hMove < 0 ||hMove > 0))
@@ -97,12 +103,12 @@ namespace Kart
 
         protected void move(float direction) {
             if (direction > 0) {
-                _currentSpeed += vehicleStats.acceleration * Time.fixedDeltaTime;
-                _currentSpeed = Mathf.Min(vehicleStats.topSpeed, _currentSpeed);
+                _currentSpeed += finalStats.acceleration * Time.fixedDeltaTime;
+                _currentSpeed = Mathf.Min(finalStats.topSpeed, _currentSpeed);
             }
             else if (direction < 0) {
-                _currentSpeed -= vehicleStats.reverseAcceleration * Time.fixedDeltaTime;
-                _currentSpeed = Mathf.Max(-vehicleStats.reverseSpeed, _currentSpeed);
+                _currentSpeed -= finalStats.reverseAcceleration * Time.fixedDeltaTime;
+                _currentSpeed = Mathf.Max(-finalStats.reverseSpeed, _currentSpeed);
             }
             else _currentSpeed = 0;
 
@@ -113,7 +119,7 @@ namespace Kart
         protected void rotate(float angle)
         {
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
-            float steerAngle = lerpedAngle * (vehicleStats.steer*2 + steeringSpeed) * Time.fixedDeltaTime;
+            float steerAngle = lerpedAngle * (finalStats.steer*2 + steeringSpeed) * Time.fixedDeltaTime;
             transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
             Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
             
@@ -146,8 +152,7 @@ namespace Kart
             }
             transform.position += transform.up * (_yVelocity * Time.fixedDeltaTime);
         }
-
-
+        
         private void animateWheels()
         {
             _lerpedWheelDirection = Mathf.Lerp(_lerpedWheelDirection, hMove, kartRotationLerpSpeed * Time.fixedDeltaTime * 2f);
@@ -162,7 +167,7 @@ namespace Kart
             }
         }
 
-
+        #region Drift
         private void startDrift(float direction)
         {
             driftDirection = direction > 0 ? 1 : direction < 0 ? -1 : 0;
@@ -178,7 +183,45 @@ namespace Kart
             effects.stopDrift();
             effects.startBoost(boostLength,boostStrength);
         }
+        #endregion
 
+        #region PowerUps
+        void applyPowerups()
+        {
+            // on supprime tout powerup qui a dépassé son temps d'activation
+            activePowerupList.RemoveAll((p) =>
+            {
+                if (p.elapsedTime > p.maxTime)
+                {
+                    p.powerupUsed();
+                    return true;   
+                }
+                return false;
+            });
+            var powerups = new Stats();// on initialise des stats vierges pour nos powerups
+            // on ajoute à 'powerups' les modifiers de chaque powerup
+            for (int i = 0; i < activePowerupList.Count; i++)
+            {
+                var p = activePowerupList[i];
+                // on met a jour le compteur de temps écoulé depuis l'obtention du powerup
+                p.elapsedTime += Time.deltaTime;
+                // on additionne les modifications des stats de notre powerup à 'powerups'
+                powerups += p.modifiers;
+            }
+
+            // on ajoute tous nos powerups cumulés à nos stats de base du véhicule
+            finalStats = vehicleStats + powerups;
+
+            // on clamp toutes les valeurs des stats qui nécessitent de pas dépasser [0,1]
+            finalStats.suspension = Mathf.Clamp(finalStats.suspension, 0, 1);
+        }
+
+        public void addPowerup(StatPowerup powerup)
+        {
+            activePowerupList.Add(powerup);
+        }
+        #endregion
+        
         public float currentSpeed() {
             return _currentSpeed;
         }
