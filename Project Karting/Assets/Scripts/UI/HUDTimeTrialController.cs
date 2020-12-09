@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine.UI;
 
-public class HUDController : MonoBehaviour
+public class HUDTimeTrialController : MonoBehaviour
 {
     [Header("Front")] [SerializeField] private TextMeshProUGUI bestTime = null;
     [SerializeField] private TextMeshProUGUI currentTime = null;

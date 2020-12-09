@@ -6,7 +6,7 @@ using Items;
 using UnityEngine;
 using UnityEngine.WSA;
 
-public class NukeBomb : ItemTomVersion
+public class NukeBomb : MonoBehaviour
 {
     public GameObject explosion;
     public float timeBeforeLaunch = 1f;
@@ -68,11 +68,4 @@ public class NukeBomb : ItemTomVersion
         camera.AddShakeEvent(nukeShake);
         Destroy(gameObject);
     }
-
-    public override void Use()
-    {
-        launched = true;
-    }
-    public override void onKeyDown() => Use();
-
 }

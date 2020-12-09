@@ -19,15 +19,15 @@ public class PlayerRaceInfo
         }
     }
 
-    public bool _itemIsUsing;
-    public bool itemIsUsing
+    public bool itemIsInUse;
+    public bool ItemIsInUse
     {
-        get { return _itemIsUsing;}
+        get { return itemIsInUse;}
         set
         {
-            _itemIsUsing = value;
-            onItemUsed?.Invoke(_itemIsUsing);
-            if (!_itemIsUsing) onItemUsed = null;
+            itemIsInUse = value;
+            onItemUsed?.Invoke(itemIsInUse);
+            if (!itemIsInUse) onItemUsed = null;
         }
     }
 
@@ -108,7 +108,7 @@ public class PlayerRaceInfo
         currentLapStartTime = 0f;
         _controller = new PlayerController(this, action);
         kart.GetPlayerID += () => playerId;
-        itemIsUsing = false;
+        ItemIsInUse = false;
     }
 
     

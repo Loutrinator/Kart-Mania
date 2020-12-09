@@ -16,10 +16,10 @@ public class ItemWoodbox : Item
 
     public override void OnKeyHold(PlayerRaceInfo info)
     {
-        if(info.itemIsUsing) return;
+        if(info.ItemIsInUse) return;
         Transform transform = info.kart.transform;
         WoodBox wb = Instantiate(prefab, transform.position - transform.forward*distanceFromKartBack, Quaternion.identity, transform).GetComponent<WoodBox>();
         info.onItemUsed += wb.Throw;
-        info.itemIsUsing = true;
+        info.ItemIsInUse = true;
     }
 }
