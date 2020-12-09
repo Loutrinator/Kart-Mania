@@ -29,7 +29,6 @@ namespace Player
 
         public bool ItemKeyDown()
         {
-            var a =  Input.GetButtonDown("Item");
             return Input.GetButtonDown("Item");
         }
 

@@ -9,6 +9,18 @@ public class PlayerRaceInfo
 {
     public Item item;
 
+    public bool _itemIsUsing;
+    public bool itemIsUsing
+    {
+        get { return _itemIsUsing;}
+        set
+        {
+            _itemIsUsing = value;
+            onItemUsed?.Invoke(_itemIsUsing);
+            if (!_itemIsUsing) onItemUsed = null;
+        }
+    }
+
     private PlayerController _controller;
 
     public PlayerController Controller => _controller;
@@ -71,6 +83,7 @@ public class PlayerRaceInfo
     public event Action onNewLap;
     public event Action onBestLapTimeChange;
     public event Action onKartChange;    
+    public event Action<bool> onItemUsed;    
 
     public PlayerRaceInfo(KartBase k, int id, IActions action)
     {
@@ -84,5 +97,8 @@ public class PlayerRaceInfo
         currentLapStartTime = 0f;
         _controller = new PlayerController(this, action);
         kart.GetPlayerID += () => playerId;
+        itemIsUsing = false;
     }
+
+    
 }

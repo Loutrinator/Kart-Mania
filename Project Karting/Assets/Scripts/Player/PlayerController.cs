@@ -16,7 +16,6 @@ namespace Player
         public void Update()
         {
             //TODO : inputs kart selection menu
-
             _info.kart.forwardMove = _actionsOutputs.Accelerate();
             _info.kart.hMove = _actionsOutputs.Steer();
             _info.kart.drift = _actionsOutputs.Drift();
