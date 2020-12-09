@@ -11,8 +11,6 @@ namespace Items
             if (!isHoldingKey) transform.SetParent(null);
         } 
         
-        //TODO : on trigger enter affect kart 
-
         private void OnTriggerEnter(Collider other)
         {
             KartBase kart = other.GetComponent<KartCollider>()?.kartBase;

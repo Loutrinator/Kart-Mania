@@ -44,7 +44,7 @@ namespace Items
             Item item = GameManager.Instance.itemManager.GetRandomItem(position);
             if (item != null)
             {
-                GameManager.Instance.getPlayerRaceInfo(kart.GetPlayerID.Invoke()).item = item;
+                GameManager.Instance.getPlayerRaceInfo(kart.GetPlayerID.Invoke()).Item = item;
                 Debug.Log("ITEM : " + item.name);
             }
             else

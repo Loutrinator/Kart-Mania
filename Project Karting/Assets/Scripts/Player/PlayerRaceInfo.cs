@@ -7,7 +7,17 @@ using UnityEngine.Events;
 
 public class PlayerRaceInfo
 {
-    public Item item;
+    private Item _item;
+
+    public Item Item
+    {
+        get => _item;
+        set
+        {
+            _item = value;
+            onItemSet?.Invoke();
+        }
+    }
 
     public bool _itemIsUsing;
     public bool itemIsUsing
@@ -83,6 +93,7 @@ public class PlayerRaceInfo
     public event Action onNewLap;
     public event Action onBestLapTimeChange;
     public event Action onKartChange;    
+    public event Action onItemSet;    
     public event Action<bool> onItemUsed;    
 
     public PlayerRaceInfo(KartBase k, int id, IActions action)
