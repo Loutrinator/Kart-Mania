@@ -8,8 +8,8 @@ namespace Items
     [CreateAssetMenu(fileName="SpeedKey",menuName="ScriptableObject/SpeedKey",order=0)]
     public class SpeedKey : ItemAntoineVersion
     {
-        public StatPowerup powerup;
-        private bool activated;
+        public Stats boost;
+        public float duration;
         public override void Use()
         {
             owner.keyhole.InsertKey(KeyCrankedUp);
@@ -17,6 +17,7 @@ namespace Items
 
         private void KeyCrankedUp()
         {
+            StatPowerup powerup = new StatPowerup(boost,duration);
             powerup.powerupUsed = ExpiredPowerup;
             owner.addPowerup(powerup);
         }
