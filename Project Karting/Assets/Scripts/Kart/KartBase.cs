@@ -63,17 +63,16 @@ namespace Kart
             _firstPosTime = Time.time;
             stopDrifting();
         }
-	    
+
         private void FixedUpdate() {
             if (!GameManager.Instance.raceHasBegan()) return;
             applyPowerups();
 	        move(forwardMove);
-            animateWheels();
 
             if (drift && !drifting && (hMove < 0 ||hMove > 0))
             {
                 #if UNITY_EDITOR
-                Debug.Log("Start drift");
+                //Debug.Log("Start drift");
                 #endif
                 startDrift(hMove);
             }
@@ -189,6 +188,7 @@ namespace Kart
             // on supprime tout powerup qui a dépassé son temps d'activation
             activePowerupList.RemoveAll((p) =>
             {
+                Debug.Log("elapsed " + p.elapsedTime + " max " + p.maxTime);
                 if (p.elapsedTime > p.maxTime)
                 {
                     p.powerupUsed();
@@ -202,13 +202,14 @@ namespace Kart
             {
                 var p = activePowerupList[i];
                 // on met a jour le compteur de temps écoulé depuis l'obtention du powerup
-                p.elapsedTime += Time.deltaTime;
+                p.elapsedTime += Time.fixedDeltaTime;
                 // on additionne les modifications des stats de notre powerup à 'powerups'
                 powerups += p.modifiers;
             }
 
             // on ajoute tous nos powerups cumulés à nos stats de base du véhicule
             finalStats = vehicleStats + powerups;
+            //Debug.Log("baseAcceleration " + vehicleStats.acceleration + " finalAcceleration " + finalStats.acceleration);
 
             // on clamp toutes les valeurs des stats qui nécessitent de pas dépasser [0,1]
             finalStats.suspension = Mathf.Clamp(finalStats.suspension, 0, 1);
@@ -216,6 +217,7 @@ namespace Kart
 
         public void addPowerup(StatPowerup powerup)
         {
+            Debug.Log("Add Powerup");
             activePowerupList.Add(powerup);
         }
         #endregion
