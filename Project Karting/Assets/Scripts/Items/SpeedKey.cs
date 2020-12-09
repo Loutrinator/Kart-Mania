@@ -6,23 +6,29 @@ namespace Items
 {
     
     [CreateAssetMenu(fileName="SpeedKey",menuName="ScriptableObject/SpeedKey",order=0)]
-    public class SpeedKey : ItemAntoineVersion
+    public class SpeedKey : Item
     {
-        public StatPowerup powerup;
-        private bool activated;
-        public override void Use()
+        public Stats boost;
+        public float duration;
+        public override void Use(PlayerRaceInfo info )
         {
-            owner.keyhole.InsertKey(KeyCrankedUp);
+            info.kart.keyhole.InsertKey(() => KeyCrankedUp(info));
         }
 
-        private void KeyCrankedUp()
+        private void KeyCrankedUp(PlayerRaceInfo info)
         {
-            powerup.powerupUsed = ExpiredPowerup;
-            owner.addPowerup(powerup);
+            StatPowerup powerup = new StatPowerup(boost,duration);
+            powerup.powerupUsed = () => ExpiredPowerup(info);
+            info.kart.addPowerup(powerup);
         }
-        private void ExpiredPowerup()
+        private void ExpiredPowerup(PlayerRaceInfo info)
         {
-            owner.keyhole.RemoveKey();
+            info.kart.keyhole.RemoveKey();
+        }
+
+        public override void OnKeyDown(PlayerRaceInfo info)
+        {
+            Use(info);
         }
     }
 }

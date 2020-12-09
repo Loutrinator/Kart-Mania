@@ -12,16 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d57e3a669e4581b74115d33ded1148, type: 3}
   m_Name: SpeedKey
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  powerup:
-    modifiers:
-      topSpeed: 117.16
-      acceleration: 49.4
-      reverseSpeed: 0
-      reverseAcceleration: 0
-      braking: 0
-      steer: 0
-      addedGravity: 0
-      suspension: 0
-    elapsedTime: 7.279994
-    maxTime: 7.27
+  icon: {fileID: 21300000, guid: d44d84f2b0ac15949b471240820f44a2, type: 3}
+  boost:
+    topSpeed: 50
+    acceleration: 20
+    reverseSpeed: 0
+    reverseAcceleration: 0
+    braking: 0
+    steer: 0
+    addedGravity: 0
+    suspension: 0.213
+  duration: 1000

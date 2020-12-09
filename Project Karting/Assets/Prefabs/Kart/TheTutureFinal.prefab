@@ -549,7 +549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lerpSpeed: 3
   xOffset: 0
-  target: {fileID: 7072082925053140394}
+  target: {fileID: 8655923001750661840}
 --- !u!1 &7072082923330480132
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f8a96f1bec4804987f704591521401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kart: {fileID: 7072082925053140394}
+  kart: {fileID: 8655923001750661840}
   exhausts:
   - {fileID: 848962037319456738}
   - {fileID: 7279914053512143793}
@@ -1100,12 +1100,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7072082925053140393}
-  - component: {fileID: 7072082925053140394}
   - component: {fileID: 6671327005639688407}
   - component: {fileID: 7072082925053140395}
-  - component: {fileID: 4581429040044081701}
+  - component: {fileID: 8655923001750661840}
   m_Layer: 0
-  m_Name: TheTuture
+  m_Name: TheTutureFinal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,50 +1127,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7072082925053140394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7072082925053140372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf1d66655cf6322429bd05b7b7a68fb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kartRootModel: {fileID: 7072082925228471993}
-  kartBodyModel: {fileID: 5411243444951780116}
-  wheels:
-  - {fileID: 3845672505511631293}
-  - {fileID: 554667986823568410}
-  - {fileID: 3072790223566082498}
-  - {fileID: 0}
-  turningWheels:
-  - {fileID: 5014659118040999078}
-  - {fileID: 8609656235578777857}
-  rotationAxis: {fileID: 1229019990198417434}
-  effects: {fileID: 6671327005639688407}
-  keyhole: {fileID: 7072082923481296565}
-  vehicleStats:
-    topSpeed: 40
-    acceleration: 20
-    reverseSpeed: 5
-    reverseAcceleration: 5
-    braking: 10
-    steer: 5
-    addedGravity: 1
-    suspension: 0.2
-  steeringSpeed: 40
-  yAxisOffset: 1.14
-  minDriftAngle: 0.182
-  maxDriftAngle: 1.8
-  kartRotationCoeff: 15
-  kartRollCoeff: 0
-  kartRotationLerpSpeed: 5
-  kartWheelAngle: 25
-  boostLength: 2
-  boostStrength: 1
 --- !u!114 &6671327005639688407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,7 +1223,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4581429040044081701
+--- !u!114 &8655923001750661840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1277,11 +1232,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 7072082925053140372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 708fafe195ee421e8dfb2d3068bf188c, type: 3}
+  m_Script: {fileID: 11500000, guid: 99cc829c59c3eb945a0ab2177143a094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 7072082925053140394}
-  currentItem: {fileID: 11400000, guid: aad2748c57f115245ababcb5f2fbbdf5, type: 2}
+  kartRootModel: {fileID: 7072082925228471993}
+  kartBodyModel: {fileID: 5411243444951780116}
+  wheels:
+  - {fileID: 5014659118040999078}
+  - {fileID: 8609656235578777857}
+  - {fileID: 6516015208370220249}
+  - {fileID: 0}
+  turningWheels:
+  - {fileID: 5014659118040999078}
+  - {fileID: 8609656235578777857}
+  rotationAxis: {fileID: 1229019990198417434}
+  effects: {fileID: 6671327005639688407}
+  keyhole: {fileID: 7072082923481296565}
+  vehicleStats:
+    topSpeed: 40
+    acceleration: 20
+    reverseSpeed: 5
+    reverseAcceleration: 5
+    braking: 10
+    steer: 5
+    addedGravity: 1
+    suspension: 0.2
+  steeringSpeed: 40
+  yAxisOffset: 1.14
+  minDriftAngle: 0.182
+  maxDriftAngle: 1.8
+  kartRotationCoeff: 15
+  kartRollCoeff: 0
+  kartRotationLerpSpeed: 5
+  kartWheelAngle: 25
+  boostLength: 2
+  boostStrength: 1
+  hMove: 0
+  forwardMove: 0
+  drift: 0
 --- !u!1 &7072082925228471994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,7 +1329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8464b13d452fa32409651440d53aec20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kartBase: {fileID: 7072082925053140394}
+  kartBase: {fileID: 8655923001750661840}
 --- !u!1 &7270244340812128787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,15 +1754,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 345bde157ca998444959283038b6db81, type: 3}
---- !u!198 &5579277269757136138 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6373781657113664060, guid: 345bde157ca998444959283038b6db81,
-    type: 3}
-  m_PrefabInstance: {fileID: 1520435157778044726}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8176785804886478107 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7232900734840674861, guid: 345bde157ca998444959283038b6db81,
+    type: 3}
+  m_PrefabInstance: {fileID: 1520435157778044726}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5579277269757136138 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6373781657113664060, guid: 345bde157ca998444959283038b6db81,
     type: 3}
   m_PrefabInstance: {fileID: 1520435157778044726}
   m_PrefabAsset: {fileID: 0}
@@ -1938,12 +1926,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9bde06a56b6ee14393a991b60d4594c, type: 3}
---- !u!4 &554667986823568410 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4895399434514397464, guid: a9bde06a56b6ee14393a991b60d4594c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4926199400323523842}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8609656235578777857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3685849930903110659, guid: a9bde06a56b6ee14393a991b60d4594c,
@@ -2283,12 +2265,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7587243436333590746}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3072790223566082498 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4895399434514397464, guid: a9bde06a56b6ee14393a991b60d4594c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7587243436333590746}
-  m_PrefabAsset: {fileID: 0}
 --- !u!96 &8103565843033344712 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 1819150267928420882, guid: a9bde06a56b6ee14393a991b60d4594c,
@@ -2367,12 +2343,6 @@ PrefabInstance:
 --- !u!4 &5014659118040999078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3685849930903110659, guid: a9bde06a56b6ee14393a991b60d4594c,
-    type: 3}
-  m_PrefabInstance: {fileID: 8552723948735897765}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3845672505511631293 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4895399434514397464, guid: a9bde06a56b6ee14393a991b60d4594c,
     type: 3}
   m_PrefabInstance: {fileID: 8552723948735897765}
   m_PrefabAsset: {fileID: 0}
