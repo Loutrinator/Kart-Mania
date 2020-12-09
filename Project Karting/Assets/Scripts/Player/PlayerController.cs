@@ -1,11 +1,10 @@
-﻿using Kart;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player
 {
     public class PlayerController 
     {
-        [HideInInspector] private PlayerRaceInfo _info;
+        private PlayerRaceInfo _info;
         private IActions _actionsOutputs;
 
         public PlayerController(PlayerRaceInfo raceInfo, IActions actions)
@@ -17,7 +16,7 @@ namespace Player
         public void Update()
         {
             //TODO : inputs kart selection menu
-            if (!GameManager.Instance.raceHasBegan()) return;
+
             _info.kart.forwardMove = _actionsOutputs.Accelerate();
             _info.kart.hMove = _actionsOutputs.Steer();
             _info.kart.drift = _actionsOutputs.Drift();

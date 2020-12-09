@@ -19,7 +19,6 @@ public class NukeBomb : Item
 
     private float startLauchTime;
     private float startAnimationTime;
-    private bool _playerInitLaunch;
     private bool launched;
     private void Start()
     {
@@ -28,7 +27,6 @@ public class NukeBomb : Item
 
     private void Update()
     {
-        if (!_playerInitLaunch) return;
         if (!launched)
         {
             float elapsed = Time.time - startAnimationTime;
@@ -73,10 +71,8 @@ public class NukeBomb : Item
 
     public override void Use()
     {
-        _playerInitLaunch = true;
+        launched = true;
     }
-
-
     public override void onKeyDown() => Use();
 
 }

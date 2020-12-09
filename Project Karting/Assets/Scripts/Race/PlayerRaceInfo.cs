@@ -72,7 +72,7 @@ public class PlayerRaceInfo
     public event Action onBestLapTimeChange;
     public event Action onKartChange;    
 
-    public PlayerRaceInfo(KartBase k, int id, PlayerAction action)
+    public PlayerRaceInfo(KartBase k, int id, IActions action)
     {
         bestLapTime = float.MaxValue;
         previousLapTime = float.MaxValue;
