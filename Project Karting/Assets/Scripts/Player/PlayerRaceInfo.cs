@@ -1,12 +1,41 @@
 ﻿using System;
+using Items;
 using Kart;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerRaceInfo
 {
-    private KartBase _kart;
+    private Item _item;
 
+    public Item Item
+    {
+        get => _item;
+        set
+        {
+            _item = value;
+            onItemSet?.Invoke();
+        }
+    }
+
+    public bool itemIsInUse;
+    public bool ItemIsInUse
+    {
+        get { return itemIsInUse;}
+        set
+        {
+            itemIsInUse = value;
+            onItemUsed?.Invoke(itemIsInUse);
+            if (!itemIsInUse) onItemUsed = null;
+        }
+    }
+
+    private PlayerController _controller;
+
+    public PlayerController Controller => _controller;
+
+    private KartBase _kart;
     public KartBase kart
     {
         get { return _kart; }
@@ -64,16 +93,23 @@ public class PlayerRaceInfo
     public event Action onNewLap;
     public event Action onBestLapTimeChange;
     public event Action onKartChange;    
+    public event Action onItemSet;    
+    public event Action<bool> onItemUsed;    
 
-    public PlayerRaceInfo(KartBase k, int id)
+    public PlayerRaceInfo(KartBase k, int id, IActions action)
     {
         bestLapTime = float.MaxValue;
         previousLapTime = float.MaxValue;
         kart = k;
         playerId = id;
         lap = 1;
-        position = id;
+        position = playerId;
         currentCheckpoint = 0;
         currentLapStartTime = 0f;
+        _controller = new PlayerController(this, action);
+        kart.GetPlayerID += () => playerId;
+        ItemIsInUse = false;
     }
+
+    
 }

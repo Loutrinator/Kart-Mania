@@ -33,9 +33,9 @@ namespace Items
         private void BreakLootBox(int position,KartBase kart)
         {
             state = LootBoxState.opened;
+            GiveItem(position, kart);
             StartCoroutine(WaitToRespawn());
             prism.localScale = Vector3.zero;
-            GiveItem(position, kart);
         }
 
         private void GiveItem(int position, KartBase kart)
@@ -44,6 +44,7 @@ namespace Items
             Item item = GameManager.Instance.itemManager.GetRandomItem(position);
             if (item != null)
             {
+                GameManager.Instance.getPlayerRaceInfo(kart.GetPlayerID.Invoke()).Item = item;
                 Debug.Log("ITEM : " + item.name);
             }
             else

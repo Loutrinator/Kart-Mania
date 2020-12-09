@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2035111234}
-  m_IndirectSpecularColor: {r: 131.16855, g: 162.52502, b: 215.10977, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13978,7 +13978,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -44, y: -198.43}
+  m_AnchoredPosition: {x: -44, y: -198.43018}
   m_SizeDelta: {x: 141.82831, y: 53.409897}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &564444962
@@ -16989,7 +16989,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -44, y: -37.00009}
+  m_AnchoredPosition: {x: -44, y: -37}
   m_SizeDelta: {x: 166.13287, y: 144}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &680288657
@@ -23230,7 +23230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2395f6e484734994d2f6a202eb7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kartPrefab: {fileID: 7072082925053140394, guid: db4b9d1ae0d2e79458fc6340fc0be48b,
+  kartPrefab: {fileID: 8655923001750661840, guid: 9129b08968fc41743b6765032dee15e2,
     type: 3}
   nbPlayerRacing: 1
   nbLap: 1
@@ -33803,7 +33803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1419185748
 MonoBehaviour:
   m_ObjectHideFlags: 0

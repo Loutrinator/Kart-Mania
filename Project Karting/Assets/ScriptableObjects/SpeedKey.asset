@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d57e3a669e4581b74115d33ded1148, type: 3}
+  m_Name: SpeedKey
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: d44d84f2b0ac15949b471240820f44a2, type: 3}
+  boost:
+    topSpeed: 50
+    acceleration: 100
+    reverseSpeed: 0
+    reverseAcceleration: 0
+    braking: 0
+    steer: 0
+    addedGravity: 0
+    suspension: 0.213
+  duration: 5

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Kart;
 using Items;
+using Player;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
             float diff = Time.time - player.currentLapStartTime;
             string info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " + floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
             timeInfo.text = info;
+            player.Controller.Update(); // listen player inputs 
         }
     }
 
@@ -99,8 +101,9 @@ public class GameManager : MonoBehaviour
                 Debug.Log("spawning kart " + id);
                 Transform spawn = spawnPoints[id];
                 KartBase kart = Instantiate(kartPrefab, spawn.position, spawn.rotation);
-                PlayerRaceInfo info = new PlayerRaceInfo(kart, id);
-                kart.raceInfo = info;
+                
+
+                PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
                 playersInfo[id] = info;
                 Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                 startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
