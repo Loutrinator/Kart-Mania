@@ -6,7 +6,7 @@ using Items;
 using UnityEngine;
 using UnityEngine.WSA;
 
-public class NukeBomb : Item
+public class NukeBomb : ItemTomVersion
 {
     public GameObject explosion;
     public float timeBeforeLaunch = 1f;

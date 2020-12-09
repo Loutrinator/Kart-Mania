@@ -22,15 +22,15 @@ namespace Player
             _info.kart.drift = _actionsOutputs.Drift();
             if (_actionsOutputs.ItemKeyHold())
             {
-                _info.item?.onKeyHold();
+                _info.itemTomVersion?.onKeyHold();
             }
             else if (_actionsOutputs.ItemKeyDown())
             {
-                _info.item?.onKeyDown();
+                _info.itemTomVersion?.onKeyDown();
             }
             else if (_actionsOutputs.ItemKeyUp())
             {
-                _info.item?.onKeyUp();
+                _info.itemTomVersion?.onKeyUp();
             }
         }
     }

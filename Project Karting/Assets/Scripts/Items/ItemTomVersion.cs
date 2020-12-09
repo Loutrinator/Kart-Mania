@@ -2,7 +2,7 @@
 
 namespace Items
 {
-    public abstract class Item : MonoBehaviour
+    public abstract class ItemTomVersion : MonoBehaviour
     {
         public string GetName()
         {

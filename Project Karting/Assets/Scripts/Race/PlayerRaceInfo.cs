@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class PlayerRaceInfo
 {
-    public Item item;
+    public ItemTomVersion itemTomVersion;
 
     private PlayerController _controller;
 

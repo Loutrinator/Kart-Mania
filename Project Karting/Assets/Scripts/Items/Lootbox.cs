@@ -41,10 +41,10 @@ namespace Items
         private void GiveItem(int position, KartBase kart)
         {
             Debug.Log("GIVE ITEM TO " + position);
-            Item item = GameManager.Instance.itemManager.GetRandomItem(position);
-            if (item != null)
+            ItemTomVersion itemTomVersion = GameManager.Instance.itemManager.GetRandomItem(position);
+            if (itemTomVersion != null)
             {
-                Debug.Log("ITEM : " + item.name);
+                Debug.Log("ITEM : " + itemTomVersion.name);
             }
             else
             {

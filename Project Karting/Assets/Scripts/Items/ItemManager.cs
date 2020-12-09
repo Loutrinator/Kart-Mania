@@ -23,7 +23,7 @@ namespace Items
     {
         [HideInInspector, SerializeField] public int nbItems;
         [HideInInspector, SerializeField] public int nbPositions;
-        [HideInInspector, SerializeField] public List<Item> items;
+        [HideInInspector, SerializeField] public List<ItemTomVersion> items;
         [HideInInspector, SerializeField] public List<ListProbability> itemProba;
         //[HideInInspector, SerializeField] public List<List<float>> probabilities = new List<List<float>>();
         
@@ -72,7 +72,7 @@ namespace Items
 */
 
         [CanBeNull]
-        public Item GetRandomItem(int position)
+        public ItemTomVersion GetRandomItem(int position)
         {
             float rnd = Random.value;
             Debug.Log("Random : " + rnd);
@@ -104,7 +104,7 @@ namespace Items
             var itemManager = (ItemManager) target;
             if (itemManager == null) return;
             if (itemManager.itemProba == null) itemManager.itemProba = new List<ListProbability>();
-            if (itemManager.items == null) itemManager.items = new List<Item>();
+            if (itemManager.items == null) itemManager.items = new List<ItemTomVersion>();
             if (itemColors == null) itemColors = new  Color[itemManager.items.Count];
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Positions");
@@ -133,7 +133,7 @@ namespace Items
             EditorGUILayout.LabelField("Items");
             EditorGUILayout.Space();
 
-            List<Item> list = itemManager.items;
+            List<ItemTomVersion> list = itemManager.items;
             itemManager.nbItems = Math.Max(0, EditorGUILayout.IntField("Size", list.Count));
 
             while (itemManager.nbItems > list.Count)
@@ -151,8 +151,8 @@ namespace Items
             for (int i = 0; i < list.Count; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                list[i] = EditorGUILayout.ObjectField("Item " + i, list[i], typeof(Item),
-                    true) as Item;
+                list[i] = EditorGUILayout.ObjectField("Item " + i, list[i], typeof(ItemTomVersion),
+                    true) as ItemTomVersion;
                 //EditorGUI.DrawRect(GUILayoutUtility.GetRect(5,10,20,20), itemColors[i]); affichage de couleur
                 EditorGUILayout.EndHorizontal();
             }
