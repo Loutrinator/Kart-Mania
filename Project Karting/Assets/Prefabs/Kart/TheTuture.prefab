@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpSpeed: 3
-  xOffset: 3.5
+  xOffset: 0
   target: {fileID: 7072082925053140394}
 --- !u!1 &7072082923330480132
 GameObject:
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   minDriftAngle: 0.182
   maxDriftAngle: 1.8
   kartRotationCoeff: 15
-  kartRollCoeff: 4
+  kartRollCoeff: 0
   kartRotationLerpSpeed: 5
   kartWheelAngle: 25
   boostLength: 2
