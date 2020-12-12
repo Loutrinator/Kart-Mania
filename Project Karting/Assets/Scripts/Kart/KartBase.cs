@@ -9,9 +9,9 @@ namespace Kart
     public class KartBase : MonoBehaviour {
         public Transform kartRootModel;        // The kart's root 3D model
         public Transform kartBodyModel;        // The main kart 3D model (no wheels)
-        public List<Transform> wheels;        // The wheels of the kart
+        public List<Transform> wheels;        //TODO: A DEPLACER
         public List<Transform> turningWheels;        // The turning wheels of the kart
-
+        public ShakeTransform cameraShake;
         public Transform rotationAxis;
         public KartEffects effects;
         public Keyhole keyhole;

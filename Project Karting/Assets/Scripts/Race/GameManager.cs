@@ -35,10 +35,10 @@ public class GameManager : MonoBehaviour
     private bool raceIsInit;
     private StartMsgAnimation startMessage;
 
+    private List<ShakeTransform> cameras;
+    
     private static GameManager _instance;
-
     public static GameManager Instance => _instance;
-
     private GameManager()
     {}
 
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
             _instance = this;
             DontDestroyOnLoad(this.gameObject);
-
+            cameras = new List<ShakeTransform>();
             //Rest of your Awake code
 
         } else {
@@ -107,6 +107,17 @@ public class GameManager : MonoBehaviour
                 playersInfo[id] = info;
                 Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                 startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
+                ShakeTransform camera = kart.cameraShake;
+                if (camera == null)
+                {
+                    Debug.LogWarning("PAS DE CAM TROUVEE");
+                }
+                else
+                {
+                    Debug.LogWarning("cam trouvée");
+                    cameras.Add(camera);
+                }
+                
                 startMessage._startTime = Time.time;
                 raceIsInit = true;
             }
@@ -194,5 +205,13 @@ public class GameManager : MonoBehaviour
     public bool raceHasBegan()
     {
         return raceBegan;
+    }
+
+    public void ShakeCameras(ShakeTransformEventData shake)
+    {
+        foreach (var cam in cameras)
+        {
+            cam.AddShakeEvent(shake);
+        } 
     }
 }

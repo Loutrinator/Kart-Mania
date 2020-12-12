@@ -8,6 +8,7 @@ public class NukeExplosion : MonoBehaviour
     public List<ParticleSystem> particleSystems;
     public Transform shockwave;
     public float shockwaveSpeed;
+    public AudioSource explosionEffect;
 
     private void Start()
     {
@@ -17,16 +18,24 @@ public class NukeExplosion : MonoBehaviour
     private void Update()
     {
         shockwave.localScale += Time.deltaTime * shockwaveSpeed * Vector3.one;
-        foreach (var ps in particleSystems)
+        List<ParticleSystem> psToDelete = new List<ParticleSystem>();
+       
+        for (int i = 0; i < particleSystems.Count; i++)
         {
-            if (!ps.IsAlive())
+            
+            if (!particleSystems[i].IsAlive())
             {
-                Destroy(ps.gameObject);
-                particleSystems.Remove(ps);
+                psToDelete.Add(particleSystems[i]);//Impossible to delete an element of a List while iterating. need to do it outside of for
             }
         }
 
-        if (particleSystems.Count == 0)
+        foreach (var ps in psToDelete)
+        {
+            Destroy(ps.gameObject);
+            particleSystems.Remove(ps);
+        }
+
+        if (particleSystems.Count == 0 && !explosionEffect.isPlaying)
         {
             Destroy(gameObject);
         }

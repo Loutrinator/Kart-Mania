@@ -81,6 +81,8 @@ namespace Items
                 Debug.Log("proba.id " + proba.itemId + " proba.probability " + proba.probability);
                 if (rnd <= proba.probability)
                 {
+                    Debug.Log("return item n°" + proba.itemId);
+                    
                     return items[proba.itemId];
                 }
             }

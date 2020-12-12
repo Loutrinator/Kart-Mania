@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f833f51407bc174b927de392768e916, type: 3}
   m_Name: ItemManagerPreset
   m_EditorClassIdentifier: 
-  nbItems: 0
-  nbPositions: 1
-  items: []
-  itemProba: []
+  nbItems: 1
+  nbPositions: 2
+  items:
+  - {fileID: 11400000, guid: d1ed9fbf7ff060344a6e947ef9cd105f, type: 2}
+  itemProbabilities: []
