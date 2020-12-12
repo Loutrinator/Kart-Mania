@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BombFlash
-  m_Shader: {fileID: -6465566751694194690, guid: 1028ceedf73a4204a8600190ccf058e8,
+  m_Name: Flame
+  m_Shader: {fileID: -6465566751694194690, guid: 8abdd0b33eb19a141983ed4bbe017536,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -21,12 +21,9 @@ Material:
   - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - Texture2D_205F8B47:
-        m_Texture: {fileID: 2800000, guid: 94e97ecb1a385ba4099397278f39a082, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Floats:
-    - Boolean_540106A5: 1
+    - Vector1_4C8910A6: 0.69
+    - Vector1_9F3ABC77: 0.59
     m_Colors:
-    - Color_3FF61EF0: {r: 1024, g: 412.96765, b: 284.98114, a: 1}
+    - Color_BF36D5D6: {r: 7.9066987, g: 2.1940055, b: 0.12418899, a: 0}

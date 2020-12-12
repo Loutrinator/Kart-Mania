@@ -16,10 +16,13 @@ public class NukeBomb : MonoBehaviour
     public AnimationCurve trajectory;
     [HideInInspector] public ShakeTransform camera;
     public ShakeTransformEventData nukeShake;
+    public AudioSource flightEffect;
+    
 
     private float startLauchTime;
     private float startAnimationTime;
     private bool launched;
+    private bool exploded;
     private void Start()
     {
         startAnimationTime = Time.time;
@@ -35,7 +38,7 @@ public class NukeBomb : MonoBehaviour
                 Launch();
             }
         }
-        else
+        else if(!exploded)
         {
             float elapsed = Time.time - startLauchTime;
             float percent = elapsed / travelDuration;
@@ -59,13 +62,15 @@ public class NukeBomb : MonoBehaviour
         launched = true;
         startLauchTime = Time.time;
         transform.position = startPosition;
+        flightEffect.Play();
     }
 
     private void Explode()
     {
+        exploded = true;
         Instantiate(explosion, target.position, Quaternion.identity);
         //faire un spherecast
-        camera.AddShakeEvent(nukeShake);
+        GameManager.Instance.ShakeCameras(nukeShake);
         Destroy(gameObject);
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NukeShake
   m_EditorClassIdentifier: 
   target: 1
-  amplitude: 5.64
+  amplitude: 10
   frequency: 17.64
   duration: 5
   blendOverLifeTime:
@@ -21,31 +21,22 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: -0.009429932
-      inSlope: 20.943089
-      outSlope: 20.943089
+      value: 1
+      inSlope: -7.36778
+      outSlope: -7.36778
       tangentMode: 0
-      weightedMode: 2
-      inWeight: 0
-      outWeight: 0.073999815
-    - serializedVersion: 3
-      time: 0.02092284
-      value: 0.99990463
-      inSlope: -5.232286
-      outSlope: -5.232286
-      tangentMode: 0
-      weightedMode: 1
+      weightedMode: 3
       inWeight: 0.24236245
-      outWeight: 0.14870249
+      outWeight: 0.5659239
     - serializedVersion: 3
-      time: 0.24984765
-      value: 0.06822909
-      inSlope: -0.075066105
-      outSlope: -0.075066105
+      time: 0.1702807
+      value: 0.10170687
+      inSlope: -0.16531894
+      outSlope: -0.16531894
       tangentMode: 0
       weightedMode: 3
       inWeight: 0.6534413
-      outWeight: 0.7210966
+      outWeight: 0.7172565
     - serializedVersion: 3
       time: 1
       value: 0

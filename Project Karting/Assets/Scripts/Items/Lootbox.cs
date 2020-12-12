@@ -33,6 +33,7 @@ namespace Items
         private void BreakLootBox(int position,KartBase kart)
         {
             state = LootBoxState.opened;
+            Debug.Log("Calling GiveItem");
             GiveItem(position, kart);
             StartCoroutine(WaitToRespawn());
             prism.localScale = Vector3.zero;
@@ -44,8 +45,8 @@ namespace Items
             Item item = GameManager.Instance.itemManager.GetRandomItem(position);
             if (item != null)
             {
-                GameManager.Instance.getPlayerRaceInfo(kart.GetPlayerID.Invoke()).Item = item;
                 Debug.Log("ITEM : " + item.name);
+                GameManager.Instance.getPlayerRaceInfo(kart.GetPlayerID()).Item = item;
             }
             else
             {
@@ -67,11 +68,11 @@ namespace Items
             Debug.Log("TriggerEnter");
             if (state == LootBoxState.available)
             {
-                Debug.Log("Available");
+                Debug.Log("Lootbox is available");
                 KartBase kart = other.GetComponent<KartCollider>().kartBase;
                 if (kart != null)
                 {
-                    Debug.Log("Kart not null");
+                    Debug.Log("KartBase found, breaking lootbox");
                     BreakLootBox(1,kart);
                 }
             }
