@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.sikny.splineeditor": {
+      "version": "https://github.com/Sikny/SplineEditor.git#0.0.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "56c1c806656fed05dd5171039e6685613f4d07d6"
+    },
     "com.unity.collab-proxy": {
       "version": "1.2.16",
       "depth": 0,
@@ -8,8 +15,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
-      "version": "1.0.0",
-      "depth": 1,
+      "version": "1.0.5",
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -122,7 +129,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.legacyinputhelpers": {
-      "version": "2.1.4",
+      "version": "2.1.6",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
