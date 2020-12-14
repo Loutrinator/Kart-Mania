@@ -7,38 +7,59 @@ namespace Items
     public class WoodBox : MonoBehaviour
     {
         [Header("Animation")]
+        [SerializeField] private float throwingDistance = .3f;
         [SerializeField] private float spawnAnimationDuration = .5f;
+        [SerializeField] private float throwAnimationDuration = .5f;
         [SerializeField] private AnimationCurve spawnAnimationCurve = null;
         [SerializeField] private AnimationCurve throwAnimationCurve = null;
-        private float _elapsedTime;
-        [HideInInspector] float _startTime;
-        private float _step;
+        private float _startTime;
+        private float _throwStartTime;
+        private bool _isThrowing;
+        private Transform _transform;
+        private Vector3 _startPosition;
+        private Vector3 _forward;
         public void Throw(bool isHoldingKey)
         {
-            if (!isHoldingKey) transform.SetParent(null);
+            if (!isHoldingKey)
+            {
+                _forward = _transform.parent.forward * throwingDistance;
+                _transform.SetParent(null);
+                _throwStartTime = Time.time;
+                _startPosition = _transform.position;
+                _isThrowing = true;
+            }
         }
 
         private void Start()
         {
+            _isThrowing = false;
             _startTime = Time.time;
-            transform.localScale = Vector3.zero;
+            _transform = transform;
+            _transform.localScale = Vector3.zero;
         }
 
         private void Update()
         {
             SpawnAnimation();
+            if(_isThrowing) ThrowAnimation();
         }
 
         private void SpawnAnimation()
-        {
-            _elapsedTime = Time.time - _startTime;
-            _step = _elapsedTime / spawnAnimationDuration;
-            transform.localScale = spawnAnimationCurve.Evaluate(_step) * Vector3.one;
+        { 
+            float elapsedTime = Time.time - _startTime;
+            _transform.localScale = spawnAnimationCurve.Evaluate(elapsedTime / spawnAnimationDuration) * Vector3.one;
         }
 
         private void ThrowAnimation()
         {
-            
+            float elapsedTime = Time.time - _throwStartTime;
+            float step = elapsedTime / throwAnimationDuration;
+            if (step > 1) _isThrowing = false;            
+            float yCurve = throwAnimationCurve.Evaluate(step);
+            float y = _startPosition.y + yCurve;
+            var position = _transform.position;
+            position = new Vector3(position.x,y,position.z) - _forward;
+            _transform.position = position;
         }
 
         private void BrokeAnimation(float startTime)
