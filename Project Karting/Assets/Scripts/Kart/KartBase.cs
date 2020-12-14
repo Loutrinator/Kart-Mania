@@ -193,7 +193,7 @@ namespace Kart
                 Debug.Log("elapsed " + p.elapsedTime + " max " + p.maxTime);
                 if (p.elapsedTime > p.maxTime)
                 {
-                    p.powerupUsed();
+                    p.powerupUsed?.Invoke();
                     return true;   
                 }
                 return false;

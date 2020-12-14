@@ -6,12 +6,18 @@ namespace Items
 {
     public class WoodBox : MonoBehaviour
     {
+        [Header("Effect")] 
+        [SerializeField] private Stats effect;
+        [SerializeField] private float effectDuration;
+        private StatPowerup _powerup;
+        
         [Header("Animation")]
         [SerializeField] private float throwingDistance = .3f;
         [SerializeField] private float spawnAnimationDuration = .5f;
         [SerializeField] private float throwAnimationDuration = .5f;
         [SerializeField] private AnimationCurve spawnAnimationCurve = null;
         [SerializeField] private AnimationCurve throwAnimationCurve = null;
+        
         private float _startTime;
         private float _throwStartTime;
         private bool _isThrowing;
@@ -36,6 +42,8 @@ namespace Items
             _startTime = Time.time;
             _transform = transform;
             _transform.localScale = Vector3.zero;
+            _powerup = new StatPowerup(effect,effectDuration);
+
         }
 
         private void Update()
@@ -71,7 +79,7 @@ namespace Items
             KartBase kart = other.GetComponent<KartCollider>()?.kartBase;
             if (kart != null)
             {
-                //TODO : trigger kart crash animation
+                kart.addPowerup(_powerup);
                 Destroy(gameObject);
             }
         }
