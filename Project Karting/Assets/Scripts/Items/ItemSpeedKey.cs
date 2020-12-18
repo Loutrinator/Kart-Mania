@@ -21,7 +21,7 @@ namespace Items
         {
             StatPowerup powerup = new StatPowerup(boost,duration);
             powerup.powerupUsed = () => ExpiredPowerup(info);
-            info.kart.addPowerup(powerup);
+            info.kart.AddPowerup(powerup);
         }
         private void ExpiredPowerup(PlayerRaceInfo info)
         {

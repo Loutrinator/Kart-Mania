@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using Items;
+using RoadPhysics;
 using UnityEngine;
 
 namespace Kart
 {
-    public class KartBase : MonoBehaviour {
+    public class KartBase : PhysicsObject {
         public Transform kartRootModel;        // The kart's root 3D model
         public Transform kartBodyModel;        // The main kart 3D model (no wheels)
         public List<Transform> wheels;        //TODO: A DEPLACER
         public List<Transform> turningWheels;        // The turning wheels of the kart
         public ShakeTransform cameraShake;
-        public Transform rotationAxis;
+        //public Transform rotationAxis;
         public KartEffects effects;
         public Keyhole keyhole;
         public Stats vehicleStats = new Stats {
@@ -61,22 +60,20 @@ namespace Kart
         private float _lerpedKartRotation;
 
         private void Awake() {
+            base.Awake();
             _firstPos = transform.position;
             _firstPosTime = Time.time;
-            stopDrifting();
+            StopDrifting();
         }
 
         private void FixedUpdate() {
             if (!GameManager.Instance.raceHasBegan()) return;
-            applyPowerups();
-	        move(forwardMove);
+            ApplyPowerups();
+	        Move(forwardMove);
 
             if (drift && !drifting && (hMove < 0 ||hMove > 0))
             {
-                #if UNITY_EDITOR
-                //Debug.Log("Start drift");
-                #endif
-                startDrift(hMove);
+                StartDrift(hMove);
             }
 
             if (forwardMove != 0) //on tourne pas à l'arret
@@ -84,23 +81,20 @@ namespace Kart
                 if (drifting){
                     if (!drift)
                     {
-                        stopDrifting();
+                        StopDrifting();
                     }else{   
                         float driftAngle = (1 + hMove*driftDirection)  / 2 * (maxDriftAngle - minDriftAngle) + minDriftAngle;
                         driftAngle *= driftDirection;
-                        rotate(driftAngle);
+                        Rotate(driftAngle);
                     } 
                 }else{
-                    rotate(hMove);
+                    Rotate(hMove);
                 }
             }
-            applyGravity();
-            //var t = transform;
-            //t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
         }
 
 
-        protected void move(float direction) {
+        private void Move(float direction) {
             if (direction > 0) {
                 _currentSpeed += finalStats.acceleration * Time.fixedDeltaTime;
                 _currentSpeed = Mathf.Min(finalStats.topSpeed, _currentSpeed);
@@ -112,14 +106,19 @@ namespace Kart
             else _currentSpeed = 0;
 
             var t = transform;
-            t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
+            rigidBody.position += t.forward * (_currentSpeed * Time.deltaTime);
+            //t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
         }
 
-        protected void rotate(float angle)
+        protected void Rotate(float angle)
         {
+            
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer*2 + steeringSpeed) * Time.fixedDeltaTime;
-            transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
+            
+            //transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
+            Quaternion q = Quaternion.AngleAxis(steerAngle, transform.up);
+            rigidBody.MoveRotation(rigidBody.transform.rotation * q);
             Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
             
             
@@ -139,20 +138,7 @@ namespace Kart
             kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * kartRollCoeff);
         }
 
-        private void applyGravity() {
-            Transform t = transform;
-            if (Physics.Raycast(t.position + t.up * 1f, -t.up, out var hit, 1.1f+yAxisOffset,
-                1 << LayerMask.NameToLayer("Ground"))) {
-                t.position += (hit.point.y - t.position.y+yAxisOffset) * t.up;
-                _yVelocity = 0;
-            }
-            else {
-                _yVelocity += Physics.gravity.y * Time.fixedDeltaTime;
-            }
-            transform.position += transform.up * (_yVelocity * Time.fixedDeltaTime);
-        }
-        
-        private void animateWheels()
+        private void AnimateWheels()
         {
             _lerpedWheelDirection = Mathf.Lerp(_lerpedWheelDirection, hMove, kartRotationLerpSpeed * Time.fixedDeltaTime * 2f);
             float angularSpeed = (_currentSpeed /(0.38f * (float)Math.PI)*360f)%360f;
@@ -167,14 +153,14 @@ namespace Kart
         }
 
         #region Drift
-        private void startDrift(float direction)
+        private void StartDrift(float direction)
         {
             driftDirection = direction > 0 ? 1 : direction < 0 ? -1 : 0;
             drifting = true;
             effects.startDrift();
         }
 
-        private void stopDrifting()
+        private void StopDrifting()
         {
             driftDirection = 0;
             _lerpedKartRotation = 0f;
@@ -185,12 +171,14 @@ namespace Kart
         #endregion
 
         #region PowerUps
-        void applyPowerups()
+        void ApplyPowerups()
         {
             // on supprime tout powerup qui a dépassé son temps d'activation
             activePowerupList.RemoveAll((p) =>
             {
+                #if UNITY_EDITOR
                 Debug.Log("elapsed " + p.elapsedTime + " max " + p.maxTime);
+                #endif
                 if (p.elapsedTime > p.maxTime)
                 {
                     p.powerupUsed();
@@ -217,18 +205,18 @@ namespace Kart
             finalStats.suspension = Mathf.Clamp(finalStats.suspension, 0, 1);
         }
 
-        public void addPowerup(StatPowerup powerup)
+        public void AddPowerup(StatPowerup powerup)
         {
             Debug.Log("Add Powerup");
             activePowerupList.Add(powerup);
         }
         #endregion
         
-        public float currentSpeed() {
+        public float CurrentSpeed() {
             return _currentSpeed;
         }
 
-        public float getHorizontalAxis()
+        public float GetHorizontalAxis()
         {
             return hMove;
         }

@@ -23211,6 +23211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 937836208}
   - component: {fileID: 937836206}
+  - component: {fileID: 937836207}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -23230,9 +23231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2395f6e484734994d2f6a202eb7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kartPrefab: {fileID: 6669060970404059514, guid: db4b9d1ae0d2e79458fc6340fc0be48b,
+  kartPrefab: {fileID: 6669060970404059514, guid: 788e3c6fb21859241bfef9c60f187e62,
     type: 3}
-  nbPlayerRacing: 2
+  nbPlayerRacing: 1
   nbLap: 1
   itemManager: {fileID: 11400000, guid: 4a4bb616e5b0d0244aaf6dae3cd4cc2d, type: 2}
   checkpointAmount: 5
@@ -23251,6 +23252,20 @@ MonoBehaviour:
   lap: {fileID: 680288657}
   checkpoint: {fileID: 564444962}
   timeInfo: {fileID: 51267393}
+  physicsManager: {fileID: 937836207}
+--- !u!114 &937836207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937836205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7838453671a5a24b89d3bc30187ab42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsObjects: []
 --- !u!4 &937836208
 Transform:
   m_ObjectHideFlags: 0

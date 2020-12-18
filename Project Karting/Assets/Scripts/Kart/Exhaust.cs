@@ -30,7 +30,7 @@ namespace Kart
                 exhaust.localEulerAngles = new Vector3(rot, oldRot.y, oldRot.z);
             }
 
-            bool emit = Mathf.Abs(kart.currentSpeed()) < 0.1f;
+            bool emit = Mathf.Abs(kart.CurrentSpeed()) < 0.1f;
             if (emit)
             {
                 if (!wasEmmiting)
