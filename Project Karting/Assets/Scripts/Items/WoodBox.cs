@@ -79,7 +79,7 @@ namespace Items
             KartBase kart = other.GetComponent<KartCollider>()?.kartBase;
             if (kart != null)
             {
-                kart.addPowerup(_powerup);
+                kart.AddPowerup(_powerup);
                 Destroy(gameObject);
             }
         }
