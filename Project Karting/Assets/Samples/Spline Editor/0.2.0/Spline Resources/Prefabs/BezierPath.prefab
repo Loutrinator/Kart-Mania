@@ -44,10 +44,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  startPoint: {x: -2, y: 0, z: 0}
-  endPoint: {x: 2, y: 0, z: 0}
-  startTangent: {x: -1, y: 0, z: 0}
-  endTangent: {x: 1, y: 0, z: 0}
+  controlPoints:
+  - position: {x: -2, y: 1.5, z: 1}
+    tangent1: {x: 1.5, y: -0, z: -0}
+    tangent2: {x: -1.5, y: 0, z: 0}
+  - position: {x: 0.335, y: 0, z: -2.4026222}
+    tangent1: {x: -2.5, y: -0, z: -0}
+    tangent2: {x: 2.5, y: 0, z: 0}
+  - position: {x: 0.17075098, y: 0, z: -5.5566316}
+    tangent1: {x: 1, y: -0, z: -0}
+    tangent2: {x: -1, y: 0, z: 0}
   divisions: 50
   lastPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2774165490298130653
