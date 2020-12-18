@@ -29,7 +29,7 @@ namespace Kart
         private Stats finalStats;
 
         public float steeringSpeed = 70f;
-        public float yAxisOffset = 1f;
+        public float driftCoeff = 1f;
         [Header("Drift")]
         [Range(0f, 1f)] public float minDriftAngle = 0.2f;
         [Range(1f, 2f)] public float maxDriftAngle = 2f; 
@@ -51,8 +51,6 @@ namespace Kart
         // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
         public Func<int> GetPlayerID;
 
-        private Vector3 _firstPos;
-        private float _firstPosTime;
         private float _currentSpeed;
         private float _yVelocity;
         private float _currentAngularSpeed;
@@ -61,8 +59,6 @@ namespace Kart
 
         private void Awake() {
             base.Awake();
-            _firstPos = transform.position;
-            _firstPosTime = Time.time;
             StopDrifting();
         }
 
@@ -107,7 +103,10 @@ namespace Kart
 
             var t = transform;
             rigidBody.position += t.forward * (_currentSpeed * Time.deltaTime);
+            int turningDir = hMove > 0 ? 1 : hMove < 0 ? -1 : 0;
+            rigidBody.position += t.right * ( turningDir * _currentSpeed * hMove *  Time.deltaTime * driftCoeff);
             //t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
+            
         }
 
         protected void Rotate(float angle)

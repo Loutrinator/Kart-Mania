@@ -1,22 +1,42 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Kart;
 public class CameraFollowPlayer : MonoBehaviour
 {
     public float lerpSpeed = 10.0f;
+    public float yRotation = 2f;
     public float xOffset = 2f;
     //public float rotationLerpCoeff;
     //public float lookAtOffset = 1f;//3.65
     //public Vector3 dist;// 0 4.31 -7.1
     public KartBase target;
 
-    private float lerpedXAxis;
+    private float lerpedYRot;
+    private float lerpedX;
+    private Vector3 startPos;
+    private Quaternion startRot;
+    public float lookAtHeight;
+
+    private void Start()
+    {
+        startPos = transform.localPosition;
+        startRot = transform.localRotation;
+        lookAtHeight = startPos.y;
+    }
+
     private void LateUpdate()
     {
+        float desiredYRot = target.GetHorizontalAxis() * yRotation;
+        lerpedYRot = Mathf.Lerp(lerpedYRot, desiredYRot, Time.fixedDeltaTime * lerpSpeed);
         float desiredX = target.GetHorizontalAxis() * xOffset;
-        lerpedXAxis = Mathf.Lerp(lerpedXAxis, desiredX, Time.fixedDeltaTime * lerpSpeed);
+        lerpedX = Mathf.Lerp(lerpedYRot, desiredX, Time.fixedDeltaTime * lerpSpeed);
+        transform.localPosition = startPos;
         Vector3 previousPos = transform.localPosition;
-        transform.localPosition = new Vector3(lerpedXAxis,previousPos.y,previousPos.z);
+        transform.localPosition = new Vector3(lerpedX,previousPos.y,previousPos.z);
+        transform.localRotation = startRot;
+        transform.RotateAround(target.transform.position + Vector3.up*lookAtHeight,Vector3.up, lerpedYRot);
+        //transform.LookAt(target.transform.position + Vector3.up*lookAtHeight);
         /*
         Transform kartTransform = target.transform;
         Transform cameraTransform = transform;

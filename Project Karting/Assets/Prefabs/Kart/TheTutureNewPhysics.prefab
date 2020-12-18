@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f713bb3156e0634fa0c9fc2b876e8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpSpeed: 3
-  xOffset: 2.18
+  lerpSpeed: 1.6
+  yRotation: -30
+  xOffset: 2
   target: {fileID: 6669060970404059514}
+  lookAtHeight: 0
 --- !u!1 &2010858765221832551
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +160,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -6047,7 +6049,6 @@ MonoBehaviour:
   - {fileID: 8609656235578777857}
   - {fileID: 5014659118040999078}
   cameraShake: {fileID: 5241838320852678701}
-  rotationAxis: {fileID: 1229019990198417434}
   effects: {fileID: 6671327005639688407}
   keyhole: {fileID: 7072082923481296565}
   vehicleStats:
@@ -6060,10 +6061,10 @@ MonoBehaviour:
     addedGravity: 1
     suspension: 0.2
   steeringSpeed: 40
-  yAxisOffset: 1.14
+  driftCoeff: 0.2
   minDriftAngle: 0.182
   maxDriftAngle: 1.8
-  kartRotationCoeff: 15
+  kartRotationCoeff: 0
   kartRollCoeff: 4
   kartRotationLerpSpeed: 5
   kartWheelAngle: 25
