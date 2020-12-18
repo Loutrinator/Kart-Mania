@@ -181,7 +181,7 @@ namespace Kart
                 #endif
                 if (p.elapsedTime > p.maxTime)
                 {
-                    p.powerupUsed();
+                    p.powerupUsed?.Invoke();
                     return true;   
                 }
                 return false;
