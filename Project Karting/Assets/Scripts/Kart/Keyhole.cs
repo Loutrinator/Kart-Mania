@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Keyhole : MonoBehaviour
 {
-
+    public bool ANIMATION;
     public float baseSpeed = 300f;
     public float lerpSpeed = 2f;
     public Transform keyhole;
@@ -62,6 +63,11 @@ public class Keyhole : MonoBehaviour
 
     void Update()
     {
+        if (ANIMATION)
+        {
+            ANIMATION = false;
+            InsertKey(null);
+        }
         currentSpeed = Mathf.Lerp(currentSpeed, baseSpeed, lerpSpeed * Time.deltaTime);
         float animationPercent;
         float elapsed;
@@ -128,7 +134,10 @@ public class Keyhole : MonoBehaviour
                 {
                     currentStateStartTime = Time.time;
                     keyHoleState = KeyHoleState.inserted;
-                    powerupCallback();
+                    if (powerupCallback != null)
+                    {
+                        powerupCallback();
+                    } 
                 }
                 break;
             
@@ -189,7 +198,7 @@ public class Keyhole : MonoBehaviour
         HandRewindHoldPosition = false;
     }
 
-    public bool InsertKey(Action callback)
+    public bool InsertKey([CanBeNull] Action callback)
     {
         if (keyHoleState == KeyHoleState.empty)
         {
@@ -197,7 +206,10 @@ public class Keyhole : MonoBehaviour
             keyHoleState = KeyHoleState.insertion;
             ResetKeyhole();
             keyMeshRenderer.enabled = true;
-            powerupCallback = callback;
+            if (callback != null)
+            {
+                powerupCallback = callback;
+            }
             return true;
         }
         return false;

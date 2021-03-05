@@ -1,18 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MainMenuCamera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public enum MainCameraPosition
+    {screen, car, desk}
 
-    // Update is called once per frame
-    void Update()
+    public Animator cameraAnimator;
+    private MainCameraPosition positionState;
+    
+
+    private void Update()
     {
-        
+        if (Input.GetKeyDown("space"))
+        {
+            cameraAnimator.SetTrigger("move");
+        }
     }
 }
