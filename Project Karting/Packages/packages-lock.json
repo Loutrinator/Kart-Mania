@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "com.sikny.splineeditor": {
-      "version": "https://github.com/Sikny/SplineEditor.git#0.2.1",
+      "version": "https://github.com/Sikny/SplineEditor.git#0.3.0",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "5deaed25c8ba072d16edaebdaad4e0c6d27ec722"
+      "hash": "ca2a89bbe4309e61dd6e231137debeaf35eb5f3f"
     },
     "com.unity.collab-proxy": {
       "version": "1.2.16",
@@ -15,8 +15,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
-      "version": "1.0.5",
-      "depth": 2,
+      "version": "1.0.6",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -31,7 +31,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.vscode": {
-      "version": "1.2.2",
+      "version": "1.2.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -84,11 +84,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.18",
+      "version": "1.1.22",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.ext.nunit": "1.0.0",
+        "com.unity.ext.nunit": "1.0.6",
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
@@ -104,10 +104,15 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.2.6",
+      "version": "1.2.18",
       "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.modules.director": "1.0.0",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.particlesystem": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.ugui": {
@@ -129,14 +134,17 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.legacyinputhelpers": {
-      "version": "2.1.6",
+      "version": "2.1.7",
       "depth": 1,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.modules.vr": "1.0.0",
+        "com.unity.modules.xr": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.management": {
-      "version": "3.2.16",
+      "version": "3.2.17",
       "depth": 0,
       "source": "registry",
       "dependencies": {
