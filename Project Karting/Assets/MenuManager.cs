@@ -44,17 +44,7 @@ public class MenuManager : MonoBehaviour
         championshipAnimator.SetBool("Choosen",true);
         SelectMode(GameMode.championship);
     }
-    public void ShowPreviousKart()
-    {
-        vehiculeId = (vehiculeId - 1) % vehiculeAmount;
-        Debug.Log("Showing kart n°" + vehiculeId);
-    }
-    public void ShowNextKart()
-    {
-        vehiculeId = (vehiculeId + 1) % vehiculeAmount;
-        Debug.Log("Showing kart n°" + vehiculeId);
-    }
-    public void SelectKart()
+    public void SelectKart(int id)
     {
         vehiculeId = (vehiculeId + 1) % vehiculeAmount;
         Debug.Log("Showing kart n°" + vehiculeId);
