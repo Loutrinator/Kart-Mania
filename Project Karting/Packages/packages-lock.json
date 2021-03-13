@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "com.sikny.splineeditor": {
-      "version": "https://github.com/Sikny/SplineEditor.git#0.0.4",
+      "version": "https://github.com/Sikny/SplineEditor.git#0.3.0",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "4d0d781d43cdf25a8c0a1ffc2823b28cd626f19a"
+      "hash": "ca2a89bbe4309e61dd6e231137debeaf35eb5f3f"
     },
     "com.unity.collab-proxy": {
       "version": "1.2.16",
@@ -84,7 +84,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.20",
+      "version": "1.1.22",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -104,10 +104,15 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.2.6",
+      "version": "1.2.18",
       "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.modules.director": "1.0.0",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.particlesystem": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.ugui": {
