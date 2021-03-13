@@ -13,7 +13,7 @@ public class CameraFollowPlayer : MonoBehaviour
     private float lerpedXAxis;
     private void LateUpdate()
     {
-        float desiredX = target.getHorizontalAxis() * xOffset;
+        float desiredX = target.GetHorizontalAxis() * xOffset;
         lerpedXAxis = Mathf.Lerp(lerpedXAxis, desiredX, Time.fixedDeltaTime * lerpSpeed);
         Vector3 previousPos = transform.localPosition;
         transform.localPosition = new Vector3(lerpedXAxis,previousPos.y,previousPos.z);
