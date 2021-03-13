@@ -14,13 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   m_AdvancedMode: 0
-  indirectSpecularIntensity:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-  indirectDiffuseIntensity:
+  indirectDiffuseLightingMultiplier:
     m_OverrideState: 1
     m_Value: 8
+    min: 0
+  indirectDiffuseLightingLayers:
+    m_OverrideState: 0
+    m_Value: 255
+  reflectionLightingMultiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  reflectionLightingLayers:
+    m_OverrideState: 0
+    m_Value: 255
+  reflectionProbeIntensityMultiplier:
+    m_OverrideState: 0
+    m_Value: 0
     min: 0
 --- !u!114 &-1658960478407648048
 MonoBehaviour:
@@ -74,6 +84,27 @@ MonoBehaviour:
   hdriSky:
     m_OverrideState: 1
     m_Value: {fileID: 8900000, guid: 54a3a0570aebe8949bec4966f1376581, type: 3}
+  enableDistortion:
+    m_OverrideState: 0
+    m_Value: 0
+  procedural:
+    m_OverrideState: 0
+    m_Value: 1
+  flowmap:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  upperHemisphereOnly:
+    m_OverrideState: 0
+    m_Value: 1
+  scrollDirection:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  scrollSpeed:
+    m_OverrideState: 0
+    m_Value: 2
+    min: 0
   enableBackplate:
     m_OverrideState: 0
     m_Value: 0
@@ -175,8 +206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953beb541740ddc499d005ee80c9ff29, type: 3}
   m_Name: Fog
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
+  quality:
+    m_OverrideState: 0
+    m_Value: 1
   enabled:
     m_OverrideState: 1
     m_Value: 1
@@ -185,7 +219,7 @@ MonoBehaviour:
     m_Value: 0
   color:
     m_OverrideState: 1
-    m_Value: {r: 105.22525, g: 414.28888, b: 719.605, a: 1}
+    m_Value: {r: 290.411, g: 248.86473, b: 228.76715, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -218,12 +252,6 @@ MonoBehaviour:
   maximumHeight:
     m_OverrideState: 0
     m_Value: 5.7
-  albedo:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
   meanFreePath:
     m_OverrideState: 1
     m_Value: 118.1
@@ -231,11 +259,12 @@ MonoBehaviour:
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 0
-  anisotropy:
-    m_OverrideState: 1
-    m_Value: 0.6
-    min: -1
-    max: 1
+  albedo:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
   globalLightProbeDimmer:
     m_OverrideState: 0
     m_Value: 1
@@ -245,11 +274,45 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 64
     min: 0.1
+  denoisingMode:
+    m_OverrideState: 0
+    m_Value: 2
+  anisotropy:
+    m_OverrideState: 1
+    m_Value: 0.6
+    min: -1
+    max: 1
   sliceDistributionUniformity:
     m_OverrideState: 0
     m_Value: 0.75
     min: 0
     max: 1
+  m_FogControlMode:
+    m_OverrideState: 0
+    m_Value: 0
+  screenResolutionPercentage:
+    m_OverrideState: 0
+    m_Value: 12.5
+    min: 6.25
+    max: 50
+  volumeSliceCount:
+    m_OverrideState: 0
+    m_Value: 64
+    min: 1
+    max: 512
+  m_VolumetricFogBudget:
+    m_OverrideState: 0
+    m_Value: 0.33
+    min: 0
+    max: 1
+  m_ResolutionDepthRatio:
+    m_OverrideState: 0
+    m_Value: 0.666
+    min: 0
+    max: 1
+  directionalLightsOnly:
+    m_OverrideState: 0
+    m_Value: 0
   filter:
     m_OverrideState: 0
     m_Value: 0
