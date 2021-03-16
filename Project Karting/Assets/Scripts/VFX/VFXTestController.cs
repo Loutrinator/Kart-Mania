@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VFXTestController : MonoBehaviour
 {
-    public ShakeTransform camera;
+    public ShakeTransform cameraShakeTransform;
     public Transform effectPosition;
 
     public GameObject[] effects;
 
     public string[] keys;
-    // Update is called once per frame
+    
     void Update()
     {
         for (int i = 0; i < keys.Length; i++)
@@ -24,7 +22,7 @@ public class VFXTestController : MonoBehaviour
                     NukeBomb bomb = g.GetComponent<NukeBomb>();
                     bomb.target = effectPosition;
                     bomb.transform.position = bomb.startPosition;
-                    bomb.camera = camera;
+                    bomb.cameraShakeTransform = cameraShakeTransform;
                 }
             }
         }

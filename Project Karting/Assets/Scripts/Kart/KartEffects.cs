@@ -6,7 +6,7 @@ namespace Kart
 {
         public class KartEffects : MonoBehaviour
     {
-        public Camera camera;
+        public Camera cam;
         public List<TrailRenderer> skidEmitters;
         public List<ParticleSystem> driftSmokeEmitters;
 
@@ -38,8 +38,8 @@ namespace Kart
             stopBoost();
             stopDrift();
             driftLevel = 0;
-            baseFOV = camera.fieldOfView;
-            baseZ = camera.transform.localPosition.z;
+            baseFOV = cam.fieldOfView;
+            baseZ = cam.transform.localPosition.z;
         }
         /*
         public void LateUpdate()
@@ -80,9 +80,9 @@ namespace Kart
                 if (elapsed < boostLength)
                 {
                     float boostEffect =  boostCameraEffect.Evaluate(elapsed /boostLength)*boostStrength;
-                    camera.fieldOfView = baseFOV + boostEffect * boostFOVOffset;
-                    Vector3 previousPos = camera.transform.localPosition;
-                    camera.transform.localPosition =  new Vector3(previousPos.x,previousPos.y, baseZ - boostEffect * boostZOffset);
+                    cam.fieldOfView = baseFOV + boostEffect * boostFOVOffset;
+                    Vector3 previousPos = cam.transform.localPosition;
+                    cam.transform.localPosition =  new Vector3(previousPos.x,previousPos.y, baseZ - boostEffect * boostZOffset);
             
                 }else
                 {

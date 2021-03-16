@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Kart;
 using Items;
 using Player;
 using RoadPhysics;
-using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
     public KartBase kartPrefab;
@@ -18,9 +15,9 @@ public class GameManager : MonoBehaviour {
     public Transform[] spawnPoints;
 
     [Header("UI and HUD")] [SerializeField]
-    private GameObject HUDvsClockPrefab = null;
+    private GameObject HUDvsClockPrefab;
 
-    [SerializeField] private GameObject StartUIPrefab = null;
+    [SerializeField] private GameObject StartUIPrefab;
 
     [Header("Debug")] public Text bestTime;
     public Text currentTime;
@@ -85,11 +82,9 @@ public class GameManager : MonoBehaviour {
 
 
     private void InitRace() {
-        Debug.Log("init of race");
         playersInfo = new PlayerRaceInfo[nbPlayerRacing];
         if (spawnPoints.Length >= nbPlayerRacing) {
             for (int id = 0; id < nbPlayerRacing; ++id) {
-                Debug.Log("spawning kart " + id);
                 Transform spawn = spawnPoints[id];
                 KartBase kart = Instantiate(kartPrefab, spawn.position, spawn.rotation);
 
@@ -100,13 +95,9 @@ public class GameManager : MonoBehaviour {
                 playersInfo[id] = info;
                 Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                 startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
-                ShakeTransform camera = kart.cameraShake;
-                if (camera == null) {
-                    Debug.LogWarning("PAS DE CAM TROUVEE");
-                }
-                else {
-                    Debug.LogWarning("cam trouvée");
-                    cameras.Add(camera);
+                ShakeTransform cam = kart.cameraShake;
+                if (cam != null) {
+                    cameras.Add(cam);
                 }
 
                 startMessage._startTime = Time.time;

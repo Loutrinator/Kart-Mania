@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class KartPreview : MonoBehaviour
 {
-    public string name;
+    public string kartName;
     public Stats stats;
 }

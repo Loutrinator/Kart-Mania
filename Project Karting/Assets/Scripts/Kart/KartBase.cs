@@ -59,7 +59,7 @@ namespace Kart
         private float _lerpedWheelDirection;
         private float _lerpedKartRotation;
 
-        private void Awake() {
+        protected override void Awake() {
             base.Awake();
             _firstPos = transform.position;
             _firstPosTime = Time.time;
@@ -112,13 +112,12 @@ namespace Kart
 
         protected void Rotate(float angle)
         {
-            
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer*2 + steeringSpeed) * Time.fixedDeltaTime;
             
             //transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
             Quaternion q = Quaternion.AngleAxis(steerAngle, transform.up);
-            rigidBody.MoveRotation(rigidBody.transform.rotation * q);
+            rigidBody.MoveRotation(q * rigidBody.transform.rotation);
             Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
             
             

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class KartSelectionManager : MonoBehaviour
 {
@@ -49,7 +46,7 @@ public class KartSelectionManager : MonoBehaviour
     {
         if (currentKartInformations != null)
         {
-            kartNameDisplay.text = currentKartInformations.name;
+            kartNameDisplay.text = currentKartInformations.kartName;
             speed.text = ((int)currentKartInformations.stats.topSpeed).ToString();
             acceleration.text = ((int)currentKartInformations.stats.acceleration).ToString();
             brake.text = ((int)currentKartInformations.stats.braking).ToString();
