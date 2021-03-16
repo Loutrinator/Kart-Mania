@@ -48,6 +48,7 @@ public class MenuManager : MonoBehaviour
     {
         vehiculeId = (vehiculeId + 1) % vehiculeAmount;
         Debug.Log("Showing kart n°" + vehiculeId);
+        mainCameraAnimator.SetTrigger("move");
     }
     public void ShowPreviousScreen()
     {

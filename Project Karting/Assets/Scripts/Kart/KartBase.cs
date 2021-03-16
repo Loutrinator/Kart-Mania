@@ -106,7 +106,7 @@ namespace Kart
             else _currentSpeed = 0;
 
             var t = transform;
-            rigidBody.position += t.forward * (_currentSpeed * Time.deltaTime);
+            rigidBody.MovePosition(rigidBody.position + t.forward * (_currentSpeed * Time.deltaTime));
             //t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
         }
 

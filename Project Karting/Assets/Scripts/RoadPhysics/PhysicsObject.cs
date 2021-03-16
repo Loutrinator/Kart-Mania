@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace RoadPhysics {
     public class PhysicsObject : MonoBehaviour {
@@ -10,8 +11,9 @@ namespace RoadPhysics {
             currentGravity = Physics.gravity;
         }
 
-        public void UpdateGravity() {
-            rigidBody.AddForce(currentGravity, ForceMode.Acceleration);
+        public void UpdateGravity(Vector3 groundNormal) {
+            Vector3 gravity = -groundNormal * currentGravity.magnitude;
+            rigidBody.AddForce(gravity, ForceMode.Acceleration);
         }
     }
 }
