@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Animator championshipAnimator;
     [SerializeField] private Animator levelEditorAnimator;
     [SerializeField] private CustomCanvas gameModeCanvas;
-    [SerializeField] private int vehiculeAmount;
+    
     private int vehiculeId;
     private GameMode gameMode;
     
@@ -44,10 +44,8 @@ public class MenuManager : MonoBehaviour
         championshipAnimator.SetBool("Choosen",true);
         SelectMode(GameMode.championship);
     }
-    public void SelectKart(int id)
+    public void ShowNextScreen()
     {
-        vehiculeId = (vehiculeId + 1) % vehiculeAmount;
-        Debug.Log("Showing kart n°" + vehiculeId);
         mainCameraAnimator.SetTrigger("move");
     }
     public void ShowPreviousScreen()
