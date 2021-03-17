@@ -45,7 +45,7 @@ namespace Kart
         protected float lerpedAngle;
         public int forwardMove;    // -1; 0; 1
         public bool drift;
-        protected int driftDirection;
+        public int driftDirection;
         private bool drifting;
 
         // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
