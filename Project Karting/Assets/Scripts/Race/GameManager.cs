@@ -19,13 +19,6 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private GameObject StartUIPrefab;
 
-    [Header("Debug")] public Text bestTime;
-    public Text currentTime;
-    public Text timeDiff;
-    public Text lap;
-    public Text checkpoint;
-    public Text timeInfo;
-
     private PlayerRaceInfo[] playersInfo;
 
     private bool raceBegan;
@@ -60,13 +53,13 @@ public class GameManager : MonoBehaviour {
     private void Update() {
         if (raceBegan) {
             PlayerRaceInfo player = playersInfo[0];
-            currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
-            lap.text = player.lap.ToString();
-            checkpoint.text = player.currentCheckpoint.ToString();
-            float diff = Time.time - player.currentLapStartTime;
-            string info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
-                          floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
-            timeInfo.text = info;
+            //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
+            //lap.text = player.lap.ToString();
+            //checkpoint.text = player.currentCheckpoint.ToString();
+            //float diff = Time.time - player.currentLapStartTime;
+            // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
+            //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
+            //timeInfo.text = info;
             player.Controller.Update(); // listen player inputs 
         }
     }
@@ -151,7 +144,7 @@ public class GameManager : MonoBehaviour {
             playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
         }
 
-        bestTime.text = floatToTimeString(playersInfo[playerId].bestLapTime);
+        /*bestTime.text = floatToTimeString(playersInfo[playerId].bestLapTime);
         currentTime.text = floatToTimeString(playersInfo[playerId].previousLapTime);
         if (playersInfo[playerId].lap != 1) {
             timeDiff.text = floatToTimeString(diff);
@@ -161,7 +154,7 @@ public class GameManager : MonoBehaviour {
             else {
                 timeDiff.color = Color.green;
             }
-        }
+        }*/
     }
 
     private string floatToTimeString(float time) {
