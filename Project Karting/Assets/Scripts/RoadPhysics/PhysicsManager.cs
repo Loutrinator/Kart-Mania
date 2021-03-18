@@ -19,8 +19,8 @@ namespace RoadPhysics {
 
         private void FixedUpdate() {
             for (int i = physicsObjects.Count - 1; i >= 0; --i) {
-                BezierUtils.BezierPos pos = road.GetClosestPoint(physicsObjects[i].transform.position);
-                physicsObjects[i].UpdateGravity(pos.LocalUp);
+                //BezierUtils.BezierPos pos = road.GetClosestPoint(physicsObjects[i].transform.position);
+                physicsObjects[i].UpdateGravity(Vector3.up); //pos.LocalUp);
             }
         }
 
