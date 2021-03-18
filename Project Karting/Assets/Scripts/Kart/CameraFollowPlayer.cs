@@ -1,20 +1,33 @@
 ﻿using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Kart;
+using UnityEditor.ShaderGraph;
+
 public class CameraFollowPlayer : MonoBehaviour
 {
-    public float lerpSpeed = 10.0f;
     public float xOffset = 2f;
     //public float rotationLerpCoeff;
     //public float lookAtOffset = 1f;//3.65
     //public Vector3 dist;// 0 4.31 -7.1
     public KartBase target;
-
+    
     private float lerpedXAxis;
     private void LateUpdate()
     {
-        float desiredX = target.GetHorizontalAxis() * xOffset;
-        lerpedXAxis = Mathf.Lerp(lerpedXAxis, desiredX, Time.fixedDeltaTime * lerpSpeed);
+        float desiredX = 0;
+        if (target.driftDirection == 0)
+        {
+            desiredX = target.GetHorizontalAxis() * xOffset;
+        }
+        else
+        {
+            desiredX = target.driftDirection*xOffset*2f;
+        }
+
+        float previousX = lerpedXAxis;
+        lerpedXAxis = Mathf.Lerp(lerpedXAxis, desiredX, Time.fixedDeltaTime * 2f);
+        Debug.Log(lerpedXAxis - previousX);
+        
         Vector3 previousPos = transform.localPosition;
         transform.localPosition = new Vector3(lerpedXAxis,previousPos.y,previousPos.z);
         /*
@@ -33,6 +46,7 @@ public class CameraFollowPlayer : MonoBehaviour
         //cameraTransform.Rotate(Vector3.right, 90f, Space.Self);
         //cameraTransform.rotation = Quaternion.Lerp(oldRotation,cameraTransform.rotation,rotationLerpCoeff);*/
     }
+
     /*
     private void OnDrawGizmos()
     {

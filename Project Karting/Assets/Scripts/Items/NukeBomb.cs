@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Items;
-using UnityEngine;
-using UnityEngine.WSA;
+﻿using UnityEngine;
 
 public class NukeBomb : MonoBehaviour
 {
@@ -14,7 +8,7 @@ public class NukeBomb : MonoBehaviour
     public Vector3 startPosition;
     public Transform target;
     public AnimationCurve trajectory;
-    [HideInInspector] public ShakeTransform camera;
+    [HideInInspector] public ShakeTransform cameraShakeTransform;
     public ShakeTransformEventData nukeShake;
     public AudioSource flightEffect;
     

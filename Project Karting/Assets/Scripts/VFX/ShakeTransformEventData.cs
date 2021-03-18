@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Shake Transform Event", menuName = "Custom/Shake Transform Event", order = 1)]
 public class ShakeTransformEventData : ScriptableObject {
@@ -23,16 +21,13 @@ public class ShakeTransformEventData : ScriptableObject {
         new Keyframe(1.0f, 0.0f)
         );
 
-    public void Init(float amplitude, float frequency, float duration, AnimationCurve blendOverLifetime, Target target)
+    public void Init(float amplitudeP, float frequencyP, float durationP, Target targetP)
     {
-        this.target = target;
-        this.amplitude = amplitude;
-        this.frequency = frequency;
-
-
-        this.duration = duration;
-
-        this.blendOverLifeTime = blendOverLifeTime;
+        target = targetP;
+        amplitude = amplitudeP;
+        frequency = frequencyP;
+        
+        duration = durationP;
     }
 
 }

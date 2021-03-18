@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SplineEditor.Runtime;
 using UnityEngine;
 
 namespace RoadPhysics {
@@ -8,8 +9,9 @@ namespace RoadPhysics {
         public static PhysicsManager instance => _instance;
 
 
+        public BezierSpline road;
         public List<PhysicsObject> physicsObjects = new List<PhysicsObject>();
-        
+
         public void Init() {
             if (_instance == null)
                 _instance = this;
@@ -17,7 +19,8 @@ namespace RoadPhysics {
 
         private void FixedUpdate() {
             for (int i = physicsObjects.Count - 1; i >= 0; --i) {
-                physicsObjects[i].UpdateGravity();
+                BezierUtils.BezierPos pos = road.GetClosestPoint(physicsObjects[i].transform.position);
+                physicsObjects[i].UpdateGravity(pos.LocalUp);
             }
         }
 

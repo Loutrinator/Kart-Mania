@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8863347900010395657
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ddcec8a8eb2d684d833ac8f5d26aebd, type: 3}
+  m_Name: HDShadowSettings
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  maxShadowDistance:
+    m_OverrideState: 1
+    m_Value: 3000
+    min: 0
+  directionalTransmissionMultiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
+  cascadeShadowSplitCount:
+    m_OverrideState: 1
+    m_Value: 4
+    min: 1
+    max: 4
+  cascadeShadowSplit0:
+    m_OverrideState: 1
+    m_Value: 0.0031873835
+  cascadeShadowSplit1:
+    m_OverrideState: 1
+    m_Value: 0.4091534
+  cascadeShadowSplit2:
+    m_OverrideState: 1
+    m_Value: 0.7750698
+  cascadeShadowBorder0:
+    m_OverrideState: 1
+    m_Value: 1
+  cascadeShadowBorder1:
+    m_OverrideState: 1
+    m_Value: 0.56197226
+  cascadeShadowBorder2:
+    m_OverrideState: 1
+    m_Value: 0.65513927
+  cascadeShadowBorder3:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-6997717616824770254
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -16,20 +65,20 @@ MonoBehaviour:
   m_AdvancedMode: 0
   indirectDiffuseLightingMultiplier:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 22.27
     min: 0
   indirectDiffuseLightingLayers:
     m_OverrideState: 0
     m_Value: 255
   reflectionLightingMultiplier:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 9.6
     min: 0
   reflectionLightingLayers:
     m_OverrideState: 0
     m_Value: 255
   reflectionProbeIntensityMultiplier:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
     min: 0
 --- !u!114 &-1658960478407648048
@@ -47,8 +96,8 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   rotation:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 210
     min: 0
     max: 360
   skyIntensityMode:
@@ -56,7 +105,7 @@ MonoBehaviour:
     m_Value: 0
   exposure:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 8.91
   multiplier:
     m_OverrideState: 1
     m_Value: 871.78
@@ -171,6 +220,9 @@ MonoBehaviour:
   - {fileID: -1658960478407648048}
   - {fileID: 5321722785694334585}
   - {fileID: -6997717616824770254}
+  - {fileID: 7853042452312060670}
+  - {fileID: 4498201237692768074}
+  - {fileID: -8863347900010395657}
 --- !u!114 &3912485203739470195
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -194,6 +246,72 @@ MonoBehaviour:
   fogType:
     m_OverrideState: 1
     m_Value: 3
+--- !u!114 &4498201237692768074
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b145d2b9ee1ac4f846968484e7485a, type: 3}
+  m_Name: ContactShadows
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  quality:
+    m_OverrideState: 1
+    m_Value: 2
+  enable:
+    m_OverrideState: 1
+    m_Value: 1
+  length:
+    m_OverrideState: 1
+    m_Value: 0.256
+    min: 0
+    max: 1
+  opacity:
+    m_OverrideState: 1
+    m_Value: 1
+    min: 0
+    max: 1
+  distanceScaleFactor:
+    m_OverrideState: 1
+    m_Value: 0.493
+    min: 0
+    max: 1
+  maxDistance:
+    m_OverrideState: 1
+    m_Value: 1000
+    min: 0
+  minDistance:
+    m_OverrideState: 1
+    m_Value: 0
+    min: 0
+  fadeDistance:
+    m_OverrideState: 1
+    m_Value: 79.15
+    min: 0
+  fadeInDistance:
+    m_OverrideState: 1
+    m_Value: 0
+    min: 0
+  rayBias:
+    m_OverrideState: 0
+    m_Value: 0.2
+    min: 0
+    max: 1
+  thicknessScale:
+    m_OverrideState: 0
+    m_Value: 0.15
+    min: 0.02
+    max: 1
+  m_SampleCount:
+    m_OverrideState: 1
+    m_Value: 16
+    min: 4
+    max: 64
 --- !u!114 &5321722785694334585
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -206,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953beb541740ddc499d005ee80c9ff29, type: 3}
   m_Name: Fog
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 0
@@ -219,7 +337,7 @@ MonoBehaviour:
     m_Value: 0
   color:
     m_OverrideState: 1
-    m_Value: {r: 290.411, g: 248.86473, b: 228.76715, a: 1}
+    m_Value: {r: 307.65314, g: 176.36185, b: 111.741936, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -316,3 +434,25 @@ MonoBehaviour:
   filter:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &7853042452312060670
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b6af8f7ad32324cb6941c3290e5895, type: 3}
+  m_Name: MicroShadowing
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  enable:
+    m_OverrideState: 1
+    m_Value: 1
+  opacity:
+    m_OverrideState: 1
+    m_Value: 1
+    min: 0
+    max: 1
