@@ -23,7 +23,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.13
+    m_Value: 0.173
     min: 0
     max: 1
   scatter:
@@ -68,11 +68,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b24b200358312b4fa1004e2431c2f1f, type: 3}
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9374851, z: 0.7750831, w: -0.027210576}
+    m_Value: {x: 1, y: 0.9374851, z: 0.7750831, w: 0.19067805}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 0.9629538, y: 0.9651235, z: 1, w: 0.017793458}
@@ -111,6 +111,45 @@ MonoBehaviour:
   - {fileID: 6640133647794636954}
   - {fileID: -6015535525827699547}
   - {fileID: -1412199579834409174}
+  - {fileID: 4484607854055327482}
+--- !u!114 &4484607854055327482
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8bcdf71d7fafa419fca1ed162f5fc9, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  postExposure:
+    m_OverrideState: 1
+    m_Value: -0.24
+  contrast:
+    m_OverrideState: 1
+    m_Value: -5
+    min: -100
+    max: 100
+  colorFilter:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    hdr: 1
+    showAlpha: 0
+    showEyeDropper: 1
+  hueShift:
+    m_OverrideState: 0
+    m_Value: 0
+    min: -180
+    max: 180
+  saturation:
+    m_OverrideState: 1
+    m_Value: 9
+    min: -100
+    max: 100
 --- !u!114 &6640133647794636954
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -130,22 +169,22 @@ MonoBehaviour:
     m_Value: 0
   meteringMode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   luminanceSource:
     m_OverrideState: 1
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 8.446816
+    m_Value: 6.3003335
   compensation:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -2.75
   limitMin:
     m_OverrideState: 1
-    m_Value: -10
+    m_Value: 14.542374
   limitMax:
     m_OverrideState: 1
-    m_Value: 8.66
+    m_Value: 9.473558
   curveMap:
     m_OverrideState: 0
     m_Value:
