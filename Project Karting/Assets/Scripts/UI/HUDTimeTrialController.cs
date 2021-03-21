@@ -21,12 +21,12 @@ public class HUDTimeTrialController : MonoBehaviour
         bestTime.text = "";
         currentTime.text = "00:00:00";
         timeDiff.text = "";
-        lap.text = "0/" + GameManager.Instance.nbLap;
+        lap.text = "0/" + GameManager.Instance.currentRace.laps;
         _info.onBestLapTimeChange += () => bestTime.text = Utils.DisplayHelper.floatToTimeString(_info.bestLapTime);
         _info.onNewLap += () =>
         {
             // Update time diff each new lap
-            lap.text = _info.lap + " / " + GameManager.Instance.nbLap;
+            lap.text = _info.lap + " / " + GameManager.Instance.currentRace.laps;
             if (_info.lap < 3) return;
             float diff = _info.previousLapTime - _info.bestLapTime;
             timeDiff.text = Utils.DisplayHelper.floatToTimeString(diff);

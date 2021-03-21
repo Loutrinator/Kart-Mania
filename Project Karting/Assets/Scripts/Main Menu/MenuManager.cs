@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    public enum GameMode {timeTrial,championship,levelEditor}
 
     [SerializeField] private Animator mainCameraAnimator;
     [SerializeField] private Animator logoAnimator;
@@ -12,37 +12,41 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Animator championshipAnimator;
     [SerializeField] private Animator levelEditorAnimator;
     [SerializeField] private CustomCanvas gameModeCanvas;
-    
-    private int vehiculeId;
-    private GameMode gameMode;
-    
-    public void SelectMode(GameMode mode)
+
+    private void Start()
     {
-        gameMode = mode;
-        logoAnimator.SetBool("isVisible", false);
-        mainCameraAnimator.SetTrigger("move");
-        gameModeCanvas.disableUIInteraction();
+        logoAnimator.SetBool("isVisible", true);
     }
+
     public void SelectModeTimeTrial()
     {
         timeTrialAnimator.SetBool("Choosen",true);
         levelEditorAnimator.SetBool("NotSelected",true);
         championshipAnimator.SetBool("NotSelected",true);
-        SelectMode(GameMode.timeTrial);
+        logoAnimator.SetBool("isVisible", false);
+        mainCameraAnimator.SetTrigger("move");
+        gameModeCanvas.disableUIInteraction();
+        GameManager.Instance.gameConfig.mode = GameMode.timeTrial;
     }
     public void SelectModeLevelEditor()
     {
         timeTrialAnimator.SetBool("NotSelected",true);
         levelEditorAnimator.SetBool("Choosen",true);
         championshipAnimator.SetBool("NotSelected",true);
-        SelectMode(GameMode.levelEditor);
+        logoAnimator.SetBool("isVisible", false);
+        mainCameraAnimator.SetTrigger("move");
+        gameModeCanvas.disableUIInteraction();
+        GameManager.Instance.gameConfig.mode = GameMode.editor;
     }
     public void SelectModeChampionship()
     {
         timeTrialAnimator.SetBool("NotSelected",true);
         levelEditorAnimator.SetBool("NotSelected",true);
         championshipAnimator.SetBool("Choosen",true);
-        SelectMode(GameMode.championship);
+        logoAnimator.SetBool("isVisible", false);
+        mainCameraAnimator.SetTrigger("move");
+        gameModeCanvas.disableUIInteraction();
+        GameManager.Instance.gameConfig.mode = GameMode.championship;
     }
     public void ShowNextScreen()
     {

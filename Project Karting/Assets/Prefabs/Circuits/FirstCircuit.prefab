@@ -413,6 +413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4164677768927076147}
+  - component: {fileID: 7155308424949468804}
   m_Layer: 0
   m_Name: FirstCircuit
   m_TagString: Untagged
@@ -435,6 +436,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7155308424949468804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4160936595165977355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd98d97f9b14c5eb6e959fce57abff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: First Circuit
+  image: {fileID: 0}
+  laps: 3
+  circuitBezierData: {fileID: 0}
 --- !u!1 &6798291624067294888
 GameObject:
   m_ObjectHideFlags: 0
