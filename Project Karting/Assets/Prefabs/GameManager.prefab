@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &974393620473618569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 974393620473618580}
+  - component: {fileID: 974393620473618570}
+  - component: {fileID: 974393620473618571}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &974393620473618580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974393620473618569}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -169.2, y: 1.91, z: -247.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &974393620473618570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974393620473618569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad2395f6e484734994d2f6a202eb7c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kartPrefab: {fileID: 6669060970404059514, guid: 788e3c6fb21859241bfef9c60f187e62,
+    type: 3}
+  nbPlayerRacing: 1
+  nbLap: 1
+  itemManager: {fileID: 11400000, guid: 4a4bb616e5b0d0244aaf6dae3cd4cc2d, type: 2}
+  checkpointAmount: 5
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  HUDvsClockPrefab: {fileID: 8088969956587258211, guid: c88fc4398f416c340b9898c29a056315,
+    type: 3}
+  StartUIPrefab: {fileID: 4545681373983826033, guid: 24b9c1952b0ed7742a40ee0a11942240,
+    type: 3}
+  bestTime: {fileID: 0}
+  currentTime: {fileID: 0}
+  timeDiff: {fileID: 0}
+  lap: {fileID: 0}
+  checkpoint: {fileID: 0}
+  timeInfo: {fileID: 0}
+  physicsManager: {fileID: 974393620473618571}
+--- !u!114 &974393620473618571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974393620473618569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7838453671a5a24b89d3bc30187ab42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsObjects: []

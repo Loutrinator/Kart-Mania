@@ -74,7 +74,7 @@ public class ShakeTransform : MonoBehaviour {
     public void AddShakeEvent(float amplitude, float frequency, float duration, AnimationCurve blendOverLifetime, ShakeTransformEventData.Target target)
     {
         ShakeTransformEventData data = ScriptableObject.CreateInstance<ShakeTransformEventData>();
-        data.Init(amplitude, frequency, duration,blendOverLifetime,target);
+        data.Init(amplitude, frequency, duration,target);
 
         AddShakeEvent(data);
     }

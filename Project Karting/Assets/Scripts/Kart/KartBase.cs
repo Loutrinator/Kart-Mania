@@ -45,7 +45,7 @@ namespace Kart
         protected float lerpedAngle;
         public int forwardMove;    // -1; 0; 1
         public bool drift;
-        protected int driftDirection;
+        public int driftDirection;
         private bool drifting;
 
         // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
@@ -59,7 +59,7 @@ namespace Kart
         private float _lerpedWheelDirection;
         private float _lerpedKartRotation;
 
-        private void Awake() {
+        protected override void Awake() {
             base.Awake();
             _firstPos = transform.position;
             _firstPosTime = Time.time;
@@ -106,19 +106,18 @@ namespace Kart
             else _currentSpeed = 0;
 
             var t = transform;
-            rigidBody.position += t.forward * (_currentSpeed * Time.deltaTime);
+            rigidBody.MovePosition(rigidBody.position + t.forward * (_currentSpeed * Time.deltaTime));
             //t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
         }
 
         protected void Rotate(float angle)
         {
-            
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer*2 + steeringSpeed) * Time.fixedDeltaTime;
             
             //transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
             Quaternion q = Quaternion.AngleAxis(steerAngle, transform.up);
-            rigidBody.MoveRotation(rigidBody.transform.rotation * q);
+            rigidBody.MoveRotation(q * rigidBody.transform.rotation);
             Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
             
             
