@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Animator timeTrialAnimator;
     [SerializeField] private Animator championshipAnimator;
     [SerializeField] private Animator levelEditorAnimator;
+    [SerializeField] private Animator kartSelectorAnimator;
     [SerializeField] private CustomCanvas gameModeCanvas;
 
     private void Start()
@@ -55,6 +56,11 @@ public class MenuManager : MonoBehaviour
     public void ShowPreviousScreen()
     {
         mainCameraAnimator.SetTrigger("back");
+    }
+    public void HideKartSelector()
+    {
+        Debug.Log("HIDE");
+        kartSelectorAnimator.SetBool("isHidden", true);
     }
     
 }

@@ -4,60 +4,108 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TransitionState{hidden,fadeIn,blackedOut,fadeOut}
 public class TransitionController : MonoBehaviour
 {
-    public Image image;
-    public bool openByDefault;
     public bool startTransition;
+    public Animator loadingImage;
+    public TransitionState transitionState;
+    public float XPosition;
+    public AnimationCurve fadeInCurve;
+    public AnimationCurve fadeOutCurve;
+    public float transitionDuration;
+    
     private bool isTransitioning;
-    public float transitionSpeed;
     private float completion;
-    private int direction;
 
-    private void Start()
-    {
-        if (openByDefault)
-        {
-            completion = 0;
-        }
-        else
-        {
-            completion = 1;
-        }
-    }
+    private float currentStateStartTime;
+    
 
     private void Update()
     {
+        float elapsed = 0f;
+        float animationPercent = 0f;
+        float xPos = 0f;
+
         if (startTransition)
         {
-            StartTransition();
-        }
-
-        if (isTransitioning)
-        {
-            completion += direction * transitionSpeed * Time.deltaTime;
-            image.material.SetFloat("Cutoff",completion);
-            if ((direction == 1 && completion >= 1) || (direction == -1 && completion <= 0))
+            startTransition = false;
+            if (transitionState == TransitionState.hidden)
             {
-                isTransitioning = false;
+                FadeIn();
+            }else if (transitionState == TransitionState.blackedOut)
+            {
+                FadeOut();
             }
         }
         
+        switch (transitionState)
+        {
+            case TransitionState.hidden:
+                break;
+            case TransitionState.blackedOut:
+                break;
+            case TransitionState.fadeIn:
+                elapsed = 0f;
+                elapsed = Time.time - currentStateStartTime;
+                animationPercent = elapsed / transitionDuration;
+
+                xPos = fadeInCurve.Evaluate(animationPercent);
+                transform.localPosition = new Vector3(xPos * -XPosition, 0, 0);
+
+                if (elapsed >= transitionDuration)
+                {
+                    currentStateStartTime = Time.time;
+                    transitionState = TransitionState.blackedOut;
+                    ShowLoading();
+                }
+
+                break;
+            case TransitionState.fadeOut:
+                elapsed = Time.time - currentStateStartTime;
+                animationPercent = elapsed / transitionDuration;
+
+                xPos = fadeOutCurve.Evaluate(animationPercent);
+                transform.localPosition = new Vector3(xPos * XPosition, 0, 0);
+
+                if (elapsed >= transitionDuration)
+                {
+                    currentStateStartTime = Time.time;
+                    transitionState = TransitionState.hidden;
+                }
+
+                break;
+        }
+    }
+    
+    public void FadeIn()
+    {
+        currentStateStartTime = Time.time;
+        transitionState = TransitionState.fadeIn;
+    }
+    public void FadeOut()
+    {
+        currentStateStartTime = Time.time;
+        transitionState = TransitionState.fadeOut;
+        HideLoading();
+    }
+
+    public void ResetToHide()
+    {
         
     }
 
-    private void StartTransition()
+    public void ResetToClear()
     {
-        startTransition = false;
-        isTransitioning = true;
-        if (completion >= 1)
-        {
-            completion = 0;
-            direction = 1;
-        }else if(completion <= 0)
-        {
-            completion = 1;
-            direction = -1;
-        }
+        
+    }
+    
+    public void ShowLoading()
+    {
+        loadingImage.SetBool("visible", true);
+    }
+    public void HideLoading()
+    {
+        loadingImage.SetBool("visible", false);
     }
 }
