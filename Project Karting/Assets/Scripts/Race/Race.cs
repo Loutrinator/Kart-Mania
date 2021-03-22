@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class Race :MonoBehaviour
 {
     public string name;
-    public Image image;
+    public Sprite image;
     public int laps;
-    public BezierData circuitBezierData;
 }
