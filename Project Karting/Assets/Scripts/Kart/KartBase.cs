@@ -50,6 +50,9 @@ namespace Kart
         public int forwardMove; // -1; 0; 1
         public bool drift;
         public int driftDirection;
+
+        public Collider vehicleCollider;
+        
         private bool drifting;
 
         // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
@@ -69,6 +72,11 @@ namespace Kart
             _firstPos = transform.position;
             _firstPosTime = Time.time;
             StopDrifting();
+
+            foreach (var wheel in wheels)
+            {
+                Physics.IgnoreCollision(wheel, vehicleCollider);
+            }
         }
 
         protected override bool IsGrounded()

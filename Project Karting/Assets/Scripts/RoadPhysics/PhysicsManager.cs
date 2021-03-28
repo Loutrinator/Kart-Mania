@@ -26,7 +26,6 @@ namespace RoadPhysics {
                 {
                     BezierUtils.BezierPos pos = road.GetClosestBezierPos(physicsObjects[i].transform.position);
                     physicsObjects[i].UpdatePhysics(pos.LocalUp);
-                    Debug.DrawLine(pos.GlobalOrigin, physicsObjects[i].transform.position);
                 }
                 else
                 {
