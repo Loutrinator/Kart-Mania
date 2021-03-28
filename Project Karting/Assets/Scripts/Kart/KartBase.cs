@@ -9,7 +9,7 @@ namespace Kart
     {
         public Transform kartRootModel; // The kart's root 3D model
         public Transform kartBodyModel; // The main kart 3D model (no wheels)
-        public List<Transform> wheels; //TODO: A DEPLACER
+        public List<WheelCollider> wheels; //TODO: A DEPLACER
         public List<Transform> turningWheels; // The turning wheels of the kart
 
         public ShakeTransform cameraShake;
@@ -63,34 +63,23 @@ namespace Kart
         private float _lerpedWheelDirection;
         private float _lerpedKartRotation;
 
-        private Bounds[] wheelsBounds;
-
         protected override void Awake()
         {
             base.Awake();
             _firstPos = transform.position;
             _firstPosTime = Time.time;
             StopDrifting();
-            
-            wheelsBounds = new Bounds[wheels.Count];
-            for (var index = 0; index < wheels.Count; index++)
-            {
-                wheelsBounds[index] = wheels[index].GetComponentInChildren<Renderer>().bounds;
-            }
         }
 
         protected override bool IsGrounded()
         {
+            int wheelsOnGround = 0;
             for (var index = 0; index < wheels.Count; index++)
             {
-                Transform wheel = wheels[index]; 
-                if (!Physics.Raycast(wheel.position, -wheel.up, wheelsBounds[index].extents.y + 0.1f,
-                    LayerMask.GetMask("Ground")))
-                {
-                    return false;
-                }
+                if (wheels[index].isGrounded) wheelsOnGround++;
             }
-            return true;
+
+            return wheelsOnGround >= 4;
         }
 
         private void FixedUpdate()

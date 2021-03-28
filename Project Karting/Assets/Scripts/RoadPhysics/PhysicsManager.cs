@@ -24,8 +24,9 @@ namespace RoadPhysics {
             for (int i = physicsObjects.Count - 1; i >= 0; --i) {
                 if (_hasRoad)
                 {
-                    BezierUtils.BezierPos pos = road.GetClosestPoint(physicsObjects[i].transform.position);
+                    BezierUtils.BezierPos pos = road.GetClosestBezierPos(physicsObjects[i].transform.position);
                     physicsObjects[i].UpdatePhysics(pos.LocalUp);
+                    Debug.DrawLine(pos.GlobalOrigin, physicsObjects[i].transform.position);
                 }
                 else
                 {
