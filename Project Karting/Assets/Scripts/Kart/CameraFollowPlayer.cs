@@ -26,7 +26,6 @@ public class CameraFollowPlayer : MonoBehaviour
 
         float previousX = lerpedXAxis;
         lerpedXAxis = Mathf.Lerp(lerpedXAxis, desiredX, Time.fixedDeltaTime * 2f);
-        Debug.Log(lerpedXAxis - previousX);
         
         Vector3 previousPos = transform.localPosition;
         transform.localPosition = new Vector3(lerpedXAxis,previousPos.y,previousPos.z);

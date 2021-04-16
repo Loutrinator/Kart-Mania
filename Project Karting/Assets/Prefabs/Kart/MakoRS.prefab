@@ -155,6 +155,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7659790999841299513}
+  - component: {fileID: 5474277518029148937}
   m_Layer: 9
   m_Name: dragster wheel
   m_TagString: Untagged
@@ -177,6 +178,36 @@ Transform:
   m_Father: {fileID: 7750200387822309014}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!146 &5474277518029148937
+WheelCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656186629057298232}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.85
+  m_SuspensionSpring:
+    spring: 35000
+    damper: 4500
+    targetPosition: 0.5
+  m_SuspensionDistance: 0
+  m_ForceAppPointDistance: 0
+  m_Mass: 20
+  m_WheelDampingRate: 0.25
+  m_ForwardFriction:
+    m_ExtremumSlip: 0.4
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 0.8
+    m_AsymptoteValue: 0.5
+    m_Stiffness: 1
+  m_SidewaysFriction:
+    m_ExtremumSlip: 0.2
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 0.5
+    m_AsymptoteValue: 0.75
+    m_Stiffness: 1
+  m_Enabled: 1
 --- !u!1 &2104752388427734171
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5171062410734496925}
+  - component: {fileID: 4755297992543613819}
   m_Layer: 9
   m_Name: dragster wheel
   m_TagString: Untagged
@@ -553,6 +585,36 @@ Transform:
   m_Father: {fileID: 4451961783618723414}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!146 &4755297992543613819
+WheelCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098510934477335564}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.85
+  m_SuspensionSpring:
+    spring: 35000
+    damper: 4500
+    targetPosition: 0.5
+  m_SuspensionDistance: 0
+  m_ForceAppPointDistance: 0
+  m_Mass: 20
+  m_WheelDampingRate: 0.25
+  m_ForwardFriction:
+    m_ExtremumSlip: 0.4
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 0.8
+    m_AsymptoteValue: 0.5
+    m_Stiffness: 1
+  m_SidewaysFriction:
+    m_ExtremumSlip: 0.2
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 0.5
+    m_AsymptoteValue: 0.75
+    m_Stiffness: 1
+  m_Enabled: 1
 --- !u!1 &3368124978920472196
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +788,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f713bb3156e0634fa0c9fc2b876e8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpSpeed: 3
   xOffset: 2.18
   target: {fileID: 9197028294900898373}
 --- !u!1 &3751979711494227052
@@ -5961,8 +6022,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.9628143, y: 2.618147, z: 8.112198}
-  m_Center: {x: 0, y: 1.2404332, z: 0}
+  m_Size: {x: 3.9628143, y: 2.1666577, z: 8.112198}
+  m_Center: {x: 0, y: 1.4661778, z: 0}
 --- !u!114 &5055619466034635560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6124,15 +6185,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99cc829c59c3eb945a0ab2177143a094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGravity: {x: 0, y: 0, z: 0}
+  currentGravityAcceleration: {x: 0, y: 0, z: 0}
+  currentVelocity: {x: 0, y: 0, z: 0}
   rigidBody: {fileID: 4686627548744261268}
   kartRootModel: {fileID: 4686627548263282054}
   kartBodyModel: {fileID: 7509666760968161323}
   wheels:
-  - {fileID: 7401823191910459289}
-  - {fileID: 5171062410734496925}
-  - {fileID: 8737724695046057958}
-  - {fileID: 7659790999841299513}
+  - {fileID: 1204886762423558507}
+  - {fileID: 4755297992543613819}
+  - {fileID: 769393242965037012}
+  - {fileID: 5474277518029148937}
   turningWheels:
   - {fileID: 7401823191910459289}
   - {fileID: 5171062410734496925}
@@ -6161,6 +6223,8 @@ MonoBehaviour:
   hMove: 0
   forwardMove: 0
   drift: 0
+  driftDirection: 0
+  vehicleCollider: {fileID: 4686627548263282055}
 --- !u!1 &4686627549183994683
 GameObject:
   m_ObjectHideFlags: 0
@@ -11727,6 +11791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8737724695046057958}
+  - component: {fileID: 769393242965037012}
   m_Layer: 9
   m_Name: dragster wheel
   m_TagString: Untagged
@@ -11749,6 +11814,36 @@ Transform:
   m_Father: {fileID: 4686627549499476558}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!146 &769393242965037012
+WheelCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5463419429092903179}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.85
+  m_SuspensionSpring:
+    spring: 35000
+    damper: 4500
+    targetPosition: 0.5
+  m_SuspensionDistance: 0
+  m_ForceAppPointDistance: 0
+  m_Mass: 20
+  m_WheelDampingRate: 0.25
+  m_ForwardFriction:
+    m_ExtremumSlip: 0.4
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 0.8
+    m_AsymptoteValue: 0.5
+    m_Stiffness: 1
+  m_SidewaysFriction:
+    m_ExtremumSlip: 0.2
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 0.5
+    m_AsymptoteValue: 0.75
+    m_Stiffness: 1
+  m_Enabled: 1
 --- !u!1 &5875394335546428332
 GameObject:
   m_ObjectHideFlags: 0
@@ -16670,6 +16765,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7401823191910459289}
+  - component: {fileID: 1204886762423558507}
   m_Layer: 9
   m_Name: dragster wheel
   m_TagString: Untagged
@@ -16692,6 +16788,36 @@ Transform:
   m_Father: {fileID: 4686627547810496240}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!146 &1204886762423558507
+WheelCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065182868244398452}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.85
+  m_SuspensionSpring:
+    spring: 35000
+    damper: 4500
+    targetPosition: 0.5
+  m_SuspensionDistance: 0
+  m_ForceAppPointDistance: 0
+  m_Mass: 20
+  m_WheelDampingRate: 0.25
+  m_ForwardFriction:
+    m_ExtremumSlip: 0.4
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 0.8
+    m_AsymptoteValue: 0.5
+    m_Stiffness: 1
+  m_SidewaysFriction:
+    m_ExtremumSlip: 0.2
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 0.5
+    m_AsymptoteValue: 0.75
+    m_Stiffness: 1
+  m_Enabled: 1
 --- !u!1 &6174120120705212209
 GameObject:
   m_ObjectHideFlags: 0
