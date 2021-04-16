@@ -166,7 +166,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4099746521796739956}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -431,17 +431,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3485849799564412644}
-  m_LocalRotation: {x: 0.009363184, y: 0.17239831, z: 0.0028788592, w: 0.9849786}
-  m_LocalPosition: {x: 0, y: 0, z: -961.2}
+  m_LocalRotation: {x: 0.009363185, y: 0.17239836, z: 0.002878859, w: 0.9849787}
+  m_LocalPosition: {x: 0, y: 0, z: -961.2002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3984795954515720314}
-  m_Father: {fileID: 5869716174502501514}
-  m_RootOrder: 6
+  m_Father: {fileID: 4099746521796739956}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 1, y: 19.86, z: 0.51}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1273.8, y: -685.6}
+  m_AnchoredPosition: {x: 1273.7999, y: -744.44995}
   m_SizeDelta: {x: 975.4, y: 172.93}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8883414282593702866
@@ -525,7 +525,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6378034518292939449}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1709895078832880951}
+        m_TargetAssemblyTypeName: KartSelectionManager, Assembly-CSharp
+        m_MethodName: ChooseKart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: HideKartSelector
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &1407905574
 Animator:
   serializedVersion: 3
@@ -576,7 +600,7 @@ RectTransform:
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4099746521796739956}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -691,6 +715,7 @@ GameObject:
   - component: {fileID: 4099746521796739959}
   - component: {fileID: 1709895078832880951}
   - component: {fileID: 1205495549}
+  - component: {fileID: 1154621793}
   m_Layer: 5
   m_Name: Car selection canvas
   m_TagString: Untagged
@@ -710,6 +735,7 @@ RectTransform:
   m_LocalScale: {x: 0.0028511928, y: 0.0028511924, z: 0.0028511928}
   m_Children:
   - {fileID: 5869716174502501514}
+  - {fileID: 2866453112943986118}
   - {fileID: 7297642388011086395}
   - {fileID: 9081368372245558032}
   m_Father: {fileID: 0}
@@ -790,7 +816,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4099746521796739957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae91d9fda670b3f43ba4fee155f8870b, type: 3}
+  m_Script: {fileID: 11500000, guid: e6637271931add6488c870f8da90ce1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kartNameDisplay: {fileID: 3026118294479697280}
@@ -799,12 +825,13 @@ MonoBehaviour:
   steering: {fileID: 428667644083572830}
   brake: {fileID: 8060705389167726019}
   okayletzgo: {fileID: 614998773576788557}
+  menuManager: {fileID: 0}
   availableKarts:
-  - {fileID: 5603670318921890552, guid: 234500fa216b12240a6979ec4e8a46f1, type: 3}
-  - {fileID: 4686627548744261291, guid: ce01bb3f244551446bb09b1413401d4d, type: 3}
+  - {fileID: 2639054221376803220, guid: 234500fa216b12240a6979ec4e8a46f1, type: 3}
+  - {fileID: 4080713924953889256, guid: ce01bb3f244551446bb09b1413401d4d, type: 3}
   diaphragm: {fileID: 0}
   carHolder: {fileID: 0}
-  spawnHeight: 8
+  spawnHeight: 10
 --- !u!114 &1205495549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,6 +848,25 @@ MonoBehaviour:
   - {fileID: 2172052178755191399}
   - {fileID: 5459174502439396903}
   - {fileID: 6910019967233188443}
+--- !u!95 &1154621793
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099746521796739957}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0ea93fe73943d414eb70a3de1f6b6bf3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6154703899545001140
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,7 +902,6 @@ RectTransform:
   - {fileID: 2190762069812242645}
   - {fileID: 8379132192477656392}
   - {fileID: 1377295191741338310}
-  - {fileID: 2866453112943986118}
   m_Father: {fileID: 4099746521796739956}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1576,6 +1621,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db15ffd2baf54e845a37c3444f60a862, type: 3}
+--- !u!224 &1377295191741338310 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4683562967963438711, guid: db15ffd2baf54e845a37c3444f60a862,
+    type: 3}
+  m_PrefabInstance: {fileID: 6044526800619052209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &614998773576788557 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6587239281736185596, guid: db15ffd2baf54e845a37c3444f60a862,
@@ -1588,12 +1639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1377295191741338310 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4683562967963438711, guid: db15ffd2baf54e845a37c3444f60a862,
-    type: 3}
-  m_PrefabInstance: {fileID: 6044526800619052209}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6816336345282930338
 PrefabInstance:
   m_ObjectHideFlags: 0
