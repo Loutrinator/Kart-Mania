@@ -82,9 +82,12 @@ namespace Kart
         protected override bool IsGrounded()
         {
             int wheelsOnGround = 0;
-            for (var index = 0; index < wheels.Count; index++)
-            {
-                if (wheels[index].isGrounded) wheelsOnGround++;
+            for (var index = 0; index < wheels.Count; index++) {
+                Vector3 wheelPos = wheels[index].transform.position;
+                //if (wheels[index].isGrounded) wheelsOnGround++;
+                if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out var hit, 0.5f, LayerMask.GetMask("Ground"))) {
+                    wheelsOnGround++;
+                }
             }
 
             return wheelsOnGround >= 4;
