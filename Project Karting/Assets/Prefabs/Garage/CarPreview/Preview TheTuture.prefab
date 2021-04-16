@@ -5887,15 +5887,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kartName: The Tuture
-  stats:
-    topSpeed: 40
-    acceleration: 20
-    reverseSpeed: 5
-    reverseAcceleration: 5
-    braking: 10
-    steer: 5
-    addedGravity: 1
-    suspension: 0.2
+  kartPrefab: {fileID: 6669060970404059514, guid: 788e3c6fb21859241bfef9c60f187e62,
+    type: 3}
 --- !u!1 &5603670318959940054
 GameObject:
   m_ObjectHideFlags: 0

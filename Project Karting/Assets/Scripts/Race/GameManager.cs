@@ -6,10 +6,13 @@ using Items;
 using Player;
 using RoadPhysics;
 
-public class GameManager : MonoBehaviour {
-    public KartBase kartPrefab;
-    [Range(1, 10)] public int nbPlayerRacing = 1;
-    [Range(1, 10)] public int nbLap = 1;
+public class GameManager : MonoBehaviour
+{
+
+    public GameConfig gameConfig;
+    public Race currentRace;
+    
+    
     public ItemManager itemManager;
     public int checkpointAmount;
     public Transform[] spawnPoints;
@@ -39,15 +42,20 @@ public class GameManager : MonoBehaviour {
             _instance = this;
             DontDestroyOnLoad(gameObject);
             cameras = new List<ShakeTransform>();
+            gameConfig = new GameConfig();
+            gameConfig.players = new List<PlayerConfig>();
+            gameConfig.races = new List<Race>();
             //Rest of your Awake code
         }
         else {
             Destroy(this);
         }
 
-        physicsManager.Init();
+        if (physicsManager != null)
+        {
+            physicsManager.Init();
+        }
         raceIsInit = false;
-        InitRace();
     }
 
     private void Update() {
@@ -74,12 +82,17 @@ public class GameManager : MonoBehaviour {
     }
 
 
-    private void InitRace() {
+    private void InitRace()
+    {
+        int nbPlayerRacing = gameConfig.players.Count;
         playersInfo = new PlayerRaceInfo[nbPlayerRacing];
         if (spawnPoints.Length >= nbPlayerRacing) {
-            for (int id = 0; id < nbPlayerRacing; ++id) {
+            for (int id = 0; id < nbPlayerRacing; ++id)
+            {
+
+                PlayerConfig playerConfig = gameConfig.players[id];
                 Transform spawn = spawnPoints[id];
-                KartBase kart = Instantiate(kartPrefab, spawn.position, spawn.rotation);
+                KartBase kart = Instantiate(playerConfig.kartPrefab, spawn.position, spawn.rotation);
 
 
                 PlayerRaceInfo
