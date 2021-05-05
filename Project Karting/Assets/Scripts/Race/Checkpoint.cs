@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Handlers;
 using UnityEngine;
 using Kart;
 public class Checkpoint : MonoBehaviour
