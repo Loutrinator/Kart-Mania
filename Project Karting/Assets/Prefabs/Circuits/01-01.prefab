@@ -748,102 +748,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bezierSettings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
---- !u!1 &604826616421293956
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 183959270972888264}
-  - component: {fileID: 6450523194633779744}
-  - component: {fileID: 2385997941642086467}
-  - component: {fileID: 9078479634473945541}
-  m_Layer: 0
-  m_Name: Mesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &183959270972888264
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604826616421293956}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8803878012359887918}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6450523194633779744
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604826616421293956}
-  m_Mesh: {fileID: 0}
---- !u!23 &2385997941642086467
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604826616421293956}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 257
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 9df9ac361cefffb45b826fb2ca7c1436, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &9078479634473945541
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604826616421293956}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &731974556008055326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,54 +1542,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 8673793040599612232}
   tangentEnd: {fileID: 8527969300221641952}
-  bezierDistance: 53823.527
---- !u!1 &2547546975102551613
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8803878012359887918}
-  - component: {fileID: 3646439851292447737}
-  m_Layer: 0
-  m_Name: RoadBorder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8803878012359887918
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2547546975102551613}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 183959270972888264}
-  m_Father: {fileID: 6571465190898040510}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3646439851292447737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2547546975102551613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 254eb604504c7bf40895ab9878827daa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  roll: 0
 --- !u!1 &2766609543491269828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,11 +1590,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 8954145470689809068}
-  generateCollider: 1
   bezierSpline: {fileID: 6571465191081595646}
   roadWidth: 23.1
   roadThickness: 3
-  meshCollider: {fileID: 7467149093369857567}
 --- !u!1 &3191499103792227172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,10 +1639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 5386335073001121307}
   tangentEnd: {fileID: 4955917821665188275}
-  bezierDistance: 51098.656
+  roll: 0
 --- !u!1 &5543099173937438772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,10 +1688,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529516181726539}
   tangentEnd: {fileID: 2621523596701309667}
-  bezierDistance: 52952.68
+  roll: 0
 --- !u!1 &5543099173973198687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,10 +1737,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529516213060128}
   tangentEnd: {fileID: 2621523596665552264}
-  bezierDistance: 53583.56
+  roll: 0
 --- !u!1 &5543099174119173612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1932,10 +1786,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529516267251859}
   tangentEnd: {fileID: 2621523596484319035}
-  bezierDistance: 52815.227
+  roll: 0
 --- !u!1 &5543099174226124871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,10 +1835,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515958969656}
   tangentEnd: {fileID: 2621523596377365136}
-  bezierDistance: 51173.137
+  roll: 0
 --- !u!1 &5543099174416017233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,10 +1884,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515970535982}
   tangentEnd: {fileID: 2621523596223257990}
-  bezierDistance: 51340.547
+  roll: 0
 --- !u!1 &5543099174418255895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,10 +1933,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515968157032}
   tangentEnd: {fileID: 2621523596221409984}
-  bezierDistance: 52238.875
+  roll: 0
 --- !u!1 &5543099174537048365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,10 +1982,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515581994066}
   tangentEnd: {fileID: 2621523597174787066}
-  bezierDistance: 52445.785
+  roll: 0
 --- !u!1 &5543099174544036855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,10 +2031,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515574072968}
   tangentEnd: {fileID: 2621523597169502496}
-  bezierDistance: 51254.43
+  roll: 0
 --- !u!1 &5543099174662885117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,10 +2080,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515724573570}
   tangentEnd: {fileID: 2621523597015397418}
-  bezierDistance: 51418.83
+  roll: 0
 --- !u!1 &5543099174724784908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,10 +2129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515394373235}
   tangentEnd: {fileID: 2621523596955724251}
-  bezierDistance: 53709.113
+  roll: 0
 --- !u!1 &5543099174805259848
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,10 +2178,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515312841527}
   tangentEnd: {fileID: 2621523596906183839}
-  bezierDistance: 51807.137
+  roll: 0
 --- !u!1 &5543099174875352649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2382,10 +2227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515511057206}
   tangentEnd: {fileID: 2621523596838057118}
-  bezierDistance: 51533.477
+  roll: 0
 --- !u!1 &5543099175160459506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2432,10 +2276,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529515293209997}
   tangentEnd: {fileID: 2621523595445258789}
-  bezierDistance: 53391.473
+  roll: 0
 --- !u!1 &5543099175620102017
 GameObject:
   m_ObjectHideFlags: 0
@@ -2482,10 +2325,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529514498917118}
   tangentEnd: {fileID: 2621523596093832534}
-  bezierDistance: 53228.26
+  roll: 0
 --- !u!1 &5543099175683317012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2532,10 +2374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529514704279659}
   tangentEnd: {fileID: 2621523596031272899}
-  bezierDistance: 53075.992
+  roll: 0
 --- !u!1 &5543099175832297350
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,10 +2423,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529514353842937}
   tangentEnd: {fileID: 2621523595848607057}
-  bezierDistance: 52594.05
+  roll: 0
 --- !u!1 &5543099175902585706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2632,10 +2472,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  nodeMode: 0
   tangentStart: {fileID: 3055529514283689493}
   tangentEnd: {fileID: 2621523595776350653}
-  bezierDistance: 52001.86
+  roll: 0
 --- !u!1 &6203281848893857429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,7 +2593,6 @@ Transform:
   m_Children:
   - {fileID: 6571465191081595647}
   - {fileID: 7301837001630945659}
-  - {fileID: 8803878012359887918}
   m_Father: {fileID: 8738788713797060524}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2835,7 +2673,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
-  loop: 0
   bezierNodes:
   - {fileID: 1678382083865843086}
   - {fileID: 2726178030416316637}
@@ -3053,7 +2890,7 @@ GameObject:
   - component: {fileID: 8738788713797060524}
   - component: {fileID: 2576412271248234011}
   m_Layer: 0
-  m_Name: 01-01
+  m_Name: FirstCircuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
