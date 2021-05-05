@@ -12,6 +12,8 @@ public class RaceSelectionManager : MonoBehaviour
     public List<Race> races;
     public List<CarrousselSelector> raceSelectors;
     public TextMeshProUGUI raceName;
+    public Animator goCanvasAnimator;
+    public MenuManager menuManager;
     
     private List<int> _selectedRaces;
     private int _currentRaceId;
@@ -88,5 +90,10 @@ public class RaceSelectionManager : MonoBehaviour
         int offset = pos - 3; 
         Race associatedRace = races[(_currentRaceId + offset + races.Count) % races.Count];
         selector.image.sprite = associatedRace.image;
+    }
+    public void SelectRaces()
+    {
+        goCanvasAnimator.SetBool("visible",true);
+        menuManager.ShowNextScreen();
     }
 }

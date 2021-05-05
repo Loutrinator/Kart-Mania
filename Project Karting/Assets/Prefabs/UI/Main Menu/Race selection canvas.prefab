@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 334795596599880836}
   m_LocalRotation: {x: -0, y: -0.00000005960463, z: 0.000000029802315, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.000030759496}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5909200307064411963}
   m_RootOrder: 11
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 22df131b6f90e4d4fb02d3a92c51fcd4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 157e799717a8bbc44a8cf541d5eff172, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -274,9 +274,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: ShowNextScreen
+      - m_Target: {fileID: 5040319570354014627}
+        m_TargetAssemblyTypeName: RaceSelectionManager, Assembly-CSharp
+        m_MethodName: SelectRaces
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -630,6 +630,8 @@ MonoBehaviour:
   - {fileID: 4639522838409963067}
   - {fileID: 3911728170301653820}
   raceName: {fileID: 1886696077801539527}
+  goCanvasAnimator: {fileID: 0}
+  menuManager: {fileID: 0}
 --- !u!1 &4887791692862004429
 GameObject:
   m_ObjectHideFlags: 0

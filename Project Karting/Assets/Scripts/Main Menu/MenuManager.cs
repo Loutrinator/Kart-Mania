@@ -14,6 +14,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Animator levelEditorAnimator;
     [SerializeField] private Animator kartSelectorAnimator;
     [SerializeField] private CustomCanvas gameModeCanvas;
+    [SerializeField] private TransitionController transitionController;
+
 
     private void Start()
     {
@@ -63,5 +65,10 @@ public class MenuManager : MonoBehaviour
         Debug.Log("HIDE");
         kartSelectorAnimator.SetBool("isHidden", true);
     }
-    
+
+    public void ShowTransition()
+    {
+        Debug.Log("ShowTransition");
+        transitionController.FadeIn();
+    }
 }
