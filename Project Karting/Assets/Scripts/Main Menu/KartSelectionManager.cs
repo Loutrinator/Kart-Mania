@@ -75,7 +75,7 @@ public class KartSelectionManager : MonoBehaviour
         playerConfig.type = PlayerType.player;
         playerConfig.name = "Player 1";
         playerConfig.kartPrefab = selectedKart.kartPrefab;
-        GameManager.Instance.gameConfig.players.Append(playerConfig);
+        GameManager.Instance.gameConfig.players.Add(playerConfig);
         menuManager.ShowNextScreen();
     }
 }

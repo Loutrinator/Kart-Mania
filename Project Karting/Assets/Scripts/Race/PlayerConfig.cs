@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Kart;
 
 public enum PlayerType
@@ -7,6 +8,7 @@ public enum PlayerType
     IA
 }
 
+[Serializable]
 public struct PlayerConfig
 {
     public string name;

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using Handlers;
 using UnityEngine;
 using UnityEngine.UI;
 using Kart;
 using Items;
 using Player;
 using RoadPhysics;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public class GameManager : MonoBehaviour
 {
-
     public GameConfig gameConfig;
     public Race currentRace;
     
@@ -34,6 +35,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => _instance;
     [SerializeField] private PhysicsManager physicsManager;
 
+    private Race _currentCircuit;
+    private List<KartBase> _currentPlayers;
+    
     private GameManager() {
     }
 
@@ -187,6 +191,21 @@ public class GameManager : MonoBehaviour
     public void ShakeCameras(ShakeTransformEventData shake) {
         foreach (var cam in cameras) {
             cam.AddShakeEvent(shake);
+        }
+    }
+
+    public void OnMainMenuLoading()
+    {
+        SceneManager.LoadScene(2);  // index changes with gameConfig.mode
+    }
+
+    public void InitLevel()
+    {
+        _currentCircuit = Instantiate(gameConfig.races[0], null);
+        _currentPlayers = new List<KartBase>();
+        foreach (var playerConfig in gameConfig.players)
+        {
+            _currentPlayers.Add(Instantiate(playerConfig.kartPrefab));
         }
     }
 }

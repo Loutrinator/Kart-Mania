@@ -14,13 +14,13 @@ public class RaceSelectionManager : MonoBehaviour
     public Animator goCanvasAnimator;
     public MenuManager menuManager;
     
-    private List<int> _selectedRaces;
+    //private List<int> _selectedRaces;
     private int _currentRaceId;
     private int _currentCarrousselPos;
 
     public RaceSelectionManager()
     {
-        _selectedRaces = new List<int>();
+        //_selectedRaces = new List<int>();
     }
 
     private void Start()
@@ -36,10 +36,11 @@ public class RaceSelectionManager : MonoBehaviour
 
     public void ChoseRace()
     {
-        foreach (var raceId in _selectedRaces)
-        {
-            GameManager.Instance.gameConfig.races.Append(races[raceId]);
-        }
+        //foreach (var raceId in _selectedRaces)
+        //{
+        Debug.Log("Choosing race");
+            GameManager.Instance.gameConfig.races.Add(races[_currentRaceId]);
+        //}
     }
 
     public void ShowNextRace()
@@ -92,6 +93,7 @@ public class RaceSelectionManager : MonoBehaviour
     }
     public void SelectRaces()
     {
+        ChoseRace();
         goCanvasAnimator.SetBool("visible",true);
         menuManager.ShowNextScreen();
     }

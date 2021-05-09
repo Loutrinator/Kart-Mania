@@ -19,7 +19,12 @@ public class TransitionController : MonoBehaviour
     private float completion;
 
     private float currentStateStartTime;
-    
+
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Update()
     {
@@ -78,12 +83,12 @@ public class TransitionController : MonoBehaviour
         }
     }
     
-    public void FadeIn()
+    public void FadeIn()    // transition start
     {
         currentStateStartTime = Time.time;
         transitionState = TransitionState.fadeIn;
     }
-    public void FadeOut()
+    public void FadeOut()    // transition end
     {
         currentStateStartTime = Time.time;
         transitionState = TransitionState.fadeOut;
@@ -103,6 +108,8 @@ public class TransitionController : MonoBehaviour
     public void ShowLoading()
     {
         loadingImage.SetBool("visible", true);
+        GameManager.Instance.OnMainMenuLoading();
+        Destroy(gameObject);
     }
     public void HideLoading()
     {
