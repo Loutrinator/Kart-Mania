@@ -8,7 +8,6 @@ public class MenuManager : MonoBehaviour
 {
 
     [SerializeField] private Animator mainCameraAnimator;
-    [SerializeField] private Animator logoAnimator;
     [SerializeField] private Animator timeTrialAnimator;
     [SerializeField] private Animator championshipAnimator;
     [SerializeField] private Animator levelEditorAnimator;
@@ -17,17 +16,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TransitionController transitionController;
 
 
-    private void Start()
-    {
-        logoAnimator.SetBool("isVisible", true);
-    }
 
     public void SelectModeTimeTrial()
     {
         timeTrialAnimator.SetBool("Choosen",true);
         levelEditorAnimator.SetBool("NotSelected",true);
         championshipAnimator.SetBool("NotSelected",true);
-        logoAnimator.SetBool("isVisible", false);
         mainCameraAnimator.SetTrigger("move");
         gameModeCanvas.disableUIInteraction();
         GameManager.Instance.gameConfig.mode = GameMode.timeTrial;
@@ -37,7 +31,6 @@ public class MenuManager : MonoBehaviour
         timeTrialAnimator.SetBool("NotSelected",true);
         levelEditorAnimator.SetBool("Choosen",true);
         championshipAnimator.SetBool("NotSelected",true);
-        logoAnimator.SetBool("isVisible", false);
         mainCameraAnimator.SetTrigger("move");
         gameModeCanvas.disableUIInteraction();
         GameManager.Instance.gameConfig.mode = GameMode.editor;
@@ -47,7 +40,6 @@ public class MenuManager : MonoBehaviour
         timeTrialAnimator.SetBool("NotSelected",true);
         levelEditorAnimator.SetBool("NotSelected",true);
         championshipAnimator.SetBool("Choosen",true);
-        logoAnimator.SetBool("isVisible", false);
         mainCameraAnimator.SetTrigger("move");
         gameModeCanvas.disableUIInteraction();
         GameManager.Instance.gameConfig.mode = GameMode.championship;

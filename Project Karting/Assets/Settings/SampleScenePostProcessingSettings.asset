@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6608745176711353231
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
+  m_Name: Bloom
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  threshold:
+    m_OverrideState: 0
+    m_Value: 0.9
+    min: 0
+  intensity:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  scatter:
+    m_OverrideState: 0
+    m_Value: 0.7
+    min: 0
+    max: 1
+  clamp:
+    m_OverrideState: 0
+    m_Value: 65472
+    min: 0
+  tint:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    hdr: 0
+    showAlpha: 0
+    showEyeDropper: 1
+  highQualityFiltering:
+    m_OverrideState: 0
+    m_Value: 0
+  skipIterations:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 16
+  dirtTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  dirtIntensity:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
 --- !u!114 &-6015535525827699547
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -13,6 +65,7 @@ MonoBehaviour:
   m_Name: Bloom
   m_EditorClassIdentifier: 
   active: 1
+  <displayName>k__BackingField: 
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
@@ -33,7 +86,11 @@ MonoBehaviour:
     max: 1
   tint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.95224637, b: 0.8254717, a: 1}
+    m_Value:
+      r: 1
+      g: 0.95224637
+      b: 0.8254717
+      a: 1
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
@@ -69,6 +126,7 @@ MonoBehaviour:
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
   active: 1
+  <displayName>k__BackingField: Shadows, Midtones, Highlights
   m_AdvancedMode: 0
   shadows:
     m_OverrideState: 1
@@ -108,10 +166,7 @@ MonoBehaviour:
   m_Name: SampleScenePostProcessingSettings
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 6640133647794636954}
-  - {fileID: -6015535525827699547}
-  - {fileID: -1412199579834409174}
-  - {fileID: 4484607854055327482}
+  - {fileID: -6608745176711353231}
 --- !u!114 &4484607854055327482
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -125,6 +180,7 @@ MonoBehaviour:
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
   active: 1
+  <displayName>k__BackingField: 
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 0
@@ -136,7 +192,11 @@ MonoBehaviour:
     max: 100
   colorFilter:
     m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -163,6 +223,7 @@ MonoBehaviour:
   m_Name: Exposure
   m_EditorClassIdentifier: 
   active: 1
+  <displayName>k__BackingField: 
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
@@ -188,10 +249,8 @@ MonoBehaviour:
   curveMap:
     m_OverrideState: 0
     m_Value:
-      serializedVersion: 2
       m_Curve:
-      - serializedVersion: 3
-        time: -10
+      - time: -10
         value: -10
         inSlope: 0
         outSlope: 1
@@ -199,8 +258,7 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
-      - serializedVersion: 3
-        time: 20
+      - time: 20
         value: 20
         inSlope: 1
         outSlope: 0
@@ -214,10 +272,8 @@ MonoBehaviour:
   limitMinCurveMap:
     m_OverrideState: 0
     m_Value:
-      serializedVersion: 2
       m_Curve:
-      - serializedVersion: 3
-        time: -10
+      - time: -10
         value: -12
         inSlope: 0
         outSlope: 1
@@ -225,8 +281,7 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
-      - serializedVersion: 3
-        time: 20
+      - time: 20
         value: 18
         inSlope: 1
         outSlope: 0
@@ -240,10 +295,8 @@ MonoBehaviour:
   limitMaxCurveMap:
     m_OverrideState: 0
     m_Value:
-      serializedVersion: 2
       m_Curve:
-      - serializedVersion: 3
-        time: -10
+      - time: -10
         value: -8
         inSlope: 0
         outSlope: 1
@@ -251,8 +304,7 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
-      - serializedVersion: 3
-        time: 20
+      - time: 20
         value: 22
         inSlope: 1
         outSlope: 0
