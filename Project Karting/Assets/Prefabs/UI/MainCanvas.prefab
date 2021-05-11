@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 9188326654988620607}
   - component: {fileID: 9188326654988620606}
   - component: {fileID: 9188326654988620605}
+  - component: {fileID: 160048397754628462}
   m_Layer: 5
   m_Name: MainCanvas
   m_TagString: Untagged
@@ -505,7 +506,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 304
   m_TargetDisplay: 0
@@ -549,6 +550,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &160048397754628462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188326654988620604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37c685b82da4b84690c0652f7e70f72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9188326655026815023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -566,12 +579,6 @@ PrefabInstance:
       propertyPath: startTransition
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5714554220056912276, guid: 44e6b053372bac947b6dc5a3fdd03029,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 16a32dacada6d2d468b004671b8b45cc,
-        type: 3}
     - target: {fileID: 5714554220056912277, guid: 44e6b053372bac947b6dc5a3fdd03029,
         type: 3}
       propertyPath: m_Pivot.x

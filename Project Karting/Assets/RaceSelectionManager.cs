@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Game;
+using Handlers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -39,7 +41,7 @@ public class RaceSelectionManager : MonoBehaviour
         //foreach (var raceId in _selectedRaces)
         //{
         Debug.Log("Choosing race");
-            GameManager.Instance.gameConfig.races.Add(races[_currentRaceId]);
+            LevelManager.instance.gameConfig.races.Add(races[_currentRaceId]);
         //}
     }
 
@@ -62,7 +64,7 @@ public class RaceSelectionManager : MonoBehaviour
 
     private void UpdateText()
     {
-        raceName.text = races[_currentRaceId].name;
+        raceName.text = races[_currentRaceId].circuitName;
     }
     private void MoveSelectors()
     {

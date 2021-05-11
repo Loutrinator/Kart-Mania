@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Game;
+using Handlers;
 using TMPro;
 using UnityEngine;
 using Kart;
@@ -72,10 +74,10 @@ public class KartSelectionManager : MonoBehaviour
     public void ChooseKart()
     {
         PlayerConfig playerConfig = new PlayerConfig();
-        playerConfig.type = PlayerType.player;
+        playerConfig.type = PlayerType.Player;
         playerConfig.name = "Player 1";
         playerConfig.kartPrefab = selectedKart.kartPrefab;
-        GameManager.Instance.gameConfig.players.Add(playerConfig);
+        LevelManager.instance.gameConfig.players.Add(playerConfig);
         menuManager.ShowNextScreen();
     }
 }

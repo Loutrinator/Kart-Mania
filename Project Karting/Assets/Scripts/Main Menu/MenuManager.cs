@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Game;
 using Handlers;
 using UnityEngine;
 
@@ -13,9 +11,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Animator levelEditorAnimator;
     [SerializeField] private Animator kartSelectorAnimator;
     [SerializeField] private CustomCanvas gameModeCanvas;
-    [SerializeField] private TransitionController transitionController;
-
-
 
     public void SelectModeTimeTrial()
     {
@@ -24,7 +19,7 @@ public class MenuManager : MonoBehaviour
         championshipAnimator.SetBool("NotSelected",true);
         mainCameraAnimator.SetTrigger("move");
         gameModeCanvas.disableUIInteraction();
-        GameManager.Instance.gameConfig.mode = GameMode.timeTrial;
+        LevelManager.instance.gameConfig.mode = GameMode.TimeTrial;
     }
     public void SelectModeLevelEditor()
     {
@@ -33,7 +28,7 @@ public class MenuManager : MonoBehaviour
         championshipAnimator.SetBool("NotSelected",true);
         mainCameraAnimator.SetTrigger("move");
         gameModeCanvas.disableUIInteraction();
-        GameManager.Instance.gameConfig.mode = GameMode.editor;
+        LevelManager.instance.gameConfig.mode = GameMode.Editor;
     }
     public void SelectModeChampionship()
     {
@@ -42,7 +37,7 @@ public class MenuManager : MonoBehaviour
         championshipAnimator.SetBool("Choosen",true);
         mainCameraAnimator.SetTrigger("move");
         gameModeCanvas.disableUIInteraction();
-        GameManager.Instance.gameConfig.mode = GameMode.championship;
+        LevelManager.instance.gameConfig.mode = GameMode.Championship;
     }
     public void ShowNextScreen()
     {
@@ -61,6 +56,10 @@ public class MenuManager : MonoBehaviour
     public void ShowTransition()
     {
         Debug.Log("ShowTransition");
-        transitionController.FadeIn();
+        TransitionController.Instance.FadeIn(StartLevel);
+    }
+
+    private void StartLevel() {
+        SceneManager.instance.LoadGameMode(LevelManager.instance.gameConfig.mode);
     }
 }
