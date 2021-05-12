@@ -96,7 +96,7 @@ namespace Kart
 
         private void FixedUpdate()
         {
-            if (!GameManager.Instance.raceHasBegan()) return;
+            if (!GameManager.Instance.RaceHasBegan()) return;
             ApplyPowerups();
             Move(forwardMove);
 
@@ -251,7 +251,6 @@ namespace Kart
 
         public void AddPowerup(StatPowerup powerup)
         {
-            Debug.Log("Add Powerup");
             activePowerupList.Add(powerup);
         }
 

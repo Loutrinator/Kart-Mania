@@ -1,5 +1,4 @@
 using System;
-using Handlers;
 using UnityEngine;
 
 public enum TransitionState {
@@ -119,7 +118,6 @@ public class TransitionController : MonoBehaviour
             _onShowLoading.Invoke();
             _onShowLoading = null;
         }
-        //Destroy(gameObject);
     }
     public void HideLoading()
     {

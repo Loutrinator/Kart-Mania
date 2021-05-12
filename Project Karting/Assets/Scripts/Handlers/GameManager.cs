@@ -106,7 +106,7 @@ namespace Handlers {
             }
         }
 
-        public PlayerRaceInfo getPlayerRaceInfo(int id) {
+        public PlayerRaceInfo GetPlayerRaceInfo(int id) {
             foreach (var info in playersInfo) {
                 if (info.playerId == id) return info;
             }
@@ -114,8 +114,7 @@ namespace Handlers {
             return null;
         }
 
-        public void checkpointPassed(int checkpointId, int playerId) {
-            Debug.Log("Checkpoint passed");
+        public void CheckpointPassed(int checkpointId, int playerId) {
             PlayerRaceInfo player = playersInfo[playerId];
             //permet de vérifier si premièrement le checkpoint est valide et si il est après le checkpoint actuel
             if (checkpointId < checkpointAmount) {
@@ -124,15 +123,14 @@ namespace Handlers {
                 }
                 else if (player.currentCheckpoint == checkpointAmount - 1 && checkpointId == 0) {
                     playersInfo[playerId].currentCheckpoint = checkpointId;
-                    newLap(playerId);
+                    NewLap(playerId);
                 }
             }
 
             //si le checkpoint validé est le dernier de la liste
         }
 
-        private void newLap(int playerId) {
-            Debug.Log("LAP");
+        private void NewLap(int playerId) {
             //on calcule le temps du lap
             playersInfo[playerId].previousLapTime = Time.time - playersInfo[playerId].currentLapStartTime;
             playersInfo[playerId].currentLapStartTime = Time.time;
@@ -141,7 +139,6 @@ namespace Handlers {
             playersInfo[playerId].lap += 1; // doit être appelé ici pour mettre à jour la diff dans la HUD
 
             if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime) {
-                Debug.Log("MEILLEUR TEMPS");
                 playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
             }
 
@@ -158,7 +155,7 @@ namespace Handlers {
         }*/
         }
 
-        private string floatToTimeString(float time) {
+        private string FloatToTimeString(float time) {
             string prefix = "";
             if (time < 0) prefix = "-";
             time = Mathf.Abs(time);
@@ -168,7 +165,7 @@ namespace Handlers {
             return prefix + string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
         }
 
-        public bool raceHasBegan() {
+        public bool RaceHasBegan() {
             return raceBegan;
         }
 

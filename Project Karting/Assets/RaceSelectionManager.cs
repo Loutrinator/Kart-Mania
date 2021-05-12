@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Game;
 using Handlers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class RaceSelectionManager : MonoBehaviour
 {
@@ -40,7 +36,6 @@ public class RaceSelectionManager : MonoBehaviour
     {
         //foreach (var raceId in _selectedRaces)
         //{
-        Debug.Log("Choosing race");
             LevelManager.instance.gameConfig.races.Add(races[_currentRaceId]);
         //}
     }
@@ -68,7 +63,7 @@ public class RaceSelectionManager : MonoBehaviour
     }
     private void MoveSelectors()
     {
-        string text = "CurrentId = " + _currentRaceId + "[ ";
+        //string text = "CurrentId = " + _currentRaceId + "[ ";
         
         int carouselLimit = 7;
         for (int i = 0; i < raceSelectors.Count; i++)
@@ -79,16 +74,16 @@ public class RaceSelectionManager : MonoBehaviour
             {
                 UpdateSelector(pos,raceSelectors[i]);
             }
-            text += " " + pos;
+            //text += " " + pos;
             selector.SetInteger("position",pos);
         }
         
-        text += " ]";
-        Debug.Log(text);
+        //text += " ]";
+        //Debug.Log(text);
     }
     private void UpdateSelector(int pos,CarrousselSelector selector)
     {
-        Debug.Log("pos : " + pos + " _currentCarrousselPos : " + _currentCarrousselPos + " _currentRaceId : " + _currentRaceId);
+        //Debug.Log("pos : " + pos + " _currentCarrousselPos : " + _currentCarrousselPos + " _currentRaceId : " + _currentRaceId);
         int offset = pos - 3; 
         Race associatedRace = races[(_currentRaceId + offset + races.Count) % races.Count];
         selector.image.sprite = associatedRace.image;

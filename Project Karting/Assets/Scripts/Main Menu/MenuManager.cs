@@ -49,13 +49,11 @@ public class MenuManager : MonoBehaviour
     }
     public void HideKartSelector()
     {
-        Debug.Log("HIDE");
         kartSelectorAnimator.SetBool("isHidden", true);
     }
 
     public void ShowTransition()
     {
-        Debug.Log("ShowTransition");
         TransitionController.Instance.FadeIn(StartLevel);
     }
 

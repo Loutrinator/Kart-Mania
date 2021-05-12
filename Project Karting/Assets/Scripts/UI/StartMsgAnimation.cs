@@ -94,7 +94,7 @@ public class StartMsgAnimation : MonoBehaviour
         // if it display "GO!" the race begun
         if (_iconIndex == 3)
         {
-            if (!GameManager.Instance.raceHasBegan()) GameManager.Instance.StartRace();
+            if (!GameManager.Instance.RaceHasBegan()) GameManager.Instance.StartRace();
             if (_step < 2) return; // execution repeat until we reach the end of animation curves
             Destroy(gameObject);
         }
