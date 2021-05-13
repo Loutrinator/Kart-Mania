@@ -20,6 +20,7 @@ public class TransitionController : MonoBehaviour
     private float currentStateStartTime;
 
     private Action _onShowLoading;
+    private Action _onHideLoading;
 
     public static TransitionController Instance { get; private set; }
 
@@ -94,10 +95,11 @@ public class TransitionController : MonoBehaviour
         transitionState = TransitionState.FadeIn;
         _onShowLoading = onLoadingStart;
     }
-    public void FadeOut()    // transition end
+    public void FadeOut(Action onLoadingEnd = null)    // transition end
     {
         currentStateStartTime = Time.time;
         transitionState = TransitionState.FadeOut;
+        _onHideLoading = onLoadingEnd;
         HideLoading();
     }
 
@@ -122,5 +124,9 @@ public class TransitionController : MonoBehaviour
     public void HideLoading()
     {
         loadingImage.SetBool("visible", false);
+        if (_onHideLoading != null) {
+            _onHideLoading.Invoke();
+            _onHideLoading = null;
+        }
     }
 }

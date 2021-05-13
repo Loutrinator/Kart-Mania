@@ -13,10 +13,10 @@ namespace Handlers {
         public ItemManager itemManager;
         public int checkpointAmount;
 
-        [Header("UI and HUD")] [SerializeField]
+        /*[Header("UI and HUD")] [SerializeField]
         private GameObject HUDvsClockPrefab;
 
-        [SerializeField] private GameObject StartUIPrefab;
+        [SerializeField] private GameObject StartUIPrefab;*/
 
         private PlayerRaceInfo[] playersInfo;
 
@@ -49,7 +49,9 @@ namespace Handlers {
             
             InitRace();
             
-            TransitionController.Instance.FadeOut();
+            TransitionController.Instance.FadeOut(() => {
+                raceBegan = true;  // todo enable after delay
+            });
         }
 
         private void Update() {
