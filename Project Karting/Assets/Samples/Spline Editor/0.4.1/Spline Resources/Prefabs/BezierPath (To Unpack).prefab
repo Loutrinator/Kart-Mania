@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6599967608814098654}
   - component: {fileID: 76239912389573836}
   - component: {fileID: 4215782602509380694}
+  - component: {fileID: 1360923243208051799}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1360923243208051799
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940484775290382462}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &2774165489944837277
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 8e7aae4bdb8fb4247b38116f9fe82c4c, type: 2}
+  loop: 0
   bezierNodes:
   - {fileID: 7640241913734921198}
   - {fileID: 6383866143106148029}
@@ -140,7 +156,7 @@ GameObject:
   - component: {fileID: 2774165490298130654}
   - component: {fileID: 6782662702495946385}
   m_Layer: 0
-  m_Name: BezierPath
+  m_Name: BezierPath (To Unpack)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,9 +237,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 76239912389573836}
+  generateCollider: 1
   bezierSpline: {fileID: 2774165489944837278}
   roadWidth: 1
   roadThickness: 0.2
+  meshCollider: {fileID: 1360923243208051799}
 --- !u!1001 &1256518511426566959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321,25 +339,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: BezierControlPoint
       objectReference: {fileID: 0}
-    - target: {fileID: 4976086808036387952, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976086808036387952, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976086808036387952, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5325507121439333778, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9,
         type: 3}
       propertyPath: roll
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325507121439333778, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9,
+        type: 3}
+      propertyPath: bezierDistance
+      value: 9.999999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9, type: 3}
@@ -457,21 +465,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BezierControlPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976086808036387952, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976086808036387952, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976086808036387952, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5325507121439333778, guid: d9a3e2ac0edd29e4ea99d2b5a5b21cc9,
         type: 3}
