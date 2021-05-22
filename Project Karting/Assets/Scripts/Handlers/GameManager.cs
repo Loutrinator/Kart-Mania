@@ -1,167 +1,150 @@
 ﻿using System.Collections.Generic;
-using Handlers;
-using UnityEngine;
-using UnityEngine.UI;
-using Kart;
+using Game;
 using Items;
+using Kart;
 using Player;
 using RoadPhysics;
-using SceneManager = UnityEngine.SceneManagement.SceneManager;
+using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
-    public GameConfig gameConfig;
-    public Race currentRace;
-    
-    
-    public ItemManager itemManager;
-    public int checkpointAmount;
-    public Transform[] spawnPoints;
+namespace Handlers {
+    public class GameManager : MonoBehaviour {
+        public Race currentRace;
 
-    [Header("UI and HUD")] [SerializeField]
-    private GameObject HUDvsClockPrefab;
+        public ItemManager itemManager;
+        public int checkpointAmount;
 
-    [SerializeField] private GameObject StartUIPrefab;
+        /*[Header("UI and HUD")] [SerializeField]
+        private GameObject HUDvsClockPrefab;
 
-    private PlayerRaceInfo[] playersInfo;
+        [SerializeField] private GameObject StartUIPrefab;*/
 
-    private bool raceBegan;
-    private bool raceIsInit;
-    private StartMsgAnimation startMessage;
+        private PlayerRaceInfo[] playersInfo;
 
-    private List<ShakeTransform> cameras;
+        private bool raceBegan;
+        private bool raceIsInit;
+        private StartMsgAnimation startMessage;
 
-    private static GameManager _instance;
-    public static GameManager Instance => _instance;
-    [SerializeField] private PhysicsManager physicsManager;
+        private List<ShakeTransform> cameras;
 
-    private Race _currentCircuit;
-    private List<KartBase> _currentPlayers;
-    
-    private GameManager() {
-    }
+        public static GameManager Instance { get; private set; }
 
-    private void Awake() {
-        if (_instance == null) {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-            cameras = new List<ShakeTransform>();
-            gameConfig = new GameConfig();
-            gameConfig.players = new List<PlayerConfig>();
-            gameConfig.races = new List<Race>();
-            //Rest of your Awake code
-        }
-        else {
-            Destroy(this);
-        }
+        [SerializeField] private PhysicsManager physicsManager;
 
-        if (physicsManager != null)
-        {
-            physicsManager.Init();
-        }
-        raceIsInit = false;
-    }
+        private void Awake() {
+            if (Instance == null) {
+                Instance = this;
+                cameras = new List<ShakeTransform>();
+            }
+            else {
+                Destroy(gameObject);
+            }
 
-    private void Update() {
-        if (raceBegan) {
-            PlayerRaceInfo player = playersInfo[0];
-            //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
-            //lap.text = player.lap.ToString();
-            //checkpoint.text = player.currentCheckpoint.ToString();
-            //float diff = Time.time - player.currentLapStartTime;
-            // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
-            //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
-            //timeInfo.text = info;
-            player.Controller.Update(); // listen player inputs 
-        }
-    }
-
-    public void StartRace() {
-        for (int i = 0; i < playersInfo.Length; ++i) {
-            playersInfo[i].currentLapStartTime = Time.time;
-            playersInfo[i].lap = 1;
-        }
-
-        raceBegan = true;
-    }
-
-
-    private void InitRace()
-    {
-        int nbPlayerRacing = gameConfig.players.Count;
-        playersInfo = new PlayerRaceInfo[nbPlayerRacing];
-        if (spawnPoints.Length >= nbPlayerRacing) {
-            for (int id = 0; id < nbPlayerRacing; ++id)
+            if (physicsManager != null)
             {
+                physicsManager.Init();
+            }
+            raceIsInit = false;
+            
+            LevelManager.instance.InitLevel();
+            
+            InitRace();
+            
+            TransitionController.Instance.FadeOut(() => {
+                raceBegan = true;  // todo enable after delay
+            });
+        }
 
-                PlayerConfig playerConfig = gameConfig.players[id];
-                Transform spawn = spawnPoints[id];
-                KartBase kart = Instantiate(playerConfig.kartPrefab, spawn.position, spawn.rotation);
+        private void Update() {
+            if (raceBegan) {
+                PlayerRaceInfo player = playersInfo[0];
+                //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
+                //lap.text = player.lap.ToString();
+                //checkpoint.text = player.currentCheckpoint.ToString();
+                //float diff = Time.time - player.currentLapStartTime;
+                // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
+                //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
+                //timeInfo.text = info;
+                player.Controller.Update(); // listen player inputs 
+            }
+        }
+
+        public void StartRace() {
+            for (int i = 0; i < playersInfo.Length; ++i) {
+                playersInfo[i].currentLapStartTime = Time.time;
+                playersInfo[i].lap = 1;
+            }
+
+            raceBegan = true;
+        }
 
 
-                PlayerRaceInfo
-                    info = new PlayerRaceInfo(kart, id,
-                        new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
-                playersInfo[id] = info;
-                Instantiate(HUDvsClockPrefab); // id automatically set inside the class
-                startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
-                ShakeTransform cam = kart.cameraShake;
-                if (cam != null) {
-                    cameras.Add(cam);
+        private void InitRace() {
+            int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
+            playersInfo = new PlayerRaceInfo[nbPlayerRacing];
+            Transform[] spawnPoints = LevelManager.instance.currentRace.spawnPoints;
+            if (spawnPoints.Length >= nbPlayerRacing) {
+                for (int id = 0; id < nbPlayerRacing; ++id) {
+                    PlayerConfig playerConfig = LevelManager.instance.gameConfig.players[id];
+                    Transform spawn = spawnPoints[id];
+                    KartBase kart = Instantiate(playerConfig.kartPrefab, spawn.position, spawn.rotation);
+                    
+                    PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
+                    playersInfo[id] = info;
+                    
+                    // todo
+                    /*Instantiate(HUDvsClockPrefab); // id automatically set inside the class
+                    startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
+                    ShakeTransform cam = kart.cameraShake;
+                    if (cam != null) {
+                        cameras.Add(cam);
+                    }
+                    startMessage._startTime = Time.time;*/
+                    raceIsInit = true;
                 }
-
-                startMessage._startTime = Time.time;
-                raceIsInit = true;
-            }
-        }
-        else {
+            } else {
 #if UNITY_EDITOR
-            Debug.LogError("Attempting to spawn " + nbPlayerRacing + " but only " + spawnPoints.Length +
-                           " availables.");
+                Debug.LogError("Attempting to spawn " + nbPlayerRacing + " but only " + spawnPoints.Length + " available.");
 #endif
-        }
-    }
-
-    public PlayerRaceInfo getPlayerRaceInfo(int id) {
-        foreach (var info in playersInfo) {
-            if (info.playerId == id) return info;
-        }
-
-        return null;
-    }
-
-    public void checkpointPassed(int checkpointId, int playerId) {
-        Debug.Log("Checkpoint passed");
-        PlayerRaceInfo player = playersInfo[playerId];
-        //permet de vérifier si premièrement le checkpoint est valide et si il est après le checkpoint actuel
-        if (checkpointId < checkpointAmount) {
-            if (checkpointId - player.currentCheckpoint == 1) {
-                playersInfo[playerId].currentCheckpoint = checkpointId;
-            }
-            else if (player.currentCheckpoint == checkpointAmount - 1 && checkpointId == 0) {
-                playersInfo[playerId].currentCheckpoint = checkpointId;
-                newLap(playerId);
             }
         }
 
-        //si le checkpoint validé est le dernier de la liste
-    }
+        public PlayerRaceInfo GetPlayerRaceInfo(int id) {
+            foreach (var info in playersInfo) {
+                if (info.playerId == id) return info;
+            }
 
-    private void newLap(int playerId) {
-        Debug.Log("LAP");
-        //on calcule le temps du lap
-        playersInfo[playerId].previousLapTime = Time.time - playersInfo[playerId].currentLapStartTime;
-        playersInfo[playerId].currentLapStartTime = Time.time;
-
-        float diff = playersInfo[playerId].previousLapTime - playersInfo[playerId].bestLapTime;
-        playersInfo[playerId].lap += 1; // doit être appelé ici pour mettre à jour la diff dans la HUD
-
-        if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime) {
-            Debug.Log("MEILLEUR TEMPS");
-            playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
+            return null;
         }
 
-        /*bestTime.text = floatToTimeString(playersInfo[playerId].bestLapTime);
+        public void CheckpointPassed(int checkpointId, int playerId) {
+            PlayerRaceInfo player = playersInfo[playerId];
+            //permet de vérifier si premièrement le checkpoint est valide et si il est après le checkpoint actuel
+            if (checkpointId < checkpointAmount) {
+                if (checkpointId - player.currentCheckpoint == 1) {
+                    playersInfo[playerId].currentCheckpoint = checkpointId;
+                }
+                else if (player.currentCheckpoint == checkpointAmount - 1 && checkpointId == 0) {
+                    playersInfo[playerId].currentCheckpoint = checkpointId;
+                    NewLap(playerId);
+                }
+            }
+
+            //si le checkpoint validé est le dernier de la liste
+        }
+
+        private void NewLap(int playerId) {
+            //on calcule le temps du lap
+            playersInfo[playerId].previousLapTime = Time.time - playersInfo[playerId].currentLapStartTime;
+            playersInfo[playerId].currentLapStartTime = Time.time;
+
+            float diff = playersInfo[playerId].previousLapTime - playersInfo[playerId].bestLapTime;
+            playersInfo[playerId].lap += 1; // doit être appelé ici pour mettre à jour la diff dans la HUD
+
+            if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime) {
+                playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
+            }
+
+            /*bestTime.text = floatToTimeString(playersInfo[playerId].bestLapTime);
         currentTime.text = floatToTimeString(playersInfo[playerId].previousLapTime);
         if (playersInfo[playerId].lap != 1) {
             timeDiff.text = floatToTimeString(diff);
@@ -172,40 +155,26 @@ public class GameManager : MonoBehaviour
                 timeDiff.color = Color.green;
             }
         }*/
-    }
-
-    private string floatToTimeString(float time) {
-        string prefix = "";
-        if (time < 0) prefix = "-";
-        time = Mathf.Abs(time);
-        int minutes = (int) time / 60;
-        int seconds = (int) time - 60 * minutes;
-        int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
-        return prefix + string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
-    }
-
-    public bool raceHasBegan() {
-        return raceBegan;
-    }
-
-    public void ShakeCameras(ShakeTransformEventData shake) {
-        foreach (var cam in cameras) {
-            cam.AddShakeEvent(shake);
         }
-    }
 
-    public void OnMainMenuLoading()
-    {
-        SceneManager.LoadScene(2);  // index changes with gameConfig.mode
-    }
+        private string FloatToTimeString(float time) {
+            string prefix = "";
+            if (time < 0) prefix = "-";
+            time = Mathf.Abs(time);
+            int minutes = (int) time / 60;
+            int seconds = (int) time - 60 * minutes;
+            int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
+            return prefix + string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+        }
 
-    public void InitLevel()
-    {
-        _currentCircuit = Instantiate(gameConfig.races[0], null);
-        _currentPlayers = new List<KartBase>();
-        foreach (var playerConfig in gameConfig.players)
-        {
-            _currentPlayers.Add(Instantiate(playerConfig.kartPrefab));
+        public bool RaceHasBegan() {
+            return raceBegan;
+        }
+
+        public void ShakeCameras(ShakeTransformEventData shake) {
+            foreach (var cam in cameras) {
+                cam.AddShakeEvent(shake);
+            }
         }
     }
 }

@@ -4,9 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName="WoodBox",menuName="ScriptableObject/Items/Woodbox",order=0)]
 public class ItemWoodbox : Item
 {
-    [SerializeField] private GameObject prefab;
+    [SerializeField] private WoodBox prefab;
     [SerializeField] private float distanceFromKartBack = 5f;
- 
+
+    public override void OnKeyDown(PlayerRaceInfo info) {
+        
+    }
+
     public override void OnKeyUp(PlayerRaceInfo info)
     {
         // Calling this will change info.ItemIsUsing and invoke info.onItemUsed
@@ -18,7 +22,7 @@ public class ItemWoodbox : Item
     {
         if(info.ItemIsInUse) return;
         Transform transform = info.kart.transform;
-        WoodBox wb = Instantiate(prefab, transform.position - transform.forward*distanceFromKartBack, Quaternion.identity, transform).GetComponent<WoodBox>();
+        WoodBox wb = Instantiate(prefab, transform.position - transform.forward*distanceFromKartBack, Quaternion.identity, transform);
         info.onItemUsed += wb.Throw;
         info.ItemIsInUse = true;
     }

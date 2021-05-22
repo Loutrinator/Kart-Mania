@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Handlers;
+using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class HUDTimeTrialController : MonoBehaviour
     private void Start()
     {
         _id = _nbInstances++;
-        _info = GameManager.Instance.getPlayerRaceInfo(_id);
+        _info = GameManager.Instance.GetPlayerRaceInfo(_id);
         bestTime.text = "";
         currentTime.text = "00:00:00";
         timeDiff.text = "";
@@ -53,7 +54,7 @@ public class HUDTimeTrialController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.raceHasBegan())
+        if (GameManager.Instance.RaceHasBegan())
         {
             currentTime.text = Utils.DisplayHelper.floatToTimeString(Time.time - _info.currentLapStartTime);
         }

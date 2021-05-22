@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -74,15 +71,11 @@ namespace Items
         public Item GetRandomItem(int position)
         {
             float rnd = Random.value;
-            Debug.Log("Random : " + rnd);
             for (int i = 0; i < itemProbabilities[position].Count; i++)
             {
                 ItemProbability proba = itemProbabilities[position][i];
-                Debug.Log("proba.id " + proba.itemId + " proba.probability " + proba.probability);
                 if (rnd <= proba.probability)
                 {
-                    Debug.Log("return item n°" + proba.itemId);
-                    
                     return items[proba.itemId];
                 }
             }

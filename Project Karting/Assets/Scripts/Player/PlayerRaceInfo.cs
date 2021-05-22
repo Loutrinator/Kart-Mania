@@ -2,8 +2,6 @@
 using Items;
 using Kart;
 using Player;
-using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerRaceInfo
 {
@@ -15,9 +13,12 @@ public class PlayerRaceInfo
         set
         {
             _item = value;
+            hasItem = _item != null;
             onItemSet?.Invoke();
         }
     }
+
+    public bool hasItem;
 
     public bool itemIsInUse;
     public bool ItemIsInUse

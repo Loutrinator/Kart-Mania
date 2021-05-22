@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.SocialPlatforms;
 using Kart;
-using UnityEditor.ShaderGraph;
 
 public class CameraFollowPlayer : MonoBehaviour
 {

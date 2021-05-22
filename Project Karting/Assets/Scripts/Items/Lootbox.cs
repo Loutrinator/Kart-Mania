@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Handlers;
 using Kart;
 using UnityEngine;
 
@@ -33,7 +34,6 @@ namespace Items
         private void BreakLootBox(int position,KartBase kart)
         {
             state = LootBoxState.opened;
-            Debug.Log("Calling GiveItem");
             GiveItem(position, kart);
             StartCoroutine(WaitToRespawn());
             prism.localScale = Vector3.zero;
@@ -41,38 +41,27 @@ namespace Items
 
         private void GiveItem(int position, KartBase kart)
         {
-            Debug.Log("GIVE ITEM TO " + position);
             Item item = GameManager.Instance.itemManager.GetRandomItem(position);
             if (item != null)
             {
-                Debug.Log("ITEM : " + item.name);
-                GameManager.Instance.getPlayerRaceInfo(kart.GetPlayerID()).Item = item;
-            }
-            else
-            {
-                Debug.LogError("NO ITEM");
+                GameManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID()).Item = item;
             }
         }
 
         IEnumerator WaitToRespawn()
         {
-            Debug.Log("WAIT");
             yield return new WaitForSeconds(timeToRespawn);
-            Debug.Log("RESPAWN");
             state = LootBoxState.fadeIn;
             fadeInStartTime = Time.time;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("TriggerEnter");
             if (state == LootBoxState.available)
             {
-                Debug.Log("Lootbox is available");
                 KartBase kart = other.GetComponent<KartCollider>().kartBase;
                 if (kart != null)
                 {
-                    Debug.Log("KartBase found, breaking lootbox");
                     BreakLootBox(1,kart);
                 }
             }

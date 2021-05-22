@@ -51,7 +51,9 @@ public class Skidmarks : MonoBehaviour {
 
 	protected void Awake() {
 		if (transform.position != Vector3.zero) {
+#if UNITY_EDITOR
 			Debug.LogWarning("Skidmarks.cs transform must be at 0,0,0. Setting it to zero now.");
+#endif
 			transform.position = Vector3.zero;
 			transform.rotation = Quaternion.identity;
 		}
@@ -159,14 +161,14 @@ public class Skidmarks : MonoBehaviour {
 
 		if (lastSection != null) {
 			Vector3 xDirection = Vector3.Cross(distAndDirection, normal).normalized;
-			curSection.Posl = curSection.Pos + xDirection * MARK_WIDTH * 0.5f;
-			curSection.Posr = curSection.Pos - xDirection * MARK_WIDTH * 0.5f;
+			curSection.Posl = curSection.Pos + xDirection * (MARK_WIDTH * 0.5f);
+			curSection.Posr = curSection.Pos - xDirection * (MARK_WIDTH * 0.5f);
 			curSection.Tangent = new Vector4(xDirection.x, xDirection.y, xDirection.z, 1);
 
 			if (lastSection.LastIndex == -1) {
 				lastSection.Tangent = curSection.Tangent;
-				lastSection.Posl = curSection.Pos + xDirection * MARK_WIDTH * 0.5f;
-				lastSection.Posr = curSection.Pos - xDirection * MARK_WIDTH * 0.5f;
+				lastSection.Posl = curSection.Pos + xDirection * (MARK_WIDTH * 0.5f);
+				lastSection.Posr = curSection.Pos - xDirection * (MARK_WIDTH * 0.5f);
 			}
 		}
 

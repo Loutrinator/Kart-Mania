@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public enum TransitionState{hidden,fadeIn,blackedOut,fadeOut}
+public enum TransitionState {
+    Hidden, FadeIn, BlackedOut, FadeOut
+}
 public class TransitionController : MonoBehaviour
 {
     public bool startTransition;
@@ -20,25 +19,33 @@ public class TransitionController : MonoBehaviour
 
     private float currentStateStartTime;
 
+    private Action _onShowLoading;
+    private Action _onHideLoading;
+
+    public static TransitionController Instance { get; private set; }
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (Instance != null) {
+            Destroy(gameObject);
+        }
+
+        Instance = this;
     }
 
     private void Update()
     {
-        float elapsed = 0f;
-        float animationPercent = 0f;
-        float xPos = 0f;
+        float elapsed;
+        float animationPercent;
+        float xPos;
 
         if (startTransition)
         {
             startTransition = false;
-            if (transitionState == TransitionState.hidden)
+            if (transitionState == TransitionState.Hidden)
             {
                 FadeIn();
-            }else if (transitionState == TransitionState.blackedOut)
+            } else if (transitionState == TransitionState.BlackedOut)
             {
                 FadeOut();
             }
@@ -46,12 +53,11 @@ public class TransitionController : MonoBehaviour
         
         switch (transitionState)
         {
-            case TransitionState.hidden:
+            case TransitionState.Hidden:
                 break;
-            case TransitionState.blackedOut:
+            case TransitionState.BlackedOut:
                 break;
-            case TransitionState.fadeIn:
-                elapsed = 0f;
+            case TransitionState.FadeIn:
                 elapsed = Time.time - currentStateStartTime;
                 animationPercent = elapsed / transitionDuration;
 
@@ -61,12 +67,12 @@ public class TransitionController : MonoBehaviour
                 if (elapsed >= transitionDuration)
                 {
                     currentStateStartTime = Time.time;
-                    transitionState = TransitionState.blackedOut;
+                    transitionState = TransitionState.BlackedOut;
                     ShowLoading();
                 }
 
                 break;
-            case TransitionState.fadeOut:
+            case TransitionState.FadeOut:
                 elapsed = Time.time - currentStateStartTime;
                 animationPercent = elapsed / transitionDuration;
 
@@ -76,22 +82,24 @@ public class TransitionController : MonoBehaviour
                 if (elapsed >= transitionDuration)
                 {
                     currentStateStartTime = Time.time;
-                    transitionState = TransitionState.hidden;
+                    transitionState = TransitionState.Hidden;
                 }
 
                 break;
         }
     }
     
-    public void FadeIn()    // transition start
+    public void FadeIn(Action onLoadingStart = null)    // transition start
     {
         currentStateStartTime = Time.time;
-        transitionState = TransitionState.fadeIn;
+        transitionState = TransitionState.FadeIn;
+        _onShowLoading = onLoadingStart;
     }
-    public void FadeOut()    // transition end
+    public void FadeOut(Action onLoadingEnd = null)    // transition end
     {
         currentStateStartTime = Time.time;
-        transitionState = TransitionState.fadeOut;
+        transitionState = TransitionState.FadeOut;
+        _onHideLoading = onLoadingEnd;
         HideLoading();
     }
 
@@ -108,11 +116,17 @@ public class TransitionController : MonoBehaviour
     public void ShowLoading()
     {
         loadingImage.SetBool("visible", true);
-        GameManager.Instance.OnMainMenuLoading();
-        Destroy(gameObject);
+        if (_onShowLoading != null) {
+            _onShowLoading.Invoke();
+            _onShowLoading = null;
+        }
     }
     public void HideLoading()
     {
         loadingImage.SetBool("visible", false);
+        if (_onHideLoading != null) {
+            _onHideLoading.Invoke();
+            _onHideLoading = null;
+        }
     }
 }

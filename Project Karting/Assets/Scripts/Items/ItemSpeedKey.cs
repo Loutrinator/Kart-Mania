@@ -1,7 +1,4 @@
-using System.Security.Permissions;
-using Kart;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Items
 {
@@ -17,6 +14,7 @@ namespace Items
             base.Use(info);
         }
 
+
         private void KeyCrankedUp(PlayerRaceInfo info)
         {
             StatPowerup powerup = new StatPowerup(boost,duration);
@@ -31,6 +29,14 @@ namespace Items
         public override void OnKeyDown(PlayerRaceInfo info)
         {
             Use(info);
+        }
+        
+        public override void OnKeyHold(PlayerRaceInfo info) {
+            
+        }
+
+        public override void OnKeyUp(PlayerRaceInfo info) {
+            
         }
     }
 }
