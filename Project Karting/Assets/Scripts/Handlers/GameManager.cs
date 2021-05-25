@@ -28,7 +28,7 @@ namespace Handlers {
 
         public static GameManager Instance { get; private set; }
 
-        [SerializeField] private PhysicsManager physicsManager;
+        public PhysicsManager physicsManager;
 
         private void Awake() {
             if (Instance == null) {
@@ -39,13 +39,14 @@ namespace Handlers {
                 Destroy(gameObject);
             }
 
-            if (physicsManager != null)
-            {
-                physicsManager.Init();
-            }
             raceIsInit = false;
             
-            LevelManager.instance.InitLevel();
+            Race currentRace = LevelManager.instance.InitLevel();
+            
+            if (physicsManager != null)
+            {
+                physicsManager.Init(currentRace.road.bezierSpline);
+            }
             
             InitRace();
             

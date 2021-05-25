@@ -14,9 +14,10 @@ namespace RoadPhysics {
 
         private bool _hasRoad;
 
-        public void Init() {
+        public void Init(BezierSpline roadP) {
             if (_instance == null)
                 _instance = this;
+            road = roadP;
             _hasRoad = road != null;
         }
 

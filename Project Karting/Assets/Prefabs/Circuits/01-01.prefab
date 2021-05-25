@@ -1505,8 +1505,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3149743445185773232}
+  - component: {fileID: 8830239635316759502}
   m_Layer: 0
-  m_Name: SpawnPoint
+  m_Name: SpawnPoint01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1519,13 +1520,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481997607891235529}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalRotation: {x: -0, y: 0.9614173, z: -0, w: 0.2750941}
+  m_LocalPosition: {x: 292.50797, y: 2.62, z: -560.0227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8738788713797060524}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8830239635316759502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481997607891235529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dd8e7b5e40c59498b1801dccb58474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spline: {fileID: 6571465191081595646}
+  distance: 0
+  horizontalOffset: 0
+  verticalOffset: 0
 --- !u!1 &2221928710838631991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,7 +1592,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 8673793040599612232}
   tangentEnd: {fileID: 8527969300221641952}
-  bezierDistance: 35882.05
+  bezierDistance: 47843.035
 --- !u!1 &2766609543491269828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1621,11 +1638,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 8954145470689809068}
-  generateCollider: 0
+  generateCollider: 1
   bezierSpline: {fileID: 6571465191081595646}
   roadWidth: 23.1
   roadThickness: 3
-  meshCollider: {fileID: 0}
+  meshCollider: {fileID: 7467149093369857567}
 --- !u!1 &3191499103792227172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1692,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 5386335073001121307}
   tangentEnd: {fileID: 4955917821665188275}
-  bezierDistance: 33157.18
+  bezierDistance: 45118.164
 --- !u!1 &5543099173937438772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,7 +1742,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529516181726539}
   tangentEnd: {fileID: 2621523596701309667}
-  bezierDistance: 35011.203
+  bezierDistance: 46972.188
 --- !u!1 &5543099173973198687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,7 +1792,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529516213060128}
   tangentEnd: {fileID: 2621523596665552264}
-  bezierDistance: 35642.082
+  bezierDistance: 47603.066
 --- !u!1 &5543099174119173612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1842,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529516267251859}
   tangentEnd: {fileID: 2621523596484319035}
-  bezierDistance: 34873.75
+  bezierDistance: 46834.734
 --- !u!1 &5543099174226124871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1875,7 +1892,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515958969656}
   tangentEnd: {fileID: 2621523596377365136}
-  bezierDistance: 33231.66
+  bezierDistance: 45192.645
 --- !u!1 &5543099174416017233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1925,7 +1942,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515970535982}
   tangentEnd: {fileID: 2621523596223257990}
-  bezierDistance: 33399.07
+  bezierDistance: 45360.055
 --- !u!1 &5543099174418255895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1975,7 +1992,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515968157032}
   tangentEnd: {fileID: 2621523596221409984}
-  bezierDistance: 34297.4
+  bezierDistance: 46258.383
 --- !u!1 &5543099174537048365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,7 +2042,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515581994066}
   tangentEnd: {fileID: 2621523597174787066}
-  bezierDistance: 34504.31
+  bezierDistance: 46465.293
 --- !u!1 &5543099174544036855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,7 +2092,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515574072968}
   tangentEnd: {fileID: 2621523597169502496}
-  bezierDistance: 33312.953
+  bezierDistance: 45273.938
 --- !u!1 &5543099174662885117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,7 +2142,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515724573570}
   tangentEnd: {fileID: 2621523597015397418}
-  bezierDistance: 33477.35
+  bezierDistance: 45438.336
 --- !u!1 &5543099174724784908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,7 +2192,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515394373235}
   tangentEnd: {fileID: 2621523596955724251}
-  bezierDistance: 35767.637
+  bezierDistance: 47728.62
 --- !u!1 &5543099174805259848
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,7 +2242,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515312841527}
   tangentEnd: {fileID: 2621523596906183839}
-  bezierDistance: 33865.66
+  bezierDistance: 45826.645
 --- !u!1 &5543099174875352649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,7 +2292,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515511057206}
   tangentEnd: {fileID: 2621523596838057118}
-  bezierDistance: 33592
+  bezierDistance: 45552.984
 --- !u!1 &5543099175160459506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,7 +2342,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529515293209997}
   tangentEnd: {fileID: 2621523595445258789}
-  bezierDistance: 35449.996
+  bezierDistance: 47410.98
 --- !u!1 &5543099175620102017
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,7 +2392,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529514498917118}
   tangentEnd: {fileID: 2621523596093832534}
-  bezierDistance: 35286.785
+  bezierDistance: 47247.77
 --- !u!1 &5543099175683317012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,7 +2442,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529514704279659}
   tangentEnd: {fileID: 2621523596031272899}
-  bezierDistance: 35134.516
+  bezierDistance: 47095.5
 --- !u!1 &5543099175832297350
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,7 +2492,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529514353842937}
   tangentEnd: {fileID: 2621523595848607057}
-  bezierDistance: 34652.574
+  bezierDistance: 46613.56
 --- !u!1 &5543099175902585706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,7 +2542,7 @@ MonoBehaviour:
   nodeMode: 0
   tangentStart: {fileID: 3055529514283689493}
   tangentEnd: {fileID: 2621523595776350653}
-  bezierDistance: 34060.383
+  bezierDistance: 46021.367
 --- !u!1 &6203281848893857429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2851,7 +2868,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c2b38f50d7baa8440bc9b63137a30cb3, type: 2}
+  - {fileID: 2100000, guid: 9df9ac361cefffb45b826fb2ca7c1436, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
