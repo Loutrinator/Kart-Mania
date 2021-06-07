@@ -16,7 +16,7 @@ namespace RoadPhysics {
         public void UpdatePhysics(Vector3 groundNormal) {
             currentGravityAcceleration = -groundNormal * currentGravityAcceleration.magnitude;
 
-            if (IsGrounded()) currentGravityVelocity = Vector3.zero;
+            if (IsGrounded()) currentGravityVelocity = Time.fixedDeltaTime * currentGravityAcceleration;
             else
             {
                 currentGravityVelocity += Time.fixedDeltaTime * currentGravityAcceleration;
