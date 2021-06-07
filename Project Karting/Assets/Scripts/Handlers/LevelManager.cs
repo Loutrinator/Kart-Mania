@@ -33,9 +33,10 @@ namespace Handlers {
             };
         }
         
-        public void InitLevel() {
+        public Race InitLevel() {
             currentRace = Instantiate(gameConfig.races[0]);
             currentRace.Init();
+            return currentRace;
         }
     }
 }

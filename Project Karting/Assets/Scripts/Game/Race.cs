@@ -1,4 +1,5 @@
-﻿using SplineEditor.Runtime;
+﻿using Handlers;
+using SplineEditor.Runtime;
 using UnityEngine;
 
 namespace Game {
@@ -8,7 +9,7 @@ namespace Game {
         public Sprite image;
         public int laps;
 
-        [SerializeField] private BezierPath road;
+        public BezierPath road;
         
         public Transform[] spawnPoints;
 
