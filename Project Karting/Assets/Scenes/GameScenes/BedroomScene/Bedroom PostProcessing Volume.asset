@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Value: 1.01
   contrast:
     m_OverrideState: 1
-    m_Value: 1.2
+    m_Value: -10
     min: -100
     max: 100
   colorFilter:
@@ -35,7 +35,7 @@ MonoBehaviour:
     max: 180
   saturation:
     m_OverrideState: 1
-    m_Value: 6.8
+    m_Value: 3
     min: -100
     max: 100
 --- !u!114 &-4222266606274881346
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   threshold:
     m_OverrideState: 1
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   temperature:
     m_OverrideState: 1
-    m_Value: -9.6
+    m_Value: 8
     min: -100
     max: 100
   tint:
