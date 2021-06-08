@@ -15,7 +15,7 @@ namespace Handlers {
         [Header("UI and HUD")] [SerializeField]
         private GameObject HUDvsClockPrefab;
 
-       // [SerializeField] private GameObject StartUIPrefab;*/
+        [SerializeField] private GameObject StartUIPrefab;
 
         private PlayerRaceInfo[] playersInfo;
 
@@ -98,12 +98,13 @@ namespace Handlers {
                     
                     // todo
                    // Instantiate(HUDvsClockPrefab); // id automatically set inside the class
-                    /*startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
+                    startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
                     ShakeTransform cam = kart.cameraShake;
-                    if (cam != null) {
-                        cameras.Add(cam);
-                    }
-                    startMessage._startTime = Time.time;*/
+                    // if (cam != null)
+                    // {
+                    //     cameras.Add(cam);
+                    // }
+                    startMessage._startTime = Time.time;
                     raceIsInit = true;
                 }
             } else {
