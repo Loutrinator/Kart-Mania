@@ -5905,6 +5905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGravityAcceleration: {x: 0, y: 0, z: 0}
   currentVelocity: {x: 0, y: 0, z: 0}
+  currentAngularVelocity: {x: 0, y: 0, z: 0}
   rigidBody: {fileID: 7072082925053140395}
   kartRootModel: {fileID: 7072082925228471993}
   kartBodyModel: {fileID: 5411243444951780116}
@@ -5924,7 +5925,7 @@ MonoBehaviour:
     acceleration: 20
     reverseSpeed: 5
     reverseAcceleration: 5
-    braking: 10
+    braking: 5
     steer: 5
     addedGravity: 1
     suspension: 0.2
