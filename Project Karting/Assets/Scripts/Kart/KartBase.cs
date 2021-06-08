@@ -145,8 +145,6 @@ namespace Kart
 
             var t = transform;
             currentVelocity = t.forward * _currentSpeed;
-            //rigidBody.MovePosition(rigidBody.position + t.forward * (_currentSpeed * Time.deltaTime));
-            //t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
         }
 
         protected void Rotate(float angle)
@@ -154,23 +152,8 @@ namespace Kart
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer * 2 + steeringSpeed) * Time.fixedDeltaTime;
 
-            //transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
-            Quaternion q = Quaternion.AngleAxis(steerAngle, transform.up);
-            rigidBody.MoveRotation(q * rigidBody.transform.rotation);
-            Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
-
-
-            /*
-            _lerpedKartRotation = Mathf.Lerp(lerpedAngle, driftDirection, kartRotationLerpSpeed * Time.fixedDeltaTime);
-
-            if (drifting)
-            {   
-                kartRootModel.localEulerAngles = Vector3.up * (_lerpedKartRotation * 70 * kartRotationCoeff);
-            }
-            else
-            {
-                kartRootModel.localEulerAngles = Vector3.up * (steerAngle * kartRotationCoeff);
-            }*/
+            currentAngularVelocity = transform.up * steerAngle;
+            
             kartRootModel.localEulerAngles = Vector3.up * (steerAngle * kartRotationCoeff);
 
             kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * kartRollCoeff);

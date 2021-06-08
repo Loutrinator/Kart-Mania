@@ -156,7 +156,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7659790999841299513}
   - component: {fileID: 5474277518029148937}
-  - component: {fileID: 1627073603567830013}
   m_Layer: 9
   m_Name: dragster wheel
   m_TagString: Untagged
@@ -209,21 +208,6 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
---- !u!114 &1627073603567830013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1656186629057298232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 263738c863b6db04e8863c087b01274d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfCollider: {fileID: 5474277518029148937}
-  ignoreColliders:
-  - {fileID: 4686627548263282055}
 --- !u!1 &2104752388427734171
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +440,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5171062410734496925}
   - component: {fileID: 4755297992543613819}
-  - component: {fileID: 3461955385830103647}
   m_Layer: 9
   m_Name: dragster wheel
   m_TagString: Untagged
@@ -509,21 +492,6 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
---- !u!114 &3461955385830103647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3098510934477335564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 263738c863b6db04e8863c087b01274d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfCollider: {fileID: 4755297992543613819}
-  ignoreColliders:
-  - {fileID: 4686627548263282055}
 --- !u!1 &3368124978920472196
 GameObject:
   m_ObjectHideFlags: 0
@@ -11619,7 +11587,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8737724695046057958}
   - component: {fileID: 769393242965037012}
-  - component: {fileID: 7345073535628727480}
   m_Layer: 9
   m_Name: dragster wheel
   m_TagString: Untagged
@@ -11672,21 +11639,6 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
---- !u!114 &7345073535628727480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5463419429092903179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 263738c863b6db04e8863c087b01274d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfCollider: {fileID: 769393242965037012}
-  ignoreColliders:
-  - {fileID: 4686627548263282055}
 --- !u!1 &5875394335546428332
 GameObject:
   m_ObjectHideFlags: 0
@@ -16609,7 +16561,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7401823191910459289}
   - component: {fileID: 1204886762423558507}
-  - component: {fileID: 1555728052559371112}
   m_Layer: 9
   m_Name: dragster wheel
   m_TagString: Untagged
@@ -16662,21 +16613,6 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
---- !u!114 &1555728052559371112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6065182868244398452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 263738c863b6db04e8863c087b01274d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfCollider: {fileID: 1204886762423558507}
-  ignoreColliders:
-  - {fileID: 4686627548263282055}
 --- !u!1 &6174120120705212209
 GameObject:
   m_ObjectHideFlags: 0

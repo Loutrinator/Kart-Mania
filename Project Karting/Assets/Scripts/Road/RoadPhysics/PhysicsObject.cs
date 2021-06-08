@@ -4,9 +4,10 @@ namespace Road.RoadPhysics {
     public abstract class PhysicsObject : MonoBehaviour {
         public Vector3 currentGravityAcceleration;
         public Vector3 currentVelocity;
+        public Vector3 currentAngularVelocity;
         public Rigidbody rigidBody;
 
-        private Vector3 currentGravityVelocity;
+        private Vector3 _currentGravityVelocity;
 
         protected virtual void Awake() {
             PhysicsManager.instance.AddPhysicsObject(this);
@@ -16,15 +17,14 @@ namespace Road.RoadPhysics {
         public void UpdatePhysics(Vector3 groundNormal) {
             currentGravityAcceleration = -groundNormal * currentGravityAcceleration.magnitude;
 
-            if (IsGrounded()) currentGravityVelocity = Time.fixedDeltaTime * currentGravityAcceleration;
+            if (IsGrounded()) _currentGravityVelocity = Time.fixedDeltaTime * currentGravityAcceleration;
             else
             {
-                currentGravityVelocity += Time.fixedDeltaTime * currentGravityAcceleration;
+                _currentGravityVelocity += Time.fixedDeltaTime * currentGravityAcceleration;
             }
             
-            rigidBody.velocity = currentVelocity + currentGravityVelocity;
-            rigidBody.angularVelocity = Vector3.zero;
-            //rigidBody.AddForce(currentGravityAcceleration, ForceMode.Acceleration);
+            rigidBody.velocity = currentVelocity + _currentGravityVelocity;
+            rigidBody.angularVelocity = currentAngularVelocity;
         }
 
         protected abstract bool IsGrounded();
