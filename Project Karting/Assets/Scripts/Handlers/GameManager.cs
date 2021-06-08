@@ -24,7 +24,7 @@ namespace Handlers {
         private StartMsgAnimation startMessage;
 
         //private List<ShakeTransform> cameras;
-        public GameObject cameraParentPrefab;
+        public CameraFollowPlayer cameraParentPrefab;
 
         public static GameManager Instance { get; private set; }
 
@@ -93,7 +93,8 @@ namespace Handlers {
                     playersInfo[id] = info;
                     
                     // cameras for players
-                    Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
+                    var kartCam = Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
+                    kartCam.target = kart.transform;
                     
                     // todo
                     /*Instantiate(HUDvsClockPrefab); // id automatically set inside the class
