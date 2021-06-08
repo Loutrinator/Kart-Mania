@@ -49,5 +49,8 @@ namespace Handlers
         public void LoadGameMode(GameMode mode) {
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneMap[mode]);
         }
+        public void LoadMainMenu() {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
     }
 }
