@@ -2,7 +2,7 @@
 using SplineEditor.Runtime;
 using UnityEngine;
 
-namespace RoadPhysics {
+namespace Road.RoadPhysics {
     public class PhysicsManager : MonoBehaviour {
         private static PhysicsManager _instance;
 

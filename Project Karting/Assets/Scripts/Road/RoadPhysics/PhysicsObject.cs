@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RoadPhysics {
+namespace Road.RoadPhysics {
     public abstract class PhysicsObject : MonoBehaviour {
         public Vector3 currentGravityAcceleration;
         public Vector3 currentVelocity;

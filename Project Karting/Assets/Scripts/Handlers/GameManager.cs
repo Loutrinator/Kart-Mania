@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Game;
+﻿using Game;
 using Items;
 using Kart;
 using Player;
-using RoadPhysics;
+using Road.RoadPhysics;
 using UnityEngine;
 
 namespace Handlers {
@@ -24,7 +23,8 @@ namespace Handlers {
         private bool raceIsInit;
         private StartMsgAnimation startMessage;
 
-        private List<ShakeTransform> cameras;
+        //private List<ShakeTransform> cameras;
+        public GameObject cameraParentPrefab;
 
         public static GameManager Instance { get; private set; }
 
@@ -33,7 +33,7 @@ namespace Handlers {
         private void Awake() {
             if (Instance == null) {
                 Instance = this;
-                cameras = new List<ShakeTransform>();
+                //cameras = new List<ShakeTransform>();
             }
             else {
                 Destroy(gameObject);
@@ -91,6 +91,9 @@ namespace Handlers {
                     
                     PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
                     playersInfo[id] = info;
+                    
+                    // cameras for players
+                    Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
                     
                     // todo
                     /*Instantiate(HUDvsClockPrefab); // id automatically set inside the class
@@ -173,9 +176,9 @@ namespace Handlers {
         }
 
         public void ShakeCameras(ShakeTransformEventData shake) {
-            foreach (var cam in cameras) {
+            /*foreach (var cam in cameras) {
                 cam.AddShakeEvent(shake);
-            }
+            }*/
         }
     }
 }
