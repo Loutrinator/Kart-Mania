@@ -143,7 +143,7 @@ namespace Kart
                 _currentSpeed -= finalStats.reverseAcceleration * Time.fixedDeltaTime;
                 _currentSpeed = Mathf.Max(-finalStats.reverseSpeed, _currentSpeed);
             }
-            else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, finalStats.braking * Time.fixedDeltaTime);
+            else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, 2 * Time.fixedDeltaTime);
 
             var t = transform;
             currentVelocity = t.forward * _currentSpeed;
