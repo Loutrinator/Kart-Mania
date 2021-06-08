@@ -126,6 +126,9 @@ namespace Kart
                     Rotate(hMove);
                 }
             }
+            else {
+                currentAngularVelocity = Vector3.zero;
+            }
         }
 
 
