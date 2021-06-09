@@ -14,7 +14,7 @@ namespace Handlers {
         public int checkpointAmount;
 
         [Header("UI and HUD")] [SerializeField]
-        private GameObject HUDvsClockPrefab;
+        private HUDTimeTrialController HUDvsClockPrefab;
 
         [SerializeField] private GameObject StartUIPrefab;
 
@@ -60,7 +60,7 @@ namespace Handlers {
             }
             
             TransitionController.Instance.FadeOut(() => {
-                raceBegan = true;  // todo enable after delay
+                //raceBegan = true;  // todo enable after delay
             });
         }
 

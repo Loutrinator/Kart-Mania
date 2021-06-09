@@ -35,8 +35,9 @@ namespace Road.RoadMesh
 
         [ContextMenu("Update Mesh")]
         public void UpdateMesh() {
+            if (bezierPath == null) return;
             Mesh mesh = new Mesh();
-
+            
             List<BezierUtils.BezierPos> vectorFrames = new List<BezierUtils.BezierPos>(
                 bezierPath.bezierSpline.RotationMinimisingFrames.Where(
                     bezierPos => bezierPos.BezierDistance >= distanceStart && bezierPos.BezierDistance <= distanceEnd));
