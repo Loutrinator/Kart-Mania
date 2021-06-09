@@ -85,7 +85,6 @@ namespace Handlers {
             }
 
             raceBegan = true;
-            Debug.Log("Race began");
         }
 
         private void InitRace() {
@@ -106,8 +105,6 @@ namespace Handlers {
                     kartCam.target = kart.transform;
                     karts.Add(kart);
                     
-                    // todo
-                    Debug.Log(GameManager.Instance.currentRace);
                     Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                     startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
                     ShakeTransform cam = kart.cameraShake;
