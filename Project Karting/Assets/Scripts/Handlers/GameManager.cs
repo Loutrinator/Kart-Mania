@@ -132,7 +132,6 @@ namespace Handlers {
 
         public void CheckpointPassed(int checkpointId, int playerId) {
             PlayerRaceInfo player = playersInfo[playerId];
-            Debug.Log("id :" + checkpointId);
 
             //permet de vérifier si premièrement le checkpoint est valide et si il est après le checkpoint actuel
             if (checkpointId < checkpointAmount) {
