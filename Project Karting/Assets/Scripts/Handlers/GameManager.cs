@@ -97,13 +97,16 @@ namespace Handlers {
                     Transform spawn = spawnPoints[id];
                     KartBase kart = Instantiate(playerConfig.kartPrefab, spawn.position, spawn.rotation);
                     
-                    PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
-                    playersInfo[id] = info;
                     
                     // cameras for players
                     var kartCam = Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
                     kartCam.target = kart.transform;
+                    
                     karts.Add(kart);
+                    
+                    PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
+                    info.camera = kartCam;
+                    playersInfo[id] = info;
                     
                     Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                     startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();

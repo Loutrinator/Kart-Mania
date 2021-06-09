@@ -36,5 +36,9 @@ namespace Player
         {
             return Input.GetButtonUp("Item");
         }
+        public bool ShowRearCamera()
+        {
+            return Input.GetButton("RearCamera");
+        }
     }
 }
