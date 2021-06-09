@@ -34,8 +34,7 @@ namespace Handlers
         {
             kart.transform.position = kart.lastGroundBezierPos.GlobalOrigin;
             kart.transform.rotation = kart.lastGroundBezierPos.Rotation;
-            kart.rigidBody.velocity = Vector3.zero;
-            kart.rigidBody.angularVelocity = Vector3.zero;
+            kart.ResetForces();
         }
     }
 }

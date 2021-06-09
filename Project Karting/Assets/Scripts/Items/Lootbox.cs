@@ -59,7 +59,7 @@ namespace Items
         {
             if (state == LootBoxState.available)
             {
-                KartBase kart = other.GetComponent<KartCollider>().kartBase;
+                KartBase kart = other.GetComponent<KartCollisions>().kartBase;
                 if (kart != null)
                 {
                     BreakLootBox(1,kart);
