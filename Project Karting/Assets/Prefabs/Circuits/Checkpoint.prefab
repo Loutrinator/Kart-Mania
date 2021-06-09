@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 132725148892228468}
   - component: {fileID: 3656526732695113090}
   - component: {fileID: 1596217793355050250}
-  m_Layer: 0
+  - component: {fileID: 4040084783436648365}
+  m_Layer: 13
   m_Name: Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +92,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4872971696117697879}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -112,3 +113,15 @@ MonoBehaviour:
   distance: 421.43
   horizontalOffset: 0
   verticalOffset: 9
+--- !u!114 &4040084783436648365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4872971696117697879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df9b82dbd62b3c42a30b90951dd9fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
