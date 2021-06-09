@@ -9,6 +9,7 @@ namespace Road.RoadPhysics {
         public static PhysicsManager instance => _instance;
 
 
+        public float drag = 0.05f;
         public BezierSpline road;
         public List<PhysicsObject> physicsObjects = new List<PhysicsObject>();
 
@@ -26,11 +27,11 @@ namespace Road.RoadPhysics {
                 if (_hasRoad)
                 {
                     physicsObjects[i].closestBezierPos = road.GetClosestBezierPos(physicsObjects[i].transform.position);
-                    physicsObjects[i].UpdatePhysics(physicsObjects[i].closestBezierPos.LocalUp);
+                    physicsObjects[i].UpdatePhysics(physicsObjects[i].closestBezierPos.LocalUp, drag);
                 }
                 else
                 {
-                    physicsObjects[i].UpdatePhysics(Vector3.up);
+                    physicsObjects[i].UpdatePhysics(Vector3.up, drag);
                 }
             }
         }

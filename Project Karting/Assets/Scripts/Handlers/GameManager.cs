@@ -135,6 +135,7 @@ namespace Handlers {
 
         public void CheckpointPassed(int checkpointId, int playerId) {
             PlayerRaceInfo player = playersInfo[playerId];
+
             //permet de vérifier si premièrement le checkpoint est valide et si il est après le checkpoint actuel
             if (checkpointId < checkpointAmount) {
                 if (checkpointId - player.currentCheckpoint == 1) {

@@ -858,8 +858,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481997607891235529}
-  m_LocalRotation: {x: 0.0043965615, y: 0.96418124, z: -0.016013214, w: 0.26472402}
-  m_LocalPosition: {x: 263.60846, y: 3.2648785, z: -514.58923}
+  m_LocalRotation: {x: 0.0047501735, y: 0.96646845, z: -0.017925128, w: 0.2561149}
+  m_LocalPosition: {x: 262.2973, y: 3.3563938, z: -512.3385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8738788713797060524}
@@ -878,7 +878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spline: {fileID: 4270162758006377534}
-  distance: 2953
+  distance: 2950
   horizontalOffset: 0
   verticalOffset: 0
 --- !u!1 &1557406991054568430
@@ -2998,7 +2998,8 @@ GameObject:
   - component: {fileID: 5321789483988489559}
   - component: {fileID: 7943852896982655389}
   - component: {fileID: 5013503200854800285}
-  m_Layer: 0
+  - component: {fileID: 8240453164565688883}
+  m_Layer: 13
   m_Name: Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3077,11 +3078,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8448401534742708296}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10.500701, y: 0.76884437, z: 7.0772786}
   m_Center: {x: -0.000002861023, y: -0.0000000065432224, z: 3.5128667}
+--- !u!114 &8240453164565688883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448401534742708296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df9b82dbd62b3c42a30b90951dd9fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpointId: 0
 --- !u!1 &8515366204316918465
 GameObject:
   m_ObjectHideFlags: 0
@@ -3256,6 +3270,11 @@ PrefabInstance:
       propertyPath: distance
       value: 974.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: checkpointId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4872971696117697879, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: m_Name
@@ -3341,6 +3360,11 @@ PrefabInstance:
       propertyPath: distance
       value: 2252
       objectReference: {fileID: 0}
+    - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: checkpointId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4872971696117697879, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: m_Name
@@ -3425,6 +3449,11 @@ PrefabInstance:
         type: 3}
       propertyPath: distance
       value: 1614.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: checkpointId
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4872971696117697879, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
@@ -3622,6 +3651,11 @@ PrefabInstance:
       propertyPath: spline
       value: 
       objectReference: {fileID: 4270162758006377534}
+    - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: checkpointId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4872971696117697879, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: m_Name
@@ -3828,6 +3862,11 @@ PrefabInstance:
       propertyPath: distance
       value: 1979
       objectReference: {fileID: 0}
+    - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: checkpointId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4872971696117697879, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: m_Name
@@ -3912,6 +3951,11 @@ PrefabInstance:
         type: 3}
       propertyPath: distance
       value: 2767
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: checkpointId
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4872971696117697879, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}

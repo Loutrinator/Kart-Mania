@@ -5768,6 +5768,7 @@ GameObject:
   - component: {fileID: 6671327005639688407}
   - component: {fileID: 7072082925053140395}
   - component: {fileID: 6669060970404059514}
+  - component: {fileID: 2789011401745134355}
   m_Layer: 9
   m_Name: Kart-TheTuture
   m_TagString: Untagged
@@ -5905,6 +5906,7 @@ MonoBehaviour:
   currentGravityAcceleration: {x: 0, y: 0, z: 0}
   currentVelocity: {x: 0, y: 0, z: 0}
   currentAngularVelocity: {x: 0, y: 0, z: 0}
+  currentForcesVelocity: {x: 0, y: 0, z: 0}
   rigidBody: {fileID: 7072082925053140395}
   kartRootModel: {fileID: 7072082925228471993}
   kartBodyModel: {fileID: 5411243444951780116}
@@ -5943,6 +5945,20 @@ MonoBehaviour:
   drift: 0
   driftDirection: 0
   vehicleCollider: {fileID: 7072082925228471992}
+--- !u!114 &2789011401745134355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072082925053140372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8464b13d452fa32409651440d53aec20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kartBase: {fileID: 6669060970404059514}
+  bumpForce: 50
 --- !u!1 &7072082925228471994
 GameObject:
   m_ObjectHideFlags: 0
@@ -5953,7 +5969,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7072082925228471993}
   - component: {fileID: 7072082925228471992}
-  - component: {fileID: 7279505854336376855}
   m_Layer: 9
   m_Name: Voiture
   m_TagString: Untagged
@@ -5990,19 +6005,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0919762, y: 2.6029482, z: 6.3124437}
   m_Center: {x: 0, y: 1.2601118, z: 0.50470304}
---- !u!114 &7279505854336376855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7072082925228471994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8464b13d452fa32409651440d53aec20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kartBase: {fileID: 6669060970404059514}
 --- !u!1 &7270244340812128787
 GameObject:
   m_ObjectHideFlags: 0

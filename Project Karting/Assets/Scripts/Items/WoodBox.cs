@@ -76,7 +76,7 @@ namespace Items
         }
         private void OnTriggerEnter(Collider other)
         {
-            KartBase kart = other.GetComponent<KartCollider>()?.kartBase;
+            KartBase kart = other.GetComponent<KartCollisions>()?.kartBase;
             if (kart != null)
             {
                 kart.AddPowerup(_powerup);
