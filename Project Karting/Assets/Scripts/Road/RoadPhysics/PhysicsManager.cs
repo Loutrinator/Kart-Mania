@@ -2,7 +2,7 @@
 using SplineEditor.Runtime;
 using UnityEngine;
 
-namespace RoadPhysics {
+namespace Road.RoadPhysics {
     public class PhysicsManager : MonoBehaviour {
         private static PhysicsManager _instance;
 
@@ -14,9 +14,10 @@ namespace RoadPhysics {
 
         private bool _hasRoad;
 
-        public void Init() {
+        public void Init(BezierSpline roadP) {
             if (_instance == null)
                 _instance = this;
+            road = roadP;
             _hasRoad = road != null;
         }
 
@@ -24,8 +25,8 @@ namespace RoadPhysics {
             for (int i = physicsObjects.Count - 1; i >= 0; --i) {
                 if (_hasRoad)
                 {
-                    BezierUtils.BezierPos pos = road.GetClosestBezierPos(physicsObjects[i].transform.position);
-                    physicsObjects[i].UpdatePhysics(pos.LocalUp);
+                    physicsObjects[i].closestBezierPos = road.GetClosestBezierPos(physicsObjects[i].transform.position);
+                    physicsObjects[i].UpdatePhysics(physicsObjects[i].closestBezierPos.LocalUp);
                 }
                 else
                 {

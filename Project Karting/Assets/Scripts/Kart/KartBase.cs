@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using RoadPhysics;
+using Handlers;
+using Road.RoadPhysics;
 using UnityEngine;
 
 namespace Kart
@@ -52,7 +53,7 @@ namespace Kart
         public int driftDirection;
 
         public Collider vehicleCollider;
-        
+
         private bool drifting;
 
         // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
@@ -79,13 +80,17 @@ namespace Kart
             }
         }
 
-        protected override bool IsGrounded()
+        public override bool IsGrounded()
         {
             int wheelsOnGround = 0;
             for (var index = 0; index < wheels.Count; index++) {
                 Vector3 wheelPos = wheels[index].transform.position;
                 //if (wheels[index].isGrounded) wheelsOnGround++;
-                if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out var hit, 0.5f, LayerMask.GetMask("Ground"))) {
+                if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out _, 0.5f, LayerMask.GetMask("Environement")))
+                {
+                    GameManager.Instance.respawner.Respawn(this);
+                }
+                else if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out _, 0.5f, LayerMask.GetMask("Ground"))) {
                     wheelsOnGround++;
                 }
             }
@@ -95,7 +100,7 @@ namespace Kart
 
         private void FixedUpdate()
         {
-            if (!GameManager.Instance.raceHasBegan()) return;
+            if (!GameManager.Instance.RaceHasBegan()) return;
             ApplyPowerups();
             Move(forwardMove);
 
@@ -125,6 +130,9 @@ namespace Kart
                     Rotate(hMove);
                 }
             }
+            else {
+                currentAngularVelocity = Vector3.zero;
+            }
         }
 
 
@@ -135,17 +143,14 @@ namespace Kart
                 _currentSpeed += finalStats.acceleration * Time.fixedDeltaTime;
                 _currentSpeed = Mathf.Min(finalStats.topSpeed, _currentSpeed);
             }
-            else if (direction < 0)
-            {
+            else if (direction < 0) {
                 _currentSpeed -= finalStats.reverseAcceleration * Time.fixedDeltaTime;
                 _currentSpeed = Mathf.Max(-finalStats.reverseSpeed, _currentSpeed);
             }
-            else _currentSpeed = 0;
+            else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, 2 * Time.fixedDeltaTime);
 
             var t = transform;
             currentVelocity = t.forward * _currentSpeed;
-            //rigidBody.MovePosition(rigidBody.position + t.forward * (_currentSpeed * Time.deltaTime));
-            //t.position += t.forward * (_currentSpeed * Time.fixedDeltaTime);
         }
 
         protected void Rotate(float angle)
@@ -153,23 +158,8 @@ namespace Kart
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer * 2 + steeringSpeed) * Time.fixedDeltaTime;
 
-            //transform.RotateAround(rotationAxis.position, rotationAxis.up, steerAngle);
-            Quaternion q = Quaternion.AngleAxis(steerAngle, transform.up);
-            rigidBody.MoveRotation(q * rigidBody.transform.rotation);
-            Vector3 currentRotation = kartRootModel.rotation.eulerAngles;
-
-
-            /*
-            _lerpedKartRotation = Mathf.Lerp(lerpedAngle, driftDirection, kartRotationLerpSpeed * Time.fixedDeltaTime);
-
-            if (drifting)
-            {   
-                kartRootModel.localEulerAngles = Vector3.up * (_lerpedKartRotation * 70 * kartRotationCoeff);
-            }
-            else
-            {
-                kartRootModel.localEulerAngles = Vector3.up * (steerAngle * kartRotationCoeff);
-            }*/
+            currentAngularVelocity = transform.up * steerAngle;
+            
             kartRootModel.localEulerAngles = Vector3.up * (steerAngle * kartRotationCoeff);
 
             kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * kartRollCoeff);
@@ -250,7 +240,6 @@ namespace Kart
 
         public void AddPowerup(StatPowerup powerup)
         {
-            Debug.Log("Add Powerup");
             activePowerupList.Add(powerup);
         }
 

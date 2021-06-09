@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Items
 {
@@ -13,9 +12,10 @@ namespace Items
             info.ItemIsInUse = false;
             info.Item = null;
         }
-        public virtual void OnKeyHold(PlayerRaceInfo info){return;}
-        public virtual void OnKeyDown(PlayerRaceInfo info){return;}
-        public virtual void OnKeyUp(PlayerRaceInfo info){return;}
-        
+
+        public abstract void OnKeyHold(PlayerRaceInfo info);
+        public abstract void OnKeyDown(PlayerRaceInfo info);
+        public abstract void OnKeyUp(PlayerRaceInfo info);
+
     }
 }

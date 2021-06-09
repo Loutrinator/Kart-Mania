@@ -9,8 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a23b7dce67c867543845608210496374, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f8b16ce820bc1a4eb7aed3c10e20801, type: 3}
   m_Name: LevelManager
   m_EditorClassIdentifier: 
-  levelList:
-  - {fileID: 2348048894690543091, guid: d44dfcfbdd966b6478fb4f88a214c64d, type: 3}
+  gameConfig:
+    mode: 0
+    players:
+    - name: Player 1
+      kartPrefab: {fileID: 6669060970404059514, guid: 788e3c6fb21859241bfef9c60f187e62,
+        type: 3}
+      type: 0
+    races:
+    - {fileID: 2576412271248234011, guid: 49837825580569c4d8cf96eef1dbb890, type: 3}
+  currentRace: {fileID: 0}

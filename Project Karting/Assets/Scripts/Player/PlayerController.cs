@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Player
+﻿namespace Player
 {
     public class PlayerController
     {
@@ -19,9 +17,11 @@ namespace Player
             _info.kart.forwardMove = _actionsOutputs.Accelerate();
             _info.kart.hMove = _actionsOutputs.Steer();
             _info.kart.drift = _actionsOutputs.Drift();
-            if (_actionsOutputs.ItemKeyHold()) _info.Item?.OnKeyHold(_info);
-            if (_actionsOutputs.ItemKeyDown()) _info.Item?.OnKeyDown(_info);
-            if (_actionsOutputs.ItemKeyUp()) _info.Item?.OnKeyUp(_info);
+            if (_info.hasItem) {
+                if (_actionsOutputs.ItemKeyHold()) _info.Item.OnKeyHold(_info);
+                if (_actionsOutputs.ItemKeyDown()) _info.Item.OnKeyDown(_info);
+                if (_actionsOutputs.ItemKeyUp()) _info.Item.OnKeyUp(_info);
+            }
         }
     }
 }
