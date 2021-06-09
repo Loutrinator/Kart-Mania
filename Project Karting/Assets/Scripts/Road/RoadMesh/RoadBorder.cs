@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using SplineEditor.Runtime;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ namespace Road.RoadMesh
         public Side roadSide;
         public float roadWidth = 1;
         public float roadThickness = 1;
+        public float distanceStart;
+        public float distanceEnd = 10;
         
         [SerializeField, HideInInspector] private MeshCollider meshCollider;
 
@@ -32,9 +35,12 @@ namespace Road.RoadMesh
 
         [ContextMenu("Update Mesh")]
         public void UpdateMesh() {
+            if (bezierPath == null) return;
             Mesh mesh = new Mesh();
             
-            List<BezierUtils.BezierPos> vectorFrames = bezierPath.bezierSpline.RotationMinimisingFrames;
+            List<BezierUtils.BezierPos> vectorFrames = new List<BezierUtils.BezierPos>(
+                bezierPath.bezierSpline.RotationMinimisingFrames.Where(
+                    bezierPos => bezierPos.BezierDistance >= distanceStart && bezierPos.BezierDistance <= distanceEnd));
             int arrayLen = vectorFrames.Count;
             
             var vertices = new Vector3[arrayLen * 2 * 4 + 8];    // 2 vertices per bezier vertex * (2 faces + 2 sides) + 2 extremities 

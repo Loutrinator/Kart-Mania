@@ -58,5 +58,8 @@ public class HUDTimeTrialController : MonoBehaviour
         {
             currentTime.text = Utils.DisplayHelper.floatToTimeString(Time.time - _info.currentLapStartTime);
         }
+        else {
+            currentTime.text = Utils.DisplayHelper.floatToTimeString(0f);
+        }
     }
 }
