@@ -1,4 +1,5 @@
-﻿using Game;
+﻿using System.Collections.Generic;
+using Game;
 using Items;
 using Kart;
 using Player;
@@ -17,6 +18,8 @@ namespace Handlers {
 
         [SerializeField] private GameObject StartUIPrefab;*/
 
+        [HideInInspector] public List<KartBase> karts = new List<KartBase>();
+
         private PlayerRaceInfo[] playersInfo;
 
         private bool raceBegan;
@@ -29,6 +32,7 @@ namespace Handlers {
         public static GameManager Instance { get; private set; }
 
         public PhysicsManager physicsManager;
+        public KartRespawner respawner;
 
         private void Awake() {
             if (Instance == null) {
@@ -49,6 +53,11 @@ namespace Handlers {
             }
             
             InitRace();
+
+            if (respawner != null)
+            {
+                respawner.Init();
+            }
             
             TransitionController.Instance.FadeOut(() => {
                 raceBegan = true;  // todo enable after delay
@@ -78,7 +87,6 @@ namespace Handlers {
             raceBegan = true;
         }
 
-
         private void InitRace() {
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
             playersInfo = new PlayerRaceInfo[nbPlayerRacing];
@@ -95,6 +103,7 @@ namespace Handlers {
                     // cameras for players
                     var kartCam = Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
                     kartCam.target = kart.transform;
+                    karts.Add(kart);
                     
                     // todo
                     /*Instantiate(HUDvsClockPrefab); // id automatically set inside the class

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SplineEditor.Runtime;
+using UnityEngine;
 
 namespace Road.RoadPhysics {
     public abstract class PhysicsObject : MonoBehaviour {
@@ -7,6 +8,8 @@ namespace Road.RoadPhysics {
         public Vector3 currentAngularVelocity;
         public Rigidbody rigidBody;
 
+        public BezierUtils.BezierPos closestBezierPos;
+        public BezierUtils.BezierPos lastGroundBezierPos;
         private Vector3 _currentGravityVelocity;
 
         protected virtual void Awake() {
@@ -17,7 +20,11 @@ namespace Road.RoadPhysics {
         public void UpdatePhysics(Vector3 groundNormal) {
             currentGravityAcceleration = -groundNormal * currentGravityAcceleration.magnitude;
 
-            if (IsGrounded()) _currentGravityVelocity = Time.fixedDeltaTime * currentGravityAcceleration;
+            if (IsGrounded())
+            {
+                _currentGravityVelocity = Time.fixedDeltaTime * currentGravityAcceleration;
+                lastGroundBezierPos = closestBezierPos;
+            }
             else
             {
                 _currentGravityVelocity += Time.fixedDeltaTime * currentGravityAcceleration;
@@ -27,6 +34,6 @@ namespace Road.RoadPhysics {
             rigidBody.angularVelocity = currentAngularVelocity;
         }
 
-        protected abstract bool IsGrounded();
+        public abstract bool IsGrounded();
     }
 }

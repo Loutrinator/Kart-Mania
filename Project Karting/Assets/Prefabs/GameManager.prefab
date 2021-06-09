@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 974393620473618580}
   - component: {fileID: 974393620473618570}
   - component: {fileID: 974393620473618571}
+  - component: {fileID: 2033935846926441275}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,9 +48,11 @@ MonoBehaviour:
   currentRace: {fileID: 0}
   itemManager: {fileID: 11400000, guid: 4a4bb616e5b0d0244aaf6dae3cd4cc2d, type: 2}
   checkpointAmount: 5
+  karts: []
   cameraParentPrefab: {fileID: 589774808360774384, guid: 71c17ac6747a0f449a68f354cb30795b,
     type: 3}
   physicsManager: {fileID: 974393620473618571}
+  respawner: {fileID: 2033935846926441275}
 --- !u!114 &974393620473618571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,3 +67,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   road: {fileID: 0}
   physicsObjects: []
+--- !u!114 &2033935846926441275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974393620473618569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5923baa9973e0304cbbf44b1cc171e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceForRespawn: 60
