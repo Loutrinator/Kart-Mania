@@ -1,4 +1,4 @@
-﻿using Handlers;
+﻿using Road.RoadMesh;
 using SplineEditor.Runtime;
 using UnityEngine;
 
@@ -15,6 +15,10 @@ namespace Game {
 
         public void Init() {
             road.bezierMeshExtrusion.UpdateMesh();
+            var borders = GetComponentsInChildren<RoadBorder>();
+            foreach (var border in borders) {
+                border.UpdateMesh();
+            }
         }
     }
 }
