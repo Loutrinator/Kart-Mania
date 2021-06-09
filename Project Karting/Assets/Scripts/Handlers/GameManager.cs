@@ -85,6 +85,7 @@ namespace Handlers {
             }
 
             raceBegan = true;
+            Debug.Log("Race began");
         }
 
         private void InitRace() {
