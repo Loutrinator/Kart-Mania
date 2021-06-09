@@ -24,8 +24,6 @@ namespace Handlers {
 
         [HideInInspector] public GameConfig gameConfig;
 
-        [HideInInspector] public Race currentRace;    // instantiated
-
         public void Init() {
             gameConfig = new GameConfig {
                 players = new List<PlayerConfig>(), 
@@ -34,7 +32,7 @@ namespace Handlers {
         }
         
         public Race InitLevel() {
-            currentRace = Instantiate(gameConfig.races[0]);
+            Race currentRace = Instantiate(gameConfig.races[0]);
             currentRace.Init();
             return currentRace;
         }

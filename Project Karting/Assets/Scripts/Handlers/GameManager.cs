@@ -45,7 +45,7 @@ namespace Handlers {
 
             raceIsInit = false;
             
-            Race currentRace = LevelManager.instance.InitLevel();
+            currentRace = LevelManager.instance.InitLevel();
             
             if (physicsManager != null)
             {
@@ -90,7 +90,7 @@ namespace Handlers {
         private void InitRace() {
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
             playersInfo = new PlayerRaceInfo[nbPlayerRacing];
-            Transform[] spawnPoints = LevelManager.instance.currentRace.spawnPoints;
+            Transform[] spawnPoints = currentRace.spawnPoints;
             if (spawnPoints.Length >= nbPlayerRacing) {
                 for (int id = 0; id < nbPlayerRacing; ++id) {
                     PlayerConfig playerConfig = LevelManager.instance.gameConfig.players[id];
@@ -106,7 +106,8 @@ namespace Handlers {
                     karts.Add(kart);
                     
                     // todo
-                   // Instantiate(HUDvsClockPrefab); // id automatically set inside the class
+                    Debug.Log(GameManager.Instance.currentRace);
+                    Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                     startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
                     ShakeTransform cam = kart.cameraShake;
                     // if (cam != null)
