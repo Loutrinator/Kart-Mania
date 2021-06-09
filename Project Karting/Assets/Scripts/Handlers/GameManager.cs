@@ -13,10 +13,10 @@ namespace Handlers {
         public ItemManager itemManager;
         public int checkpointAmount;
 
-        /*[Header("UI and HUD")] [SerializeField]
+        [Header("UI and HUD")] [SerializeField]
         private GameObject HUDvsClockPrefab;
 
-        [SerializeField] private GameObject StartUIPrefab;*/
+        [SerializeField] private GameObject StartUIPrefab;
 
         [HideInInspector] public List<KartBase> karts = new List<KartBase>();
 
@@ -106,13 +106,14 @@ namespace Handlers {
                     karts.Add(kart);
                     
                     // todo
-                    /*Instantiate(HUDvsClockPrefab); // id automatically set inside the class
+                   // Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                     startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
                     ShakeTransform cam = kart.cameraShake;
-                    if (cam != null) {
-                        cameras.Add(cam);
-                    }
-                    startMessage._startTime = Time.time;*/
+                    // if (cam != null)
+                    // {
+                    //     cameras.Add(cam);
+                    // }
+                    startMessage._startTime = Time.time;
                     raceIsInit = true;
                 }
             } else {
