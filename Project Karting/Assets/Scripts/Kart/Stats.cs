@@ -8,28 +8,35 @@ public struct Stats
 {
     [Header("Movement Settings")]
     [Tooltip("The maximum speed forwards")]
+    [Range(0f,1f)]
     public float topSpeed;
 
     [Tooltip("How quickly the Kart reaches top speed.")]
+    [Range(0f,1f)]
     public float acceleration;
 
     [Tooltip("The maximum speed backward.")]
+    [Range(0f,1f)]
     public float reverseSpeed;
 
     [Tooltip("The rate at which the kart increases its backward speed.")]
+    [Range(0f,1f)]
     public float reverseAcceleration;
 
     [Tooltip("How quickly the Kart slows down when going in the opposite direction.")]
+    [Range(0f,1f)]
     public float braking;
 
     [Tooltip("How quickly the Kart can turn left and right.")]
+    [Range(0f,1f)]
     public float steer;
 
     [Tooltip("Additional gravity for when the Kart is in the air.")]
+    [Range(0f,1f)]
     public float addedGravity;
 
     [Tooltip("How much the Kart tries to keep going forward when on bumpy terrain.")]
-    [Range(0, 1)]
+    [Range(0f,1f)]
     public float suspension;
 
     // allow for stat adding for powerups.
