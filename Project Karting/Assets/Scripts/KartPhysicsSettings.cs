@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityExtendedEditor.ExtendedAttributes.Editor;
 
 [CreateAssetMenu(fileName = "PhysicsSettings", menuName = "ScriptableObjects/PhysicsSettings")]
 public class KartPhysicsSettings : ScriptableObject
@@ -20,14 +22,26 @@ public class KartPhysicsSettings : ScriptableObject
     }
     #endregion
     #region Kart Stats
-    public float topSpeed = 40f;
+    [MinMaxSlider(25f,75f)]
+    public Vector2 topSpeed = new Vector2(80f,120f);
     public float acceleration = 20f;
     public float reverseSpeed = 15;
     public float reverseAcceleration = 5f;
     public float braking = 15;
+
+    public float getTopSpeed(float stat)
+    {
+        return getStat(stat, topSpeed);
+    }
+
+    private float getStat(float value, Vector2 range)
+    {
+        return range.x + (range.y - range.x) * value;
+    }
+    
     #endregion
     #region Kart physics
-    public float steeringSpeed = 40f;
+    public float steeringSpeed = 80f;
     public float minDriftAngle = 0.182f;
     public float maxDriftAngle = 1.8f;
     public float kartRotationCoeff = 15f;

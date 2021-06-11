@@ -6,9 +6,11 @@ namespace Player
     {
         public int Accelerate()
         {
-            float forwardInput = Input.GetAxis("Vertical");
-            if (forwardInput > 0.001f) return 1;
-            if (forwardInput < -0.001f) return -1;
+            float accelerate = Input.GetAxis("Accelerate");
+            float brake = Input.GetAxis("Brake");
+            Debug.Log("Accelerate : " + accelerate + " Brake : " + brake);
+            if (brake > 0.001f) return -1;
+            if (accelerate > 0.001f) return 1;
             return 0;
         }
 

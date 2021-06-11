@@ -130,7 +130,7 @@ namespace Kart
             if (direction > 0)
             {
                 _currentSpeed += finalStats.acceleration * KartPhysicsSettings.instance.acceleration * Time.fixedDeltaTime;
-                _currentSpeed = Mathf.Min(finalStats.topSpeed * KartPhysicsSettings.instance.topSpeed, _currentSpeed);
+                _currentSpeed = Mathf.Min(KartPhysicsSettings.instance.getTopSpeed(finalStats.topSpeed), _currentSpeed);
             }
             else if (direction < 0) {
                 _currentSpeed -= finalStats.reverseAcceleration * KartPhysicsSettings.instance.reverseAcceleration * Time.fixedDeltaTime;
