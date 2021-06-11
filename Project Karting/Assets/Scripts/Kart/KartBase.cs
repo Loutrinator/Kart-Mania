@@ -91,10 +91,11 @@ namespace Kart
             if (!GameManager.Instance.RaceHasBegan()) return;
             ApplyPowerups();
             Move(forwardMove);
+            float rotationDirection = forwardMove > 0 ? hMove : -hMove;
 
             if (drift && !drifting && (hMove < 0 || hMove > 0))
             {
-                StartDrift(hMove);
+                StartDrift(rotationDirection);
             }
 
             if (forwardMove != 0) //on tourne pas à l'arret
@@ -107,7 +108,7 @@ namespace Kart
                     }
                     else
                     {
-                        float driftAngle = (1 + hMove * driftDirection) / 2 * (KartPhysicsSettings.instance.maxDriftAngle - KartPhysicsSettings.instance.minDriftAngle) +
+                        float driftAngle = (1 + rotationDirection * driftDirection) / 2 * (KartPhysicsSettings.instance.maxDriftAngle - KartPhysicsSettings.instance.minDriftAngle) +
                                            KartPhysicsSettings.instance.minDriftAngle;
                         driftAngle *= driftDirection;
                         Rotate(driftAngle);
@@ -115,7 +116,7 @@ namespace Kart
                 }
                 else
                 {
-                    Rotate(hMove);
+                    Rotate(rotationDirection);
                 }
             }
             else {
@@ -135,7 +136,7 @@ namespace Kart
                 _currentSpeed -= finalStats.reverseAcceleration * KartPhysicsSettings.instance.reverseAcceleration * Time.fixedDeltaTime;
                 _currentSpeed = Mathf.Max(-finalStats.reverseSpeed * KartPhysicsSettings.instance.reverseSpeed, _currentSpeed);
             }
-            else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, 2 * Time.fixedDeltaTime);
+            else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, KartPhysicsSettings.instance.engineBrakeSpeed * Time.fixedDeltaTime);
 
             var t = transform;
             currentVelocity = t.forward * _currentSpeed;
@@ -143,6 +144,7 @@ namespace Kart
 
         protected void Rotate(float angle)
         {
+                
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer * 2 + KartPhysicsSettings.instance.steeringSpeed) * Time.fixedDeltaTime;
 
