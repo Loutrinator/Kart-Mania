@@ -10,5 +10,6 @@ namespace Player
         bool ItemKeyHold();
         bool ItemKeyDown();
         bool ItemKeyUp();
+        bool ShowRearCamera();
     }
 }

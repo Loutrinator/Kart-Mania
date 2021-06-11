@@ -36045,7 +36045,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754896076461728969}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: carHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41930,7 +41930,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  m_Intensity: 32
+  m_Intensity: 5.8
   m_Range: 10
   m_SpotAngle: 85.8
   m_InnerSpotAngle: 21.80208
@@ -55573,7 +55573,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  m_Intensity: 32
+  m_Intensity: 5.8
   m_Range: 10
   m_SpotAngle: 85.8
   m_InnerSpotAngle: 21.80208
@@ -58865,7 +58865,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  m_Intensity: 32
+  m_Intensity: 5.8
   m_Range: 10
   m_SpotAngle: 85.8
   m_InnerSpotAngle: 21.80208
@@ -72655,7 +72655,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  m_Intensity: 32
+  m_Intensity: 5.8
   m_Range: 10
   m_SpotAngle: 85.8
   m_InnerSpotAngle: 21.80208
@@ -78380,7 +78380,7 @@ GameObject:
   - component: {fileID: 4683463517201019223}
   - component: {fileID: 5463722476359903717}
   - component: {fileID: 5463722476359903716}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: diaphragm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97754,7 +97754,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  m_Intensity: 32
+  m_Intensity: 5.8
   m_Range: 10
   m_SpotAngle: 85.8
   m_InnerSpotAngle: 21.80208
@@ -108266,7 +108266,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  m_Intensity: 32
+  m_Intensity: 5.8
   m_Range: 10
   m_SpotAngle: 85.8
   m_InnerSpotAngle: 21.80208
@@ -115136,6 +115136,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lamelle pivot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1969262334751832861, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416739147661092705, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8690536693769277365, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
         type: 3}
       propertyPath: m_RootOrder
@@ -115226,6 +115236,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lamelle pivot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969262334751832861, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416739147661092705, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8690536693769277365, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
         type: 3}
@@ -115318,6 +115338,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lamelle pivot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1969262334751832861, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416739147661092705, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8690536693769277365, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
         type: 3}
       propertyPath: m_RootOrder
@@ -115408,6 +115438,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lamelle pivot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969262334751832861, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416739147661092705, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8690536693769277365, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
         type: 3}
@@ -115574,6 +115614,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lamelle pivot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969262334751832861, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416739147661092705, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8690536693769277365, guid: 0449a9cb7d879484daaca3b84a7f3ad2,
         type: 3}

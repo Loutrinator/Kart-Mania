@@ -5922,24 +5922,14 @@ MonoBehaviour:
   effects: {fileID: 6671327005639688407}
   keyhole: {fileID: 7072082923481296565}
   vehicleStats:
-    topSpeed: 40
-    acceleration: 20
-    reverseSpeed: 5
-    reverseAcceleration: 5
-    braking: 5
-    steer: 5
-    addedGravity: 1
-    suspension: 0.2
-  steeringSpeed: 40
-  yAxisOffset: 1.14
-  minDriftAngle: 0.182
-  maxDriftAngle: 1.8
-  kartRotationCoeff: 15
-  kartRollCoeff: 4
-  kartRotationLerpSpeed: 5
-  kartWheelAngle: 25
-  boostLength: 2
-  boostStrength: 1
+    topSpeed: 0.5
+    acceleration: 0.5
+    reverseSpeed: 0.5
+    reverseAcceleration: 0.5
+    braking: 0.5
+    steer: 0.5
+    addedGravity: 0.5
+    suspension: 0.5
   hMove: 0
   forwardMove: 0
   drift: 0

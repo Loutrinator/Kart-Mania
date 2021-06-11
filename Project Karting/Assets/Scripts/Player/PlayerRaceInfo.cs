@@ -37,6 +37,8 @@ public class PlayerRaceInfo
     public PlayerController Controller => _controller;
 
     private KartBase _kart;
+
+    public CameraFollowPlayer camera;
     public KartBase kart
     {
         get { return _kart; }
