@@ -5,7 +5,7 @@ namespace Kart
     public class KartCollisions : MonoBehaviour
     {
         public KartBase kartBase;
-        public float bumpForce = 20f;
+        public float bumpForce = 50f;
 
         private void OnCollisionEnter(Collision other) {
             if (other.gameObject.layer == LayerMask.NameToLayer("Wall")) {
