@@ -60,14 +60,21 @@ public class KartSelectionManager : MonoBehaviour
         }
     }
 
+    private int getKartId(int direction)
+    {
+        int position = (currentKartId + direction + 100*availableKarts.Count) % availableKarts.Count;
+        Debug.Log("Position : " + position + " currentKartId : " + currentKartId + "availableKarts.Count : " + availableKarts.Count);
+        return position;
+    }
+
     public void SelectNext()
     {
-        currentKartId = (currentKartId + 1 + availableKarts.Count) % availableKarts.Count;
+        currentKartId = getKartId(1);
         diaphragm.Open();
     }
     public void SelectPrevious()
     {
-        currentKartId = (currentKartId - 1 + availableKarts.Count) % availableKarts.Count;
+        currentKartId = getKartId(-1);
         diaphragm.Open();
     }
 

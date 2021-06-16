@@ -43,7 +43,7 @@ public class RaceSelectionManager : MonoBehaviour
     public void ShowNextRace()
     {
         int limit = races.Count;
-        _currentRaceId = (_currentRaceId - 1 + limit) % limit;
+        _currentRaceId = (_currentRaceId - 1 + 100*limit) % limit;
         _currentCarrousselPos = (_currentCarrousselPos + 1 + 7) % 7;
         MoveSelectors();
         UpdateText();
@@ -51,7 +51,7 @@ public class RaceSelectionManager : MonoBehaviour
     public void ShowPreviousRace()
     {
         int limit = races.Count;
-        _currentRaceId = (_currentRaceId + 1 + limit) % limit;
+        _currentRaceId = (_currentRaceId + 1 + 100*limit) % limit;
         _currentCarrousselPos = (_currentCarrousselPos - 1 + 7) % 7;
         MoveSelectors();
         UpdateText();
@@ -85,7 +85,7 @@ public class RaceSelectionManager : MonoBehaviour
     {
         //Debug.Log("pos : " + pos + " _currentCarrousselPos : " + _currentCarrousselPos + " _currentRaceId : " + _currentRaceId);
         int offset = pos - 3; 
-        Race associatedRace = races[(_currentRaceId + offset + races.Count) % races.Count];
+        Race associatedRace = races[(_currentRaceId + offset + 100*races.Count) % races.Count];
         selector.image.sprite = associatedRace.image;
     }
     public void SelectRaces()
