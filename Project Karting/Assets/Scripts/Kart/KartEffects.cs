@@ -20,6 +20,7 @@ namespace Kart
         public AnimationCurve boostCameraEffect;
         public float boostFOVOffset;
         public float boostZOffset;
+        public Material driftMaterial;
         private bool boostActivated;
         private float boostStrength;
         private float boostStartTime;
@@ -100,18 +101,21 @@ namespace Kart
             if (isDrifting)
             {
                 driftLevel = 1;
+                driftMaterial.SetInt("Drift_Mode",driftLevel);
                 boostLight.color = boostColors[driftLevel];
                 yield return wait;
             }
             if (isDrifting)
             {
                 driftLevel = 2;
+                driftMaterial.SetInt("Drift_Mode",driftLevel);
                 boostLight.color = boostColors[driftLevel];
                 yield return wait;
             }
             if (isDrifting)
             {
                 driftLevel = 3;
+                driftMaterial.SetInt("Drift_Mode",driftLevel);
                 boostLight.color = boostColors[driftLevel];
             }
         }
@@ -134,6 +138,7 @@ namespace Kart
         public void stopDrift()
         {
             isDrifting = false;
+            driftMaterial.SetInt("Drift_Mode",0);
             foreach (var skid in skidEmitters)
             {
                 skid.emitting = false;

@@ -704,6 +704,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   boostFOVOffset: 7
   boostZOffset: 0
+  driftMaterial: {fileID: 2100000, guid: 35ac0cbcd3d328e4fb763e15d5330f66, type: 2}
   driftLevel: 0
 --- !u!54 &7072082925053140395
 Rigidbody:
@@ -1177,6 +1178,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Keyhole position
       objectReference: {fileID: 0}
+    - target: {fileID: 6170764888181934207, guid: d0138061ddb019040b314f9cfd1ce84e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 35ac0cbcd3d328e4fb763e15d5330f66, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0138061ddb019040b314f9cfd1ce84e, type: 3}
 --- !u!114 &7072082923481296565 stripped

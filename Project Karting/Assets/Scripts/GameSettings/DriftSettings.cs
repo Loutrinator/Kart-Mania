@@ -2,17 +2,17 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityExtendedEditor.ExtendedAttributes.Editor;
 
-[CreateAssetMenu(fileName = "KartPhysicsSettings", menuName = "ScriptableObjects/KartPhysicsSettings")]
-public class KartPhysicsSettings : ScriptableObject
+[CreateAssetMenu(fileName = "DriftSettings", menuName = "ScriptableObjects/DriftSettings")]
+public class DriftSettings : ScriptableObject
 {
     
     #region Singleton
-    public static KartPhysicsSettings instance;
+    public static DriftSettings instance;
         
     private void OnEnable()
     {
         if (instance != null)
-            throw new UnityException(typeof(KartPhysicsSettings) + " is already instantiated");
+            throw new UnityException(typeof(DriftSettings) + " is already instantiated");
         instance = this;
     }
 
