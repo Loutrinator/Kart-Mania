@@ -12,6 +12,7 @@ namespace Kart
 
 
         public List<ParticleSystem> boostSparksEmitters;
+        public ParticleSystem driftLoadingSparksEmitter;
         public Light boostLight;
         public Color[] boostColors;
         [SerializeField] private float[] boostIntensity;
@@ -97,9 +98,13 @@ namespace Kart
         private IEnumerator BoostLoading()
         {
             WaitForSeconds wait = new WaitForSeconds(boostTimeToSwitch);
+            var emissionModule = driftLoadingSparksEmitter.emission;
+            var mainModule = driftLoadingSparksEmitter.main;
             yield return wait;
             if (isDrifting)
             {
+                driftLoadingSparksEmitter.Play();
+                emissionModule.rateOverTime = 75;
                 driftLevel = 1;
                 driftMaterial.SetInt("Drift_Mode",driftLevel);
                 boostLight.color = boostColors[driftLevel];
@@ -108,6 +113,8 @@ namespace Kart
             if (isDrifting)
             {
                 driftLevel = 2;
+                emissionModule.rateOverTime = 250;
+                mainModule.simulationSpeed = 1.5f;
                 driftMaterial.SetInt("Drift_Mode",driftLevel);
                 boostLight.color = boostColors[driftLevel];
                 yield return wait;
@@ -115,6 +122,8 @@ namespace Kart
             if (isDrifting)
             {
                 driftLevel = 3;
+                mainModule.simulationSpeed = 2f;
+                emissionModule.rateOverTime = 500;
                 driftMaterial.SetInt("Drift_Mode",driftLevel);
                 boostLight.color = boostColors[driftLevel];
             }
@@ -137,6 +146,7 @@ namespace Kart
 
         public void stopDrift()
         {
+            driftLoadingSparksEmitter.Stop();
             isDrifting = false;
             driftMaterial.SetInt("Drift_Mode",0);
             foreach (var skid in skidEmitters)

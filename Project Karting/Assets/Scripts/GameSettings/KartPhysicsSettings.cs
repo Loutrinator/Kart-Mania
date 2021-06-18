@@ -11,9 +11,7 @@ public class KartPhysicsSettings : ScriptableObject
         
     private void OnEnable()
     {
-        if (instance != null)
-            throw new UnityException(typeof(KartPhysicsSettings) + " is already instantiated");
-        instance = this;
+        if (instance == null) instance = this;
     }
 
     private void OnDisable()
