@@ -22,8 +22,9 @@ namespace Kart
         public float boostZOffset;
         private bool boostActivated;
         private float boostStrength;
-        private float boostLength;
         private float boostStartTime;
+        private float boostLength;
+        private bool isDrifting;
 
 
         private float currentIntensity;
@@ -96,17 +97,27 @@ namespace Kart
         {
             WaitForSeconds wait = new WaitForSeconds(boostTimeToSwitch);
             yield return wait;
-            driftLevel = 1;
-            boostLight.color = boostColors[driftLevel];
-            yield return wait;
-            driftLevel = 2;
-            boostLight.color = boostColors[driftLevel];
-            yield return wait;
-            driftLevel = 3;
-            boostLight.color = boostColors[driftLevel];
+            if (isDrifting)
+            {
+                driftLevel = 1;
+                boostLight.color = boostColors[driftLevel];
+                yield return wait;
+            }
+            if (isDrifting)
+            {
+                driftLevel = 2;
+                boostLight.color = boostColors[driftLevel];
+                yield return wait;
+            }
+            if (isDrifting)
+            {
+                driftLevel = 3;
+                boostLight.color = boostColors[driftLevel];
+            }
         }
         public void startDrift()
         {
+            isDrifting = true;
             foreach(var skid in skidEmitters)
             {
                 skid.emitting = true;
@@ -122,6 +133,7 @@ namespace Kart
 
         public void stopDrift()
         {
+            isDrifting = false;
             foreach (var skid in skidEmitters)
             {
                 skid.emitting = false;
@@ -134,6 +146,10 @@ namespace Kart
             boostLight.color = boostColors[0];
             currentIntensity = boostIntensity[0];
             boostLight.gameObject.SetActive(true);
+            if (driftLevel > 0)
+            {
+                startBoost(KartPhysicsSettings.instance.boostLength*(driftLevel/3f), KartPhysicsSettings.instance.boostStrength);
+            }
             driftLevel = 0;
         }
 

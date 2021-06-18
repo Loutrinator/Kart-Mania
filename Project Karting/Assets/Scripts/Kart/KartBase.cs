@@ -39,6 +39,7 @@ namespace Kart
         [HideInInspector] public int forwardMove; // -1; 0; 1
         [HideInInspector] public bool drift;
         [HideInInspector] public int driftDirection;
+        
 
         public Collider vehicleCollider;
 
@@ -186,7 +187,6 @@ namespace Kart
             _lerpedKartRotation = 0f;
             drifting = false;
             effects.stopDrift();
-            effects.startBoost(KartPhysicsSettings.instance.boostLength, KartPhysicsSettings.instance.boostStrength);
         }
 
         #endregion
