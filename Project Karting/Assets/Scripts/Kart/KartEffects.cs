@@ -14,13 +14,7 @@ namespace Kart
         public List<ParticleSystem> boostSparksEmitters;
         public ParticleSystem driftLoadingSparksEmitter;
         public Light boostLight;
-        public Color[] boostColors;
-        [SerializeField] private float[] boostIntensity;
-        public float boostSwitchSpeed;
-        public float boostTimeToSwitch;
         public AnimationCurve boostCameraEffect;
-        public float boostFOVOffset;
-        public float boostZOffset;
         public Material driftMaterial;
         private bool boostActivated;
         private float boostStrength;
@@ -67,14 +61,14 @@ namespace Kart
             //Debug.Log("currentIntensity = " + currentIntensity);
             //Debug.Log("driftLevel = " + driftLevel);
             #endif
-            currentIntensity = Mathf.Lerp(currentIntensity, boostIntensity[driftLevel], Time.fixedDeltaTime * boostSwitchSpeed);
-            if (Mathf.Abs(currentIntensity - boostIntensity[driftLevel]) > 0.1f)
+            currentIntensity = Mathf.Lerp(currentIntensity, DriftSettings.instance.driftEffectIntensity[driftLevel], Time.fixedDeltaTime * DriftSettings.instance.boostSwitchSpeed);
+            if (Mathf.Abs(currentIntensity - DriftSettings.instance.driftEffectIntensity[driftLevel]) > 0.1f)
             {
                 boostLight.intensity = currentIntensity;
             }
             else
             {
-                boostLight.intensity = boostIntensity[driftLevel];
+                boostLight.intensity = DriftSettings.instance.driftEffectIntensity[driftLevel];
             }
 
             if (boostActivated)
@@ -83,9 +77,9 @@ namespace Kart
                 if (elapsed < boostLength)
                 {
                     float boostEffect =  boostCameraEffect.Evaluate(elapsed /boostLength)*boostStrength;
-                    cam.fieldOfView = baseFOV + boostEffect * boostFOVOffset;
+                    cam.fieldOfView = baseFOV + boostEffect * DriftSettings.instance.boostFOVOffset;
                     Vector3 previousPos = cam.transform.localPosition;
-                    cam.transform.localPosition =  new Vector3(previousPos.x,previousPos.y, baseZ - boostEffect * boostZOffset);
+                    //cam.transform.localPosition =  new Vector3(previousPos.x,previousPos.y, baseZ - boostEffect * DriftSettings.instance.boostZOffset);
             
                 }else
                 {
@@ -97,7 +91,7 @@ namespace Kart
 
         private IEnumerator BoostLoading()
         {
-            WaitForSeconds wait = new WaitForSeconds(boostTimeToSwitch);
+            WaitForSeconds wait = new WaitForSeconds(DriftSettings.instance.boostTimeToSwitch);
             var emissionModule = driftLoadingSparksEmitter.emission;
             var mainModule = driftLoadingSparksEmitter.main;
             yield return wait;
@@ -107,7 +101,7 @@ namespace Kart
                 emissionModule.rateOverTime = 75;
                 driftLevel = 1;
                 driftMaterial.SetInt("Drift_Mode",driftLevel);
-                boostLight.color = boostColors[driftLevel];
+                boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
                 yield return wait;
             }
             if (isDrifting)
@@ -116,7 +110,7 @@ namespace Kart
                 emissionModule.rateOverTime = 250;
                 mainModule.simulationSpeed = 1.5f;
                 driftMaterial.SetInt("Drift_Mode",driftLevel);
-                boostLight.color = boostColors[driftLevel];
+                boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
                 yield return wait;
             }
             if (isDrifting)
@@ -125,7 +119,7 @@ namespace Kart
                 mainModule.simulationSpeed = 2f;
                 emissionModule.rateOverTime = 500;
                 driftMaterial.SetInt("Drift_Mode",driftLevel);
-                boostLight.color = boostColors[driftLevel];
+                boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
             }
         }
         public void startDrift()
@@ -158,8 +152,8 @@ namespace Kart
             {
                 smoke.Stop();
             }
-            boostLight.color = boostColors[0];
-            currentIntensity = boostIntensity[0];
+            boostLight.color = DriftSettings.instance.driftEffectColors[0];
+            currentIntensity = DriftSettings.instance.driftEffectIntensity[0];
             boostLight.gameObject.SetActive(true);
             if (driftLevel > 0)
             {
@@ -188,11 +182,6 @@ namespace Kart
             }
 
             boostActivated = false;
-        }
-
-        public void startDriftLoading(int level)
-        {
-        
         }
     }
 }
