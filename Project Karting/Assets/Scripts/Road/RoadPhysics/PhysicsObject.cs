@@ -19,7 +19,7 @@ namespace Road.RoadPhysics {
         }
 
         public void UpdatePhysics(Vector3 groundNormal, float drag) {
-            currentGravityAcceleration = -groundNormal * currentGravityAcceleration.magnitude;
+            currentGravityAcceleration = currentGravityAcceleration.magnitude * (-groundNormal);
 
             if (IsGrounded())
             {
@@ -28,7 +28,7 @@ namespace Road.RoadPhysics {
             }
             else
             {
-                _currentGravityVelocity += Time.fixedDeltaTime * currentGravityAcceleration;
+                _currentGravityVelocity += currentGravityAcceleration * (Time.fixedDeltaTime * KartPhysicsSettings.instance.gravityMultiplier);
             }
             
             rigidBody.velocity = currentVelocity + _currentGravityVelocity + currentForcesVelocity;
