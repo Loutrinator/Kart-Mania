@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 5639796513394662992}
   - component: {fileID: 4700638895347635781}
   - component: {fileID: 8172843981789393367}
+  - component: {fileID: 5534744263233412158}
   m_Layer: 0
   m_Name: Aileron
   m_TagString: Untagged
@@ -175,6 +176,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5534744263233412158
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016378845928419432}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1942011705583849068, guid: 9b934e49287da1e45a400e0a2f2206fb, type: 3}
 --- !u!1 &7069297237529014134
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,7 +781,7 @@ MonoBehaviour:
   forwardMove: 0
   drift: 0
   driftDirection: 0
-  vehicleCollider: {fileID: 7072082925228471992}
+  vehicleCollider: {fileID: 0}
 --- !u!114 &2789011401745134355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,7 +805,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7072082925228471993}
-  - component: {fileID: 7072082925228471992}
   m_Layer: 9
   m_Name: Voiture
   m_TagString: Untagged
@@ -814,19 +828,6 @@ Transform:
   m_Father: {fileID: 7072082925053140393}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7072082925228471992
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7072082925228471994}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.0919762, y: 2.6029482, z: 6.3124437}
-  m_Center: {x: 0, y: 1.2601118, z: 0.50470304}
 --- !u!1 &7703046936705992192
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +869,7 @@ GameObject:
   - component: {fileID: 5423276046575375660}
   - component: {fileID: 1428241676658091385}
   - component: {fileID: 5807636560362033438}
+  - component: {fileID: 1539265328038045356}
   m_Layer: 0
   m_Name: voiture
   m_TagString: Untagged
@@ -944,6 +946,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1539265328038045356
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8503605590613409329}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8302856757195774222, guid: 9b934e49287da1e45a400e0a2f2206fb, type: 3}
 --- !u!1001 &339556805685439913
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -39,9 +39,6 @@ namespace Kart
         [HideInInspector] public int forwardMove; // -1; 0; 1
         [HideInInspector] public bool drift;
         [HideInInspector] public int driftDirection;
-        
-
-        public Collider vehicleCollider;
 
         private bool drifting;
 
@@ -63,9 +60,14 @@ namespace Kart
             _firstPosTime = Time.time;
             StopDrifting();
 
-            foreach (var wheel in wheels)
+            var colliders = GetComponentsInChildren<Collider>();
+            foreach (var col in colliders)
             {
-                Physics.IgnoreCollision(wheel, vehicleCollider);
+                foreach (var wheel in wheels)
+                {
+                    if(wheel != col)
+                        Physics.IgnoreCollision(wheel, col);
+                }
             }
         }
 

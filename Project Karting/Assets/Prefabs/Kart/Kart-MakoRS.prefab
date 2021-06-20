@@ -587,6 +587,7 @@ GameObject:
   - component: {fileID: 6698083668656513263}
   - component: {fileID: 6697249269946381992}
   - component: {fileID: 8568532714034981707}
+  - component: {fileID: 8486211968174604253}
   m_Layer: 0
   m_Name: shark spoiler
   m_TagString: Untagged
@@ -657,6 +658,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8486211968174604253
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751979711494227052}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2461485987896776844, guid: ba483ca453b944840a595a1b28e33d07, type: 3}
 --- !u!1 &3763116192423185928
 GameObject:
   m_ObjectHideFlags: 0
@@ -5772,7 +5787,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4686627548263282054}
-  - component: {fileID: 4686627548263282055}
   - component: {fileID: 5055619466034635560}
   m_Layer: 9
   m_Name: Voiture
@@ -5797,19 +5811,6 @@ Transform:
   m_Father: {fileID: 4686627548744261270}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4686627548263282055
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4686627548263282053}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.9628143, y: 2.1666577, z: 8.112198}
-  m_Center: {x: 0, y: 1.4661778, z: 0}
 --- !u!114 &5055619466034635560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5886,6 +5887,7 @@ MonoBehaviour:
   - {fileID: 3120621241849036403}
   - {fileID: 453704274295680408}
   - {fileID: 3398922926775700644}
+  driftLoadingSparksEmitter: {fileID: 0}
   boostLight: {fileID: 0}
   boostColors:
   - {r: 1, g: 1, b: 1, a: 0}
@@ -5943,6 +5945,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   boostFOVOffset: 7
   boostZOffset: 0
+  driftMaterial: {fileID: 0}
   driftLevel: 0
 --- !u!54 &4686627548744261268
 Rigidbody:
@@ -6003,7 +6006,7 @@ MonoBehaviour:
   forwardMove: 0
   drift: 0
   driftDirection: 0
-  vehicleCollider: {fileID: 4686627548263282055}
+  vehicleCollider: {fileID: 0}
 --- !u!1 &4686627549183994683
 GameObject:
   m_ObjectHideFlags: 0
@@ -15955,6 +15958,7 @@ GameObject:
   - component: {fileID: 6477680631676023316}
   - component: {fileID: 7947309231193275825}
   - component: {fileID: 5309309561090722171}
+  - component: {fileID: 2552095744761627359}
   m_Layer: 0
   m_Name: makoRS
   m_TagString: Untagged
@@ -16030,6 +16034,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2552095744761627359
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5957849553167870126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7938324208164030908, guid: ba483ca453b944840a595a1b28e33d07, type: 3}
 --- !u!1 &6065182868244398452
 GameObject:
   m_ObjectHideFlags: 0
