@@ -32,6 +32,7 @@ namespace Kart
         };
         
         List<StatPowerup> activePowerupList = new List<StatPowerup>();
+        private Stats convertedStats;
         private Stats finalStats;
 
         [HideInInspector] public float hMove;
@@ -90,6 +91,7 @@ namespace Kart
         private void FixedUpdate()
         {
             if (!GameManager.Instance.RaceHasBegan()) return;
+            ConvertStats();
             ApplyPowerups();
             Move(forwardMove);
             float rotationDirection = forwardMove > 0 ? hMove : -hMove;
@@ -125,21 +127,30 @@ namespace Kart
             }
         }
 
+        private void ConvertStats()
+        {
+            convertedStats.acceleration = vehicleStats.acceleration * KartPhysicsSettings.instance.acceleration;
+            convertedStats.topSpeed = KartPhysicsSettings.instance.getTopSpeed(vehicleStats.topSpeed);
+            convertedStats.reverseAcceleration = vehicleStats.reverseAcceleration * KartPhysicsSettings.instance.reverseAcceleration;
+            convertedStats.reverseSpeed = vehicleStats.reverseSpeed * KartPhysicsSettings.instance.reverseSpeed;
+        }
+
 
         private void Move(float direction)
         {
             if (direction > 0)
             {
-                _currentSpeed += finalStats.acceleration * KartPhysicsSettings.instance.acceleration * Time.fixedDeltaTime;
-                _currentSpeed = Mathf.Min(KartPhysicsSettings.instance.getTopSpeed(finalStats.topSpeed), _currentSpeed);
+                _currentSpeed += finalStats.acceleration * Time.fixedDeltaTime;
+                _currentSpeed = Mathf.Min(finalStats.topSpeed, _currentSpeed);
             }
             else if (direction < 0) {
-                _currentSpeed -= finalStats.reverseAcceleration * KartPhysicsSettings.instance.reverseAcceleration * Time.fixedDeltaTime;
-                _currentSpeed = Mathf.Max(-finalStats.reverseSpeed * KartPhysicsSettings.instance.reverseSpeed, _currentSpeed);
+                _currentSpeed -= finalStats.reverseAcceleration* Time.fixedDeltaTime;
+                _currentSpeed = Mathf.Max(-finalStats.reverseSpeed, _currentSpeed);
             }
             else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, KartPhysicsSettings.instance.engineBrakeSpeed * Time.fixedDeltaTime);
 
             var t = transform;
+            Debug.Log("Current Speed : " + _currentSpeed);
             currentVelocity = t.forward * _currentSpeed;
         }
 
@@ -198,9 +209,6 @@ namespace Kart
             // on supprime tout powerup qui a dépassé son temps d'activation
             activePowerupList.RemoveAll((p) =>
             {
-#if UNITY_EDITOR
-                Debug.Log("elapsed " + p.elapsedTime + " max " + p.maxTime);
-#endif
                 if (p.elapsedTime > p.maxTime)
                 {
                     p.powerupUsed?.Invoke();
@@ -211,17 +219,20 @@ namespace Kart
             });
             var powerups = new Stats(); // on initialise des stats vierges pour nos powerups
             // on ajoute à 'powerups' les modifiers de chaque powerup
+            Debug.Log("Nb Powerups : " + activePowerupList.Count);
             for (int i = 0; i < activePowerupList.Count; i++)
             {
+                
                 var p = activePowerupList[i];
                 // on met a jour le compteur de temps écoulé depuis l'obtention du powerup
                 p.elapsedTime += Time.fixedDeltaTime;
                 // on additionne les modifications des stats de notre powerup à 'powerups'
                 powerups += p.modifiers;
+                Debug.Log("modifiers.topSpeed " + p.modifiers.topSpeed);
             }
 
             // on ajoute tous nos powerups cumulés à nos stats de base du véhicule
-            finalStats = vehicleStats + powerups;
+            finalStats = convertedStats + powerups;
             //Debug.Log("baseAcceleration " + vehicleStats.acceleration + " finalAcceleration " + finalStats.acceleration);
 
             // on clamp toutes les valeurs des stats qui nécessitent de pas dépasser [0,1]
@@ -230,6 +241,7 @@ namespace Kart
 
         public void AddPowerup(StatPowerup powerup)
         {
+            Debug.Log("ADDING POWERUP");
             activePowerupList.Add(powerup);
         }
 

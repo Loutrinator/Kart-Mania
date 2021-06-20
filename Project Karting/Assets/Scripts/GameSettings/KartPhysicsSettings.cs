@@ -46,7 +46,6 @@ public class KartPhysicsSettings : ScriptableObject
     public float kartRollCoeff = 4f;
     public float kartRotationLerpSpeed = 5f;
     public float kartWheelAngle = 25f;
-    public float boostLength = 2f;
     public float boostStrength = 1f;
     public float engineBrakeSpeed = 10f;
 

@@ -105,6 +105,7 @@ namespace Handlers {
                     if (kartEffects != null)
                     {
                         kartEffects.cameraShakeTransform = kartCam.cameraShakeTransform;
+                        kartEffects.cam = kartCam.frontCamera;
                     }
                     karts.Add(kart);
                     

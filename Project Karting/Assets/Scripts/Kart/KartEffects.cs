@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Kart
 {
-        public class KartEffects : MonoBehaviour
+    public class KartEffects : MonoBehaviour
     {
+        public KartBase kart;
         public Camera cam;
         [HideInInspector] public ShakeTransform cameraShakeTransform;
         public List<TrailRenderer> skidEmitters;
@@ -15,13 +16,14 @@ namespace Kart
         public List<ParticleSystem> boostSparksEmitters;
         public ParticleSystem driftLoadingSparksEmitter;
         public Light boostLight;
-        public AnimationCurve boostCameraEffect;
         public Material driftMaterial;
         private bool boostActivated;
         private float boostStrength;
         private float boostStartTime;
         private float boostLength;
+        private float FOVeffect;
         private bool isDrifting;
+        private bool FOVFadedIn;
 
 
         private float currentIntensity;
@@ -77,8 +79,24 @@ namespace Kart
                 float elapsed = Time.time - boostStartTime;
                 if (elapsed < boostLength)
                 {
-                    float boostEffect =  boostCameraEffect.Evaluate(elapsed /boostLength)*boostStrength;
-                    cam.fieldOfView = baseFOV + boostEffect * DriftSettings.instance.boostFOVOffset;
+                    float boostEffect = 0;
+                    if (!FOVFadedIn)
+                    {
+                        float fadePercent = elapsed / DriftSettings.instance.transitionSpeed;
+                        boostEffect =  DriftSettings.instance.boostCameraIn.Evaluate(fadePercent);
+                        if (fadePercent > 1)
+                        {
+                            FOVFadedIn = true;
+                        }
+                    }
+                    else
+                    {
+                        float fadePercent = (elapsed - (boostLength - DriftSettings.instance.transitionSpeed))/ DriftSettings.instance.transitionSpeed;
+                        fadePercent = fadePercent > 0 ? fadePercent : 0;
+                        boostEffect =  DriftSettings.instance.boostCameraOut.Evaluate(fadePercent);
+                    }
+                    
+                    cam.fieldOfView = baseFOV + boostEffect * boostStrength * FOVeffect;
                     Vector3 previousPos = cam.transform.localPosition;
                     //cam.transform.localPosition =  new Vector3(previousPos.x,previousPos.y, baseZ - boostEffect * DriftSettings.instance.boostZOffset);
             
@@ -158,25 +176,34 @@ namespace Kart
             boostLight.gameObject.SetActive(true);
             if (driftLevel > 0)
             {
-                startBoost(KartPhysicsSettings.instance.boostLength*(driftLevel/3f), KartPhysicsSettings.instance.boostStrength);
+                float boostDuration = 0;
+                switch (driftLevel)
+                {
+                    case 1:
+                        boostDuration = DriftSettings.instance.boostDuration[0];
+                        break;
+                    case 2:
+                        boostDuration = DriftSettings.instance.boostDuration[1];
+                        break;
+                    case 3:
+                        boostDuration = DriftSettings.instance.boostDuration[2];
+                        break;
+                }
+                startBoost(boostDuration, KartPhysicsSettings.instance.boostStrength);
             }
             driftLevel = 0;
         }
 
         public void startBoost(float length, float force)
         {
-            switch (driftLevel)
-            {
-                case 1:
-                    cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boost1Shake);
-                    break;
-                case 2:
-                    cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boost2Shake);
-                    break;
-                case 3:
-                    cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boost3Shake);
-                    break;
-            }
+            
+            cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[driftLevel-1]);
+            FOVeffect = DriftSettings.instance.boostFOVOffset* driftLevel;
+            Stats statModifier = new Stats();
+            statModifier.acceleration = 50f;
+            statModifier.topSpeed = DriftSettings.instance.boostStrength[driftLevel-1];
+            StatPowerup boost = new StatPowerup(statModifier,DriftSettings.instance.boostDuration[driftLevel - 1]);
+            kart.AddPowerup(boost);
             
             foreach(var spark in boostSparksEmitters)
             {
@@ -187,6 +214,7 @@ namespace Kart
             boostStrength = force;
             boostStartTime = Time.time;
             boostActivated = true;
+            FOVFadedIn = false;
         }
         public void stopBoost()
         {

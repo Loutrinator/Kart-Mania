@@ -576,6 +576,7 @@ MonoBehaviour:
   rotationPercent: 0.1
   frontCamera: {fileID: 0}
   rearCamera: {fileID: 0}
+  cameraShakeTransform: {fileID: 0}
 --- !u!1 &3751979711494227052
 GameObject:
   m_ObjectHideFlags: 0
@@ -5872,7 +5873,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8feb25f4248f554ca6f51149a197e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kart: {fileID: 9197028294900898373}
   cam: {fileID: 5045769943927733355}
+  cameraShakeTransform: {fileID: 0}
   skidEmitters:
   - {fileID: 6006268276583041527}
   - {fileID: 3465839517833807294}
@@ -5886,63 +5889,9 @@ MonoBehaviour:
   - {fileID: 3120621241849036403}
   - {fileID: 453704274295680408}
   - {fileID: 3398922926775700644}
+  driftLoadingSparksEmitter: {fileID: 0}
   boostLight: {fileID: 0}
-  boostColors:
-  - {r: 1, g: 1, b: 1, a: 0}
-  - {r: 1, g: 0.5861493, b: 0.1462264, a: 0}
-  - {r: 0, g: 0.42546296, b: 1, a: 0}
-  - {r: 0.6447725, g: 0, b: 1, a: 0}
-  boostIntensity:
-  - 0
-  - 13
-  - 15
-  - 16
-  boostSwitchSpeed: 5
-  boostTimeToSwitch: 1
-  boostCameraEffect:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.1448343
-      outSlope: 3.1448343
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.078014165
-    - serializedVersion: 3
-      time: 0.17205
-      value: 0.9955709
-      inSlope: 0.04279783
-      outSlope: 0.04279783
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.70567346
-      value: 1.0031213
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: -0.0031051636
-      inSlope: -3.4187417
-      outSlope: -3.4187417
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  boostFOVOffset: 7
-  boostZOffset: 0
+  driftMaterial: {fileID: 0}
   driftLevel: 0
 --- !u!54 &4686627548744261268
 Rigidbody:

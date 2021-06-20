@@ -8,7 +8,6 @@ namespace Player
         {
             float accelerate = Input.GetAxis("Accelerate");
             float brake = Input.GetAxis("Brake");
-            Debug.Log("Accelerate : " + accelerate + " Brake : " + brake);
             if (brake > 0.001f) return -1;
             if (accelerate > 0.001f) return 1;
             return 0;

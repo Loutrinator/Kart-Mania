@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -30,10 +31,15 @@ public class DriftSettings : ScriptableObject
     #endregion
     
     #region Boost
+    public List<ShakeTransformEventData> boostShake;
+    public List<float> boostDuration;
+    public List<float> boostStrength;
+    #endregion
+    #region Camera FOV effect
     public float boostFOVOffset;
-    public ShakeTransformEventData boost1Shake;
-    public ShakeTransformEventData boost2Shake;
-    public ShakeTransformEventData boost3Shake;
+    public float transitionSpeed;
+    public AnimationCurve boostCameraIn;
+    public AnimationCurve boostCameraOut;
 
     #endregion
 }
