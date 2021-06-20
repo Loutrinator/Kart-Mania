@@ -12,6 +12,7 @@ namespace Kart {
         public float rotationPercent = 0.1f;
         public Camera frontCamera;
         public Camera rearCamera;
+        public ShakeTransform cameraShakeTransform;
 
         private CameraMode currentCameraMode = CameraMode.front;
 

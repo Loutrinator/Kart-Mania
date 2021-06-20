@@ -7,6 +7,7 @@ namespace Kart
         public class KartEffects : MonoBehaviour
     {
         public Camera cam;
+        [HideInInspector] public ShakeTransform cameraShakeTransform;
         public List<TrailRenderer> skidEmitters;
         public List<ParticleSystem> driftSmokeEmitters;
 
@@ -164,6 +165,19 @@ namespace Kart
 
         public void startBoost(float length, float force)
         {
+            switch (driftLevel)
+            {
+                case 1:
+                    cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boost1Shake);
+                    break;
+                case 2:
+                    cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boost2Shake);
+                    break;
+                case 3:
+                    cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boost3Shake);
+                    break;
+            }
+            
             foreach(var spark in boostSparksEmitters)
             {
                 spark.Play();

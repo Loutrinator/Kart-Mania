@@ -96,12 +96,16 @@ namespace Handlers {
                     PlayerConfig playerConfig = LevelManager.instance.gameConfig.players[id];
                     Transform spawn = spawnPoints[id];
                     KartBase kart = Instantiate(playerConfig.kartPrefab, spawn.position, spawn.rotation);
+                    KartEffects kartEffects = kart.GetComponent<KartEffects>();
                     
                     
                     // cameras for players
                     var kartCam = Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
                     kartCam.target = kart.transform;
-                    
+                    if (kartEffects != null)
+                    {
+                        kartEffects.cameraShakeTransform = kartCam.cameraShakeTransform;
+                    }
                     karts.Add(kart);
                     
                     PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction

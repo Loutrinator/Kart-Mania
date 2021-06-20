@@ -31,5 +31,9 @@ public class DriftSettings : ScriptableObject
     
     #region Boost
     public float boostFOVOffset;
+    public ShakeTransformEventData boost1Shake;
+    public ShakeTransformEventData boost2Shake;
+    public ShakeTransformEventData boost3Shake;
+
     #endregion
 }
