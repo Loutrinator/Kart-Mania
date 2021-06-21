@@ -32,7 +32,7 @@ namespace Handlers
 
         public void Respawn(KartBase kart)
         {
-            kart.transform.position = kart.lastGroundBezierPos.GlobalOrigin;
+            kart.transform.position = kart.lastGroundBezierPos.GlobalOrigin + kart.lastGroundBezierPos.LocalUp*KartPhysicsSettings.instance.respawnHeight;
             kart.transform.rotation = kart.lastGroundBezierPos.Rotation;
             kart.ResetForces();
         }

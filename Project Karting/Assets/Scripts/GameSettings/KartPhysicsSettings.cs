@@ -49,6 +49,7 @@ public class KartPhysicsSettings : ScriptableObject
     public float boostStrength = 1f;
     public float engineBrakeSpeed = 10f;
     public float gravityMultiplier = 10f;
+    public float respawnHeight = 2f;
 
     #endregion
 }

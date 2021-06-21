@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9e36bf42ece1240877440c0ee2a60f, type: 3}
   m_Name: KartPhysicsSettings
   m_EditorClassIdentifier: 
-  topSpeed: {x: 45, y: 55}
+  topSpeed: {x: 65, y: 75}
   acceleration: 40
-  reverseSpeed: 50
+  reverseSpeed: 60
   reverseAcceleration: 50
   braking: 1000
   steeringSpeed: 25
@@ -24,6 +24,6 @@ MonoBehaviour:
   kartRollCoeff: 10
   kartRotationLerpSpeed: 3
   kartWheelAngle: 75
-  boostLength: 2
   boostStrength: 1
   engineBrakeSpeed: 0.4
+  gravityMultiplier: 10
