@@ -25,6 +25,7 @@ namespace Handlers {
         private bool raceBegan;
         private bool raceIsInit;
         private StartMsgAnimation startMessage;
+        private float startTime;
 
         //private List<ShakeTransform> cameras;
         public CameraFollowPlayer cameraParentPrefab;
@@ -120,7 +121,8 @@ namespace Handlers {
                     // {
                     //     cameras.Add(cam);
                     // }
-                    startMessage._startTime = Time.time;
+                    startTime = startMessage.getStartTime();
+                    
                     raceIsInit = true;
                 }
             } else {
@@ -130,6 +132,7 @@ namespace Handlers {
             }
         }
 
+        private void 
         public PlayerRaceInfo GetPlayerRaceInfo(int id) {
             foreach (var info in playersInfo) {
                 if (info.playerId == id) return info;

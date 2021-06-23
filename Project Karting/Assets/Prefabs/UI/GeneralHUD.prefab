@@ -82,6 +82,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4545681373983826032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +129,7 @@ RectTransform:
   m_GameObject: {fileID: 4545681375164708468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4545681373983826045}
   m_RootOrder: 0
@@ -161,6 +162,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -273,38 +275,38 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.3
       value: 1.2
-      inSlope: 4
-      outSlope: -2.988099
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 1
+      inSlope: -0.18105558
+      outSlope: -0.16625264
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.10421137
+      outWeight: 0.3404707
     - serializedVersion: 3
       time: 0.4
       value: 0.90119016
-      inSlope: -2.988099
-      outSlope: 2.9761968
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inSlope: 0.08419133
+      outSlope: 0.050389376
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.47751638
+      outWeight: 0.6509634
     - serializedVersion: 3
       time: 0.45
       value: 1.05
-      inSlope: 2.9761968
-      outSlope: -0.9999988
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inSlope: 0.48650753
+      outSlope: -1.0298815
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.34903657
+      outWeight: 0.1648819
     - serializedVersion: 3
       time: 0.5
       value: 1
-      inSlope: -0.9999988
+      inSlope: -0.08010507
       outSlope: 0
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.3030305
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.47109234
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
@@ -382,28 +384,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.009635925
+      value: 1.0023499
+      inSlope: -0.0067284945
+      outSlope: -0.0067284945
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9
-      value: 1
+      time: 0.5017456
+      value: 0.9990387
       inSlope: -0
-      outSlope: -9.999998
-      tangentMode: 69
-      weightedMode: 0
+      outSlope: -0
+      tangentMode: 1
+      weightedMode: 3
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.46466756
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -9.999998
-      outSlope: -9.999998
+      time: 0.99676514
+      value: 0.01651001
+      inSlope: -1.984828
+      outSlope: -1.984828
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -411,6 +413,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  timeBeforeCountDown: 2
   fadeInDuration: 1
   goFadeInDuration: 2
   startSFX: 0.1
