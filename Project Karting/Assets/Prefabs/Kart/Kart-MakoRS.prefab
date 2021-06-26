@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &262957999567374713
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7572830747863391453}
-  m_Layer: 0
-  m_Name: RaycastCenter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7572830747863391453
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 262957999567374713}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8808, z: -0.01}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4686627548744261270}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &907715426505572931
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +558,7 @@ GameObject:
   - component: {fileID: 6697249269946381992}
   - component: {fileID: 8568532714034981707}
   - component: {fileID: 8486211968174604253}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: shark spoiler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5857,7 +5827,6 @@ Transform:
   m_Children:
   - {fileID: 4686627548263282054}
   - {fileID: 6127642598074066106}
-  - {fileID: 7572830747863391453}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5887,8 +5856,8 @@ MonoBehaviour:
   - {fileID: 3120621241849036403}
   - {fileID: 453704274295680408}
   - {fileID: 3398922926775700644}
-  driftLoadingSparksEmitter: {fileID: 0}
-  boostLight: {fileID: 0}
+  driftLoadingSparksEmitter: {fileID: 6677086218762617938}
+  boostLight: {fileID: 8661354202249319345}
   boostColors:
   - {r: 1, g: 1, b: 1, a: 0}
   - {r: 1, g: 0.5861493, b: 0.1462264, a: 0}
@@ -5945,7 +5914,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   boostFOVOffset: 7
   boostZOffset: 0
-  driftMaterial: {fileID: 0}
+  driftMaterial: {fileID: 2100000, guid: 35ac0cbcd3d328e4fb763e15d5330f66, type: 2}
   driftLevel: 0
 --- !u!54 &4686627548744261268
 Rigidbody:
@@ -5960,7 +5929,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &9197028294900898373
@@ -5992,7 +5961,7 @@ MonoBehaviour:
   - {fileID: 5171062410734496925}
   cameraShake: {fileID: 7751235033543211794}
   effects: {fileID: 9203804644391519208}
-  keyhole: {fileID: 0}
+  keyhole: {fileID: 593124679095247912}
   vehicleStats:
     topSpeed: 50.19
     acceleration: 14.8
@@ -6006,7 +5975,6 @@ MonoBehaviour:
   forwardMove: 0
   drift: 0
   driftDirection: 0
-  vehicleCollider: {fileID: 0}
 --- !u!1 &4686627549183994683
 GameObject:
   m_ObjectHideFlags: 0
@@ -15959,7 +15927,8 @@ GameObject:
   - component: {fileID: 7947309231193275825}
   - component: {fileID: 5309309561090722171}
   - component: {fileID: 2552095744761627359}
-  m_Layer: 0
+  - component: {fileID: 3272387993783144183}
+  m_Layer: 9
   m_Name: makoRS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16043,11 +16012,24 @@ MeshCollider:
   m_GameObject: {fileID: 5957849553167870126}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7938324208164030908, guid: ba483ca453b944840a595a1b28e33d07, type: 3}
+--- !u!65 &3272387993783144183
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5957849553167870126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.8889596, y: 5.5177283, z: 1.644956}
+  m_Center: {x: -2.5323927e-16, y: -0.0467116, z: 1.4160244}
 --- !u!1 &6065182868244398452
 GameObject:
   m_ObjectHideFlags: 0
@@ -50629,9 +50611,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0138061ddb019040b314f9cfd1ce84e, type: 3}
+--- !u!198 &6677086218762617938 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1302848917567955681, guid: d0138061ddb019040b314f9cfd1ce84e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5673797457597916851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &593124679095247915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5081841016464343704, guid: d0138061ddb019040b314f9cfd1ce84e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5673797457597916851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &593124679095247912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5081841016464343707, guid: d0138061ddb019040b314f9cfd1ce84e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5673797457597916851}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0364e4e83288cc43854c3eb937869e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!108 &8661354202249319345 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 3931131733579871490, guid: d0138061ddb019040b314f9cfd1ce84e,
     type: 3}
   m_PrefabInstance: {fileID: 5673797457597916851}
   m_PrefabAsset: {fileID: 0}

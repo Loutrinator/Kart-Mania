@@ -32,8 +32,18 @@ namespace Handlers
 
         public void Respawn(KartBase kart)
         {
-            kart.transform.position = kart.lastGroundBezierPos.GlobalOrigin;
-            kart.transform.rotation = kart.lastGroundBezierPos.Rotation;
+            BezierUtils.BezierPos respawnPos = null;
+            if (kart.lastGroundBezierPos != null)
+            {
+                respawnPos = kart.lastGroundBezierPos;
+            }
+            else
+            {
+                respawnPos = GameManager.Instance.currentRace.road.bezierSpline.GetBezierPos(0);
+            }
+            kart.transform.position = respawnPos.GlobalOrigin;
+            kart.transform.rotation = respawnPos.Rotation;
+
             kart.ResetForces();
         }
     }
