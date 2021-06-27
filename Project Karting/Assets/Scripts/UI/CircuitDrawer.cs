@@ -21,10 +21,16 @@ namespace UI
             var frames = race.road.bezierSpline.RotationMinimisingFrames;
             Vector3[] positions = new Vector3[frames.Count];
             lineRenderer.positionCount = frames.Count;
+
+            float minX = float.MaxValue, maxX = float.MinValue, minZ = float.MaxValue, maxZ = float.MinValue;
             for (var index = 0; index < frames.Count; index++)
             {
                 Vector3 pos = frames[index].GlobalOrigin;
                 positions[index] = pos;
+                if (pos.x > maxX) maxX = pos.x;
+                if (pos.x < minX) minX = pos.x;
+                if (pos.z > maxZ) maxZ = pos.z;
+                if (pos.z < minZ) minZ = pos.z;
             }
 
             lineRenderer.widthMultiplier = roadWidth;
@@ -32,6 +38,7 @@ namespace UI
 
             RenderTexture texture = new RenderTexture(textureQuality, textureQuality, 100);
             cam.targetTexture = texture;
+            cam.orthographicSize = Mathf.Max(maxX - minX, maxZ - minZ)/2 + 100;
             rawImage.texture = texture;
         }
     }
