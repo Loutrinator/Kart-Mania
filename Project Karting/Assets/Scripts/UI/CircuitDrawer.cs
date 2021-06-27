@@ -1,5 +1,6 @@
 using Game;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -9,6 +10,10 @@ namespace UI
         public LineRenderer lineRenderer;
 
         public float roadWidth = 5;
+        public int textureQuality = 1024;
+
+        public RawImage rawImage;
+        public Camera cam;
         
         [ContextMenu("Create line")]
         private void OnValidate()
@@ -24,6 +29,10 @@ namespace UI
 
             lineRenderer.widthMultiplier = roadWidth;
             lineRenderer.SetPositions(positions);
+
+            RenderTexture texture = new RenderTexture(textureQuality, textureQuality, 100);
+            cam.targetTexture = texture;
+            rawImage.texture = texture;
         }
     }
 }
