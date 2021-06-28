@@ -81,7 +81,7 @@ public class StartMsgAnimation : MonoBehaviour
     //Debug timing
     private void Update()
     {
-        debugTiming();
+        //debugTiming();
     }
 
     private void debugTiming()
