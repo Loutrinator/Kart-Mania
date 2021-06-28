@@ -90,7 +90,15 @@ namespace Kart
 
         private void FixedUpdate()
         {
-            if (!GameManager.Instance.RaceHasBegan()) return;
+            
+            if (GameManager.Instance.gameState == GameState.start)
+            {
+                if (Input.GetAxis("Accelerate") > 0)
+                {
+                    effects.Rewind();
+                }
+            }
+            if (!GameManager.Instance.RaceHadBegun()) return;
             ConvertStats();
             ApplyPowerups();
             Move(forwardMove);
@@ -150,7 +158,7 @@ namespace Kart
             else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, KartPhysicsSettings.instance.engineBrakeSpeed * Time.fixedDeltaTime);
 
             var t = transform;
-            Debug.Log("Current Speed : " + _currentSpeed);
+            //Debug.Log("Current Speed : " + _currentSpeed);
             currentVelocity = t.forward * _currentSpeed;
         }
 
@@ -219,7 +227,7 @@ namespace Kart
             });
             var powerups = new Stats(); // on initialise des stats vierges pour nos powerups
             // on ajoute à 'powerups' les modifiers de chaque powerup
-            Debug.Log("Nb Powerups : " + activePowerupList.Count);
+            //Debug.Log("Nb Powerups : " + activePowerupList.Count);
             for (int i = 0; i < activePowerupList.Count; i++)
             {
                 
@@ -228,7 +236,7 @@ namespace Kart
                 p.elapsedTime += Time.fixedDeltaTime;
                 // on additionne les modifications des stats de notre powerup à 'powerups'
                 powerups += p.modifiers;
-                Debug.Log("modifiers.topSpeed " + p.modifiers.topSpeed);
+                //Debug.Log("modifiers.topSpeed " + p.modifiers.topSpeed);
             }
 
             // on ajoute tous nos powerups cumulés à nos stats de base du véhicule

@@ -7,7 +7,14 @@ using Road.RoadPhysics;
 using UnityEngine;
 
 namespace Handlers {
-    public class GameManager : MonoBehaviour {
+    public enum GameState
+    {
+        idle,start,race
+    }
+    public class GameManager : MonoBehaviour
+    {
+
+        public GameState gameState;
         public Race currentRace;
 
         public ItemManager itemManager;
@@ -22,8 +29,6 @@ namespace Handlers {
 
         private PlayerRaceInfo[] playersInfo;
 
-        private bool raceBegan;
-        private bool raceIsInit;
         private StartMsgAnimation startMessage;
         private float startTime;
 
@@ -44,8 +49,6 @@ namespace Handlers {
                 Destroy(gameObject);
             }
 
-            raceIsInit = false;
-            
             currentRace = LevelManager.instance.InitLevel();
             
             if (physicsManager != null)
@@ -66,7 +69,7 @@ namespace Handlers {
         }
 
         private void Update() {
-            if (raceBegan) {
+            if (gameState == GameState.race) {
                 PlayerRaceInfo player = playersInfo[0];
                 //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
                 //lap.text = player.lap.ToString();
@@ -85,10 +88,17 @@ namespace Handlers {
                 playersInfo[i].lap = 1;
             }
 
-            raceBegan = true;
+            gameState = GameState.race;
+            foreach (var kart in karts)
+            {
+                kart.effects.StopRewind();
+            }
+            
         }
 
-        private void InitRace() {
+        private void InitRace()
+        {
+            gameState = GameState.start;
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
             playersInfo = new PlayerRaceInfo[nbPlayerRacing];
             Transform[] spawnPoints = currentRace.spawnPoints;
@@ -122,8 +132,13 @@ namespace Handlers {
                     //     cameras.Add(cam);
                     // }
                     startTime = startMessage.getStartTime();
-                    
-                    raceIsInit = true;
+                    StartMsgAnimation startUI = startMessage.GetComponent<StartMsgAnimation>();
+                    if (startUI != null)
+                    {
+                        startUI.placeKeysAction = placeKeys;
+                    }
+
+                    gameState = GameState.start;
                 }
             } else {
 #if UNITY_EDITOR
@@ -132,7 +147,13 @@ namespace Handlers {
             }
         }
 
-        private void 
+        private void placeKeys()
+        {
+            foreach (var kart in karts)
+            {
+                kart.effects.InsertKey();
+            }
+        }
         public PlayerRaceInfo GetPlayerRaceInfo(int id) {
             foreach (var info in playersInfo) {
                 if (info.playerId == id) return info;
@@ -193,8 +214,8 @@ namespace Handlers {
             return prefix + string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
         }
 
-        public bool RaceHasBegan() {
-            return raceBegan;
+        public bool RaceHadBegun() {
+            return  (gameState == GameState.race);
         }
 
         public void ShakeCameras(ShakeTransformEventData shake) {

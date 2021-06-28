@@ -10,7 +10,7 @@ namespace Items
         public float duration;
         public override void Use(PlayerRaceInfo info )
         {
-            info.kart.keyhole.InsertKey(() => KeyCrankedUp(info));
+            info.kart.keyhole.InsertKey(Keyhole.RewindMode.auto,() => KeyCrankedUp(info));
             base.Use(info);
         }
 

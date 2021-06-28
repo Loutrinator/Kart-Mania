@@ -652,6 +652,7 @@ MonoBehaviour:
   driftLoadingSparksEmitter: {fileID: 3942867087395425999}
   boostLight: {fileID: 1309819555041794348}
   driftMaterial: {fileID: 2100000, guid: 35ac0cbcd3d328e4fb763e15d5330f66, type: 2}
+  _keyhole: {fileID: 7072082923481296565}
   driftLevel: 0
 --- !u!54 &7072082925053140395
 Rigidbody:
@@ -1070,6 +1071,11 @@ PrefabInstance:
       propertyPath: simulationSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4116899686905314185, guid: d0138061ddb019040b314f9cfd1ce84e,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 66e059cea6db69240b9ee2e5aafe347c, type: 3}
     - target: {fileID: 5081841016464343704, guid: d0138061ddb019040b314f9cfd1ce84e,
         type: 3}
       propertyPath: m_RootOrder

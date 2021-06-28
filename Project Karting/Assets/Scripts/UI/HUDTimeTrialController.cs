@@ -54,7 +54,7 @@ public class HUDTimeTrialController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.RaceHasBegan())
+        if (GameManager.Instance.RaceHadBegun())
         {
             currentTime.text = Utils.DisplayHelper.floatToTimeString(Time.time - _info.currentLapStartTime);
         }

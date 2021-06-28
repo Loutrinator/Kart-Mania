@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Handlers;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 
 public class StartMsgAnimation : MonoBehaviour
 {
+    [HideInInspector] public Action placeKeysAction;
+     
     [SerializeField] private List<Sprite> icons = null;
     [SerializeField] private float timeBeforeCountDown = 2f;
     [SerializeField] private float fadeInDuration = 1f;
@@ -27,20 +30,22 @@ public class StartMsgAnimation : MonoBehaviour
         startTime = Time.time;//debug
         _image.transform.localScale = Vector3.zero;
         _image.transform.rotation = Quaternion.Euler(0,0,-30);
-        //délai
+        //delay
         StartCoroutine(WaitToStartCountDown());
     }
 
     private IEnumerator WaitToStartCountDown()
     {
-        yield return new WaitForSeconds(timeBeforeCountDown);
+        yield return new WaitForSeconds(timeBeforeCountDown-1f);
+        placeKeysAction.Invoke();
+        yield return new WaitForSeconds(1f);
         countDown = true;
         startTime = Time.time;
         yield return AnimateNumber(icons[0]);
         yield return AnimateNumber(icons[1]);
         yield return AnimateNumber(icons[2]);
         yield return AnimateGo(icons[3]);
-        if (!GameManager.Instance.RaceHasBegan()) GameManager.Instance.StartRace();
+        if (!GameManager.Instance.RaceHadBegun()) GameManager.Instance.StartRace();
     }
 
     private IEnumerator AnimateNumber(Sprite sprite)
@@ -85,18 +90,18 @@ public class StartMsgAnimation : MonoBehaviour
         {
             //debug
             float elapsed = Time.time - startTime;
-            if (elapsed >= 0.8 && elapsed < 1.2)
+            if (elapsed >= 1.2 && elapsed < 1.6)
             {
                 DebugPrinter.Instance.changeColor(Color.green);
             }
-            else if (elapsed >= 1.2 && elapsed < 2)
+            else if (elapsed >= 1.6 && elapsed < 2)
             {
                 DebugPrinter.Instance.changeColor(Color.yellow);
             }
             else {
                 DebugPrinter.Instance.changeColor(Color.red);
             }
-            DebugPrinter.Instance.print("" + elapsed);
+            DebugPrinter.Instance.print("" + GameManager.Instance.gameState);
         }
     }
 
@@ -104,4 +109,5 @@ public class StartMsgAnimation : MonoBehaviour
     {
         return Time.time + timeBeforeCountDown + fadeInDuration * 3f;
     }
+    
 }

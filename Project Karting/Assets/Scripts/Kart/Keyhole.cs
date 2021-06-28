@@ -17,7 +17,7 @@ public class Keyhole : MonoBehaviour
 
     public enum RewindMode
     {
-        auto, hand, manual
+        auto, startRewindMode, manual
     }
     [SerializeField]
     public RewindMode rewindMode;
@@ -47,6 +47,7 @@ public class Keyhole : MonoBehaviour
     public float autoRewindTimeToMaxSpeed = 0.3f;
     public AnimationCurve autoRewindSpeedAC;
 
+    private AudioSource ratchetSound;
     private float currentSpeed;
     private Action powerupCallback;
     private enum KeyHoleState
@@ -55,6 +56,14 @@ public class Keyhole : MonoBehaviour
     }
     private KeyHoleState keyHoleState;
     private float currentStateStartTime;
+    private float _idleDuration;
+
+    private void Awake()
+    {
+        ratchetSound = this.GetComponent<AudioSource>();
+        _idleDuration = idleDuration;
+    }
+
     private void Start()
     {
         currentSpeed = 0f;
@@ -66,7 +75,7 @@ public class Keyhole : MonoBehaviour
         if (ANIMATION)
         {
             ANIMATION = false;
-            InsertKey(null);
+            InsertKey(rewindMode, null);
         }
         currentSpeed = Mathf.Lerp(currentSpeed, baseSpeed, lerpSpeed * Time.deltaTime);
         float animationPercent;
@@ -88,7 +97,7 @@ public class Keyhole : MonoBehaviour
                 float newZRotation = oldRotation.z + currentSpeed * Time.deltaTime;
                 newZRotation = newZRotation % 360f;
                 keyhole.localEulerAngles = new Vector3(oldRotation.x, oldRotation.y, newZRotation);
-                if (elapsed >= idleDuration)
+                if (elapsed >= _idleDuration)
                 {
                     currentStateStartTime = Time.time;
                     keyHoleState = KeyHoleState.extraction;
@@ -109,7 +118,7 @@ public class Keyhole : MonoBehaviour
                         break;
                     
                     // ------ HAND REWIND ------
-                    case RewindMode.hand:
+                    case RewindMode.startRewindMode:
                         if (!HandRewindHoldPosition)
                         {
                             Vector3 oldR = keyhole.localEulerAngles;
@@ -132,12 +141,16 @@ public class Keyhole : MonoBehaviour
 
                 if (elapsed >= rewindDuration)
                 {
-                    currentStateStartTime = Time.time;
-                    keyHoleState = KeyHoleState.inserted;
-                    if (powerupCallback != null)
+                    if (rewindMode != RewindMode.startRewindMode)
                     {
-                        powerupCallback();
-                    } 
+                        currentStateStartTime = Time.time;
+                        keyHoleState = KeyHoleState.inserted;
+                        
+                        if (powerupCallback != null)
+                        {
+                            powerupCallback();
+                        } 
+                    }
                 }
                 break;
             
@@ -158,9 +171,12 @@ public class Keyhole : MonoBehaviour
                 //newRot = keyhole.transform.Transfor (newPos);
                 key.transform.localEulerAngles =newRot;
                 if (elapsed >= insertionDuration)
-                { 
-                    currentStateStartTime = Time.time;
-                    keyHoleState = KeyHoleState.rewind;
+                {
+                    if (rewindMode != RewindMode.startRewindMode)
+                    {
+                        currentStateStartTime = Time.time;
+                        keyHoleState = KeyHoleState.rewind;
+                    }
                 }
                 break;
             
@@ -196,10 +212,12 @@ public class Keyhole : MonoBehaviour
     {
         yield return new WaitForSeconds(handRewindWait);
         HandRewindHoldPosition = false;
+        ratchetSound.Play();
     }
 
-    public bool InsertKey([CanBeNull] Action callback)
+    public bool InsertKey(RewindMode mode, [CanBeNull] Action callback)
     {
+        rewindMode = mode;
         if (keyHoleState == KeyHoleState.empty)
         {
             currentStateStartTime = Time.time;
@@ -224,5 +242,29 @@ public class Keyhole : MonoBehaviour
     {
         Vector3 oldRotation = keyhole.eulerAngles;
         keyhole.eulerAngles = new Vector3(oldRotation.x, oldRotation.y, 0);
+    }
+
+    public void Rewind()
+    {
+        if (rewindMode == RewindMode.startRewindMode && keyHoleState == KeyHoleState.insertion)
+        {
+            currentStateStartTime = Time.time;
+            keyHoleState = KeyHoleState.rewind;
+            ratchetSound.Play();
+        }
+    }
+    public void StopRewind(float duration)
+    {
+        if (rewindMode == RewindMode.startRewindMode && keyHoleState == KeyHoleState.rewind)
+        {
+            _idleDuration = duration;
+            currentStateStartTime = Time.time;
+            keyHoleState = KeyHoleState.inserted;
+                        
+            if (powerupCallback != null)
+            {
+                powerupCallback();
+            }
+        }
     }
 }
