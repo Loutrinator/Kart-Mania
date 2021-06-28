@@ -22,15 +22,24 @@ namespace UI
             Vector3[] positions = new Vector3[frames.Count];
             lineRenderer.positionCount = frames.Count;
 
-            float minX = float.MaxValue, maxX = float.MinValue, minZ = float.MaxValue, maxZ = float.MinValue;
+            Transform lineT = lineRenderer.transform;
+            float minX = float.MaxValue, maxX = float.MinValue, minZ = float.MaxValue, 
+                maxZ = float.MinValue, maxY = float.MinValue;
+            Vector3 topPoint = Vector3.zero;
             for (var index = 0; index < frames.Count; index++)
             {
                 Vector3 pos = frames[index].GlobalOrigin;
                 positions[index] = pos;
+                pos = lineT.TransformPoint(pos);
                 if (pos.x > maxX) maxX = pos.x;
                 if (pos.x < minX) minX = pos.x;
                 if (pos.z > maxZ) maxZ = pos.z;
                 if (pos.z < minZ) minZ = pos.z;
+                if (pos.y > maxY)
+                {
+                    maxY = pos.y;
+                    topPoint = pos;
+                }
             }
 
             lineRenderer.widthMultiplier = roadWidth;
@@ -39,6 +48,14 @@ namespace UI
             RenderTexture texture = new RenderTexture(textureQuality, textureQuality, 100);
             cam.targetTexture = texture;
             cam.orthographicSize = Mathf.Max(maxX - minX, maxZ - minZ)/2 + 100;
+
+            Vector2 viewportPoint = cam.WorldToViewportPoint(topPoint);
+            while (viewportPoint.x < 0 || viewportPoint.x > 1 || viewportPoint.y < 0 || viewportPoint.y > 1)
+            {
+                ++topPoint.y;
+                viewportPoint = cam.WorldToViewportPoint(topPoint);
+            }
+            cam.transform.position = new Vector3((maxX + minX) / 2, topPoint.y + roadWidth, (maxZ + minZ) / 2);
             rawImage.texture = texture;
         }
     }

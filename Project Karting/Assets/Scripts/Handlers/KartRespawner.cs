@@ -32,7 +32,7 @@ namespace Handlers
 
         public void Respawn(KartBase kart)
         {
-            BezierUtils.BezierPos respawnPos = null;
+            BezierUtils.BezierPos respawnPos;
             if (kart.lastGroundBezierPos != null)
             {
                 respawnPos = kart.lastGroundBezierPos;
