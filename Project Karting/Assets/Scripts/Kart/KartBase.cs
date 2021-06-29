@@ -57,12 +57,15 @@ namespace Kart
         private float _lerpedWheelDirection;
         private float _lerpedKartRotation;
 
+        public bool canMove;
+
         protected override void Awake()
         {
             base.Awake();
             _firstPos = transform.position;
             _firstPosTime = Time.time;
             StopDrifting();
+            canMove = true;
 
             foreach (var wheel in wheels)
             {
@@ -98,7 +101,7 @@ namespace Kart
                     effects.Rewind();
                 }
             }
-            if (!GameManager.Instance.RaceHadBegun()) return;
+            if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
             ConvertStats();
             ApplyPowerups();
             Move(forwardMove);

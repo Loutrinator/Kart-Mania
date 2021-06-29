@@ -653,6 +653,8 @@ MonoBehaviour:
   boostLight: {fileID: 1309819555041794348}
   driftMaterial: {fileID: 2100000, guid: 35ac0cbcd3d328e4fb763e15d5330f66, type: 2}
   _keyhole: {fileID: 7072082923481296565}
+  explosionMotorEffect: {fileID: 78476274015600624, guid: 0e3441130f8562c4d81031533ae14038,
+    type: 3}
   driftLevel: 0
 --- !u!54 &7072082925053140395
 Rigidbody:
@@ -714,6 +716,7 @@ MonoBehaviour:
   drift: 0
   driftDirection: 0
   vehicleCollider: {fileID: 7072082925228471992}
+  canMove: 0
 --- !u!114 &2789011401745134355
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,8 @@ namespace Kart
         public Light boostLight;
         public Material driftMaterial;
         [SerializeField] private Keyhole _keyhole;
+
+        public GameObject explosionMotorEffect;
         private bool boostActivated;
         private float boostStrength;
         private float boostStartTime;
@@ -298,6 +300,16 @@ namespace Kart
 
         private void ExplodeMotor()
         {
+            Debug.Log("EXPLOSIOOOON");
+            Instantiate(explosionMotorEffect, transform.position + new Vector3(0, 1, 0), Quaternion.identity, transform);
+            StartCoroutine(FreezeControl());
+        }
+
+        private IEnumerator FreezeControl()
+        {
+            kart.canMove = false;
+            yield return new WaitForSeconds(2f);
+            kart.canMove = true;
         }
     }
 }
