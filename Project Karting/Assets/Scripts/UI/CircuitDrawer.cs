@@ -48,7 +48,8 @@ namespace UI
             RenderTexture texture = new RenderTexture(textureQuality, textureQuality, 100);
             cam.targetTexture = texture;
             cam.orthographicSize = Mathf.Max(maxX - minX, maxZ - minZ)/2 + 100;
-
+            
+            cam.transform.position = new Vector3((maxX + minX) / 2, topPoint.y + roadWidth, (maxZ + minZ) / 2);
             Vector2 viewportPoint = cam.WorldToViewportPoint(topPoint);
             while (viewportPoint.x < 0 || viewportPoint.x > 1 || viewportPoint.y < 0 || viewportPoint.y > 1)
             {
