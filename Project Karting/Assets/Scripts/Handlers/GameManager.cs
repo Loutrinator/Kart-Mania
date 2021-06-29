@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Handlers {
     public class GameManager : MonoBehaviour {
         public Race currentRace;
-        public CircuitDrawer circuitDrawer;
+        public Minimap minimap;
 
         public ItemManager itemManager;
         public int checkpointAmount;
@@ -48,8 +48,8 @@ namespace Handlers {
             raceIsInit = false;
             
             currentRace = LevelManager.instance.InitLevel();
-            circuitDrawer.race = currentRace;
-            circuitDrawer.Init();
+            minimap.race = currentRace;
+            minimap.DrawMinimap();
 
             if (physicsManager != null)
             {
@@ -80,6 +80,7 @@ namespace Handlers {
                 //timeInfo.text = info;
                 player.Controller.Update(); // listen player inputs 
             }
+            minimap.UpdateMinimap();
         }
 
         public void StartRace() {
@@ -120,8 +121,10 @@ namespace Handlers {
                     //     cameras.Add(cam);
                     // }
                     startMessage._startTime = Time.time;
-                    raceIsInit = true;
+                    
+                    minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer);
                 }
+                raceIsInit = true;
             } else {
 #if UNITY_EDITOR
                 Debug.LogError("Attempting to spawn " + nbPlayerRacing + " but only " + spawnPoints.Length + " available.");

@@ -8,6 +8,7 @@ namespace Kart
 {
     public class KartBase : PhysicsObject
     {
+        public GameObject minimapRenderer;
         public Transform kartRootModel; // The kart's root 3D model
         public Transform kartBodyModel; // The main kart 3D model (no wheels)
         public List<WheelCollider> wheels; //TODO: A DEPLACER
