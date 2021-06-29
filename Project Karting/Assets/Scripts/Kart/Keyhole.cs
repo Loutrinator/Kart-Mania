@@ -46,8 +46,14 @@ public class Keyhole : MonoBehaviour
     public float autoRewindSpeed = 500f;
     public float autoRewindTimeToMaxSpeed = 0.3f;
     public AnimationCurve autoRewindSpeedAC;
-
-    private AudioSource ratchetSound;
+    
+    [Header("Sound")]
+    
+    [SerializeField] private AudioSource keyPopSound;
+    [SerializeField] private AudioSource ratchetSound;
+    [SerializeField] private AudioSource keyInsertion;
+    
+    
     private float currentSpeed;
     private Action powerupCallback;
     private enum KeyHoleState
@@ -57,10 +63,10 @@ public class Keyhole : MonoBehaviour
     private KeyHoleState keyHoleState;
     private float currentStateStartTime;
     private float _idleDuration;
-
+    private bool _insertionSoundPlayed;
+    
     private void Awake()
     {
-        ratchetSound = this.GetComponent<AudioSource>();
         _idleDuration = idleDuration;
     }
 
@@ -172,10 +178,17 @@ public class Keyhole : MonoBehaviour
                 key.transform.localEulerAngles =newRot;
                 if (elapsed >= insertionDuration)
                 {
+                    if (!_insertionSoundPlayed)
+                    {
+                        Debug.Log("Elapsed");
+                        keyInsertion.Play();
+                        _insertionSoundPlayed = true;
+                    }
                     if (rewindMode != RewindMode.startRewindMode)
                     {
                         currentStateStartTime = Time.time;
                         keyHoleState = KeyHoleState.rewind;
+                        _insertionSoundPlayed = false;
                     }
                 }
                 break;
@@ -203,6 +216,7 @@ public class Keyhole : MonoBehaviour
                     //Debug.Log("elapsed " + elapsed);
                     keyHoleState = KeyHoleState.empty;
                     keyMeshRenderer.enabled = false;
+                    _insertionSoundPlayed = false;
                 }
                 break;
         }
@@ -217,11 +231,15 @@ public class Keyhole : MonoBehaviour
 
     public bool InsertKey(RewindMode mode, [CanBeNull] Action callback)
     {
+        
+        _insertionSoundPlayed = false;
+        
         rewindMode = mode;
         if (keyHoleState == KeyHoleState.empty)
         {
             currentStateStartTime = Time.time;
             keyHoleState = KeyHoleState.insertion;
+            keyPopSound.Play();
             ResetKeyhole();
             keyMeshRenderer.enabled = true;
             if (callback != null)
