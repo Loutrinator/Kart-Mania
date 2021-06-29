@@ -599,6 +599,7 @@ GameObject:
   - component: {fileID: 7072082925053140395}
   - component: {fileID: 6669060970404059514}
   - component: {fileID: 2789011401745134355}
+  - component: {fileID: 4222294656709650358}
   m_Layer: 9
   m_Name: Kart-TheTuture
   m_TagString: Untagged
@@ -731,6 +732,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kartBase: {fileID: 6669060970404059514}
   bumpForce: 50
+--- !u!114 &4222294656709650358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072082925053140372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43959e4bf4f35e4bae2685eb7511f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowAccelerationClip: {fileID: 0}
+  lowDecelerationClip: {fileID: 0}
+  highAccelerationClip: {fileID: 8300000, guid: f7293f653127b764bada1dc03a02781e,
+    type: 3}
+  highDecelerationClip: {fileID: 0}
+  pitchMultiplier: 1
+  lowPitchMin: 1
+  lowPitchMax: 6
+  highPitchMultiplier: 0.25
+  maxRolloffDistance: 500
+  dopplerLevel: 1
+  useDoppler: 1
 --- !u!1 &7072082925228471994
 GameObject:
   m_ObjectHideFlags: 0

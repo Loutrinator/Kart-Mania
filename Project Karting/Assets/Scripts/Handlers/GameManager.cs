@@ -108,6 +108,7 @@ namespace Handlers {
                     Transform spawn = spawnPoints[id];
                     KartBase kart = Instantiate(playerConfig.kartPrefab, spawn.position, spawn.rotation);
                     KartEffects kartEffects = kart.GetComponent<KartEffects>();
+                    KartAudio kartAudio = kart.GetComponent<KartAudio>();
                     
                     
                     // cameras for players
@@ -117,6 +118,11 @@ namespace Handlers {
                     {
                         kartEffects.cameraShakeTransform = kartCam.cameraShakeTransform;
                         kartEffects.cam = kartCam.frontCamera;
+                    }
+                    if (kartAudio != null)
+                    {
+                        kartAudio.cam = kartCam.frontCamera;
+                        kartAudio.kart = kart;
                     }
                     karts.Add(kart);
                     
