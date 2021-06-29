@@ -4,11 +4,13 @@ using Items;
 using Kart;
 using Player;
 using Road.RoadPhysics;
+using UI;
 using UnityEngine;
 
 namespace Handlers {
     public class GameManager : MonoBehaviour {
         public Race currentRace;
+        public CircuitDrawer circuitDrawer;
 
         public ItemManager itemManager;
         public int checkpointAmount;
@@ -46,7 +48,9 @@ namespace Handlers {
             raceIsInit = false;
             
             currentRace = LevelManager.instance.InitLevel();
-            
+            circuitDrawer.race = currentRace;
+            circuitDrawer.Init();
+
             if (physicsManager != null)
             {
                 physicsManager.Init(currentRace.road.bezierSpline);
