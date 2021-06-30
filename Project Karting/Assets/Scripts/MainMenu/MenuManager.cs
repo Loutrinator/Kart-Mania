@@ -60,4 +60,14 @@ public class MenuManager : MonoBehaviour
     private void StartLevel() {
         SceneManager.instance.LoadGameMode(LevelManager.instance.gameConfig.mode);//TODO
     }
+    public void QuitGame()
+    {
+        Debug.Log("Quitting the app !");
+        
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                 Application.Quit();
+        #endif
+    }
 }
