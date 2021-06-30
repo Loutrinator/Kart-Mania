@@ -98,8 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f713bb3156e0634fa0c9fc2b876e8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xOffset: 4.5
   target: {fileID: 0}
+  rotationPercent: 0.1
+  frontCamera: {fileID: 0}
+  rearCamera: {fileID: 0}
 --- !u!114 &2249182489142587335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6161461778134510871
 RectTransform:
   m_ObjectHideFlags: 0
@@ -239,9 +241,9 @@ RectTransform:
   m_Father: {fileID: 155450782728903313}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1649, y: -226}
   m_SizeDelta: {x: 354, y: 362}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7229482093350983939

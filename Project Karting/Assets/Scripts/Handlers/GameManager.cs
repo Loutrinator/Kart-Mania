@@ -4,6 +4,7 @@ using Items;
 using Kart;
 using Player;
 using Road.RoadPhysics;
+using UI;
 using UnityEngine;
 
 namespace Handlers {
@@ -16,6 +17,7 @@ namespace Handlers {
 
         public GameState gameState;
         public Race currentRace;
+        public Minimap minimap;
 
         public ItemManager itemManager;
         public int checkpointAmount;
@@ -50,7 +52,9 @@ namespace Handlers {
             }
 
             currentRace = LevelManager.instance.InitLevel();
-            
+            minimap.race = currentRace;
+            minimap.DrawMinimap();
+
             if (physicsManager != null)
             {
                 physicsManager.Init(currentRace.road.bezierSpline);
@@ -80,6 +84,7 @@ namespace Handlers {
                 //timeInfo.text = info;
                 player.Controller.Update(); // listen player inputs 
             }
+            minimap.UpdateMinimap();
         }
 
         public void StartRace() {
@@ -133,16 +138,14 @@ namespace Handlers {
                     Instantiate(HUDvsClockPrefab); // id automatically set inside the class
                     startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
                     ShakeTransform cam = kart.cameraShake;
-                    // if (cam != null)
-                    // {
-                    //     cameras.Add(cam);
-                    // }
+                    
                     startTime = startMessage.getStartTime();
                     StartMsgAnimation startUI = startMessage.GetComponent<StartMsgAnimation>();
                     if (startUI != null)
                     {
                         startUI.placeKeysAction = placeKeys;
                     }
+                    minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer);
 
                     gameState = GameState.start;
                 }

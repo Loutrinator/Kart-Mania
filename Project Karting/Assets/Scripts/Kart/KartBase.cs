@@ -8,6 +8,7 @@ namespace Kart
 {
     public class KartBase : PhysicsObject
     {
+        public GameObject minimapRenderer;
         public Transform kartRootModel; // The kart's root 3D model
         public Transform kartBodyModel; // The main kart 3D model (no wheels)
         public List<WheelCollider> wheels; //TODO: A DEPLACER
@@ -40,9 +41,6 @@ namespace Kart
         [HideInInspector] public int forwardMove; // -1; 0; 1
         [HideInInspector] public bool drift;
         [HideInInspector] public int driftDirection;
-        
-
-        public Collider vehicleCollider;
 
         private bool drifting;
 
@@ -67,9 +65,14 @@ namespace Kart
             StopDrifting();
             canMove = true;
 
-            foreach (var wheel in wheels)
+            var colliders = GetComponentsInChildren<Collider>();
+            foreach (var col in colliders)
             {
-                Physics.IgnoreCollision(wheel, vehicleCollider);
+                foreach (var wheel in wheels)
+                {
+                    if(wheel != col)
+                        Physics.IgnoreCollision(wheel, col);
+                }
             }
         }
 

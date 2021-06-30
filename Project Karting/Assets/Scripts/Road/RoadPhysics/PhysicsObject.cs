@@ -18,12 +18,13 @@ namespace Road.RoadPhysics {
             currentGravityAcceleration = Physics.gravity;
         }
 
-        public void UpdatePhysics(Vector3 groundNormal, float drag) {
-            currentGravityAcceleration = currentGravityAcceleration.magnitude * (-groundNormal);
+        public void UpdatePhysics(Vector3 groundNormal, float drag)
+        {
+            currentGravityAcceleration = -groundNormal * currentGravityAcceleration.magnitude;
 
             if (IsGrounded())
             {
-                _currentGravityVelocity = Time.fixedDeltaTime * currentGravityAcceleration;
+                _currentGravityVelocity = currentGravityAcceleration * Time.fixedDeltaTime;
                 lastGroundBezierPos = closestBezierPos;
             }
             else

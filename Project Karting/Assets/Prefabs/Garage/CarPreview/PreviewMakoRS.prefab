@@ -592,6 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kartBase: {fileID: 0}
+  bumpForce: 50
 --- !u!1 &4686627548744261291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,7 +1102,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5273262297498683067}
-  m_Mesh: {fileID: 3137937436956427401, guid: defe4979f0ef58845899012884e9a685, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &5921838161867122542
 MeshRenderer:
   m_ObjectHideFlags: 0
