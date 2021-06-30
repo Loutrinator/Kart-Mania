@@ -995,6 +995,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2541598111825877317, guid: 814157724baddef4baec1799ac0670a0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1938997335}
+    - target: {fileID: 2541598111825877317, guid: 814157724baddef4baec1799ac0670a0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowCredits
+      objectReference: {fileID: 0}
     - target: {fileID: 3239890816584727103, guid: 814157724baddef4baec1799ac0670a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2422,92 +2432,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4686627549433525105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4686627549433525107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25f8a96f1bec4804987f704591521401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kart: {fileID: 0}
-  exhausts:
-  - {fileID: 1877269345086691723}
-  - {fileID: 1683021675339785102}
-  smokeEmitters:
-  - {fileID: 0}
-  - {fileID: 0}
-  exhaustsPositionAC:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -0
-      outSlope: -0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.08687942
-    - serializedVersion: 3
-      time: 0.20213392
-      value: 0.019162625
-      inSlope: -0.20878069
-      outSlope: -0.20878069
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.08221495
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  exhaustsRotationAC:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 8.373778
-      outSlope: 8.373778
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.07289311
-    - serializedVersion: 3
-      time: 0.17822844
-      value: 3.2586803
-      inSlope: -2.855184
-      outSlope: -2.855184
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.123704664
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2.552107
-      outSlope: -2.552107
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.13793771
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  speed: 5
 --- !u!4 &4686627549433525106
 Transform:
   m_ObjectHideFlags: 0
@@ -2533,7 +2457,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4686627549433525106}
-  - component: {fileID: 4686627549433525105}
   m_Layer: 0
   m_Name: "\xE9chapements"
   m_TagString: Untagged

@@ -52,5 +52,8 @@ namespace Handlers
         public void LoadMainMenu() {
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
+        public void LoadCredits() {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        }
     }
 }

@@ -64,10 +64,14 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("Quitting the app !");
         
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #else
-                 Application.Quit();
-        #endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+    public void ShowCredits()
+    {
+        SceneManager.instance.LoadCredits();//TODO
     }
 }
