@@ -11,11 +11,11 @@ public class KartSelectionManager : MonoBehaviour
 {
     [Header("UI")]
     public TextMeshProUGUI kartNameDisplay;
-    public TextMeshProUGUI speed;
-    public TextMeshProUGUI acceleration;
-    public TextMeshProUGUI steering;
-    public TextMeshProUGUI brake;
-    public TextMeshProUGUI okayletzgo;
+    public StatDisplay speed;
+    public StatDisplay acceleration;
+    public StatDisplay steering;
+    public StatDisplay brake;
+    public StatDisplay okayletzgo;
     [Header("Other")]
     public MenuManager menuManager;
     public List<KartPreview> availableKarts;
@@ -52,11 +52,11 @@ public class KartSelectionManager : MonoBehaviour
         {
             Stats stats = selectedKart.kartPrefab.vehicleStats;
             kartNameDisplay.text = selectedKart.kartName;
-            speed.text = ((int)stats.topSpeed).ToString();
-            acceleration.text = ((int)stats.acceleration).ToString();
-            brake.text = ((int)stats.braking).ToString();
-            steering.text = ((int)stats.steer).ToString();
-            okayletzgo.text = stats .suspension.ToString();
+            speed.SetValue( stats.topSpeed);
+            acceleration.SetValue( stats.acceleration);
+            brake.SetValue( stats.braking);
+            steering.SetValue( stats.steer);
+            okayletzgo.SetValue( stats.addedGravity);
             
         }
     }
