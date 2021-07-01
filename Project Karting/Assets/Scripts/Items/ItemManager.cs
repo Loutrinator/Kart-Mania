@@ -50,7 +50,7 @@ namespace Items
 
                         if (sumProba > 1f)
                         {
-                            Debug.LogError("SUM OF PROBABILITIES AT POSITION " + i + " IS OVER 1f");
+                            //Debug.LogError("SUM OF PROBABILITIES AT POSITION " + i + " IS OVER 1f");
                         }
                         else
                         {

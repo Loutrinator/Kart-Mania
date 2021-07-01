@@ -51,9 +51,6 @@ public class Skidmarks : MonoBehaviour {
 
 	protected void Awake() {
 		if (transform.position != Vector3.zero) {
-#if UNITY_EDITOR
-			Debug.LogWarning("Skidmarks.cs transform must be at 0,0,0. Setting it to zero now.");
-#endif
 			transform.position = Vector3.zero;
 			transform.rotation = Quaternion.identity;
 		}

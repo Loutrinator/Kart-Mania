@@ -79,11 +79,9 @@ public class RaceSelectionManager : MonoBehaviour
         }
         
         //text += " ]";
-        //Debug.Log(text);
     }
     private void UpdateSelector(int pos,CarrousselSelector selector)
     {
-        //Debug.Log("pos : " + pos + " _currentCarrousselPos : " + _currentCarrousselPos + " _currentRaceId : " + _currentRaceId);
         int offset = pos - 3; 
         Race associatedRace = races[(_currentRaceId + offset + 100*races.Count) % races.Count];
         selector.image.sprite = associatedRace.image;

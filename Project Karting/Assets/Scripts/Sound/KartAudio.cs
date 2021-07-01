@@ -9,10 +9,7 @@ public class KartAudio : MonoBehaviour
 {
     [HideInInspector] public Camera cam;
     [HideInInspector] public KartBase kart;
-    public AudioClip lowAccelerationClip;
-    public AudioClip lowDecelerationClip;
-    public AudioClip highAccelerationClip;
-    public AudioClip highDecelerationClip;
+    public AudioClip audioClip;
     public float pitchMultiplier = 1f;
     public float lowPitchMin = 1f;
     public float lowPitchMax = 6f;
@@ -21,18 +18,12 @@ public class KartAudio : MonoBehaviour
     public float dopplerLevel = 1f;
     public bool useDoppler = true;
 
-    private AudioSource _LowAccel;
-    private AudioSource _LowDecel;
     private AudioSource _HighAccel;
-    private AudioSource _HighDecel;
     private bool _StartedSound;
     
     private void StartSound()
     {
-        //_LowAccel = SetupEngineAudioSource(lowAccelerationClip);
-        //_LowDecel = SetupEngineAudioSource(lowDecelerationClip);
-        //_HighDecel = SetupEngineAudioSource(highDecelerationClip);
-        _HighAccel = SetupEngineAudioSource(highAccelerationClip);
+        _HighAccel = SetupEngineAudioSource(audioClip);
         _StartedSound = true;
     }
 
@@ -63,7 +54,7 @@ public class KartAudio : MonoBehaviour
     private void Update()
     {
         float camDist = (cam.transform.position - transform.position).sqrMagnitude;
-
+        
         if (_StartedSound && camDist > maxRolloffDistance * maxRolloffDistance)
         {
             StopSound();

@@ -51,8 +51,6 @@ namespace Kart
         /*
         public void LateUpdate()
         {
-            //Debug.Log("currentIntensity = " + currentIntensity);
-            //Debug.Log("driftLevel = " + driftLevel);
             currentIntensity = Mathf.Lerp(currentIntensity, boostIntensity[driftLevel],
                 Time.fixedDeltaTime * boostSwitchSpeed);
             if (Mathf.Abs(currentIntensity - boostIntensity[driftLevel]) > 0.1f)
@@ -67,10 +65,6 @@ namespace Kart
 
         public void LateUpdate()
         {
-#if UNITY_EDITOR
-            //Debug.Log("currentIntensity = " + currentIntensity);
-            //Debug.Log("driftLevel = " + driftLevel);
-#endif
             currentIntensity = Mathf.Lerp(currentIntensity, DriftSettings.instance.driftEffectIntensity[driftLevel],
                 Time.fixedDeltaTime * DriftSettings.instance.boostSwitchSpeed);
             if (Mathf.Abs(currentIntensity - DriftSettings.instance.driftEffectIntensity[driftLevel]) > 0.1f)
@@ -254,7 +248,6 @@ namespace Kart
         {
             if (!keyIsRewinding)
             {
-                Debug.Log("REWIND");
                 timeWhenKeyInserted = Time.time;
                 _keyhole.Rewind();
                 keyIsRewinding = true;
@@ -264,7 +257,6 @@ namespace Kart
         {
             float now = Time.time;
             float duration = now - timeWhenKeyInserted;
-            Debug.Log("Duration : " + duration);
             if (duration > 2)
             {
                 _keyhole.StopRewind(0);
@@ -300,7 +292,6 @@ namespace Kart
 
         private void ExplodeMotor()
         {
-            Debug.Log("EXPLOSIOOOON");
             Instantiate(explosionMotorEffect, transform.position + new Vector3(0, 1, 0), Quaternion.identity, transform);
             StartCoroutine(FreezeControl());
         }

@@ -64,7 +64,6 @@ public class KartSelectionManager : MonoBehaviour
     private int getKartId(int direction)
     {
         int position = (currentKartId + direction + 100*availableKarts.Count) % availableKarts.Count;
-        Debug.Log("Position : " + position + " currentKartId : " + currentKartId + "availableKarts.Count : " + availableKarts.Count);
         return position;
     }
 
