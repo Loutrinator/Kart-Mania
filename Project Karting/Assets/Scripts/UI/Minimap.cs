@@ -22,6 +22,8 @@ namespace UI
         public void DrawMinimap()
         {
             _objectPreviews = new Dictionary<GameObject, GameObject>();
+
+            MinMax minMax = new MinMax();
             
             var frames = race.road.bezierSpline.RotationMinimisingFrames;
             Vector3[] positions = new Vector3[frames.Count];
@@ -34,6 +36,7 @@ namespace UI
             for (var index = 0; index < frames.Count; index++)
             {
                 Vector3 pos = frames[index].LocalOrigin;
+                minMax.AddValue(pos.y);
                 positions[index] = pos;
                 pos = lineT.TransformPoint(pos);
                 if (pos.x > maxX) maxX = pos.x;
@@ -49,6 +52,14 @@ namespace UI
 
             lineRenderer.widthMultiplier = roadWidth;
             lineRenderer.SetPositions(positions);
+            if (Application.isPlaying)
+            {
+                lineRenderer.material.SetFloat("_min", minMax.Min);
+                lineRenderer.material.SetFloat("_max", minMax.Max);
+            } else {
+                lineRenderer.sharedMaterial.SetFloat("_min", minMax.Min);
+                lineRenderer.sharedMaterial.SetFloat("_max", minMax.Max);
+            }
 
             RenderTexture texture = new RenderTexture(textureQuality, textureQuality, 100);
             cam.targetTexture = texture;
