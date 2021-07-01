@@ -7,19 +7,16 @@ using UnityEngine;
 [RequireComponent(typeof (KartBase))]
 public class KartAudio : MonoBehaviour
 {
-    [HideInInspector] public Camera cam;
+    public Camera cam;
     [HideInInspector] public KartBase kart;
     public AudioClip audioClip;
     public float pitchMultiplier = 1f;
-    public float lowPitchMin = 1f;
-    public float lowPitchMax = 6f;
-    public float highPitchMultiplier = 0.25f;
     public float maxRolloffDistance = 500f;
-    public float dopplerLevel = 1f;
     public bool useDoppler = true;
 
     private AudioSource _HighAccel;
     private bool _StartedSound;
+    private float _speed;
     
     private void StartSound()
     {
@@ -47,6 +44,7 @@ public class KartAudio : MonoBehaviour
             source.loop = true;
             source.priority = Int32.MaxValue;
             source.playOnAwake = true;
+            source.Play();
         }
         return source;
     }
@@ -54,22 +52,22 @@ public class KartAudio : MonoBehaviour
     private void Update()
     {
         float camDist = (cam.transform.position - transform.position).sqrMagnitude;
-        
         if (_StartedSound && camDist > maxRolloffDistance * maxRolloffDistance)
         {
             StopSound();
         }else if (!_StartedSound && camDist < maxRolloffDistance * maxRolloffDistance)
         {
+            Debug.Log("PLAY SOUND");
             StartSound();
         }
 
         if (_StartedSound)
         {
-            float pitch = Mathf.Lerp(lowPitchMin, lowPitchMax, kart.CurrentSpeed() / 60);
+            _speed = Mathf.Lerp(_speed, kart.CurrentSpeed(), AudioSettings.instance.kartSpeedLerp*Time.deltaTime);
+            float pitch = Mathf.Lerp(AudioSettings.instance.kartPitchMin, AudioSettings.instance.kartPitchMax, _speed / AudioSettings.instance.kartMaxSpeed);
 
-            pitch = Mathf.Min(lowPitchMax, pitch);
-            _HighAccel.pitch = pitch * pitchMultiplier * highPitchMultiplier;
-            _HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
+            pitch = Mathf.Min(AudioSettings.instance.kartPitchMax, pitch);
+            _HighAccel.pitch = pitch * pitchMultiplier;
             _HighAccel.volume = 1;
         }
         
