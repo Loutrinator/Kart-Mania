@@ -62,13 +62,7 @@ public class MenuManager : MonoBehaviour
     }
     public void QuitGame()
     {
-        
-#if UNITY_EDITOR
-        Debug.Log("Quitting the app !");
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        GameManager.Instance.QuitGame();
     }
     public void ShowCredits()
     {
