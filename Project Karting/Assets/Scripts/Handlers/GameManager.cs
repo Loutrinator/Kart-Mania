@@ -14,7 +14,7 @@ namespace Handlers {
     }
     public class GameManager : MonoBehaviour
     {
-
+        
         public GameState gameState;
         public Race currentRace;
         public Minimap minimap;
@@ -42,7 +42,13 @@ namespace Handlers {
         public PhysicsManager physicsManager;
         public KartRespawner respawner;
 
-        private void Awake() {
+        [HideInInspector]
+        public PauseMenu pauseMenu;
+
+        private bool gamePaused;
+        
+        private void Awake()
+        {
             if (Instance == null) {
                 Instance = this;
                 //cameras = new List<ShakeTransform>();
@@ -70,9 +76,27 @@ namespace Handlers {
             TransitionController.Instance.FadeOut(() => {
                 //raceBegan = true;  // todo enable after delay
             });
+
+            gamePaused = false;
+            pauseMenu = FindObjectOfType<PauseMenu>();
         }
 
-        private void Update() {
+        public void Update() {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Debug.Log("PAUSE");
+                gamePaused = !gamePaused;
+                if (gamePaused)
+                {
+                    Time.timeScale = 0;
+                    pauseMenu.PauseGame();
+                }
+                else
+                {
+                    Time.timeScale = 1;
+                    pauseMenu.ResumeGame();
+                }
+            }
             if (gameState == GameState.race) {
                 PlayerRaceInfo player = playersInfo[0];
                 //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
@@ -230,6 +254,23 @@ namespace Handlers {
             /*foreach (var cam in cameras) {
                 cam.AddShakeEvent(shake);
             }*/
+        }
+
+        public void QuitGame()
+        {
+        #if UNITY_EDITOR
+            Debug.Log("Quitting the app !");
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+        }
+
+        public void ResumeGame()
+        {
+            
+            Time.timeScale = 1;
+            gamePaused = false;
         }
     }
 }
