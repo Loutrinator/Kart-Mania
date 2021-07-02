@@ -127,7 +127,6 @@ namespace Handlers {
                     if (kartAudio != null)
                     {
                         kartAudio.cam = kartCam.frontCamera;
-                        kartAudio.kart = kart;
                     }
                     karts.Add(kart);
                     

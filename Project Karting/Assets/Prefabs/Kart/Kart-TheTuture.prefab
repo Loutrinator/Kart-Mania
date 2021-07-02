@@ -730,12 +730,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  kart: {fileID: 0}
+  kart: {fileID: 6669060970404059514}
   audioClip: {fileID: 8300000, guid: 40edf607338302146b91d0f9c2ac0686, type: 3}
-  speedLerp: 1.5
-  pitchMin: 0.8
-  pitchMax: 1.6
-  maxSpeed: 100
+  pitchMultiplier: 1
   maxRolloffDistance: 500
   useDoppler: 1
 --- !u!1 &7072082925228471994

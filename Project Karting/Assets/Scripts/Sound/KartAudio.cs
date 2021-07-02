@@ -8,7 +8,7 @@ using UnityEngine;
 public class KartAudio : MonoBehaviour
 {
     public Camera cam;
-    [HideInInspector] public KartBase kart;
+    public KartBase kart;
     public AudioClip audioClip;
     public float pitchMultiplier = 1f;
     public float maxRolloffDistance = 500f;
