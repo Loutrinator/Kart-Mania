@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace UnityExtendedEditor.ExtendedAttributes.Editor {
+namespace UnityExtendedEditor.ExtendedAttributes {
     [AttributeUsage(AttributeTargets.Field)]
     public class MinMaxSliderAttribute : PropertyAttribute
     {
