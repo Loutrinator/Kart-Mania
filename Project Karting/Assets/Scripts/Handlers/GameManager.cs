@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Handlers {
     public enum GameState
     {
-        idle,start,race
+        idle,start,race, finish
     }
     public class GameManager : MonoBehaviour
     {
@@ -22,8 +22,9 @@ namespace Handlers {
         public ItemManager itemManager;
         public int checkpointAmount;
 
-        [Header("UI and HUD")] [SerializeField]
-        private HUDTimeTrialController HUDvsClockPrefab;
+        [Header("UI and HUD")]
+        [SerializeField] private HUDTimeTrialController HUDvsClockPrefab;
+        [SerializeField] private ScoreBoard ScoreBoardPrefab;
 
         [SerializeField] private GameObject StartUIPrefab;
 
@@ -234,6 +235,16 @@ namespace Handlers {
                 timeDiff.color = Color.green;
             }
         }*/
+            
+            // TODO : il serait préférable de terminé le race pour ce playerID
+            // mais de finir pour la totalité des participants selon une autre condition
+            // quand on sera en écran splitté (cf.  document de game design pour la condition de fin de course)
+
+            if (playersInfo[playerId].lap >= currentRace.laps)
+            {
+                playersInfo[playerId].FinishRace();
+                FinishRace(playerId);
+            }
         }
 
         private string FloatToTimeString(float time) {
@@ -254,6 +265,13 @@ namespace Handlers {
             /*foreach (var cam in cameras) {
                 cam.AddShakeEvent(shake);
             }*/
+        }
+
+        public void FinishRace(int playerID)
+        {
+            gameState = GameState.finish;
+            var board = Instantiate(ScoreBoardPrefab); // auto id to link with kart with the same ID
+            board.setId(playerID);
         }
 
         public void QuitGame()

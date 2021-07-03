@@ -50,6 +50,8 @@ public class HUDTimeTrialController : MonoBehaviour
                 iconPlaceholder.sprite = null;
             }
         };
+
+        _info.onFinishRace += () => gameObject.SetActive(false);
     }
 
     private void Update()
@@ -62,4 +64,5 @@ public class HUDTimeTrialController : MonoBehaviour
             currentTime.text = Utils.DisplayHelper.floatToTimeString(0f);
         }
     }
-}
+
+ }

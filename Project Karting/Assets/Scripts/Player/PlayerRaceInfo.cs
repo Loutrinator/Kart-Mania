@@ -89,12 +89,18 @@ public class PlayerRaceInfo
         }
     }
 
+    public void FinishRace()
+    {
+        onFinishRace?.Invoke();
+    }
+
     public float previousLapTime;
     public float currentLapStartTime;
 
     public event Action onPositionChange;
     public event Action onNewLap;
     public event Action onBestLapTimeChange;
+    public event Action onFinishRace;
     public event Action onKartChange;    
     public event Action onItemSet;    
     public event Action<bool> onItemUsed;    
