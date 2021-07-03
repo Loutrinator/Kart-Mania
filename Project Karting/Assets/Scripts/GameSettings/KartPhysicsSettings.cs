@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityExtendedEditor.ExtendedAttributes.Editor;
+using UnityExtendedEditor.ExtendedAttributes;
 
 [CreateAssetMenu(fileName = "KartPhysicsSettings", menuName = "ScriptableObjects/KartPhysicsSettings")]
 public class KartPhysicsSettings : ScriptableObject

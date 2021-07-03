@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityExtendedEditor.ExtendedAttributes.Editor;
 
 [CreateAssetMenu(fileName = "DriftSettings", menuName = "ScriptableObjects/DriftSettings")]
 public class DriftSettings : ScriptableObject
