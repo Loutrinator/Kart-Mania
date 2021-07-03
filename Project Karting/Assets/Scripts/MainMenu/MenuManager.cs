@@ -1,4 +1,5 @@
-﻿using Game;
+﻿using System;
+using Game;
 using Handlers;
 using UnityEngine;
 
@@ -11,6 +12,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Animator levelEditorAnimator;
     [SerializeField] private Animator kartSelectorAnimator;
     [SerializeField] private CustomCanvas gameModeCanvas;
+
+
+    private void Awake()
+    {
+        SoundManager.Instance.PlayMainMenuMusic();
+    }
 
     public void SelectModeTimeTrial()
     {

@@ -127,6 +127,8 @@ namespace Handlers {
 
         private void InitRace()
         {
+            SoundManager.Instance.PlayRaceMusic();
+            
             gameState = GameState.start;
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
             playersInfo = new PlayerRaceInfo[nbPlayerRacing];
