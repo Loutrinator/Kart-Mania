@@ -7,6 +7,7 @@ public class GoCanvasManager : MonoBehaviour
     public Animator canvasAnimator;
     public void OpenDoor()
     {
+        SoundManager.Instance.PlayUIClick();
         doorAnimator.SetTrigger("open");
         canvasAnimator.SetBool("visible", false);
     }

@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip backSound;
 
     [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource UISource;
 
     [Range(0f,1f)]
     [SerializeField] private float musicVolume;
@@ -50,5 +51,16 @@ public class SoundManager : MonoBehaviour
     public void FadeOutMusic()
     {
         DOTween.To(() => musicSource.volume, value => musicSource.volume = value, 0, fadeSpeed).OnComplete(() => {musicSource.Stop();});
+    }
+
+    public void PlayUIClick()
+    {
+        UISource.clip = clicSound;
+        UISource.Play();
+    }
+    public void PlayUIBack()
+    {
+        UISource.clip = backSound;
+        UISource.Play();
     }
 }

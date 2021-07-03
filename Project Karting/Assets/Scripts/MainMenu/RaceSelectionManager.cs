@@ -42,6 +42,7 @@ public class RaceSelectionManager : MonoBehaviour
 
     public void ShowNextRace()
     {
+        SoundManager.Instance.PlayUIClick();
         int limit = races.Count;
         _currentRaceId = (_currentRaceId - 1 + 100*limit) % limit;
         _currentCarrousselPos = (_currentCarrousselPos + 1 + 7) % 7;
@@ -50,6 +51,7 @@ public class RaceSelectionManager : MonoBehaviour
     }
     public void ShowPreviousRace()
     {
+        SoundManager.Instance.PlayUIClick();
         int limit = races.Count;
         _currentRaceId = (_currentRaceId + 1 + 100*limit) % limit;
         _currentCarrousselPos = (_currentCarrousselPos - 1 + 7) % 7;
