@@ -219,7 +219,14 @@ namespace Handlers {
 
             float diff = playersInfo[playerId].previousLapTime - playersInfo[playerId].bestLapTime;
             playersInfo[playerId].lap += 1; // doit être appelé ici pour mettre à jour la diff dans la HUD
-
+            playersInfo[playerId].lapsTime.Add( playersInfo[playerId].previousLapTime); //doit être appelé ici pour être sur que le previousLapTime est à jour
+            
+            //TODO : il y a un problème, la liste n'est pas bien conservé car à l'affichage du score
+            // board de fin de course, il ne reste que le dernier temps dans la liste
+            foreach (var t in  playersInfo[playerId].lapsTime)
+            {
+                Debug.Log("time add " + Utils.DisplayHelper.floatToTimeString(t));   
+            }
             if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime) {
                 playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
             }

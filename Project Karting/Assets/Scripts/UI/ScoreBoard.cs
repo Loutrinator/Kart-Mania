@@ -25,16 +25,22 @@ public class ScoreBoard : MonoBehaviour
 
         // because it use the example in prefab
         TextMeshProUGUI bestLapTime = Instantiate(currentLapTimesContainer.transform.GetComponentInChildren<TextMeshProUGUI>(), currentLapTimesContainer.transform);
+        bestLapTime.text = Utils.DisplayHelper.floatToTimeString(_info.bestLapTime);
 
         //clean
         foreach (Transform child in currentLapTimesContainer.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
+        Debug.Log("cb de temps dans la liste de _info ? : "+ _info.lapsTime.Count);
 
-        bestLapTime.text = Utils.DisplayHelper.floatToTimeString(_info.bestLapTime);
-        
-        // TODO : faire la même chose avec les autres lap time ( il faut créer un tableau de lap time dans PlayerRaceInfo )
+        foreach (float time in _info.lapsTime)
+        {
+            TextMeshProUGUI timeText = Instantiate(bestLapTime, currentLapTimesContainer.transform);
+            timeText.text = Utils.DisplayHelper.floatToTimeString(time);
+            Debug.Log("display time : "+  timeText.text);
+        }
+        bestLapTime.fontMaterial.color = Color.green;
     }
 
 }

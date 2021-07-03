@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Items;
 using Kart;
 using Player;
@@ -74,6 +75,7 @@ public class PlayerRaceInfo
         }
     } //the kart's position in te race (1rst, 2nd etc)
 
+    public List<float> lapsTime;
 
     public int currentCheckpoint;//the previous checkpoint passed
 
@@ -118,6 +120,7 @@ public class PlayerRaceInfo
         _controller = new PlayerController(this, action);
         kart.GetPlayerID += () => playerId;
         ItemIsInUse = false;
+        lapsTime = new List<float>();
     }
 
     
