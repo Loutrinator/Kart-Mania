@@ -15,9 +15,6 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource UISource;
-
-    [Range(0f,1f)]
-    [SerializeField] private float musicVolume;
     [SerializeField] private float fadeSpeed;
     
 
@@ -40,13 +37,13 @@ public class SoundManager : MonoBehaviour
     {
         musicSource.clip = mainMenuMusic;
         musicSource.Play();
-        DOTween.To(() => musicSource.volume,value => musicSource.volume = value, musicVolume, fadeSpeed);
+        DOTween.To(() => musicSource.volume,value => musicSource.volume = value, AudioSettings.instance.musicVolume, fadeSpeed);
     }
     public void PlayRaceMusic()
     {
         musicSource.clip = raceMusic;
         musicSource.Play();
-        DOTween.To(() => musicSource.volume,value => musicSource.volume = value, musicVolume, fadeSpeed);
+        DOTween.To(() => musicSource.volume,value => musicSource.volume = value, AudioSettings.instance.musicVolume, fadeSpeed);
     }
     public void FadeOutMusic()
     {
@@ -56,11 +53,13 @@ public class SoundManager : MonoBehaviour
     public void PlayUIClick()
     {
         UISource.clip = clicSound;
+        UISource.volume = AudioSettings.instance.UIVolume;
         UISource.Play();
     }
     public void PlayUIBack()
     {
         UISource.clip = backSound;
+        UISource.volume = AudioSettings.instance.UIVolume;
         UISource.Play();
     }
 }

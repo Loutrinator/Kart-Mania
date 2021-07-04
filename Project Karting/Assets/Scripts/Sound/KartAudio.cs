@@ -68,7 +68,7 @@ public class KartAudio : MonoBehaviour
 
             pitch = Mathf.Min(AudioSettings.instance.kartPitchMax, pitch);
             _HighAccel.pitch = pitch * pitchMultiplier;
-            _HighAccel.volume = 1;
+            _HighAccel.volume = AudioSettings.instance.motorVolume;
         }
         
     }
