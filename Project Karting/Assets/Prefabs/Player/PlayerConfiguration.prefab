@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1503091548220282683}
   - component: {fileID: 7883429862139131309}
-  - component: {fileID: 8378008246982057376}
   m_Layer: 0
-  m_Name: PlayerController
+  m_Name: PlayerConfiguration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: bdc3b5e0906e5c443a73f5a84908cece,
     type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -60,7 +59,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8378008246982057376}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -79,7 +78,7 @@ MonoBehaviour:
       Inc.   Generic   USB  Joystick  /stick/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8378008246982057376}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
         m_MethodName: OnDrift
         m_Mode: 0
@@ -96,7 +95,7 @@ MonoBehaviour:
       /button6]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8378008246982057376}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
         m_MethodName: OnRearCamera
         m_Mode: 0
@@ -116,15 +115,3 @@ MonoBehaviour:
   m_DefaultActionMap: Kart
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8378008246982057376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4341104904052603201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad8e3134b8f338341b739978a43716dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
