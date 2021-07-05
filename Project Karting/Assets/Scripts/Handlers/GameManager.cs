@@ -106,7 +106,10 @@ namespace Handlers {
                 // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
                 //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
                 //timeInfo.text = info;
-                player.Controller.Update(); // listen player inputs 
+                if (player.controller != null)
+                {
+                    //player.controller.active = true; // listen player inputs 
+                }
             }
             minimap.UpdateMinimap();
         }
@@ -138,6 +141,7 @@ namespace Handlers {
                     PlayerConfig playerConfig = LevelManager.instance.gameConfig.players[id];
                     Transform spawn = spawnPoints[id];
                     KartBase kart = Instantiate(playerConfig.kartPrefab, spawn.position, spawn.rotation);
+                    kart.playerIndex = id;
                     KartEffects kartEffects = kart.GetComponent<KartEffects>();
                     KartAudio kartAudio = kart.GetComponent<KartAudio>();
                     
@@ -156,7 +160,7 @@ namespace Handlers {
                     }
                     karts.Add(kart);
                     
-                    PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
+                    PlayerRaceInfo info = new PlayerRaceInfo(kart, id); //TODO : if human PlayerAction, if IA ComputerAction
                     info.camera = kartCam;
                     playersInfo[id] = info;
                     

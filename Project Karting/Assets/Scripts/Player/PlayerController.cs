@@ -1,24 +1,27 @@
 ﻿using Handlers;
+using System.Linq;
 using Kart;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class PlayerController
+    public class PlayerController : MonoBehaviour
     {
-        private PlayerRaceInfo _info;
-        private IActions _actionsOutputs;
+        private PlayerInput _playerInput;
+        private KartBase _kart;
 
-        public PlayerController(PlayerRaceInfo raceInfo, IActions actions)
+        private void Awake()
         {
-            _actionsOutputs = actions;
-            _info = raceInfo;
+            _playerInput = GetComponent<PlayerInput>();
+            linkToKart();
         }
-
-        public void Update()
+        /*public void Update()
         {
             //TODO : inputs kart selection menu
-            _info.kart.forwardMove = _actionsOutputs.Accelerate();
-            _info.kart.hMove = _actionsOutputs.Steer();
+            Vector2 movement = _actionsOutputs.Movement();
+            _info.kart.forwardMove = movement[0];
+            _info.kart.hMove = movement[1];
             _info.kart.drift = _actionsOutputs.Drift();
             if (_info.hasItem) {
                 if (_actionsOutputs.ItemKeyHold()) _info.Item.OnKeyHold(_info);
@@ -34,6 +37,44 @@ namespace Player
             {
                 _info.camera.switchCameraMode(CameraMode.front);
             }
+        }*/
+
+        private void linkToKart()
+        {
+            var karts = FindObjectsOfType<KartBase>();
+            var index = _playerInput.playerIndex;
+            _kart = karts.FirstOrDefault(k => k.playerIndex == index);
         }
+
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            Debug.Log("MOVE");
+            if (_kart != null)
+            {
+                Vector2 movement = context.ReadValue<Vector2>();
+                float x = movement[0] > 0.1f ? 1f : movement[0] < -0.1f ? -1f : 0;
+                float y = movement[1] > 0.1f ? 1f : movement[1] < -0.1f ? -1f : 0;
+                _kart.movement = new Vector2(x,y);
+            }
+        }
+
+        public void OnDrift(InputAction.CallbackContext context)
+        {
+            Debug.Log("DRIFT");
+            if (_kart != null)
+            {
+                _kart.drift = context.ReadValueAsButton();
+            }
+        }
+        public void OnRearCamera(InputAction.CallbackContext context)
+        {
+            Debug.Log("REAR");
+            if (_kart != null)
+            {
+                //_kart.rear = context.ReadValue<bool>();
+            }
+        }
+        
     }
 }
