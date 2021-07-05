@@ -108,14 +108,14 @@ namespace Kart
             ConvertStats();
             ApplyPowerups();
             Move(forwardMove);
-            float rotationDirection = forwardMove > 0 ? hMove : -hMove;
+            float rotationDirection = localCurrentVelocity.z > 0 ? hMove : -hMove;
 
             if (drift && !drifting && (hMove < 0 || hMove > 0))
             {
                 StartDrift(rotationDirection);
             }
 
-            if (forwardMove != 0) //on tourne pas à l'arret
+            if (forwardMove != 0 || Mathf.Abs(localCurrentVelocity.z) > 5f) //on tourne pas à l'arret
             {
                 if (drifting)
                 {
@@ -169,7 +169,6 @@ namespace Kart
 
         protected void Rotate(float angle)
         {
-                
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer * 2 + KartPhysicsSettings.instance.steeringSpeed) * Time.fixedDeltaTime;
 

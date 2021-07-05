@@ -5,6 +5,7 @@ namespace Road.RoadPhysics {
     public abstract class PhysicsObject : MonoBehaviour {
         public Vector3 currentGravityAcceleration;
         public Vector3 currentVelocity;
+        public Vector3 localCurrentVelocity => transform.InverseTransformDirection(currentVelocity);
         public Vector3 currentAngularVelocity;
         public Vector3 currentForcesVelocity;
         public Rigidbody rigidBody;
