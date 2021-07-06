@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c503c3c25c998974b8fe21dc0319e1b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPlayer: 2
+  MaxPlayer: 4
+  ControlTypeDisplayPrefab: {fileID: 4360029730227934261, guid: 9e1cf1589ecc07647b0576876f126878,
+    type: 3}
+  ControlTypeDisplayParent: {fileID: 0}
 --- !u!114 &2402248256873062778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: 2
+  m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:

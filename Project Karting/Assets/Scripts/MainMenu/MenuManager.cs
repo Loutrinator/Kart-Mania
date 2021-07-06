@@ -7,11 +7,11 @@ public class MenuManager : MonoBehaviour
 {
 
     [SerializeField] private Animator mainCameraAnimator;
-    [SerializeField] private Animator timeTrialAnimator;
-    [SerializeField] private Animator championshipAnimator;
+    [SerializeField] private Animator soloAnimator;
+    [SerializeField] private Animator multiAnimator;
     [SerializeField] private Animator levelEditorAnimator;
     [SerializeField] private Animator kartSelectorAnimator;
-    [SerializeField] private CustomCanvas gameModeCanvas;
+    [SerializeField] private CustomCanvas gamePlayerModeCanvas;
 
 
     private void Awake()
@@ -19,35 +19,43 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.PlayMainMenuMusic();
     }
 
-    public void SelectModeTimeTrial()
+    public void SelectMultiplayer()
     {
+        PlayerConfigurationManager.Instance.multiplayer = true;
         SoundManager.Instance.PlayUIClick();
-        timeTrialAnimator.SetBool("Choosen",true);
-        levelEditorAnimator.SetBool("NotSelected",true);
-        championshipAnimator.SetBool("NotSelected",true);
+        soloAnimator.SetBool("NotSelected",true);
+        multiAnimator.SetBool("Choosen",true);
         mainCameraAnimator.SetTrigger("move");
-        gameModeCanvas.disableUIInteraction();
-        LevelManager.instance.gameConfig.mode = GameMode.TimeTrial;
     }
-    public void SelectModeLevelEditor()
+
+    public void SelectSolo()
     {
         SoundManager.Instance.PlayUIClick();
-        timeTrialAnimator.SetBool("NotSelected",true);
-        levelEditorAnimator.SetBool("Choosen",true);
-        championshipAnimator.SetBool("NotSelected",true);
+        soloAnimator.SetBool("Choosen",true);
+        multiAnimator.SetBool("NotSelected",true);
         mainCameraAnimator.SetTrigger("move");
-        gameModeCanvas.disableUIInteraction();
-        LevelManager.instance.gameConfig.mode = GameMode.Editor;
     }
-    public void SelectModeChampionship()
+    public void SelectMode(int i)
     {
+        PlayerConfigurationManager.Instance.DisableJoining();
         SoundManager.Instance.PlayUIClick();
-        timeTrialAnimator.SetBool("NotSelected",true);
-        levelEditorAnimator.SetBool("NotSelected",true);
-        championshipAnimator.SetBool("Choosen",true);
+        switch (i)
+        {
+            case 0://timetrial
+                LevelManager.instance.gameConfig.mode = GameMode.TimeTrial;
+                break;
+            case 1://levelEditor
+                LevelManager.instance.gameConfig.mode = GameMode.Editor;
+                break;
+            case 2://Championship
+                LevelManager.instance.gameConfig.mode = GameMode.Championship;
+                break;
+            case 3://Championship
+                LevelManager.instance.gameConfig.mode = GameMode.Versus;
+                break;
+        }
         mainCameraAnimator.SetTrigger("move");
-        gameModeCanvas.disableUIInteraction();
-        LevelManager.instance.gameConfig.mode = GameMode.Championship;
+        
     }
     public void ShowNextScreen()
     {
