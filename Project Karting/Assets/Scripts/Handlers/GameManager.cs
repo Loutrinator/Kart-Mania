@@ -23,7 +23,6 @@ namespace Handlers {
 
         [Header("UI and HUD")]
         [SerializeField] private HUDTimeTrialController HUDvsClockPrefab;
-        [SerializeField] private ScoreBoard ScoreBoardPrefab;
 
         [SerializeField] private GameObject StartUIPrefab;
 
@@ -276,9 +275,13 @@ namespace Handlers {
             }*/
         }
 
-        public void FinishRace(int playerID)
-        {
+        public void FinishRace(int playerID) {
             gameState = GameState.finish;
+            karts[playerID].canMove = false;
+            karts[playerID].effects.driftLevel = 0;
+            karts[playerID].effects.StopDrift();
+            karts[playerID].currentAngularVelocity = Vector3.zero;
+            karts[playerID].ResetKart();
             //var board = Instantiate(ScoreBoardPrefab); // auto id to link with kart with the same ID
             scoreBoard.gameObject.SetActive(true);
             scoreBoard.SetId(playerID);
