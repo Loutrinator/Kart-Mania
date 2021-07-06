@@ -23,14 +23,14 @@ public class HUDTimeTrialController : MonoBehaviour
         currentTime.text = "00:00:00";
         timeDiff.text = "";
         lap.text = "0/" + GameManager.Instance.currentRace.laps;
-        _info.onBestLapTimeChange += () => bestTime.text = Utils.DisplayHelper.floatToTimeString(_info.bestLapTime);
+        _info.onBestLapTimeChange += () => bestTime.text = Utils.DisplayHelper.FloatToTimeString(_info.bestLapTime);
         _info.onNewLap += () =>
         {
             // Update time diff each new lap
             lap.text = _info.lap + " / " + GameManager.Instance.currentRace.laps;
             if (_info.lap < 3) return;
             float diff = _info.previousLapTime - _info.bestLapTime;
-            timeDiff.text = Utils.DisplayHelper.floatToTimeString(diff);
+            timeDiff.text = Utils.DisplayHelper.FloatToTimeString(diff);
             timeDiff.color = diff > 0 ? Color.red : Color.green;
         };
         _info.onItemSet += () =>
@@ -51,17 +51,22 @@ public class HUDTimeTrialController : MonoBehaviour
             }
         };
 
-        _info.onFinishRace += () => gameObject.SetActive(false);
+        _info.onFinishRace -= OnFinishRace;
+        _info.onFinishRace += OnFinishRace;
+    }
+
+    private void OnFinishRace() {
+        gameObject.SetActive(false);
     }
 
     private void Update()
     {
         if (GameManager.Instance.RaceHadBegun())
         {
-            currentTime.text = Utils.DisplayHelper.floatToTimeString(Time.time - _info.currentLapStartTime);
+            currentTime.text = Utils.DisplayHelper.FloatToTimeString(Time.time - _info.currentLapStartTime);
         }
         else {
-            currentTime.text = Utils.DisplayHelper.floatToTimeString(0f);
+            currentTime.text = Utils.DisplayHelper.FloatToTimeString(0f);
         }
     }
 

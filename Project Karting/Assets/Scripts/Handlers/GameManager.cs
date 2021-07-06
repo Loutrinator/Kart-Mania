@@ -41,6 +41,7 @@ namespace Handlers {
 
         public PhysicsManager physicsManager;
         public KartRespawner respawner;
+        public ScoreBoard scoreBoard;
 
         [HideInInspector]
         public PauseMenu pauseMenu;
@@ -226,7 +227,7 @@ namespace Handlers {
             // board de fin de course, il ne reste que le dernier temps dans la liste
             foreach (var t in  playersInfo[playerId].lapsTime)
             {
-                Debug.Log("time add " + Utils.DisplayHelper.floatToTimeString(t));   
+                Debug.Log("time add " + Utils.DisplayHelper.FloatToTimeString(t));   
             }
             if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime) {
                 playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
@@ -248,7 +249,7 @@ namespace Handlers {
             // mais de finir pour la totalité des participants selon une autre condition
             // quand on sera en écran splitté (cf.  document de game design pour la condition de fin de course)
 
-            if (playersInfo[playerId].lap >= currentRace.laps)
+            if (playersInfo[playerId].lap > currentRace.laps)
             {
                 playersInfo[playerId].FinishRace();
                 FinishRace(playerId);
@@ -278,8 +279,9 @@ namespace Handlers {
         public void FinishRace(int playerID)
         {
             gameState = GameState.finish;
-            var board = Instantiate(ScoreBoardPrefab); // auto id to link with kart with the same ID
-            board.setId(playerID);
+            //var board = Instantiate(ScoreBoardPrefab); // auto id to link with kart with the same ID
+            scoreBoard.gameObject.SetActive(true);
+            scoreBoard.SetId(playerID);
         }
 
         public void QuitGame()

@@ -1,46 +1,59 @@
 ﻿using Handlers;
-using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 
-public class ScoreBoard : MonoBehaviour
-{
-    [Header("Front")] 
-    [SerializeField] private GameObject currentLapTimesContainer = null;
-    [SerializeField] private GameObject bestLapTimesContainer = null;
-    [SerializeField] private TextMeshProUGUI totalTimeText = null;
-    [SerializeField] private TextMeshProUGUI bestTotalTimeText = null;
-
-    private PlayerRaceInfo _info;
-    private int _id = 0;
-
-    public void setId(int playerId)
+namespace UI {
+    public class ScoreBoard : MonoBehaviour
     {
-        _id = playerId;
-        _info = GameManager.Instance.GetPlayerRaceInfo(_id);
+        [Header("Front")]
+        [SerializeField] private GameObject currentLapTimesContainer;
+        [SerializeField] private GameObject bestLapTimesContainer;
+        [SerializeField] private TextMeshProUGUI totalTimeText;
+        [SerializeField] private TextMeshProUGUI bestTotalTimeText;
 
-    }
-    private void Start()
-    {
+        private PlayerRaceInfo _info;
+        private int _id;
 
-        // because it use the example in prefab
-        TextMeshProUGUI bestLapTime = Instantiate(currentLapTimesContainer.transform.GetComponentInChildren<TextMeshProUGUI>(), currentLapTimesContainer.transform);
-        bestLapTime.text = Utils.DisplayHelper.floatToTimeString(_info.bestLapTime);
-
-        //clean
-        foreach (Transform child in currentLapTimesContainer.transform)
+        public void SetId(int playerId)
         {
-            GameObject.Destroy(child.gameObject);
-        }
-        Debug.Log("cb de temps dans la liste de _info ? : "+ _info.lapsTime.Count);
+            _id = playerId;
+            _info = GameManager.Instance.GetPlayerRaceInfo(_id);
 
-        foreach (float time in _info.lapsTime)
+        }
+        private void Start()
         {
-            TextMeshProUGUI timeText = Instantiate(bestLapTime, currentLapTimesContainer.transform);
-            timeText.text = Utils.DisplayHelper.floatToTimeString(time);
-            Debug.Log("display time : "+  timeText.text);
-        }
-        bestLapTime.fontMaterial.color = Color.green;
-    }
+            // because it use the example in prefab
+            TextMeshProUGUI bestLapTime = Instantiate(currentLapTimesContainer.transform.GetComponentInChildren<TextMeshProUGUI>(), currentLapTimesContainer.transform);
+            bestLapTime.text = Utils.DisplayHelper.FloatToTimeString(_info.bestLapTime);
 
+            //clean
+            foreach (Transform child in currentLapTimesContainer.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            Debug.Log("cb de temps dans la liste de _info ? : "+ _info.lapsTime.Count);
+
+            for (var index = 0; index < _info.lapsTime.Count; index++) {
+                float time = _info.lapsTime[index];
+                TextMeshProUGUI timeText = Instantiate(bestLapTime, currentLapTimesContainer.transform);
+                timeText.enabled = true;
+                timeText.text = GetLapName(index + 1) + Utils.DisplayHelper.FloatToTimeString(time);
+                Debug.Log("display time : " + timeText.text);
+            }
+
+            bestLapTime.fontMaterial.color = Color.green;
+        }
+
+        private string GetLapName(int lap) {
+            string result = lap.ToString();
+            result += lap switch {
+                1 => "st",
+                2 => "nd",
+                3 => "rd",
+                _ => "th"
+            };
+            result += " - ";
+            return result;
+        }
+    }
 }
