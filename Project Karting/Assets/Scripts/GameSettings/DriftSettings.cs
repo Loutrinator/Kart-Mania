@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityExtendedEditor.ExtendedAttributes.Editor;
 
 [CreateAssetMenu(fileName = "DriftSettings", menuName = "ScriptableObjects/DriftSettings")]
 public class DriftSettings : ScriptableObject
@@ -41,5 +38,18 @@ public class DriftSettings : ScriptableObject
     public AnimationCurve boostCameraIn;
     public AnimationCurve boostCameraOut;
 
+    #endregion
+    #region Sound
+    
+    public AudioClip driftAudioClip;
+    public float driftVolume;
+    public float driftSoundAnimationSpeed;
+    public AnimationCurve driftVolumeEaseIn;
+    public AnimationCurve driftVolumeEaseOut;
+    public float driftPitchMin;
+    public float driftPitchMax;
+    public AnimationCurve driftPitchEaseIn;
+    public AnimationCurve driftPitchEaseOut;
+    
     #endregion
 }

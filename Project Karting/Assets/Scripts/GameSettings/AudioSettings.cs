@@ -19,6 +19,12 @@ public class AudioSettings : ScriptableObject
         instance = null;
     }
     #endregion
+
+    [Header("Volume mixer")] 
+    [Range(0f, 1f)]public float musicVolume = 0.5f;
+    [Range(0f, 1f)]public float UIVolume = 0.5f;
+    [Range(0f, 1f)]public float motorVolume = 0.5f;
+    [Range(0f, 1f)]public float driftVolume = 0.5f;
     #region Kart
     public float kartSpeedLerp = 1.5f;
     public float kartPitchMin = 0.8f;

@@ -69,11 +69,13 @@ public class KartSelectionManager : MonoBehaviour
 
     public void SelectNext()
     {
+        SoundManager.Instance.PlayUIClick();
         currentKartId = getKartId(1);
         diaphragm.Open();
     }
     public void SelectPrevious()
     {
+        SoundManager.Instance.PlayUIClick();
         currentKartId = getKartId(-1);
         diaphragm.Open();
     }

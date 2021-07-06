@@ -25,12 +25,14 @@ public class PauseMenu : MonoBehaviour
     }
     public void ResumeGame()
     {
+        SoundManager.Instance.PlayUIBack();
         GameManager.Instance.ResumeGame();
         root.SetActive(false);
     }
     
     public void QuitGame()
     {
+        SoundManager.Instance.PlayUIClick();
 #if UNITY_EDITOR
         Debug.Log("Quitting the app !");
         UnityEditor.EditorApplication.isPlaying = false;
@@ -41,6 +43,7 @@ public class PauseMenu : MonoBehaviour
     
     public void MainMenu()
     {
+        SoundManager.Instance.PlayUIClick();
         ResumeGame();
         SceneManager.instance.LoadMainMenu();
     }

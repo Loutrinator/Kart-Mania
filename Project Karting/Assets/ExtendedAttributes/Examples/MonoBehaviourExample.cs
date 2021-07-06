@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityExtendedEditor.ExtendedAttributes.Editor;
 
 // ReSharper disable once CheckNamespace
 namespace UnityExtendedEditor.ExtendedAttributes {

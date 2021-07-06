@@ -94,6 +94,7 @@ public class TransitionController : MonoBehaviour
         currentStateStartTime = Time.time;
         transitionState = TransitionState.FadeIn;
         _onShowLoading = onLoadingStart;
+        SoundManager.Instance.FadeOutMusic();
     }
     public void FadeOut(Action onLoadingEnd = null)    // transition end
     {

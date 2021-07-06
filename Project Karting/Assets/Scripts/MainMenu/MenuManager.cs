@@ -1,4 +1,5 @@
-﻿using Game;
+﻿using System;
+using Game;
 using Handlers;
 using UnityEngine;
 
@@ -12,8 +13,15 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Animator kartSelectorAnimator;
     [SerializeField] private CustomCanvas gameModeCanvas;
 
+
+    private void Awake()
+    {
+        SoundManager.Instance.PlayMainMenuMusic();
+    }
+
     public void SelectModeTimeTrial()
     {
+        SoundManager.Instance.PlayUIClick();
         timeTrialAnimator.SetBool("Choosen",true);
         levelEditorAnimator.SetBool("NotSelected",true);
         championshipAnimator.SetBool("NotSelected",true);
@@ -23,6 +31,7 @@ public class MenuManager : MonoBehaviour
     }
     public void SelectModeLevelEditor()
     {
+        SoundManager.Instance.PlayUIClick();
         timeTrialAnimator.SetBool("NotSelected",true);
         levelEditorAnimator.SetBool("Choosen",true);
         championshipAnimator.SetBool("NotSelected",true);
@@ -32,6 +41,7 @@ public class MenuManager : MonoBehaviour
     }
     public void SelectModeChampionship()
     {
+        SoundManager.Instance.PlayUIClick();
         timeTrialAnimator.SetBool("NotSelected",true);
         levelEditorAnimator.SetBool("NotSelected",true);
         championshipAnimator.SetBool("Choosen",true);
@@ -41,6 +51,7 @@ public class MenuManager : MonoBehaviour
     }
     public void ShowNextScreen()
     {
+        SoundManager.Instance.PlayUIClick();
         mainCameraAnimator.SetTrigger("move");
     }
     public void ShowPreviousScreen()
@@ -62,10 +73,12 @@ public class MenuManager : MonoBehaviour
     }
     public void QuitGame()
     {
+        SoundManager.Instance.PlayUIBack();
         GameManager.Instance.QuitGame();
     }
     public void ShowCredits()
     {
+        SoundManager.Instance.PlayUIClick();
         SceneManager.instance.LoadCredits();//TODO
     }
 }

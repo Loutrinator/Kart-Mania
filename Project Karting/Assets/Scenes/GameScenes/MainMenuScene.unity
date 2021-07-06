@@ -239,7 +239,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &467943241
 GameObject:
@@ -307,20 +307,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!115 &483944395
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 5
-  m_Script: 
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_ExecutionOrder: 0
-  m_ClassName: SceneObjectIDMapSceneAsset
-  m_Namespace: UnityEngine.Experimental.Rendering.HDPipeline
 --- !u!850595691 &546305992
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -447,7 +433,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20aa285a547592d4b831299979812d5c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
 --- !u!95 &1154621793 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1154621793, guid: 16a614cc063828c42a89a0410dd21691,
@@ -861,11 +847,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1938997335}
-    - target: {fileID: 2541598111825877317, guid: 814157724baddef4baec1799ac0670a0,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowCredits
-      objectReference: {fileID: 0}
     - target: {fileID: 3239890816584727103, guid: 814157724baddef4baec1799ac0670a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1586,11 +1567,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Car selection canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 4099746521796739957, guid: 16a614cc063828c42a89a0410dd21691,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4099746521796739961, guid: 16a614cc063828c42a89a0410dd21691,
         type: 3}
@@ -2861,6 +2837,7 @@ GameObject:
   - component: {fileID: 6509208819017775319}
   - component: {fileID: 6509208819017775320}
   - component: {fileID: 6509208819017775321}
+  - component: {fileID: 6509208819017775318}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -2868,6 +2845,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &6509208819017775318
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6509208819017775317}
+  m_Enabled: 1
 --- !u!95 &6509208819017775319
 Animator:
   serializedVersion: 3

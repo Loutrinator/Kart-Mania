@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Kart
@@ -36,6 +37,8 @@ namespace Kart
         private float timeWhenKeyInserted;
         private bool keyIsRewinding;
 
+        private AudioSource _driftSoundSource;
+
         //BoostEffect
 
         [HideInInspector] public int driftLevel;
@@ -47,6 +50,12 @@ namespace Kart
             driftLevel = 0;
             baseFOV = cam.fieldOfView;
             baseZ = cam.transform.localPosition.z;
+            _driftSoundSource = gameObject.AddComponent<AudioSource>();
+            _driftSoundSource.volume = 0f;
+            _driftSoundSource.loop = true;
+            _driftSoundSource.playOnAwake = false;
+            _driftSoundSource.clip = DriftSettings.instance.driftAudioClip;
+            
         }
         /*
         public void LateUpdate()
@@ -164,6 +173,8 @@ namespace Kart
             driftLevel = 0;
             boostLight.gameObject.SetActive(true);
             StartCoroutine(BoostLoading());
+
+            PlayBoostSound();
         }
 
         public void stopDrift()
@@ -204,8 +215,42 @@ namespace Kart
             }
 
             driftLevel = 0;
+
+            StopBoostSound();
         }
 
+
+        private void PlayBoostSound()
+        {
+            if (_driftSoundSource != null)
+            {
+                _driftSoundSource.Play();
+                DOTween.To(() => _driftSoundSource.volume, value => _driftSoundSource.volume = value,
+                        AudioSettings.instance.driftVolume, DriftSettings.instance.driftSoundAnimationSpeed)
+                    .SetEase(DriftSettings.instance.driftVolumeEaseIn);
+                _driftSoundSource.pitch = 1;
+                DOTween.To(() => _driftSoundSource.pitch, value => _driftSoundSource.pitch = value,
+                        DriftSettings.instance.driftPitchMax, DriftSettings.instance.driftSoundAnimationSpeed)
+                    .SetEase(DriftSettings.instance.driftPitchEaseIn);
+            }
+        }
+
+        private void StopBoostSound()
+        {
+            if (_driftSoundSource != null)
+            {
+                _driftSoundSource.clip = DriftSettings.instance.driftAudioClip;
+                DOTween.To(() => _driftSoundSource.volume, value => _driftSoundSource.volume = value, 0, DriftSettings.instance.driftSoundAnimationSpeed).SetEase(DriftSettings.instance.driftVolumeEaseOut);
+                DOTween.To(() => _driftSoundSource.pitch, value => _driftSoundSource.pitch = value,
+                        DriftSettings.instance.driftPitchMin, DriftSettings.instance.driftSoundAnimationSpeed)
+                    .SetEase(DriftSettings.instance.driftPitchEaseOut);
+            }
+        }
+
+        
+        
+        
+        
         public void startBoost(float length, float force)
         {
 
