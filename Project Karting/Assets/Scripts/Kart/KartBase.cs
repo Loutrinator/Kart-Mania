@@ -76,7 +76,7 @@ namespace Kart
             }
         }
 
-        public override bool IsGrounded()
+        /*public override bool IsGrounded()
         {
             int wheelsOnGround = 0;
             for (var index = 0; index < wheels.Count; index++) {
@@ -92,7 +92,7 @@ namespace Kart
             }
 
             return wheelsOnGround >= 4;
-        }
+        }*/
 
         private void FixedUpdate()
         {

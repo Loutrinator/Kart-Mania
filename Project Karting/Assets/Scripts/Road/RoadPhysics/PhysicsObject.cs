@@ -21,7 +21,7 @@ namespace Road.RoadPhysics {
 
         public void UpdatePhysics(Vector3 groundNormal, float drag)
         {
-            currentGravityAcceleration = -groundNormal * currentGravityAcceleration.magnitude;
+            /*currentGravityAcceleration = -groundNormal * currentGravityAcceleration.magnitude;
 
             if (IsGrounded())
             {
@@ -38,9 +38,11 @@ namespace Road.RoadPhysics {
             
             // drag
             currentForcesVelocity -= currentForcesVelocity * drag;
+            currentVelocity -= currentVelocity * drag;*/
+            
         }
 
-        public abstract bool IsGrounded();
+        //public abstract bool IsGrounded();
 
         public void ResetForces() {
             currentForcesVelocity = Vector3.zero;
