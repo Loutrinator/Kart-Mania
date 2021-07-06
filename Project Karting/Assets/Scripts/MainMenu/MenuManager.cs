@@ -74,7 +74,7 @@ public class MenuManager : MonoBehaviour
     public void QuitGame()
     {
         SoundManager.Instance.PlayUIBack();
-        GameManager.Instance.QuitGame();
+        SceneManager.instance.QuitGame();
     }
     public void ShowCredits()
     {
