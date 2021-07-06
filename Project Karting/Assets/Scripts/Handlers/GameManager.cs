@@ -20,7 +20,6 @@ namespace Handlers {
         public Minimap minimap;
 
         public ItemManager itemManager;
-        public int checkpointAmount;
 
         [Header("UI and HUD")] [SerializeField]
         private HUDTimeTrialController HUDvsClockPrefab;
@@ -200,11 +199,11 @@ namespace Handlers {
             PlayerRaceInfo player = playersInfo[playerId];
 
             //permet de vérifier si premièrement le checkpoint est valide et si il est après le checkpoint actuel
-            if (checkpointId < checkpointAmount) {
+            if (checkpointId < currentRace.checkpointAmount) {
                 if (checkpointId - player.currentCheckpoint == 1) {
                     playersInfo[playerId].currentCheckpoint = checkpointId;
                 }
-                else if (player.currentCheckpoint == checkpointAmount - 1 && checkpointId == 0) {
+                else if (player.currentCheckpoint == currentRace.checkpointAmount - 1 && checkpointId == 0) {
                     playersInfo[playerId].currentCheckpoint = checkpointId;
                     NewLap(playerId);
                 }

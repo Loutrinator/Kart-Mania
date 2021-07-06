@@ -13,12 +13,16 @@ namespace Game {
         
         public Transform[] spawnPoints;
 
+        [HideInInspector] public int checkpointAmount;
+
         public void Init() {
             road.bezierMeshExtrusion.UpdateMesh();
             var borders = GetComponentsInChildren<RoadBorder>();
             foreach (var border in borders) {
                 border.UpdateMesh();
             }
+
+            checkpointAmount = GetComponentsInChildren<Checkpoint>().Length;
         }
     }
 }

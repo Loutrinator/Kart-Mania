@@ -737,9 +737,9 @@ Transform:
   - {fileID: 8409028068780493390}
   - {fileID: 7225558202553291904}
   - {fileID: 4033539318593626429}
+  - {fileID: 7253895857706167934}
   - {fileID: 7542506134383538075}
   - {fileID: 2697466374312864628}
-  - {fileID: 7253895857706167934}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1804,7 +1804,7 @@ PrefabInstance:
     - target: {fileID: 1008004571451031574, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1008004571451031574, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
@@ -1876,6 +1876,11 @@ PrefabInstance:
       propertyPath: computeDistanceFromPosition
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: checkpointId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4872971696117697879, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: m_Name
@@ -1899,7 +1904,7 @@ PrefabInstance:
     - target: {fileID: 1008004571451031574, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1008004571451031574, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
@@ -1971,6 +1976,11 @@ PrefabInstance:
       propertyPath: computeDistanceFromPosition
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: checkpointId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4872971696117697879, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: m_Name
@@ -1994,7 +2004,7 @@ PrefabInstance:
     - target: {fileID: 1008004571451031574, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1008004571451031574, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
@@ -2064,6 +2074,11 @@ PrefabInstance:
     - target: {fileID: 1596217793355050250, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: computeDistanceFromPosition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: checkpointId
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4872971696117697879, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,

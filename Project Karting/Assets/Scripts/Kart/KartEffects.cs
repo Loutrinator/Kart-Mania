@@ -224,7 +224,6 @@ namespace Kart
         {
             if (_driftSoundSource != null)
             {
-                Debug.Log("IUHFSUIFHSUIEFHIUSEF");
                 _driftSoundSource.Play();
                 DOTween.To(() => _driftSoundSource.volume, value => _driftSoundSource.volume = value,
                         AudioSettings.instance.driftVolume, DriftSettings.instance.driftSoundAnimationSpeed)

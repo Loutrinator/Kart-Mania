@@ -833,6 +833,7 @@ MonoBehaviour:
   distance: 2950
   horizontalOffset: 0
   verticalOffset: 0
+  computeDistanceFromPosition: 0
 --- !u!1 &1557406991054568430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3040,6 +3041,7 @@ MonoBehaviour:
   road: {fileID: 4836199134749943345}
   spawnPoints:
   - {fileID: 3149743445185773232}
+  checkpointAmount: 0
 --- !u!1001 &852255280022554422
 PrefabInstance:
   m_ObjectHideFlags: 0
