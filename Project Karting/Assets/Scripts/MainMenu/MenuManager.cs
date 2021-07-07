@@ -2,6 +2,8 @@
 using Game;
 using Handlers;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -12,11 +14,18 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Animator levelEditorAnimator;
     [SerializeField] private Animator kartSelectorAnimator;
     [SerializeField] private CustomCanvas gamePlayerModeCanvas;
+    [SerializeField] private UICanvas playermodeCanvas;
+    [SerializeField] private UICanvas gamemodeCanvas;
+    [SerializeField] private UICanvas kartCanvas;
+    [SerializeField] private UICanvas circuitCanvas;
 
-
+    private EventSystem _eventSystem;
+    
     private void Awake()
     {
         SoundManager.Instance.PlayMainMenuMusic();
+        _eventSystem = FindObjectOfType<EventSystem>();
+        _eventSystem.SetSelectedGameObject(playermodeCanvas.firstButton.gameObject);
     }
 
     public void SelectMultiplayer()
@@ -26,6 +35,7 @@ public class MenuManager : MonoBehaviour
         soloAnimator.SetBool("NotSelected",true);
         multiAnimator.SetBool("Choosen",true);
         mainCameraAnimator.SetTrigger("move");
+        _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
     }
 
     public void SelectSolo()
@@ -34,6 +44,7 @@ public class MenuManager : MonoBehaviour
         soloAnimator.SetBool("Choosen",true);
         multiAnimator.SetBool("NotSelected",true);
         mainCameraAnimator.SetTrigger("move");
+        _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
     }
     public void SelectMode(int i)
     {
@@ -55,7 +66,7 @@ public class MenuManager : MonoBehaviour
                 break;
         }
         mainCameraAnimator.SetTrigger("move");
-        
+        _eventSystem.SetSelectedGameObject(kartCanvas.firstButton.gameObject);
     }
     public void ShowNextScreen()
     {

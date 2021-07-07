@@ -778,14 +778,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 6368353847381236147}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SelectModeChampionship
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: SelectMultiplayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -805,7 +805,7 @@ Animator:
   m_GameObject: {fileID: 2597896611118049353}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e7f4336bdeed2584c8d627d519d2e150, type: 2}
+  m_Controller: {fileID: 9100000, guid: be95cf7c1571a6742a01a759b479cfcb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1090,8 +1090,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SelectModeTimeTrial
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: SelectSolo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1111,7 +1111,7 @@ Animator:
   m_GameObject: {fileID: 5726179082482672695}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e7f4336bdeed2584c8d627d519d2e150, type: 2}
+  m_Controller: {fileID: 9100000, guid: be95cf7c1571a6742a01a759b479cfcb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1133,6 +1133,7 @@ GameObject:
   - component: {fileID: 7618155475832913804}
   - component: {fileID: 7618155475832913805}
   - component: {fileID: 833133539}
+  - component: {fileID: 539961620459604022}
   m_Layer: 0
   m_Name: Mode selection canvas
   m_TagString: Untagged
@@ -1239,6 +1240,19 @@ MonoBehaviour:
   - {fileID: 6569220197442166790}
   - {fileID: 8386481475231979543}
   - {fileID: 7208000529859843775}
+--- !u!114 &539961620459604022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618155475832913803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d7f9a81cb814e489d5b791af236c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstButton: {fileID: 6569220197442166790}
 --- !u!1 &8118635054214526384
 GameObject:
   m_ObjectHideFlags: 0
