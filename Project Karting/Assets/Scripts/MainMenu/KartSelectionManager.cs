@@ -17,7 +17,6 @@ public class KartSelectionManager : MonoBehaviour
     public StatDisplay brake;
     public StatDisplay okayletzgo;
     [Header("Other")]
-    public MenuManager menuManager;
     public List<KartPreview> availableKarts;
     public Diaphragm diaphragm;
     public Transform carHolder;
@@ -87,6 +86,6 @@ public class KartSelectionManager : MonoBehaviour
         playerConfig.name = "Player 1";
         playerConfig.kartPrefab = selectedKart.kartPrefab;
         LevelManager.instance.gameConfig.players.Add(playerConfig);
-        menuManager.ShowNextScreen();
+        MenuManager.Instance.SelectKart();
     }
 }

@@ -18,14 +18,25 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private UICanvas gamemodeCanvas;
     [SerializeField] private UICanvas kartCanvas;
     [SerializeField] private UICanvas circuitCanvas;
+    [SerializeField] private UICanvas goCanvas;
 
     private EventSystem _eventSystem;
     
+    public static MenuManager Instance { get; private set; }
+
     private void Awake()
-    {
-        SoundManager.Instance.PlayMainMenuMusic();
-        _eventSystem = FindObjectOfType<EventSystem>();
-        _eventSystem.SetSelectedGameObject(playermodeCanvas.firstButton.gameObject);
+    { 
+        if (Instance != null)
+        {
+            Debug.Log("Trying to create another singleton");
+        }
+        else
+        {
+            Instance = this;
+            SoundManager.Instance.PlayMainMenuMusic();
+            _eventSystem = FindObjectOfType<EventSystem>();
+            _eventSystem.SetSelectedGameObject(playermodeCanvas.firstButton.gameObject);
+        }
     }
 
     public void SelectMultiplayer()
@@ -47,6 +58,19 @@ public class MenuManager : MonoBehaviour
         multiAnimator.SetBool("NotSelected",true);
         mainCameraAnimator.SetTrigger("move");
         _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
+    }
+
+    public void SelectKart()
+    {
+        ShowNextScreen();
+        _eventSystem.SetSelectedGameObject(circuitCanvas.firstButton.gameObject);
+        
+    }
+    public void SelectRace()
+    {
+        ShowNextScreen();
+        _eventSystem.SetSelectedGameObject(goCanvas.firstButton.gameObject);
+        
     }
     public void SelectMode(int i)
     {

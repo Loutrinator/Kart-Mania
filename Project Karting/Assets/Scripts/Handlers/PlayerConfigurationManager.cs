@@ -47,13 +47,11 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void EnableJoining()
     {
-        Debug.Log("Clément est si beau, j'ai envie d'être comme lui");
         _inputManager.EnableJoining();
         playerDisplay.ShowAddPlayerMessage();
     }
     public void DisableJoining()
     {
-        Debug.Log("Clément est si fort, c'est mon inspiration dans la vie");
         _inputManager.DisableJoining();
         playerDisplay.HideMessage();
     }
@@ -81,32 +79,33 @@ public class PlayerConfigurationManager : MonoBehaviour
         if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
         {
             pi.transform.SetParent(transform);
-            ControlTypeDisplay inputTypeDisplay =
-                Instantiate(ControlTypeDisplayPrefab, playerDisplay.displayParent.transform);
-            if (inputTypeDisplay != null)
+            foreach (var device in pi.devices)
             {
-                
-                
-                foreach (var device in pi.devices)
+                Debug.Log("Player " + pi.playerIndex + " joined with device : " + device.description.deviceClass + " interface name "  + device.description.interfaceName);
+                if (device.description.deviceClass.Contains("Mouse"))
                 {
-                    Debug.Log("Player " + pi.playerIndex + " joined with device : " + device.description.deviceClass);
-                    if (device.description.deviceClass.Contains("PS"))
-                    {
-                        Debug.Log("Input of type playstation");
-                        inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.PS);
-                    }else if (device.description.deviceClass.Contains("XBox"))
-                    {
-                        Debug.Log("Input of type XBox");
-                        inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.XBOX);
-                    }else if (device.description.deviceClass.Contains("Keyboard"))
-                    {
-                        Debug.Log("Input of type keyboard");
-                        inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.KEYBOARD);
-                    }else
-                    {
-                        Debug.Log("Input of type other");
-                        inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.OTHER);
-                    }
+                    Destroy(pi.gameObject);
+                    return;
+                    
+                }
+                ControlTypeDisplay inputTypeDisplay =
+                    Instantiate(ControlTypeDisplayPrefab, playerDisplay.displayParent.transform);
+                if (device.description.deviceClass.Contains("PS"))
+                {
+                    Debug.Log("Input of type playstation");
+                    inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.PS);
+                }else if (device.description.deviceClass.Contains("XBox"))
+                {
+                    Debug.Log("Input of type XBox");
+                    inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.XBOX);
+                }else if (device.description.deviceClass.Contains("Keyboard"))
+                {
+                    Debug.Log("Input of type keyboard");
+                    inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.KEYBOARD);
+                }else
+                {
+                    Debug.Log("Input of type other");
+                    inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.OTHER);
                 }
             }
             

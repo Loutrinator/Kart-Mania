@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3864501435000275404}
   - component: {fileID: 3864501435000275401}
   - component: {fileID: 3864501435000275400}
+  - component: {fileID: 4488987186074138480}
   m_Layer: 0
   m_Name: Go Canvas
   m_TagString: Untagged
@@ -38,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.2800293, y: 3.5299988}
+  m_AnchoredPosition: {x: 0.2800293, y: 3.5300293}
   m_SizeDelta: {x: 404.4917, y: 230.2811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3864501435000275406
@@ -84,7 +85,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3864501435000275404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +136,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 0}
   canvasAnimator: {fileID: 3864501435000275401}
+--- !u!114 &4488987186074138480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864501435000275402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d7f9a81cb814e489d5b791af236c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstButton: {fileID: 5389184018079536378}
 --- !u!1 &5389184018079536381
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +186,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 686, y: 284}
+  m_SizeDelta: {x: 445.76, y: 184.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5389184018079536376
 CanvasRenderer:
