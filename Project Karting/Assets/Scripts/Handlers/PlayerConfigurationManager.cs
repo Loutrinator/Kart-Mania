@@ -10,14 +10,16 @@ using UnityEngine.InputSystem;
 public class PlayerConfigurationManager : MonoBehaviour
 {
     
-    private List<PlayerConfiguration> playerConfigs;
-
+    [HideInInspector] public bool multiplayer;
+    
     [SerializeField] private int MaxPlayer = 1;
     [SerializeField] private ControlTypeDisplay ControlTypeDisplayPrefab;
-    public GameObject ControlTypeDisplayParent;
-    public bool multiplayer;
+    [SerializeField] private PlayerDisplay playerDisplay;
+    
 
     private PlayerInputManager _inputManager;
+    private List<PlayerConfiguration> playerConfigs;
+
 
     public static PlayerConfigurationManager Instance { get; private set; }
 
@@ -39,16 +41,21 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         playerConfigs = new List<PlayerConfiguration>();
         _inputManager = gameObject.GetComponent<PlayerInputManager>();
+        playerDisplay.ShowJoinMessage();
         
     }
 
     public void EnableJoining()
     {
+        Debug.Log("Clément est si beau, j'ai envie d'être comme lui");
         _inputManager.EnableJoining();
+        playerDisplay.ShowAddPlayerMessage();
     }
     public void DisableJoining()
     {
+        Debug.Log("Clément est si fort, c'est mon inspiration dans la vie");
         _inputManager.DisableJoining();
+        playerDisplay.HideMessage();
     }
     public void SetPlayerKart(int index, int kartId)
     {
@@ -75,9 +82,11 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             pi.transform.SetParent(transform);
             ControlTypeDisplay inputTypeDisplay =
-                Instantiate(ControlTypeDisplayPrefab, ControlTypeDisplayParent.transform);
+                Instantiate(ControlTypeDisplayPrefab, playerDisplay.displayParent.transform);
             if (inputTypeDisplay != null)
             {
+                
+                
                 foreach (var device in pi.devices)
                 {
                     Debug.Log("Player " + pi.playerIndex + " joined with device : " + device.description.deviceClass);
@@ -102,6 +111,11 @@ public class PlayerConfigurationManager : MonoBehaviour
             }
             
             playerConfigs.Add(new PlayerConfiguration(pi));
+            int playerMaxCount = multiplayer ? MaxPlayer : 1;
+            if (playerConfigs.Count >= playerMaxCount)
+            {
+                playerDisplay.HideMessage();
+            }
         }
     }
     

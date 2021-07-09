@@ -30,6 +30,7 @@ public class MenuManager : MonoBehaviour
 
     public void SelectMultiplayer()
     {
+        PlayerConfigurationManager.Instance.EnableJoining();
         PlayerConfigurationManager.Instance.multiplayer = true;
         SoundManager.Instance.PlayUIClick();
         soloAnimator.SetBool("NotSelected",true);
@@ -40,6 +41,7 @@ public class MenuManager : MonoBehaviour
 
     public void SelectSolo()
     {
+        PlayerConfigurationManager.Instance.DisableJoining();
         SoundManager.Instance.PlayUIClick();
         soloAnimator.SetBool("Choosen",true);
         multiAnimator.SetBool("NotSelected",true);

@@ -32,7 +32,7 @@
             ],
             "bindings": [
                 {
-                    "name": "ZQSD",
+                    "name": "WASD",
                     "id": "ce92f41f-c181-4de3-bc35-be5f29251db5",
                     "path": "2DVector(mode=2)",
                     "interactions": "",
@@ -45,7 +45,7 @@
                 {
                     "name": "up",
                     "id": "05e10658-8355-44ef-850e-ade2a69816b8",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -67,7 +67,7 @@
                 {
                     "name": "left",
                     "id": "ef94f1bf-6f0a-4f14-8885-c9c3b4942a55",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -331,6 +331,61 @@
                     "name": "right",
                     "id": "2ff8145a-d4c3-4551-89ee-9ace4c5eb8ca",
                     "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "D-Pad",
+                    "id": "a6d57467-6059-48cc-8004-f1f288122652",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "2eb3de29-d33e-440f-9300-a8bb6f838b8e",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "9a92a72f-9db0-4efb-976a-2d4d82e36e70",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "f000d0b0-d5e8-4477-88f1-979a499ba218",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "c28048b3-85cc-4300-a100-9d9ea77d6064",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
