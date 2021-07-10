@@ -160,15 +160,18 @@ namespace Handlers {
                     {
                         Destroy(kartCam.GetComponent<AudioListener>());
                     }
+
+                    kartCam.SetViewport(id);
+                    
                     kartCam.target = kart.transform;
                     if (kartEffects != null)
                     {
                         kartEffects.cameraShakeTransform = kartCam.cameraShakeTransform;
-                        kartEffects.cam = kartCam.frontCamera;
+                        kartEffects.cam = kartCam.cam;
                     }
                     if (kartAudio != null)
                     {
-                        kartAudio.cam = kartCam.frontCamera;
+                        kartAudio.cam = kartCam.cam;
                     }
                     karts.Add(kart);
                     
