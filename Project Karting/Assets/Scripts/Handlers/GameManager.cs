@@ -56,6 +56,8 @@ namespace Handlers {
             else {
                 Destroy(gameObject);
             }
+            
+            
 
             currentRace = LevelManager.instance.InitLevel();
             minimap.race = currentRace;
@@ -138,9 +140,11 @@ namespace Handlers {
             Transform[] spawnPoints = currentRace.spawnPoints;
             if (spawnPoints.Length >= nbPlayerRacing) {
                 for (int id = 0; id < nbPlayerRacing; ++id) {
-                    PlayerConfig playerConfig = LevelManager.instance.gameConfig.players[id];
+                    PlayerConfiguration playerConfig = LevelManager.instance.gameConfig.players[id];
+                    //playerConfig.Input.actions.actionMaps
+                    playerConfig.Input.SwitchCurrentActionMap("Kart");
                     Transform spawn = spawnPoints[id];
-                    KartBase kart = Instantiate(playerConfig.kartPrefab, spawn.position, spawn.rotation);
+                    KartBase kart = Instantiate(playerConfig.Kart, spawn.position, spawn.rotation);
                     kart.playerIndex = id;
                     KartEffects kartEffects = kart.GetComponent<KartEffects>();
                     KartAudio kartAudio = kart.GetComponent<KartAudio>();
@@ -148,6 +152,10 @@ namespace Handlers {
                     
                     // cameras for players
                     var kartCam = Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
+                    if (id != 0)
+                    {
+                        Destroy(kartCam.GetComponent<AudioListener>());
+                    }
                     kartCam.target = kart.transform;
                     if (kartEffects != null)
                     {

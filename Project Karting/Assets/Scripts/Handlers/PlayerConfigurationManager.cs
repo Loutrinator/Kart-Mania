@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Handlers;
 using Kart;
 using UnityEditor.SearchService;
 using UnityEngine;
@@ -19,7 +20,6 @@ public class PlayerConfigurationManager : MonoBehaviour
     
 
     private PlayerInputManager _inputManager;
-    private List<PlayerConfiguration> playerConfigs;
     private List<ControlTypeDisplay> ControlTypeDisplays;
 
     private int currentPlayerIndex;
@@ -42,7 +42,6 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     private void Start()
     {
-        playerConfigs = new List<PlayerConfiguration>();
         _inputManager = gameObject.GetComponent<PlayerInputManager>();
         playerDisplay.ShowJoinMessage();
         ControlTypeDisplays = new List<ControlTypeDisplay>();
@@ -62,16 +61,16 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void SetPlayerKart(KartBase kart)
     {
         Debug.Log("SetPlayer " + currentPlayerIndex);
-        playerConfigs[currentPlayerIndex].Name = "Player " + (currentPlayerIndex+1);
-        playerConfigs[currentPlayerIndex].Kart = kart;
+        LevelManager.instance.gameConfig.players[currentPlayerIndex].Name = "Player " + (currentPlayerIndex+1);
+        LevelManager.instance.gameConfig.players[currentPlayerIndex].Kart = kart;
         ControlTypeDisplays[currentPlayerIndex].PlayerIsReady();
         ReadyPlayer(currentPlayerIndex);
     }
     public void ReadyPlayer(int index)
     {
         Debug.Log("ReadyPlayer " + currentPlayerIndex);
-        playerConfigs[index].IsReady = true;
-        if (playerConfigs.All(p => p.IsReady == true))
+        LevelManager.instance.gameConfig.players[index].IsReady = true;
+        if (LevelManager.instance.gameConfig.players.All(p => p.IsReady == true))
         {
             Debug.Log("All players ready !");
             playerDisplay.HideMarker();
@@ -96,13 +95,13 @@ public class PlayerConfigurationManager : MonoBehaviour
     
     public void HandlePlayerJoin(PlayerInput pi)
     {
-        if (playerConfigs.Count >= 1 && !multiplayer)
+        if (LevelManager.instance.gameConfig.players.Count >= 1 && !multiplayer)
         {
             Destroy(pi.gameObject);
             return;
         }
         
-        if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
+        if (!LevelManager.instance.gameConfig.players.Any(p => p.PlayerIndex == pi.playerIndex))
         {
             pi.transform.SetParent(transform);
             foreach (var device in pi.devices)
@@ -136,9 +135,9 @@ public class PlayerConfigurationManager : MonoBehaviour
                 ControlTypeDisplays.Add(inputTypeDisplay);
             }
             
-            playerConfigs.Add(new PlayerConfiguration(pi));
+            LevelManager.instance.gameConfig.players.Add(new PlayerConfiguration(pi));
             int playerMaxCount = multiplayer ? MaxPlayer : 1;
-            if (playerConfigs.Count >= playerMaxCount)
+            if (LevelManager.instance.gameConfig.players.Count >= playerMaxCount)
             {
                 playerDisplay.HideMessage();
             }

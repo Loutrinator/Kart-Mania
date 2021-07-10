@@ -26,7 +26,7 @@ namespace Handlers {
 
         public void Init() {
             gameConfig = new GameConfig {
-                players = new List<PlayerConfig>(), 
+                players = new List<PlayerConfiguration>(), 
                 races = new List<Race>()
             };
         }
