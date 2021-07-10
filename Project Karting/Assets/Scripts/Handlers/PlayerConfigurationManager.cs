@@ -62,7 +62,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         Debug.Log("SetPlayer " + currentPlayerIndex);
         LevelManager.instance.gameConfig.players[currentPlayerIndex].Name = "Player " + (currentPlayerIndex+1);
-        LevelManager.instance.gameConfig.players[currentPlayerIndex].Kart = kart;
+        LevelManager.instance.gameConfig.players[currentPlayerIndex].KartPrefab = kart;
         ControlTypeDisplays[currentPlayerIndex].PlayerIsReady();
         ReadyPlayer(currentPlayerIndex);
     }
@@ -158,6 +158,6 @@ public class PlayerConfiguration
     public int PlayerIndex { get; set; }
     public string Name { get; set; }
     public bool IsReady { get; set; }
-    public KartBase Kart { get; set; }
+    public KartBase KartPrefab { get; set; }
     public Color Color { get; set; }
 }

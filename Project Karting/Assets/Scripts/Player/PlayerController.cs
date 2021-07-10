@@ -1,6 +1,7 @@
 ﻿using Handlers;
 using System.Linq;
 using Kart;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,45 +9,46 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        private PlayerInput _playerInput;
-        private KartBase _kart;
+        private PlayerConfiguration playerConfig;
+        [SerializeField] private PlayerInput input;
+        [SerializeField] private KartBase _kart;
+        private PlayerControls _controls;
 
         private void Awake()
         {
-            _playerInput = GetComponent<PlayerInput>();
-            linkToKart();
-        }
-        /*public void Update()
-        {
-            //TODO : inputs kart selection menu
-            Vector2 movement = _actionsOutputs.Movement();
-            _info.kart.forwardMove = movement[0];
-            _info.kart.hMove = movement[1];
-            _info.kart.drift = _actionsOutputs.Drift();
-            if (_info.hasItem) {
-                if (_actionsOutputs.ItemKeyHold()) _info.Item.OnKeyHold(_info);
-                if (_actionsOutputs.ItemKeyDown()) _info.Item.OnKeyDown(_info);
-                if (_actionsOutputs.ItemKeyUp()) _info.Item.OnKeyUp(_info);
-            }
-
-            if (_actionsOutputs.ShowRearCamera())
-            {
-                _info.camera.switchCameraMode(CameraMode.rear);
-            }
-            else
-            {
-                _info.camera.switchCameraMode(CameraMode.front);
-            }
-        }*/
-
-        private void linkToKart()
-        {
-            var karts = FindObjectsOfType<KartBase>();
-            var index = _playerInput.playerIndex;
-            _kart = karts.FirstOrDefault(k => k.playerIndex == index);
+            var kart = GetComponent<KartBase>();
+            _controls = new PlayerControls();
         }
 
+        public void InitializePlayerConfiguration(PlayerConfiguration pc)
+        {
+            Debug.Log("InitializePlayerConfiguration " + pc.PlayerIndex);
+            playerConfig = pc;
+            playerConfig.Input.onActionTriggered += Input_OnActionTriggered;
+            input = playerConfig.Input;
+        }
 
+        private void Input_OnActionTriggered(InputAction.CallbackContext ctx)
+        {
+            Debug.Log("Input_OnActionTriggered");
+            if (ctx.action.name == _controls.Kart.Movement.name)
+            {
+                Debug.Log("OnMove");
+                OnMove(ctx);
+            }
+            if (ctx.action.name == _controls.Kart.Drift.name)
+            {
+                Debug.Log("OnDrift");
+                OnDrift(ctx);
+            }
+            if (ctx.action.name == _controls.Kart.Rearcamera.name)
+            {
+                Debug.Log("OnRearCamera");
+                OnRearCamera(ctx);
+            }
+        }
+        
+        
         public void OnMove(InputAction.CallbackContext context)
         {
             Debug.Log("MOVE");
@@ -78,3 +80,25 @@ namespace Player
         
     }
 }
+/*public void Update()
+{
+    //TODO : inputs kart selection menu
+    Vector2 movement = _actionsOutputs.Movement();
+    _info.kart.forwardMove = movement[0];
+    _info.kart.hMove = movement[1];
+    _info.kart.drift = _actionsOutputs.Drift();
+    if (_info.hasItem) {
+        if (_actionsOutputs.ItemKeyHold()) _info.Item.OnKeyHold(_info);
+        if (_actionsOutputs.ItemKeyDown()) _info.Item.OnKeyDown(_info);
+        if (_actionsOutputs.ItemKeyUp()) _info.Item.OnKeyUp(_info);
+    }
+
+    if (_actionsOutputs.ShowRearCamera())
+    {
+        _info.camera.switchCameraMode(CameraMode.rear);
+    }
+    else
+    {
+        _info.camera.switchCameraMode(CameraMode.front);
+    }
+}*/

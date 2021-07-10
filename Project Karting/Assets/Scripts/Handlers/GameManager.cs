@@ -144,10 +144,14 @@ namespace Handlers {
                     //playerConfig.Input.actions.actionMaps
                     playerConfig.Input.SwitchCurrentActionMap("Kart");
                     Transform spawn = spawnPoints[id];
-                    KartBase kart = Instantiate(playerConfig.Kart, spawn.position, spawn.rotation);
+                    KartBase kart = Instantiate(playerConfig.KartPrefab, spawn.position, spawn.rotation);
                     kart.playerIndex = id;
                     KartEffects kartEffects = kart.GetComponent<KartEffects>();
                     KartAudio kartAudio = kart.GetComponent<KartAudio>();
+                    
+                    //linking to controls
+                    PlayerController playerController = kart.GetComponent<PlayerController>();
+                    playerController.InitializePlayerConfiguration(playerConfig);
                     
                     
                     // cameras for players

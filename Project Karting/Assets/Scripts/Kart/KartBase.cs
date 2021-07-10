@@ -97,7 +97,6 @@ namespace Kart
 
         private void FixedUpdate()
         {
-            Debug.Log("movement " + movement);
 
             if (GameManager.Instance.gameState == GameState.start)
             {
