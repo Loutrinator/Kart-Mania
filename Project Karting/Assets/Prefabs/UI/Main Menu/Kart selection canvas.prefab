@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 1154621793}
   - component: {fileID: 7077263840096861927}
   m_Layer: 5
-  m_Name: Car selection canvas
+  m_Name: Kart selection canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -784,7 +784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 87.57, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -4.9799805, y: 2.3200073}
+  m_AnchoredPosition: {x: -4.9799805, y: 2.3200684}
   m_SizeDelta: {x: 1306.41, y: 1687.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4099746521796739961
@@ -866,7 +866,6 @@ MonoBehaviour:
   steering: {fileID: 5461819452120128668}
   brake: {fileID: 2442017463694852353}
   okayletzgo: {fileID: 5095333737552815759}
-  menuManager: {fileID: 0}
   availableKarts:
   - {fileID: 2639054221376803220, guid: 234500fa216b12240a6979ec4e8a46f1, type: 3}
   - {fileID: 4080713924953889256, guid: ce01bb3f244551446bb09b1413401d4d, type: 3}

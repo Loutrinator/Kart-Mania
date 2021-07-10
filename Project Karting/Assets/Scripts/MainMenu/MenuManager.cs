@@ -60,9 +60,11 @@ public class MenuManager : MonoBehaviour
         _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
     }
 
-    public void SelectKart()
+    public void KartConfigsReady()
     {
         ShowNextScreen();
+        
+        kartSelectorAnimator.SetBool("isHidden", true);
         _eventSystem.SetSelectedGameObject(circuitCanvas.firstButton.gameObject);
         
     }
@@ -75,7 +77,7 @@ public class MenuManager : MonoBehaviour
     public void SelectMode(int i)
     {
         PlayerConfigurationManager.Instance.DisableJoining();
-        SoundManager.Instance.PlayUIClick();
+        PlayerConfigurationManager.Instance.BeginSetup();
         switch (i)
         {
             case 0://timetrial
@@ -91,7 +93,8 @@ public class MenuManager : MonoBehaviour
                 LevelManager.instance.gameConfig.mode = GameMode.Versus;
                 break;
         }
-        mainCameraAnimator.SetTrigger("move");
+
+        ShowNextScreen();
         _eventSystem.SetSelectedGameObject(kartCanvas.firstButton.gameObject);
     }
     public void ShowNextScreen()
@@ -102,10 +105,6 @@ public class MenuManager : MonoBehaviour
     public void ShowPreviousScreen()
     {
         mainCameraAnimator.SetTrigger("back");
-    }
-    public void HideKartSelector()
-    {
-        kartSelectorAnimator.SetBool("isHidden", true);
     }
 
     public void ShowTransition()

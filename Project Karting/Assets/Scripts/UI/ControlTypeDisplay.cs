@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,8 +10,15 @@ public class ControlTypeDisplay : MonoBehaviour
     private TextMeshProUGUI playerNameDisplay;
     [SerializeField]
     private Image typeDisplay;
+    [SerializeField]
+    private Image ready;
     
     private ControlType controlType;
+
+    private void Awake()
+    {
+        ready.enabled = false;
+    }
 
     public void SetupUI(int id, ControlType c)
     {
@@ -22,6 +30,11 @@ public class ControlTypeDisplay : MonoBehaviour
         playerNameDisplay.color = color;
         typeDisplay.sprite = UISettings.instance.controllerTypeImages[(int) c];
         
+    }
+
+    public void PlayerIsReady()
+    {
+        ready.enabled = true;
     }
 }
 

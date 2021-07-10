@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Kart;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,13 +14,15 @@ public class PlayerConfigurationManager : MonoBehaviour
     [HideInInspector] public bool multiplayer;
     
     [SerializeField] private int MaxPlayer = 1;
-    [SerializeField] private ControlTypeDisplay ControlTypeDisplayPrefab;
     [SerializeField] private PlayerDisplay playerDisplay;
+    [SerializeField] private ControlTypeDisplay ControlTypeDisplayPrefab;
     
 
     private PlayerInputManager _inputManager;
     private List<PlayerConfiguration> playerConfigs;
+    private List<ControlTypeDisplay> ControlTypeDisplays;
 
+    private int currentPlayerIndex;
 
     public static PlayerConfigurationManager Instance { get; private set; }
 
@@ -42,7 +45,8 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs = new List<PlayerConfiguration>();
         _inputManager = gameObject.GetComponent<PlayerInputManager>();
         playerDisplay.ShowJoinMessage();
-        
+        ControlTypeDisplays = new List<ControlTypeDisplay>();
+
     }
 
     public void EnableJoining()
@@ -55,19 +59,41 @@ public class PlayerConfigurationManager : MonoBehaviour
         _inputManager.DisableJoining();
         playerDisplay.HideMessage();
     }
-    public void SetPlayerKart(int index, int kartId)
+    public void SetPlayerKart(KartBase kart)
     {
-        playerConfigs[index].KartId = kartId;
+        Debug.Log("SetPlayer " + currentPlayerIndex);
+        playerConfigs[currentPlayerIndex].Name = "Player " + (currentPlayerIndex+1);
+        playerConfigs[currentPlayerIndex].Kart = kart;
+        ControlTypeDisplays[currentPlayerIndex].PlayerIsReady();
+        ReadyPlayer(currentPlayerIndex);
     }
     public void ReadyPlayer(int index)
     {
+        Debug.Log("ReadyPlayer " + currentPlayerIndex);
         playerConfigs[index].IsReady = true;
-        if (playerConfigs.Count == MaxPlayer && playerConfigs.All(p => p.IsReady == true))
+        if (playerConfigs.All(p => p.IsReady == true))
         {
-            //Todo : CHARGER LA SUITE
+            Debug.Log("All players ready !");
+            playerDisplay.HideMarker();
+            MenuManager.Instance.KartConfigsReady();
+        }
+        else
+        {
+            SelectNextPlayer();
         }
     }
 
+    public void SelectNextPlayer()
+    {
+        currentPlayerIndex++;
+        playerDisplay.SelectPlayer(currentPlayerIndex);
+    }
+    public void BeginSetup()
+    {
+        playerDisplay.ShowSelectionMarker(currentPlayerIndex);
+    }
+    
+    
     public void HandlePlayerJoin(PlayerInput pi)
     {
         if (playerConfigs.Count >= 1 && !multiplayer)
@@ -107,6 +133,7 @@ public class PlayerConfigurationManager : MonoBehaviour
                     Debug.Log("Input of type other");
                     inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.OTHER);
                 }
+                ControlTypeDisplays.Add(inputTypeDisplay);
             }
             
             playerConfigs.Add(new PlayerConfiguration(pi));
@@ -130,7 +157,8 @@ public class PlayerConfiguration
     
     public PlayerInput Input { get; set; }
     public int PlayerIndex { get; set; }
+    public string Name { get; set; }
     public bool IsReady { get; set; }
-    public int KartId { get; set; }
-    public int colorId { get; set; }
+    public KartBase Kart { get; set; }
+    public Color Color { get; set; }
 }
