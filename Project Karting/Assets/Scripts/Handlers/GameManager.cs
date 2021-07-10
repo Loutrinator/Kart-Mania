@@ -128,6 +128,7 @@ namespace Handlers {
         private void InitRace()
         {
             SoundManager.Instance.PlayRaceMusic();
+            HUDTimeTrialController._nbInstances = 0;
             
             gameState = GameState.start;
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
