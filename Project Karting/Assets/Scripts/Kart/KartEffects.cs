@@ -46,7 +46,7 @@ namespace Kart
         public void Start()
         {
             stopBoost();
-            stopDrift();
+            StopDrift();
             driftLevel = 0;
             baseFOV = cam.fieldOfView;
             baseZ = cam.transform.localPosition.z;
@@ -157,7 +157,7 @@ namespace Kart
             }
         }
 
-        public void startDrift()
+        public void StartDrift()
         {
             isDrifting = true;
             foreach (var skid in skidEmitters)
@@ -177,7 +177,7 @@ namespace Kart
             PlayBoostSound();
         }
 
-        public void stopDrift()
+        public void StopDrift()
         {
             driftLoadingSparksEmitter.Stop();
             isDrifting = false;
@@ -224,7 +224,6 @@ namespace Kart
         {
             if (_driftSoundSource != null)
             {
-                Debug.Log("IUHFSUIFHSUIEFHIUSEF");
                 _driftSoundSource.Play();
                 DOTween.To(() => _driftSoundSource.volume, value => _driftSoundSource.volume = value,
                         AudioSettings.instance.driftVolume, DriftSettings.instance.driftSoundAnimationSpeed)

@@ -833,6 +833,7 @@ MonoBehaviour:
   distance: 2950
   horizontalOffset: 0
   verticalOffset: 0
+  computeDistanceFromPosition: 0
 --- !u!1 &1557406991054568430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3040,6 +3041,7 @@ MonoBehaviour:
   road: {fileID: 4836199134749943345}
   spawnPoints:
   - {fileID: 3149743445185773232}
+  checkpointAmount: 0
 --- !u!1001 &852255280022554422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3237,6 +3239,11 @@ PrefabInstance:
       propertyPath: spline
       value: 
       objectReference: {fileID: 4270162758006377534}
+    - target: {fileID: 3769738577988345106, guid: 933e058338c9af14abc8b6022f3e5186,
+        type: 3}
+      propertyPath: distance
+      value: 2979.76
+      objectReference: {fileID: 0}
     - target: {fileID: 4613079545113500549, guid: 933e058338c9af14abc8b6022f3e5186,
         type: 3}
       propertyPath: m_RootOrder
@@ -3573,6 +3580,11 @@ PrefabInstance:
       propertyPath: spline
       value: 
       objectReference: {fileID: 4270162758006377534}
+    - target: {fileID: 1596217793355050250, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
+        type: 3}
+      propertyPath: distance
+      value: 421.43
+      objectReference: {fileID: 0}
     - target: {fileID: 4040084783436648365, guid: 3559ad87c66bde74b8d0a52b8c6e3e57,
         type: 3}
       propertyPath: checkpointId

@@ -47,6 +47,7 @@ namespace Road.RoadPhysics {
         public void ResetForces() {
             currentForcesVelocity = Vector3.zero;
             currentVelocity = Vector3.zero;
+            _currentGravityVelocity = Vector3.zero;
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = Vector3.zero;
         }

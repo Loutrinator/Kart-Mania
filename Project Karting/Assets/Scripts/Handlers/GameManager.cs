@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Handlers {
     public enum GameState
     {
-        idle,start,race
+        idle,start,race, finish
     }
     public class GameManager : MonoBehaviour
     {
@@ -20,10 +20,9 @@ namespace Handlers {
         public Minimap minimap;
 
         public ItemManager itemManager;
-        public int checkpointAmount;
 
-        [Header("UI and HUD")] [SerializeField]
-        private HUDTimeTrialController HUDvsClockPrefab;
+        [Header("UI and HUD")]
+        [SerializeField] private HUDTimeTrialController HUDvsClockPrefab;
 
         [SerializeField] private GameObject StartUIPrefab;
 
@@ -41,6 +40,7 @@ namespace Handlers {
 
         public PhysicsManager physicsManager;
         public KartRespawner respawner;
+        public ScoreBoard scoreBoard;
 
         [HideInInspector]
         public PauseMenu pauseMenu;
@@ -128,6 +128,7 @@ namespace Handlers {
         private void InitRace()
         {
             SoundManager.Instance.PlayRaceMusic();
+            HUDTimeTrialController._nbInstances = 0;
             
             gameState = GameState.start;
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
@@ -200,11 +201,11 @@ namespace Handlers {
             PlayerRaceInfo player = playersInfo[playerId];
 
             //permet de vérifier si premièrement le checkpoint est valide et si il est après le checkpoint actuel
-            if (checkpointId < checkpointAmount) {
+            if (checkpointId < currentRace.checkpointAmount) {
                 if (checkpointId - player.currentCheckpoint == 1) {
                     playersInfo[playerId].currentCheckpoint = checkpointId;
                 }
-                else if (player.currentCheckpoint == checkpointAmount - 1 && checkpointId == 0) {
+                else if (player.currentCheckpoint == currentRace.checkpointAmount - 1 && checkpointId == 0) {
                     playersInfo[playerId].currentCheckpoint = checkpointId;
                     NewLap(playerId);
                 }
@@ -220,7 +221,14 @@ namespace Handlers {
 
             float diff = playersInfo[playerId].previousLapTime - playersInfo[playerId].bestLapTime;
             playersInfo[playerId].lap += 1; // doit être appelé ici pour mettre à jour la diff dans la HUD
-
+            playersInfo[playerId].lapsTime.Add( playersInfo[playerId].previousLapTime); //doit être appelé ici pour être sur que le previousLapTime est à jour
+            
+            //TODO : il y a un problème, la liste n'est pas bien conservé car à l'affichage du score
+            // board de fin de course, il ne reste que le dernier temps dans la liste
+            foreach (var t in  playersInfo[playerId].lapsTime)
+            {
+                Debug.Log("time add " + Utils.DisplayHelper.FloatToTimeString(t));   
+            }
             if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime) {
                 playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
             }
@@ -236,6 +244,16 @@ namespace Handlers {
                 timeDiff.color = Color.green;
             }
         }*/
+            
+            // TODO : il serait préférable de terminé le race pour ce playerID
+            // mais de finir pour la totalité des participants selon une autre condition
+            // quand on sera en écran splitté (cf.  document de game design pour la condition de fin de course)
+
+            if (playersInfo[playerId].lap > currentRace.laps)
+            {
+                playersInfo[playerId].FinishRace();
+                FinishRace(playerId);
+            }
         }
 
         private string FloatToTimeString(float time) {
@@ -258,14 +276,16 @@ namespace Handlers {
             }*/
         }
 
-        public void QuitGame()
-        {
-        #if UNITY_EDITOR
-            Debug.Log("Quitting the app !");
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+        public void FinishRace(int playerID) {
+            gameState = GameState.finish;
+            karts[playerID].canMove = false;
+            karts[playerID].effects.driftLevel = 0;
+            karts[playerID].effects.StopDrift();
+            karts[playerID].currentAngularVelocity = Vector3.zero;
+            karts[playerID].ResetKart();
+            //var board = Instantiate(ScoreBoardPrefab); // auto id to link with kart with the same ID
+            scoreBoard.gameObject.SetActive(true);
+            scoreBoard.SetId(playerID);
         }
 
         public void ResumeGame()
