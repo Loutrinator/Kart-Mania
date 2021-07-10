@@ -46,6 +46,11 @@ namespace Player
                 Debug.Log("OnRearCamera");
                 OnRearCamera(ctx);
             }
+            if (ctx.action.name == _controls.Kart.Pause.name)
+            {
+                Debug.Log("OnPause");
+                OnPause(ctx);
+            }
         }
         
         
@@ -76,6 +81,11 @@ namespace Player
             {
                 //_kart.rear = context.ReadValue<bool>();
             }
+        }
+        public void OnPause(InputAction.CallbackContext context)
+        {
+            Debug.Log("PAUSE");
+            GameManager.Instance.Pause();
         }
         
     }

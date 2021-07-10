@@ -84,21 +84,7 @@ namespace Handlers {
         }
 
         public void Update() {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Debug.Log("PAUSE");
-                gamePaused = !gamePaused;
-                if (gamePaused)
-                {
-                    Time.timeScale = 0;
-                    pauseMenu.PauseGame();
-                }
-                else
-                {
-                    Time.timeScale = 1;
-                    pauseMenu.ResumeGame();
-                }
-            }
+            
             if (gameState == GameState.race) {
                 PlayerRaceInfo player = playersInfo[0];
                 //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
@@ -116,6 +102,22 @@ namespace Handlers {
             minimap.UpdateMinimap();
         }
 
+        public void Pause()
+        {
+            Debug.Log("PAUSE");
+            gamePaused = !gamePaused;
+            if (gamePaused)
+            {
+                Time.timeScale = 0;
+                pauseMenu.PauseGame();
+            }
+            else
+            {
+                Time.timeScale = 1;
+                pauseMenu.ResumeGame();
+            }
+        }
+        
         public void StartRace() {
             for (int i = 0; i < playersInfo.Length; ++i) {
                 playersInfo[i].currentLapStartTime = Time.time;

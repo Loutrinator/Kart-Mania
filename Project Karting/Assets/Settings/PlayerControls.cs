@@ -41,6 +41,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""e967a3f1-c7ea-469a-8971-5bcdd69e2dbc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -195,6 +203,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Rear camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60926dd0-2441-4790-9d53-6c420b42449a"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e700f837-caf0-4c03-aed9-81c37c598284"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -416,6 +446,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Kart_Movement = m_Kart.FindAction("Movement", throwIfNotFound: true);
         m_Kart_Drift = m_Kart.FindAction("Drift", throwIfNotFound: true);
         m_Kart_Rearcamera = m_Kart.FindAction("Rear camera", throwIfNotFound: true);
+        m_Kart_Pause = m_Kart.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -473,6 +504,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Kart_Movement;
     private readonly InputAction m_Kart_Drift;
     private readonly InputAction m_Kart_Rearcamera;
+    private readonly InputAction m_Kart_Pause;
     public struct KartActions
     {
         private @PlayerControls m_Wrapper;
@@ -480,6 +512,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Kart_Movement;
         public InputAction @Drift => m_Wrapper.m_Kart_Drift;
         public InputAction @Rearcamera => m_Wrapper.m_Kart_Rearcamera;
+        public InputAction @Pause => m_Wrapper.m_Kart_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Kart; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -498,6 +531,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Rearcamera.started -= m_Wrapper.m_KartActionsCallbackInterface.OnRearcamera;
                 @Rearcamera.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnRearcamera;
                 @Rearcamera.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnRearcamera;
+                @Pause.started -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_KartActionsCallbackInterface = instance;
             if (instance != null)
@@ -511,6 +547,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Rearcamera.started += instance.OnRearcamera;
                 @Rearcamera.performed += instance.OnRearcamera;
                 @Rearcamera.canceled += instance.OnRearcamera;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -569,6 +608,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnDrift(InputAction.CallbackContext context);
         void OnRearcamera(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

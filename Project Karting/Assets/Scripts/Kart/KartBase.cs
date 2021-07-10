@@ -100,7 +100,7 @@ namespace Kart
 
             if (GameManager.Instance.gameState == GameState.start)
             {
-                if (Input.GetAxis("Accelerate") > 0)
+                if (movement[1] > 0)
                 {
                     effects.Rewind();
                 }
