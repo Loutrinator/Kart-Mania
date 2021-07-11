@@ -180,6 +180,11 @@ namespace Kart
             kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * KartPhysicsSettings.instance.kartRollCoeff);
         }
 
+        public void ResetKart() {
+            kartRootModel.localEulerAngles = Vector3.up;
+            kartBodyModel.localEulerAngles = Vector3.forward;
+        }
+
         private void AnimateWheels()
         {
             _lerpedWheelDirection =
@@ -202,7 +207,7 @@ namespace Kart
         {
             driftDirection = direction > 0 ? 1 : direction < 0 ? -1 : 0;
             drifting = true;
-            effects.startDrift();
+            effects.StartDrift();
         }
 
         private void StopDrifting()
@@ -210,7 +215,7 @@ namespace Kart
             driftDirection = 0;
             _lerpedKartRotation = 0f;
             drifting = false;
-            effects.stopDrift();
+            effects.StopDrift();
         }
 
         #endregion

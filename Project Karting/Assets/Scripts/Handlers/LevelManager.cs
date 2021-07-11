@@ -36,5 +36,9 @@ namespace Handlers {
             currentRace.Init();
             return currentRace;
         }
+
+        public void OnRaceQuit() {
+            Init();
+        }
     }
 }

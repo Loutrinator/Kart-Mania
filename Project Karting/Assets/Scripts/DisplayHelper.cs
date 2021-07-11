@@ -4,7 +4,7 @@ namespace Utils
 {
    public static class DisplayHelper
    {
-      public static string floatToTimeString(float time)
+      public static string FloatToTimeString(float time)
       {
          string prefix = "";
          if (time< 0) prefix = "-";
