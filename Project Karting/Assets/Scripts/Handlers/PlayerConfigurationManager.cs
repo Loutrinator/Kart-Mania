@@ -113,9 +113,8 @@ public class PlayerConfigurationManager : MonoBehaviour
                 {
                     Destroy(pi.gameObject);
                     return;
-                    
                 }
-
+                
                 
                 ControlTypeDisplay inputTypeDisplay =
                     Instantiate(ControlTypeDisplayPrefab, playerDisplay.displayParent.transform);
@@ -141,8 +140,10 @@ public class PlayerConfigurationManager : MonoBehaviour
                 }
                 ControlTypeDisplays.Add(inputTypeDisplay);
             }
-            
-            LevelManager.instance.gameConfig.players.Add(new PlayerConfiguration(pi));
+
+            PlayerConfiguration pg = new PlayerConfiguration(pi);
+            pg.Color = UISettings.instance.colors[pi.playerIndex];
+            LevelManager.instance.gameConfig.players.Add(pg);
             int playerMaxCount = multiplayer ? MaxPlayer : 1;
             if (LevelManager.instance.gameConfig.players.Count >= playerMaxCount)
             {
@@ -150,7 +151,11 @@ public class PlayerConfigurationManager : MonoBehaviour
             }
         }
     }
-    
+
+    public void HideJoinUI()
+    {
+        playerDisplay.gameObject.SetActive(false);
+    }
 }
 
 public class PlayerConfiguration

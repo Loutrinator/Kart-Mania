@@ -138,6 +138,10 @@ namespace Handlers {
             
             gameState = GameState.start;
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
+
+            minimap.SetPosition(nbPlayerRacing);
+            
+            
             playersInfo = new PlayerRaceInfo[nbPlayerRacing];
             Transform[] spawnPoints = currentRace.spawnPoints;
             if (spawnPoints.Length >= nbPlayerRacing) {
@@ -191,7 +195,7 @@ namespace Handlers {
                     {
                         startUI.placeKeysAction = placeKeys;
                     }
-                    minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer);
+                    minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer, playerConfig.Color);
 
                     gameState = GameState.start;
                 }

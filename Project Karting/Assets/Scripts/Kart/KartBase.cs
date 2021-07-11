@@ -174,9 +174,9 @@ namespace Kart
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer * 2 + KartPhysicsSettings.instance.steeringSpeed) * Time.fixedDeltaTime;
 
-            currentAngularVelocity = transform.up * steerAngle;
+            currentAngularVelocity = transform.up * steerAngle * KartPhysicsSettings.instance.kartRotationCoeff;
             
-            kartRootModel.localEulerAngles = Vector3.up * (steerAngle * KartPhysicsSettings.instance.kartRotationCoeff);
+            kartRootModel.localEulerAngles = Vector3.up * (steerAngle * KartPhysicsSettings.instance.kartModelRotationCoeff);
 
             kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * KartPhysicsSettings.instance.kartRollCoeff);
         }
