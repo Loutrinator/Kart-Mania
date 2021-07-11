@@ -43,7 +43,7 @@ namespace Kart
 
         [HideInInspector] public int driftLevel;
 
-        public void Start()
+        public void Init()
         {
             stopBoost();
             StopDrift();

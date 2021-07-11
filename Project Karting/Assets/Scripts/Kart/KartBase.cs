@@ -11,7 +11,6 @@ namespace Kart
         public GameObject minimapRenderer;
         public Transform kartRootModel; // The kart's root 3D model
         public Transform kartBodyModel; // The main kart 3D model (no wheels)
-        public List<WheelCollider> wheels; //TODO: A DEPLACER
         public List<Transform> turningWheels; // The turning wheels of the kart
 
         public ShakeTransform cameraShake;
@@ -47,8 +46,6 @@ namespace Kart
         // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
         public Func<int> GetPlayerID;
 
-        private Vector3 _firstPos;
-        private float _firstPosTime;
         private float _currentSpeed;
         private float _yVelocity;
         private float _currentAngularSpeed;
@@ -60,39 +57,15 @@ namespace Kart
         protected override void Awake()
         {
             base.Awake();
-            _firstPos = transform.position;
-            _firstPosTime = Time.time;
             StopDrifting();
             canMove = true;
 
-            var colliders = GetComponentsInChildren<Collider>();
-            foreach (var col in colliders)
-            {
-                foreach (var wheel in wheels)
-                {
-                    if(wheel != col)
-                        Physics.IgnoreCollision(wheel, col);
-                }
-            }
+            rigidBody.transform.parent = null;
         }
 
-        /*public override bool IsGrounded()
-        {
-            int wheelsOnGround = 0;
-            for (var index = 0; index < wheels.Count; index++) {
-                Vector3 wheelPos = wheels[index].transform.position;
-                //if (wheels[index].isGrounded) wheelsOnGround++;
-                if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out _, 0.5f, LayerMask.GetMask("Environement")))
-                {
-                    GameManager.Instance.respawner.Respawn(this);
-                }
-                else if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out _, 0.5f, LayerMask.GetMask("Ground"))) {
-                    wheelsOnGround++;
-                }
-            }
-
-            return wheelsOnGround >= 4;
-        }*/
+        public override bool IsGrounded() {
+            return Physics.SphereCast(transform.position, 0.1f, -transform.up, out _, 0.5f, LayerMask.GetMask("Ground"));
+        }
 
         private void FixedUpdate()
         {
@@ -194,10 +167,10 @@ namespace Kart
                 turningWheel.localEulerAngles = Vector3.up * (_lerpedWheelDirection * KartPhysicsSettings.instance.kartWheelAngle);
             }
 
-            foreach (var wheel in wheels)
+            /*foreach (var wheel in wheels)
             {
-                //wheel.localEulerAngles = Vector3.right * angularSpeed;
-            }
+                wheel.localEulerAngles = Vector3.right * angularSpeed;
+            }*/
         }
 
         #region Drift

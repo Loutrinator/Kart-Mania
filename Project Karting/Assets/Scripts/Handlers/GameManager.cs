@@ -155,6 +155,8 @@ namespace Handlers {
                     {
                         kartAudio.cam = kartCam.frontCamera;
                     }
+
+                    kartEffects.Init();
                     karts.Add(kart);
                     
                     PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
