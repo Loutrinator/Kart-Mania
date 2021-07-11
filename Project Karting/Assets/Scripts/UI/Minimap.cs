@@ -104,23 +104,21 @@ namespace UI
 
         public void SetPosition(int nbPlayerRacing)
         {
-            /*
             RectTransform rt = rawImage.rectTransform;
             if (nbPlayerRacing == 1)
             {
                 rt.anchorMin = new Vector2(1,1);
                 rt.anchorMax = new Vector2(1,1);
                 rt.pivot = new Vector2(1, 1);
-                rt.localPosition = new Vector2(10, 10);
+                rt.anchoredPosition = new Vector2(-10, -10);
             }
             else
             {
                 rt.anchorMin = new Vector2(0.5f,0.5f);
                 rt.anchorMax = new Vector2(0.5f,0.5f);
+                rt.pivot = new Vector2(0.5f,0.5f);
                 rt.anchoredPosition = new Vector2(0, 0);
-                rt.pivot = new Vector2(0, 0);
-                rt.localPosition = new Vector2(0, 0);
-            }*/
+            }
         }
     }
 }
