@@ -136,6 +136,7 @@ PlayerSettings:
   - {fileID: 11400000, guid: 0706db84be44e494088edc6558c166bb, type: 2}
   - {fileID: 11400000, guid: 137c79cb97fe5ea488e983425048f453, type: 2}
   - {fileID: 11400000, guid: 4279d9eaed8cd8147b570d1d6581721b, type: 2}
+  - {fileID: 11400000, guid: 90a49c5abde85024080c67b608c9b699, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -554,6 +555,7 @@ PlayerSettings:
   ps4videoRecordingFeaturesUsed: 0
   ps4contentSearchFeaturesUsed: 0
   ps4CompatibilityPS5: 0
+  ps4AllowPS5Detection: 0
   ps4GPU800MHz: 1
   ps4attribEyeToEyeDistanceSettingVR: 0
   ps4IncludedModules: []
@@ -684,7 +686,7 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 1
   cloudProjectId: 50d7ae71-8798-44b9-9dbf-4fba9e08c390
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []

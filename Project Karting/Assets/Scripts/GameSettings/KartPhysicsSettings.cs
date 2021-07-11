@@ -43,6 +43,7 @@ public class KartPhysicsSettings : ScriptableObject
     public float minDriftAngle = 0.182f;
     public float maxDriftAngle = 1.8f;
     public float kartRotationCoeff = 15f;
+    public float kartModelRotationCoeff = 15f;
     public float kartRollCoeff = 4f;
     public float kartRotationLerpSpeed = 5f;
     public float kartWheelAngle = 25f;

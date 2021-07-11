@@ -10,7 +10,7 @@ namespace Game {
    public struct GameConfig
    {
       public GameMode mode;
-      public List<PlayerConfig> players;
+      public List<PlayerConfiguration> players;
       public List<Race> races;
    }
 }

@@ -2,52 +2,100 @@
 using Game;
 using Handlers;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 public class MenuManager : MonoBehaviour
 {
 
     [SerializeField] private Animator mainCameraAnimator;
-    [SerializeField] private Animator timeTrialAnimator;
-    [SerializeField] private Animator championshipAnimator;
+    [SerializeField] private Animator soloAnimator;
+    [SerializeField] private Animator multiAnimator;
     [SerializeField] private Animator levelEditorAnimator;
     [SerializeField] private Animator kartSelectorAnimator;
-    [SerializeField] private CustomCanvas gameModeCanvas;
+    [SerializeField] private CustomCanvas gamePlayerModeCanvas;
+    [SerializeField] private UICanvas playermodeCanvas;
+    [SerializeField] private UICanvas gamemodeCanvas;
+    [SerializeField] private UICanvas kartCanvas;
+    [SerializeField] private UICanvas circuitCanvas;
+    [SerializeField] private UICanvas goCanvas;
 
+    private EventSystem _eventSystem;
+    
+    public static MenuManager Instance { get; private set; }
 
     private void Awake()
-    {
-        SoundManager.Instance.PlayMainMenuMusic();
+    { 
+        if (Instance != null)
+        {
+            Debug.Log("Trying to create another singleton");
+        }
+        else
+        {
+            Instance = this;
+            SoundManager.Instance.PlayMainMenuMusic();
+            _eventSystem = FindObjectOfType<EventSystem>();
+            _eventSystem.SetSelectedGameObject(playermodeCanvas.firstButton.gameObject);
+        }
     }
 
-    public void SelectModeTimeTrial()
+    public void SelectMultiplayer()
     {
+        PlayerConfigurationManager.Instance.EnableJoining();
+        PlayerConfigurationManager.Instance.multiplayer = true;
         SoundManager.Instance.PlayUIClick();
-        timeTrialAnimator.SetBool("Choosen",true);
-        levelEditorAnimator.SetBool("NotSelected",true);
-        championshipAnimator.SetBool("NotSelected",true);
+        soloAnimator.SetBool("NotSelected",true);
+        multiAnimator.SetBool("Choosen",true);
         mainCameraAnimator.SetTrigger("move");
-        gameModeCanvas.disableUIInteraction();
-        LevelManager.instance.gameConfig.mode = GameMode.TimeTrial;
+        _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
     }
-    public void SelectModeLevelEditor()
+
+    public void SelectSolo()
     {
+        PlayerConfigurationManager.Instance.DisableJoining();
         SoundManager.Instance.PlayUIClick();
-        timeTrialAnimator.SetBool("NotSelected",true);
-        levelEditorAnimator.SetBool("Choosen",true);
-        championshipAnimator.SetBool("NotSelected",true);
+        soloAnimator.SetBool("Choosen",true);
+        multiAnimator.SetBool("NotSelected",true);
         mainCameraAnimator.SetTrigger("move");
-        gameModeCanvas.disableUIInteraction();
-        LevelManager.instance.gameConfig.mode = GameMode.Editor;
+        _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
     }
-    public void SelectModeChampionship()
+
+    public void KartConfigsReady()
     {
-        SoundManager.Instance.PlayUIClick();
-        timeTrialAnimator.SetBool("NotSelected",true);
-        levelEditorAnimator.SetBool("NotSelected",true);
-        championshipAnimator.SetBool("Choosen",true);
-        mainCameraAnimator.SetTrigger("move");
-        gameModeCanvas.disableUIInteraction();
-        LevelManager.instance.gameConfig.mode = GameMode.Championship;
+        ShowNextScreen();
+        
+        kartSelectorAnimator.SetBool("isHidden", true);
+        _eventSystem.SetSelectedGameObject(circuitCanvas.firstButton.gameObject);
+        
+    }
+    public void SelectRace()
+    {
+        ShowNextScreen();
+        _eventSystem.SetSelectedGameObject(goCanvas.firstButton.gameObject);
+        
+    }
+    public void SelectMode(int i)
+    {
+        PlayerConfigurationManager.Instance.DisableJoining();
+        PlayerConfigurationManager.Instance.BeginSetup();
+        switch (i)
+        {
+            case 0://timetrial
+                LevelManager.instance.gameConfig.mode = GameMode.TimeTrial;
+                break;
+            case 1://levelEditor
+                LevelManager.instance.gameConfig.mode = GameMode.Editor;
+                break;
+            case 2://Championship
+                LevelManager.instance.gameConfig.mode = GameMode.Championship;
+                break;
+            case 3://Championship
+                LevelManager.instance.gameConfig.mode = GameMode.Versus;
+                break;
+        }
+
+        ShowNextScreen();
+        _eventSystem.SetSelectedGameObject(kartCanvas.firstButton.gameObject);
     }
     public void ShowNextScreen()
     {
@@ -57,10 +105,6 @@ public class MenuManager : MonoBehaviour
     public void ShowPreviousScreen()
     {
         mainCameraAnimator.SetTrigger("back");
-    }
-    public void HideKartSelector()
-    {
-        kartSelectorAnimator.SetBool("isHidden", true);
     }
 
     public void ShowTransition()

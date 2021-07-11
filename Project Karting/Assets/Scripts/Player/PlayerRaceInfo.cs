@@ -33,9 +33,7 @@ public class PlayerRaceInfo
         }
     }
 
-    private PlayerController _controller;
-
-    public PlayerController Controller => _controller;
+    public PlayerController controller;
 
     private KartBase _kart;
 
@@ -107,7 +105,7 @@ public class PlayerRaceInfo
     public event Action onItemSet;    
     public event Action<bool> onItemUsed;    
 
-    public PlayerRaceInfo(KartBase k, int id, IActions action)
+    public PlayerRaceInfo(KartBase k, int id)
     {
         bestLapTime = float.MaxValue;
         previousLapTime = float.MaxValue;
@@ -117,7 +115,6 @@ public class PlayerRaceInfo
         position = playerId;
         currentCheckpoint = 0;
         currentLapStartTime = 0f;
-        _controller = new PlayerController(this, action);
         kart.GetPlayerID += () => playerId;
         ItemIsInUse = false;
         lapsTime = new List<float>();

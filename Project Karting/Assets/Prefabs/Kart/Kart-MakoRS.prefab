@@ -543,9 +543,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  frontPosition: {fileID: 0}
+  backPosition: {fileID: 0}
   rotationPercent: 0.1
-  frontCamera: {fileID: 0}
-  rearCamera: {fileID: 0}
+  cam: {fileID: 0}
   cameraShakeTransform: {fileID: 0}
 --- !u!1 &3751979711494227052
 GameObject:
@@ -5808,6 +5809,9 @@ GameObject:
   - component: {fileID: 9203804644391519208}
   - component: {fileID: 4686627548744261268}
   - component: {fileID: 9197028294900898373}
+  - component: {fileID: 8756186664054783961}
+  - component: {fileID: 1802534277707854011}
+  - component: {fileID: 5266429396722401737}
   m_Layer: 9
   m_Name: Kart-MakoRS
   m_TagString: Untagged
@@ -5899,6 +5903,7 @@ MonoBehaviour:
   currentAngularVelocity: {x: 0, y: 0, z: 0}
   currentForcesVelocity: {x: 0, y: 0, z: 0}
   rigidBody: {fileID: 4686627548744261268}
+  playerIndex: 0
   minimapRenderer: {fileID: 6588004904838852241, guid: e97ba0b2abb510c4290224d299cc1c43,
     type: 3}
   kartRootModel: {fileID: 4686627548263282054}
@@ -5923,11 +5928,57 @@ MonoBehaviour:
     steer: 0.5
     addedGravity: 0.5
     suspension: 0.5
-  hMove: 0
-  forwardMove: 0
+  movement: {x: 0, y: 0}
   drift: 0
   driftDirection: 0
   canMove: 0
+--- !u!114 &8756186664054783961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686627548744261291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8e3134b8f338341b739978a43716dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 0}
+  _kart: {fileID: 9197028294900898373}
+--- !u!114 &1802534277707854011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686627548744261291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8464b13d452fa32409651440d53aec20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kartBase: {fileID: 6669060970404059514, guid: 788e3c6fb21859241bfef9c60f187e62,
+    type: 3}
+  bumpForce: 50
+--- !u!114 &5266429396722401737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686627548744261291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43959e4bf4f35e4bae2685eb7511f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  kart: {fileID: 6669060970404059514, guid: 788e3c6fb21859241bfef9c60f187e62, type: 3}
+  audioClip: {fileID: 8300000, guid: 40edf607338302146b91d0f9c2ac0686, type: 3}
+  pitchMultiplier: 1
+  maxRolloffDistance: 500
+  useDoppler: 1
 --- !u!1 &4686627549183994683
 GameObject:
   m_ObjectHideFlags: 0
@@ -50563,18 +50614,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0138061ddb019040b314f9cfd1ce84e, type: 3}
---- !u!198 &6677086218762617938 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1302848917567955681, guid: d0138061ddb019040b314f9cfd1ce84e,
-    type: 3}
-  m_PrefabInstance: {fileID: 5673797457597916851}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &593124679095247915 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5081841016464343704, guid: d0138061ddb019040b314f9cfd1ce84e,
-    type: 3}
-  m_PrefabInstance: {fileID: 5673797457597916851}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &593124679095247912 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5081841016464343707, guid: d0138061ddb019040b314f9cfd1ce84e,
@@ -50590,6 +50629,18 @@ MonoBehaviour:
 --- !u!108 &8661354202249319345 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 3931131733579871490, guid: d0138061ddb019040b314f9cfd1ce84e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5673797457597916851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6677086218762617938 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1302848917567955681, guid: d0138061ddb019040b314f9cfd1ce84e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5673797457597916851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &593124679095247915 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5081841016464343704, guid: d0138061ddb019040b314f9cfd1ce84e,
     type: 3}
   m_PrefabInstance: {fileID: 5673797457597916851}
   m_PrefabAsset: {fileID: 0}

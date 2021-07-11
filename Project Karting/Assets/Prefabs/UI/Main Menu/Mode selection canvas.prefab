@@ -65,9 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time trial
-
-'
+  m_text: SOLO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 45f22d45e5475b24fbc32999681585a4, type: 2}
   m_sharedMaterial: {fileID: -6933086558917020239, guid: 45f22d45e5475b24fbc32999681585a4,
@@ -304,9 +302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Championship
-
-'
+  m_text: MULTIPLAYER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e80692d1830d9f441bbaf0115518899b, type: 2}
   m_sharedMaterial: {fileID: -6933086558917020239, guid: e80692d1830d9f441bbaf0115518899b,
@@ -316,8 +312,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286874756
-  m_fontColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -334,7 +330,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 435.2
+  m_fontSize: 467.1
   m_fontSizeBase: 53.75
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -402,7 +398,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094841998036745424}
   m_LocalRotation: {x: -0, y: -0, z: -0.1330349, w: 0.9911114}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0014648438}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1538989437413488907}
@@ -410,7 +406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15.29}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1354.7, y: 131.1}
+  m_AnchoredPosition: {x: 1543, y: 142}
   m_SizeDelta: {x: 815.34, y: 312.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &926188842418669743
@@ -441,7 +437,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Soon !
+  m_text: New !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e80692d1830d9f441bbaf0115518899b, type: 2}
   m_sharedMaterial: {fileID: -6933086558917020239, guid: e80692d1830d9f441bbaf0115518899b,
@@ -678,7 +674,7 @@ GameObject:
   - component: {fileID: 8386481475231979543}
   - component: {fileID: 5968906514642846436}
   m_Layer: 0
-  m_Name: Championship
+  m_Name: MULTIPLAYER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -756,10 +752,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 6569220197442166790}
+    m_SelectOnDown: {fileID: 2541598111825877317}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 3
@@ -782,14 +778,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 6368353847381236147}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SelectModeChampionship
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: SelectMultiplayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -809,7 +805,7 @@ Animator:
   m_GameObject: {fileID: 2597896611118049353}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e7f4336bdeed2584c8d627d519d2e150, type: 2}
+  m_Controller: {fileID: 9100000, guid: be95cf7c1571a6742a01a759b479cfcb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -909,9 +905,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 2541598111825877317}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -985,7 +981,7 @@ GameObject:
   - component: {fileID: 6569220197442166790}
   - component: {fileID: 798326503}
   m_Layer: 0
-  m_Name: Time Trial
+  m_Name: SOLO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1062,10 +1058,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 8386481475231979543}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 3
@@ -1094,8 +1090,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SelectModeTimeTrial
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: SelectSolo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1115,7 +1111,7 @@ Animator:
   m_GameObject: {fileID: 5726179082482672695}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e7f4336bdeed2584c8d627d519d2e150, type: 2}
+  m_Controller: {fileID: 9100000, guid: be95cf7c1571a6742a01a759b479cfcb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1137,6 +1133,7 @@ GameObject:
   - component: {fileID: 7618155475832913804}
   - component: {fileID: 7618155475832913805}
   - component: {fileID: 833133539}
+  - component: {fileID: 539961620459604022}
   m_Layer: 0
   m_Name: Mode selection canvas
   m_TagString: Untagged
@@ -1163,7 +1160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -6.73999, y: 3.0718842}
+  m_AnchoredPosition: {x: -6.73999, y: 3.0718994}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7618155475832913807
@@ -1209,7 +1206,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7618155475832913805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1243,6 +1240,19 @@ MonoBehaviour:
   - {fileID: 6569220197442166790}
   - {fileID: 8386481475231979543}
   - {fileID: 7208000529859843775}
+--- !u!114 &539961620459604022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618155475832913803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d7f9a81cb814e489d5b791af236c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstButton: {fileID: 6569220197442166790}
 --- !u!1 &8118635054214526384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,10 +1616,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 8386481475231979543}
+    m_SelectOnDown: {fileID: 3239890816584727103}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 3
