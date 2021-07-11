@@ -7,6 +7,8 @@ using Kart;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.DualShock;
+using UnityEngine.InputSystem.XInput;
 
 [RequireComponent(typeof(PlayerInputManager))]
 public class PlayerConfigurationManager : MonoBehaviour
@@ -113,17 +115,22 @@ public class PlayerConfigurationManager : MonoBehaviour
                     return;
                     
                 }
+
+                
                 ControlTypeDisplay inputTypeDisplay =
                     Instantiate(ControlTypeDisplayPrefab, playerDisplay.displayParent.transform);
-                if (device.description.deviceClass.Contains("PS"))
-                {
-                    Debug.Log("Input of type playstation");
-                    inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.PS);
-                }else if (device.description.deviceClass.Contains("XBox"))
+                
+                if (device is XInputController)
                 {
                     Debug.Log("Input of type XBox");
                     inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.XBOX);
-                }else if (device.description.deviceClass.Contains("Keyboard"))
+                }
+                else if (device is DualShockGamepad)
+                {
+                    Debug.Log("Input of type playstation");
+                    inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.PS);
+                }
+                else if (device.description.deviceClass.Contains("Keyboard"))
                 {
                     Debug.Log("Input of type keyboard");
                     inputTypeDisplay.SetupUI(pi.playerIndex, ControlType.KEYBOARD);
