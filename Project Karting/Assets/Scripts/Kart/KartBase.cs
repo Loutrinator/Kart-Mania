@@ -8,6 +8,8 @@ namespace Kart
 {
     public class KartBase : PhysicsObject
     {
+        public int playerIndex;
+        
         public GameObject minimapRenderer;
         public Transform kartRootModel; // The kart's root 3D model
         public Transform kartBodyModel; // The main kart 3D model (no wheels)
@@ -36,9 +38,8 @@ namespace Kart
         private Stats convertedStats;
         private Stats finalStats;
 
-        [HideInInspector] public float hMove;
         protected float lerpedAngle;
-        [HideInInspector] public int forwardMove; // -1; 0; 1
+        [HideInInspector] public Vector2 movement; // -1; 0; 1
         [HideInInspector] public bool drift;
         [HideInInspector] public int driftDirection;
 
@@ -96,10 +97,10 @@ namespace Kart
 
         private void FixedUpdate()
         {
-            
+
             if (GameManager.Instance.gameState == GameState.start)
             {
-                if (Input.GetAxis("Accelerate") > 0)
+                if (movement[1] > 0)
                 {
                     effects.Rewind();
                 }
@@ -107,15 +108,15 @@ namespace Kart
             if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
             ConvertStats();
             ApplyPowerups();
-            Move(forwardMove);
-            float rotationDirection = forwardMove > 0 ? hMove : -hMove;
+            Move(movement[1]);
+            float rotationDirection = movement[1] > 0 ? movement[0] : -movement[0];
 
-            if (drift && !drifting && (hMove < 0 || hMove > 0))
+            if (drift && !drifting && (movement[0] < 0 || movement[0] > 0))
             {
                 StartDrift(rotationDirection);
             }
 
-            if (forwardMove != 0) //on tourne pas à l'arret
+            if (movement[1] != 0) //on tourne pas à l'arret
             {
                 if (drifting)
                 {
@@ -173,9 +174,9 @@ namespace Kart
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer * 2 + KartPhysicsSettings.instance.steeringSpeed) * Time.fixedDeltaTime;
 
-            currentAngularVelocity = transform.up * steerAngle;
+            currentAngularVelocity = transform.up * steerAngle * KartPhysicsSettings.instance.kartRotationCoeff;
             
-            kartRootModel.localEulerAngles = Vector3.up * (steerAngle * KartPhysicsSettings.instance.kartRotationCoeff);
+            kartRootModel.localEulerAngles = Vector3.up * (steerAngle * KartPhysicsSettings.instance.kartModelRotationCoeff);
 
             kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * KartPhysicsSettings.instance.kartRollCoeff);
         }
@@ -188,7 +189,7 @@ namespace Kart
         private void AnimateWheels()
         {
             _lerpedWheelDirection =
-                Mathf.Lerp(_lerpedWheelDirection, hMove, KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime * 2f);
+                Mathf.Lerp(_lerpedWheelDirection, movement[0], KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime * 2f);
             float angularSpeed = (_currentSpeed / (0.38f * (float) Math.PI) * 360f) % 360f;
             foreach (var turningWheel in turningWheels)
             {
@@ -264,11 +265,6 @@ namespace Kart
         public float CurrentSpeed()
         {
             return _currentSpeed;
-        }
-
-        public float GetHorizontalAxis()
-        {
-            return hMove;
         }
     }
 }

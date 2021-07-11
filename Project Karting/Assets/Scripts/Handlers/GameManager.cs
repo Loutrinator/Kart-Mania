@@ -21,8 +21,9 @@ namespace Handlers {
 
         public ItemManager itemManager;
 
-        [Header("UI and HUD")]
-        [SerializeField] private HUDTimeTrialController HUDvsClockPrefab;
+        [Header("UI and HUD")] 
+        [SerializeField] private HUDTimeTrialController timetrialHUDLeftPrefab;
+        [SerializeField] private HUDTimeTrialController timetrialHUDRightPrefab;
 
         [SerializeField] private GameObject StartUIPrefab;
 
@@ -56,6 +57,8 @@ namespace Handlers {
             else {
                 Destroy(gameObject);
             }
+            
+            
 
             currentRace = LevelManager.instance.InitLevel();
             minimap.race = currentRace;
@@ -82,21 +85,7 @@ namespace Handlers {
         }
 
         public void Update() {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Debug.Log("PAUSE");
-                gamePaused = !gamePaused;
-                if (gamePaused)
-                {
-                    Time.timeScale = 0;
-                    pauseMenu.PauseGame();
-                }
-                else
-                {
-                    Time.timeScale = 1;
-                    pauseMenu.ResumeGame();
-                }
-            }
+            
             if (gameState == GameState.race) {
                 PlayerRaceInfo player = playersInfo[0];
                 //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
@@ -106,11 +95,30 @@ namespace Handlers {
                 // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
                 //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
                 //timeInfo.text = info;
-                player.Controller.Update(); // listen player inputs 
+                if (player.controller != null)
+                {
+                    //player.controller.active = true; // listen player inputs 
+                }
             }
             minimap.UpdateMinimap();
         }
 
+        public void Pause()
+        {
+            Debug.Log("PAUSE");
+            gamePaused = !gamePaused;
+            if (gamePaused)
+            {
+                Time.timeScale = 0;
+                pauseMenu.PauseGame();
+            }
+            else
+            {
+                Time.timeScale = 1;
+                pauseMenu.ResumeGame();
+            }
+        }
+        
         public void StartRace() {
             for (int i = 0; i < playersInfo.Length; ++i) {
                 playersInfo[i].currentLapStartTime = Time.time;
@@ -132,49 +140,94 @@ namespace Handlers {
             
             gameState = GameState.start;
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
+
+            minimap.SetPosition(nbPlayerRacing);
+            
+            
             playersInfo = new PlayerRaceInfo[nbPlayerRacing];
             Transform[] spawnPoints = currentRace.spawnPoints;
             if (spawnPoints.Length >= nbPlayerRacing) {
                 for (int id = 0; id < nbPlayerRacing; ++id) {
-                    PlayerConfig playerConfig = LevelManager.instance.gameConfig.players[id];
+                    
+                    //Extracting the player's configuration
+                    PlayerConfiguration playerConfig = LevelManager.instance.gameConfig.players[id];
+                    //Switching to Kart Inputs
+                    playerConfig.Input.SwitchCurrentActionMap("Kart");
+                    
+                    //Spawning the kart
                     Transform spawn = spawnPoints[id];
-                    KartBase kart = Instantiate(playerConfig.kartPrefab, spawn.position, spawn.rotation);
-                    KartEffects kartEffects = kart.GetComponent<KartEffects>();
-                    KartAudio kartAudio = kart.GetComponent<KartAudio>();
+                    KartBase kart = Instantiate(playerConfig.KartPrefab, spawn.position, spawn.rotation);
+                    kart.playerIndex = id;
+                    
+                    //Linking to controls to the Kart
+                    PlayerController playerController = kart.GetComponent<PlayerController>();
+                    playerController.InitializePlayerConfiguration(playerConfig);
                     
                     
-                    // cameras for players
+                    // Adding the camera of the player
                     var kartCam = Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
+                    if (id != 0)
+                    {
+                        Destroy(kartCam.GetComponent<AudioListener>());
+                    }
+                    kartCam.SetViewport(id);
                     kartCam.target = kart.transform;
+                    
+                    //setting the camera to the KartEffect of the kart
+                    KartEffects kartEffects = kart.GetComponent<KartEffects>();
                     if (kartEffects != null)
                     {
                         kartEffects.cameraShakeTransform = kartCam.cameraShakeTransform;
-                        kartEffects.cam = kartCam.frontCamera;
+                        kartEffects.cam = kartCam.cam;
                     }
+                    
+                    //Setting the camera to the KartAudio of the kart
+                    KartAudio kartAudio = kart.GetComponent<KartAudio>();
                     if (kartAudio != null)
                     {
-                        kartAudio.cam = kartCam.frontCamera;
+                        kartAudio.cam = kartCam.cam;
                     }
+                    
+                    //Saving the kart in karts
                     karts.Add(kart);
                     
-                    PlayerRaceInfo info = new PlayerRaceInfo(kart, id, new PlayerAction()); //TODO : if human PlayerAction, if IA ComputerAction
+                    PlayerRaceInfo info = new PlayerRaceInfo(kart, id); //TODO : if human PlayerAction, if IA ComputerAction
                     info.camera = kartCam;
                     playersInfo[id] = info;
                     
-                    Instantiate(HUDvsClockPrefab); // id automatically set inside the class
-                    startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
-                    ShakeTransform cam = kart.cameraShake;
-                    
-                    startTime = startMessage.getStartTime();
-                    StartMsgAnimation startUI = startMessage.GetComponent<StartMsgAnimation>();
-                    if (startUI != null)
-                    {
-                        startUI.placeKeysAction = placeKeys;
-                    }
-                    minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer);
+                    //Flipping the UI if required
+                    HUDTimeTrialController HUDPRefab = timetrialHUDLeftPrefab;
 
-                    gameState = GameState.start;
+                    if ((nbPlayerRacing == 2 && id == 1) || (nbPlayerRacing == 3 && id == 2) ||
+                        (nbPlayerRacing == 4 && id >= 2))
+                    {
+                        HUDPRefab = timetrialHUDRightPrefab;
+                    }
+                    
+                    //Adding a the HUD and linking it to the cam
+                    Canvas timetrialHUD = Instantiate(HUDPRefab).GetComponent<Canvas>(); // id automatically set inside the class
+                    timetrialHUD.worldCamera = kartCam.cam;
+                    timetrialHUD.planeDistance = 1;
+                    timetrialHUD.sortingOrder = 100000;
+                    
+                    //Adding the kart marker to the minimap
+                    minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer, playerConfig.Color);
+
                 }
+                
+                    
+                //Adding the start countdown HUD    
+                startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
+                    
+                startTime = startMessage.getStartTime();
+                StartMsgAnimation startUI = startMessage.GetComponent<StartMsgAnimation>();
+                if (startUI != null)
+                {
+                    startUI.placeKeysAction = placeKeys;
+                }
+                
+                
+                gameState = GameState.start;
             } else {
 #if UNITY_EDITOR
                 Debug.LogError("Attempting to spawn " + nbPlayerRacing + " but only " + spawnPoints.Length + " available.");

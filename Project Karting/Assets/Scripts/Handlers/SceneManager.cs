@@ -47,6 +47,7 @@ namespace Handlers
         [SerializeField] private SerializedDictionary<GameMode, string> sceneMap;
 
         public void LoadGameMode(GameMode mode) {
+            PlayerConfigurationManager.Instance.HideJoinUI();
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneMap[mode]);
         }
         public void LoadMainMenu() {

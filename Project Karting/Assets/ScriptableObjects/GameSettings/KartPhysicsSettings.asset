@@ -18,9 +18,10 @@ MonoBehaviour:
   reverseAcceleration: 50
   braking: 1000
   steeringSpeed: 25
-  minDriftAngle: 1
-  maxDriftAngle: 5
-  kartRotationCoeff: 17.5
+  minDriftAngle: 0.3
+  maxDriftAngle: 1.5
+  kartRotationCoeff: 3.8
+  kartModelRotationCoeff: 75
   kartRollCoeff: 10
   kartRotationLerpSpeed: 3
   kartWheelAngle: 75

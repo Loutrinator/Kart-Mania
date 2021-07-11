@@ -10,7 +10,6 @@ public class RaceSelectionManager : MonoBehaviour
     public List<CarrousselSelector> raceSelectors;
     public TextMeshProUGUI raceName;
     public Animator goCanvasAnimator;
-    public MenuManager menuManager;
     
     //private List<int> _selectedRaces;
     private int _currentRaceId;
@@ -92,6 +91,6 @@ public class RaceSelectionManager : MonoBehaviour
     {
         ChoseRace();
         goCanvasAnimator.SetBool("visible",true);
-        menuManager.ShowNextScreen();
+        MenuManager.Instance.SelectRace();
     }
 }
