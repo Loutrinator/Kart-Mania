@@ -90,7 +90,7 @@ namespace UI
         public void AddVisualObject(GameObject obj, GameObject prefabPreview, Color color)
         {
             GameObject preview = Instantiate(prefabPreview);
-            preview.GetComponentInChildren<MeshRenderer>().material.color = color;
+            preview.GetComponentInChildren<MeshRenderer>().material.SetColor("Color_input", color);
             _objectPreviews.Add(obj, preview);
         }
 
