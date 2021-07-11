@@ -22,7 +22,6 @@ namespace Player
 
         public void InitializePlayerConfiguration(PlayerConfiguration pc)
         {
-            Debug.Log("InitializePlayerConfiguration " + pc.PlayerIndex);
             playerConfig = pc;
             playerConfig.Input.onActionTriggered += Input_OnActionTriggered;
             input = playerConfig.Input;
@@ -30,25 +29,20 @@ namespace Player
 
         private void Input_OnActionTriggered(InputAction.CallbackContext ctx)
         {
-            Debug.Log("Input_OnActionTriggered");
             if (ctx.action.name == _controls.Kart.Movement.name)
             {
-                Debug.Log("OnMove");
                 OnMove(ctx);
             }
             if (ctx.action.name == _controls.Kart.Drift.name)
             {
-                Debug.Log("OnDrift");
                 OnDrift(ctx);
             }
             if (ctx.action.name == _controls.Kart.Rearcamera.name)
             {
-                Debug.Log("OnRearCamera");
                 OnRearCamera(ctx);
             }
             if (ctx.action.name == _controls.Kart.Pause.name)
             {
-                Debug.Log("OnPause");
                 OnPause(ctx);
             }
         }
@@ -56,7 +50,6 @@ namespace Player
         
         public void OnMove(InputAction.CallbackContext context)
         {
-            Debug.Log("MOVE");
             if (_kart != null)
             {
                 Vector2 movement = context.ReadValue<Vector2>();
@@ -68,7 +61,6 @@ namespace Player
 
         public void OnDrift(InputAction.CallbackContext context)
         {
-            Debug.Log("DRIFT");
             if (_kart != null)
             {
                 _kart.drift = context.ReadValueAsButton();
@@ -76,7 +68,6 @@ namespace Player
         }
         public void OnRearCamera(InputAction.CallbackContext context)
         {
-            Debug.Log("REAR");
             if (_kart != null)
             {
                 //_kart.rear = context.ReadValue<bool>();
@@ -84,7 +75,6 @@ namespace Player
         }
         public void OnPause(InputAction.CallbackContext context)
         {
-            Debug.Log("PAUSE");
             GameManager.Instance.Pause();
         }
         
