@@ -54,12 +54,15 @@ namespace Kart
 
         public bool canMove;
 
+        private Vector3 _kartBallOffset;
+
         protected override void Awake()
         {
             base.Awake();
             StopDrifting();
             canMove = true;
 
+            _kartBallOffset = rigidBody.transform.localPosition;
             rigidBody.transform.parent = null;
         }
 
@@ -112,6 +115,14 @@ namespace Kart
             else {
                 currentAngularVelocity = Vector3.zero;
             }
+
+            _currentRotate = Mathf.Lerp(_currentRotate, _rotate, Time.deltaTime * 4f);
+            _rotate = 0f;
+            
+            transform.position = rigidBody.transform.position - _kartBallOffset;
+            Vector3 euler = Vector3.Lerp(transform.eulerAngles, new Vector3(0, transform.eulerAngles.y + _currentRotate, 0), Time.deltaTime * 5f);
+            transform.up = closestBezierPos.LocalUp;
+            transform.eulerAngles = euler;
         }
 
         private void ConvertStats()
@@ -137,19 +148,23 @@ namespace Kart
             else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, KartPhysicsSettings.instance.engineBrakeSpeed * Time.fixedDeltaTime);
 
             var t = transform;
-            currentVelocity = t.forward * _currentSpeed;
+            //currentVelocity = t.forward * _currentSpeed;
+            
+            rigidBody.AddForce(t.forward * _currentSpeed, ForceMode.Acceleration);
         }
 
+        private float _rotate, _currentRotate;
         protected void Rotate(float angle)
         {
-            lerpedAngle = Mathf.Lerp(lerpedAngle, angle, KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime);
+            _rotate = finalStats.steer * angle;
+            /*lerpedAngle = Mathf.Lerp(lerpedAngle, angle, KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime);
             float steerAngle = lerpedAngle * (finalStats.steer * 2 + KartPhysicsSettings.instance.steeringSpeed) * Time.fixedDeltaTime;
 
             currentAngularVelocity = transform.up * steerAngle;
             
             kartRootModel.localEulerAngles = Vector3.up * (steerAngle * KartPhysicsSettings.instance.kartRotationCoeff);
 
-            kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * KartPhysicsSettings.instance.kartRollCoeff);
+            kartBodyModel.localEulerAngles = Vector3.forward * (steerAngle * KartPhysicsSettings.instance.kartRollCoeff);*/
         }
 
         public void ResetKart() {

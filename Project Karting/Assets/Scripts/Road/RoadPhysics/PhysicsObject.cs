@@ -33,9 +33,10 @@ namespace Road.RoadPhysics {
                 _currentGravityVelocity += currentGravityAcceleration * (Time.fixedDeltaTime * KartPhysicsSettings.instance.gravityMultiplier);
             }
             
-            rigidBody.velocity = currentVelocity + _currentGravityVelocity + currentForcesVelocity;
+            //rigidBody.velocity = currentVelocity + _currentGravityVelocity + currentForcesVelocity;
             rigidBody.angularVelocity = currentAngularVelocity;
-            
+            rigidBody.AddForce(currentGravityAcceleration, ForceMode.Acceleration);
+
             // drag
             currentForcesVelocity -= currentForcesVelocity * drag;
             currentVelocity -= currentVelocity * drag;
