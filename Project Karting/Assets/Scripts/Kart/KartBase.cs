@@ -140,6 +140,8 @@ namespace Kart
             else {
                 currentAngularVelocity = Vector3.zero;
             }
+            
+            rigidBody.AddForce(transform.forward * (_currentSpeed), ForceMode.Acceleration);
         }
 
         private void ConvertStats()
