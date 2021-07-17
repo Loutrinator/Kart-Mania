@@ -1,4 +1,5 @@
 ﻿using System;
+using GameSettings;
 using SplineEditor.Runtime;
 using UnityEngine;
 

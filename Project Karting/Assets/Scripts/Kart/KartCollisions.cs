@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameSettings;
+using UnityEngine;
 
 namespace Kart
 {

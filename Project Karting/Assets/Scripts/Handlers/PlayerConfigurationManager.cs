@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GameSettings;
 using Handlers;
 using Kart;
+using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.DualShock;
@@ -108,16 +110,16 @@ public class PlayerConfigurationManager : MonoBehaviour
             foreach (var device in pi.devices)
             {
                 Debug.Log("Player " + pi.playerIndex + " joined with device : " + device.description.deviceClass + " interface name "  + device.description.interfaceName);
-                if (device.description.deviceClass.Contains("Mouse"))
+                /*if (device.description.deviceClass.Contains("Mouse"))
                 {
                     Destroy(pi.gameObject);
                     return;
-                }
+                }*/
                 
                 
                 ControlTypeDisplay inputTypeDisplay =
                     Instantiate(ControlTypeDisplayPrefab, playerDisplay.displayParent.transform);
-                
+
                 if (device is XInputController)
                 {
                     Debug.Log("Input of type XBox");
