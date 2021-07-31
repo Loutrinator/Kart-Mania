@@ -676,7 +676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1368285219045214713
 Transform:
   m_ObjectHideFlags: 0
@@ -3317,11 +3317,11 @@ MonoBehaviour:
   meshFilter: {fileID: 8522606498327481432}
   generateCollider: 1
   bezierPath: {fileID: 5714447425697141268}
-  roadSide: 0
-  roadWidth: 0.5
-  roadThickness: 2
-  distanceStart: 0
-  distanceEnd: 3018.18
+  roadSide: 1
+  roadWidth: 1.29
+  roadThickness: 4.3
+  distanceStart: 25.25
+  distanceEnd: 91.94
 --- !u!1 &4848756475691064369
 GameObject:
   m_ObjectHideFlags: 0
@@ -3894,8 +3894,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8264544955682673882}
-  m_LocalRotation: {x: -4.140717e-11, y: 0.702495, z: -4.1949066e-11, w: 0.7116887}
-  m_LocalPosition: {x: -367.2207, y: 1031.72, z: -1117.4138}
+  m_LocalRotation: {x: -3.4951908e-10, y: 0.67061234, z: -3.8662584e-10, w: 0.741808}
+  m_LocalPosition: {x: -358.5159, y: 1031.72, z: -1116.9244}
   m_LocalScale: {x: 45.2, y: 21.42, z: 2.75}
   m_Children: []
   m_Father: {fileID: 8436931904813511561}
@@ -3976,7 +3976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spline: {fileID: 3968446093839185947}
-  distance: 267
+  distance: 274.13
   horizontalOffset: 0
   verticalOffset: 9
   computeDistanceFromPosition: 0

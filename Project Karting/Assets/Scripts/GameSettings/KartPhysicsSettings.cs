@@ -20,7 +20,7 @@ public class KartPhysicsSettings : ScriptableObject
     }
     #endregion
     #region Kart Stats
-    [MinMaxSlider(25f,75f)]
+    [MinMaxSlider(0f,200)]
     public Vector2 topSpeed = new Vector2(80f,120f);
     public float acceleration = 20f;
     public float reverseSpeed = 15;

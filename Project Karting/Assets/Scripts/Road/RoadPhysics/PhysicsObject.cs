@@ -1,4 +1,5 @@
-﻿using SplineEditor.Runtime;
+﻿using System;
+using SplineEditor.Runtime;
 using UnityEngine;
 
 namespace Road.RoadPhysics {
@@ -32,11 +33,14 @@ namespace Road.RoadPhysics {
                 _currentGravityVelocity += currentGravityAcceleration * (Time.fixedDeltaTime * KartPhysicsSettings.instance.gravityMultiplier);
             }
             
-            rigidBody.velocity = currentVelocity + _currentGravityVelocity + currentForcesVelocity;
-            rigidBody.angularVelocity = currentAngularVelocity;
+            /*rigidBody.velocity = currentVelocity + _currentGravityVelocity + currentForcesVelocity;
+            rigidBody.angularVelocity = currentAngularVelocity;*/
             
             // drag
             currentForcesVelocity -= currentForcesVelocity * drag;
+            
+            rigidBody.AddForce(currentGravityAcceleration * KartPhysicsSettings.instance.gravityMultiplier, ForceMode.Acceleration);
+            rigidBody.angularVelocity = currentAngularVelocity;
         }
 
         public abstract bool IsGrounded();
@@ -47,6 +51,12 @@ namespace Road.RoadPhysics {
             _currentGravityVelocity = Vector3.zero;
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = Vector3.zero;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawRay(rigidBody.position, currentGravityAcceleration);
         }
     }
 }

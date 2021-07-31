@@ -15,7 +15,7 @@ namespace Kart
         public Transform kartBodyModel; // The main kart 3D model (no wheels)
         public List<WheelCollider> wheels; //TODO: A DEPLACER
         public List<Transform> turningWheels; // The turning wheels of the kart
-
+        [HideInInspector] public CameraFollowPlayer cameraFollowPlayer;
         public ShakeTransform cameraShake;
 
         //public Transform rotationAxis;
@@ -42,6 +42,7 @@ namespace Kart
         [HideInInspector] public Vector2 movement; // -1; 0; 1
         [HideInInspector] public bool drift;
         [HideInInspector] public int driftDirection;
+        [HideInInspector] public bool rear;
 
         private bool drifting;
 
@@ -98,6 +99,15 @@ namespace Kart
         private void FixedUpdate()
         {
 
+            if (rear)
+            {
+                cameraFollowPlayer.switchCameraMode(CameraMode.rear);
+            }
+            else
+            {
+                cameraFollowPlayer.switchCameraMode(CameraMode.front);
+            }
+            
             if (GameManager.Instance.gameState == GameState.start)
             {
                 if (movement[1] > 0)
@@ -140,6 +150,8 @@ namespace Kart
             else {
                 currentAngularVelocity = Vector3.zero;
             }
+            
+            rigidBody.AddForce(transform.forward * (_currentSpeed), ForceMode.Acceleration);
         }
 
         private void ConvertStats()

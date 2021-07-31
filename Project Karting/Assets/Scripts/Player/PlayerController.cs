@@ -70,7 +70,7 @@ namespace Player
         {
             if (_kart != null)
             {
-                //_kart.rear = context.ReadValue<bool>();
+                _kart.rear = context.ReadValue<float>() > 0 ;
             }
         }
         public void OnPause(InputAction.CallbackContext context)
