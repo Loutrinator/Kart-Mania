@@ -25,7 +25,7 @@ public class PlayerAI : MonoBehaviour
     {
         
     }
-
+/*
     private void Input_OnActionTriggered(InputAction.CallbackContext ctx)
     {
         if (ctx.action.name == _controls.Kart.Movement.name)
@@ -76,5 +76,5 @@ public class PlayerAI : MonoBehaviour
     {
         GameManager.Instance.Pause();
     }
-        
+        */
 }

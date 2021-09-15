@@ -2,8 +2,13 @@ using UnityEngine;
 
 namespace AI.UtilityAI
 {
-    public class Action : ScriptableObject
+    public class UtilityAIAction : ScriptableObject
     {
         public Event action;
+
+        public void performAction()
+        {
+            action.Use();
+        }
     }
 }
