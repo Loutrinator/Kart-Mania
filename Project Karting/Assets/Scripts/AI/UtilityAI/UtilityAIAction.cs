@@ -10,5 +10,10 @@ namespace AI.UtilityAI
         {
             action.Use();
         }
+
+        public float getUtility()
+        {
+            return 0.5f;
+        }
     }
 }
