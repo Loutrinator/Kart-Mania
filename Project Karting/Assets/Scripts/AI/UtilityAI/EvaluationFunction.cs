@@ -4,9 +4,8 @@ using UnityEngine;
 namespace AI.UtilityAI
 {
     [Serializable]
-    public abstract class EvaluationFunction
+    public struct EvaluationFunction
     {
         [SerializeField] public string name;
-        public abstract float GetValue();
     }
 }
