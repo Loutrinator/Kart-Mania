@@ -67,6 +67,39 @@ public class UtilityAIEditorWindow : ExtendedEditorWindow
     {
         currentProperty = selectedProperty;
         DrawField("actionName",true);
+        EditorGUILayout.BeginHorizontal(GUILayout.ExpandHeight(true));
+        EditorGUILayout.BeginVertical("box",GUILayout.ExpandWidth(true));
+        
+        //Functions list
+        SerializedProperty evalFunctionListProperties = currentProperty.FindPropertyRelative("evaluationFunctions");
+        
+        EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
+        GUILayout.Label("Functions");
+        
+        if (GUILayout.Button("+", GUILayout.MaxHeight(20), GUILayout.MaxWidth(20)))
+        {
+            evalFunctionListProperties.InsertArrayElementAtIndex(evalFunctionListProperties.arraySize);
+            Debug.Log("+");
+        }
+        if (GUILayout.Button("-", GUILayout.MaxHeight(20), GUILayout.MaxWidth(20)))
+        {
+            evalFunctionListProperties.DeleteArrayElementAtIndex(evalFunctionListProperties.arraySize-1);
+            Debug.Log("-");
+        }
+        
+        EditorGUILayout.EndHorizontal();
+        
+        foreach (SerializedProperty evalFunctionProperty in evalFunctionListProperties)
+        {
+            currentProperty = evalFunctionProperty;
+            EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
+            DrawField("evaluationData",true);
+            DrawField("coefficient",true);
+            DrawField("evaluationCurve",true);
+            EditorGUILayout.EndHorizontal();
+        }
+        EditorGUILayout.EndVertical();
+        EditorGUILayout.EndHorizontal();
 
     }
 

@@ -17,7 +17,8 @@ namespace AI.UtilityAI
             foreach (var evalSetting in evaluationFunctions)
             {
                 coeffSum += evalSetting.coefficient;
-                sum += evalSetting.coefficient * evalSetting.evaluationCurve.Evaluate(evalSetting.function.GetValue());
+                sum += evalSetting.coefficient *
+                       evalSetting.evaluationCurve.Evaluate(1f); //evalSetting.function.GetValue());
             }
 
             return Math.Min(1,Math.Max(0,sum / coeffSum)); //keeping it between 0 and 1 just in case

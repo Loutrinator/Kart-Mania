@@ -6,7 +6,7 @@ namespace AI.UtilityAI
     [Serializable]
     public struct EvaluationFunctionSettings
     {
-        [SerializeField] public EvaluationFunction function;
+        [SerializeField] public EvaluationDataEnum evaluationData;
         [SerializeField] public AnimationCurve evaluationCurve;
         [SerializeField] public float coefficient;
         
