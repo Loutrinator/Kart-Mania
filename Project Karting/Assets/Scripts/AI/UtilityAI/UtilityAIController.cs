@@ -1,30 +1,32 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace AI.UtilityAI
 {
     public class UtilityAIController : AIController
     {
-        private List<UtilityAIAction> actions;
-        private UtilityAIAction defaultAction;
+        [SerializeField] private UtilityAIAsset utilityAIAsset;
         public void tick()
-        {
-            UtilityAIAction selectedAction = actions[0];
+        {/*
+            List<UAIAction> actions = utilityAIAsset.Actions;
+            UAIAction selectedAction = actions[0];
             float utilityMax = selectedAction.getUtility();
             for (int i = 1; i < actions.Count; i++)
             {
-                UtilityAIAction action = actions[i];
+                UAIAction action = actions[i];
                 float actionUtility = action.getUtility();
                 if(actionUtility > utilityMax){
                     selectedAction = action;
                     utilityMax = actionUtility;
                 }
             }
-            if(utilityMax > 0f){
+            //performing the action
+            /*if(utilityMax > 0f){
                 selectedAction.performAction();
             } else if (defaultAction != null)
             {
                 defaultAction.performAction();
-            }
+            }*/
         }
 
         public void debug()

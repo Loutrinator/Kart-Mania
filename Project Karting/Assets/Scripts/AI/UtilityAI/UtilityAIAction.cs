@@ -1,19 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AI.UtilityAI
 {
-    public class UtilityAIAction : ScriptableObject
+    [Serializable]
+    public class UtilityAIAction
     {
-        public Event action;
-
-        public void performAction()
-        {
-            action.Use();
-        }
+        [SerializeField] public string actionName = "Action";
+        [SerializeField] public List<EvaluationFunctionSettings> evaluationFunctions;
 
         public float getUtility()
         {
-            return 0.5f;
+            float coeffSum = 0;
+            float sum = 0;
+            foreach (var evalSetting in evaluationFunctions)
+            {
+                coeffSum += evalSetting.coefficient;
+                sum += evalSetting.coefficient * evalSetting.evaluationCurve.Evaluate(evalSetting.function.GetValue());
+            }
+
+            return Math.Min(1,Math.Max(0,sum / coeffSum)); //keeping it between 0 and 1 just in case
         }
     }
 }

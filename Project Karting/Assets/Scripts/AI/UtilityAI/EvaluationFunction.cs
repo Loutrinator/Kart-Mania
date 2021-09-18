@@ -1,7 +1,12 @@
-﻿namespace AI.UtilityAI
+﻿using System;
+using UnityEngine;
+
+namespace AI.UtilityAI
 {
+    [Serializable]
     public abstract class EvaluationFunction
     {
-        public abstract float Evaluate(float value);
+        [SerializeField] public string name;
+        public abstract float GetValue();
     }
 }
