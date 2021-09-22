@@ -34,7 +34,14 @@
             "m_Id": "92ed41a865dc4dfab1ea6958610a60d9"
         }
     ],
-    "m_Keywords": [],
+    "m_Keywords": [
+        {
+            "m_Id": "b09f0859f70d48db8aec14dc33c7d8f4"
+        },
+        {
+            "m_Id": "258f6d68eb1848b19667786213358085"
+        }
+    ],
     "m_Nodes": [
         {
             "m_Id": "49aec2379ddb4d16b62ef0ef5ef61905"
@@ -2102,6 +2109,25 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "258f6d68eb1848b19667786213358085",
+    "m_Guid": {
+        "m_GuidSerialized": "227f5999-b9b9-4b39-b131-51c33f4c83b6"
+    },
+    "m_Name": "MainLightShadowsCascade",
+    "m_DefaultReferenceName": "BOOLEAN_258F6D68EB1848B19667786213358085_ON",
+    "m_OverrideReferenceName": "_MAIN_LIGHT_SHADOWS_CASCADE",
+    "m_GeneratePropertyBlock": true,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 0,
+    "m_Entries": [],
+    "m_Value": 1,
+    "m_IsEditable": true
 }
 
 {
@@ -5205,6 +5231,25 @@
     },
     "m_TextureType": 0,
     "m_NormalMapSpace": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "b09f0859f70d48db8aec14dc33c7d8f4",
+    "m_Guid": {
+        "m_GuidSerialized": "396e474a-6b3f-4256-b413-5e3cd1f37209"
+    },
+    "m_Name": "MainLightShadows",
+    "m_DefaultReferenceName": "BOOLEAN_B09F0859F70D48DB8AEC14DC33C7D8F4_ON",
+    "m_OverrideReferenceName": "_MAIN_LIGHT_SHADOWS",
+    "m_GeneratePropertyBlock": true,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 0,
+    "m_Entries": [],
+    "m_Value": 1,
+    "m_IsEditable": true
 }
 
 {
