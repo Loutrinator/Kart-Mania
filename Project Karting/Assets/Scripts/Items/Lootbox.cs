@@ -34,7 +34,7 @@ namespace Items
         private void BreakLootBox(int position,KartBase kart)
         {
             state = LootBoxState.opened;
-            GiveItem(position, kart);
+            //GiveItem(position, kart);
             StartCoroutine(WaitToRespawn());
             prism.localScale = Vector3.zero;
         }

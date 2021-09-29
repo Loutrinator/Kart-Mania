@@ -5796,7 +5796,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kartBase: {fileID: 9197028294900898373}
-  bumpForce: 50
 --- !u!1 &4686627548744261291
 GameObject:
   m_ObjectHideFlags: 0
@@ -5916,6 +5915,7 @@ MonoBehaviour:
   turningWheels:
   - {fileID: 7401823191910459289}
   - {fileID: 5171062410734496925}
+  cameraFollowPlayer: {fileID: 0}
   cameraShake: {fileID: 7751235033543211794}
   effects: {fileID: 9203804644391519208}
   keyhole: {fileID: 593124679095247912}
@@ -5931,6 +5931,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   drift: 0
   driftDirection: 0
+  rear: 0
   canMove: 0
 --- !u!114 &8756186664054783961
 MonoBehaviour:
@@ -5960,7 +5961,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kartBase: {fileID: 6669060970404059514, guid: 788e3c6fb21859241bfef9c60f187e62,
     type: 3}
-  bumpForce: 50
 --- !u!114 &5266429396722401737
 MonoBehaviour:
   m_ObjectHideFlags: 0

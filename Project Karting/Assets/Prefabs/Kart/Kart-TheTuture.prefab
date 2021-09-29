@@ -583,7 +583,6 @@ GameObject:
   - component: {fileID: 6671327005639688407}
   - component: {fileID: 7072082925053140395}
   - component: {fileID: 6669060970404059514}
-  - component: {fileID: 2789011401745134355}
   - component: {fileID: 4222294656709650358}
   - component: {fileID: -6665074051791947066}
   m_Layer: 9
@@ -688,6 +687,7 @@ MonoBehaviour:
   turningWheels:
   - {fileID: 8609656235578777857}
   - {fileID: 5014659118040999078}
+  cameraFollowPlayer: {fileID: 0}
   cameraShake: {fileID: 5241838320852678701}
   effects: {fileID: 6671327005639688407}
   keyhole: {fileID: 7072082923481296565}
@@ -703,21 +703,8 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   drift: 0
   driftDirection: 0
+  rear: 0
   canMove: 0
---- !u!114 &2789011401745134355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7072082925053140372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8464b13d452fa32409651440d53aec20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kartBase: {fileID: 6669060970404059514}
-  bumpForce: 50
 --- !u!114 &4222294656709650358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +811,7 @@ GameObject:
   - component: {fileID: 1428241676658091385}
   - component: {fileID: 5807636560362033438}
   - component: {fileID: 1539265328038045356}
+  - component: {fileID: 4919609321244666834}
   m_Layer: 9
   m_Name: voiture
   m_TagString: Untagged
@@ -914,6 +902,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8302856757195774222, guid: 9b934e49287da1e45a400e0a2f2206fb, type: 3}
+--- !u!114 &4919609321244666834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8503605590613409329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8464b13d452fa32409651440d53aec20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kartBase: {fileID: 6669060970404059514}
 --- !u!1001 &339556805685439913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1062,6 +1063,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580731698073925089, guid: 345bde157ca998444959283038b6db81,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8120327439298271423, guid: 345bde157ca998444959283038b6db81,
         type: 3}
@@ -1506,6 +1512,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580731698073925089, guid: 345bde157ca998444959283038b6db81,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8120327439298271423, guid: 345bde157ca998444959283038b6db81,
         type: 3}

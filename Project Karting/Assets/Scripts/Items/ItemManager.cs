@@ -71,6 +71,7 @@ namespace Items
         public Item GetRandomItem(int position)
         {
             float rnd = Random.value;
+            Debug.Log("taille du tableau : " + itemProbabilities.Count);
             for (int i = 0; i < itemProbabilities[position].Count; i++)
             {
                 ItemProbability proba = itemProbabilities[position][i];
@@ -95,7 +96,7 @@ namespace Items
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            var itemManager = (ItemManager) target;
+            /*var itemManager = (ItemManager) target;
             if (itemManager == null) return;
             if (itemManager.itemProbabilities == null) itemManager.itemProbabilities = new List<ListProbability>();
             if (itemManager.items == null) itemManager.items = new List<Item>();
@@ -118,7 +119,7 @@ namespace Items
             
             DrawItems(itemManager);
 
-            DrawProbability(itemManager);
+            DrawProbability(itemManager);*/
         }
         
         private static void DrawItems(ItemManager itemManager)
