@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SplineEditor.Runtime;
 using UnityEngine;
-using Utils.PrefabUtility;
+using UnityExtendedEditor.PrefabUtility;
 
 namespace Road.RoadMesh
 {
