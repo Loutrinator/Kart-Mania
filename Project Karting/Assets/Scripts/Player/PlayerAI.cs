@@ -26,6 +26,7 @@ public class PlayerAI : KartController
         _ai.kart = kart;
         movement = Vector2.zero;
         
+        GameManager.Instance.playersAiUpdate.Add(AIUpdate);
     }
 
     private void AIUpdate()
