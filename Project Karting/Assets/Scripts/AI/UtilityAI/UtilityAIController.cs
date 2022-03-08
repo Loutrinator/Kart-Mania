@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Kart;
 using UnityEngine;
 
 namespace AI.UtilityAI
@@ -6,27 +7,23 @@ namespace AI.UtilityAI
     public class UtilityAIController : AIController
     {
         [SerializeField] private UtilityAIAsset utilityAIAsset;
-        public void tick()
-        {/*
-            List<UAIAction> actions = utilityAIAsset.Actions;
-            UAIAction selectedAction = actions[0];
-            float utilityMax = selectedAction.getUtility();
-            for (int i = 1; i < actions.Count; i++)
+        public override AIAction tick()
+        {
+            
+            UtilityAIAction selectedAction = utilityAIAsset.actions[0];
+            float utilityMax = selectedAction.getUtility(kart);
+
+            for (int i = 1; i < utilityAIAsset.actions.Count; i++)
             {
-                UAIAction action = actions[i];
-                float actionUtility = action.getUtility();
+                UtilityAIAction action = utilityAIAsset.actions[i];
+                float actionUtility = action.getUtility(kart);
                 if(actionUtility > utilityMax){
                     selectedAction = action;
                     utilityMax = actionUtility;
                 }
             }
-            //performing the action
-            /*if(utilityMax > 0f){
-                selectedAction.performAction();
-            } else if (defaultAction != null)
-            {
-                defaultAction.performAction();
-            }*/
+
+            return selectedAction;
         }
 
         public void debug()

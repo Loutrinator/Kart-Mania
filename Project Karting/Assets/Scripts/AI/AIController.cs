@@ -1,7 +1,13 @@
-﻿namespace AI
+﻿
+using AI.UtilityAI;
+using Kart;
+using UnityEngine;
+namespace AI
 {
-    public interface AIController
+    public abstract class AIController : MonoBehaviour
+
     {
-        
+        [HideInInspector] public KartBase kart;
+        public abstract AIAction tick();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Game;
 using Items;
@@ -7,6 +8,7 @@ using Player;
 using Road.RoadPhysics;
 using UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Handlers {
     public enum GameState
@@ -46,6 +48,9 @@ namespace Handlers {
 
         [HideInInspector]
         public PauseMenu pauseMenu;
+
+
+
         
         /*public Event AIUpdate;
         [HideInInspector]
@@ -89,7 +94,11 @@ namespace Handlers {
             pauseMenu = FindObjectOfType<PauseMenu>();
         }
 
-        public void Update() {
+        /*private IEnumerator AIUpdate()
+        {
+        }*/
+        
+        private void Update() {
             
             if (gameState == GameState.race) {
                 PlayerRaceInfo player = playersInfo[0];
