@@ -49,6 +49,15 @@ namespace AI.UtilityAI
         {
             return 1;
         }
+
+        public float DistanceToCenterOfRoadFunction(KartBase kart) {
+            float roadSize = GameManager.Instance.currentRace.road.bezierMeshExtrusion.roadWidth;
+            float distCenter = Vector3.Distance(kart.closestBezierPos.GlobalOrigin, kart.transform.position);
+            return distCenter / roadSize;
+        }
+        
+        
+        
         public float Constant(KartBase kart)
         {
             return 1;
