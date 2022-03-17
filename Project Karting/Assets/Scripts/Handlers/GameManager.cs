@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game;
 using Items;
 using Kart;
@@ -45,6 +46,10 @@ namespace Handlers {
 
         [HideInInspector]
         public PauseMenu pauseMenu;
+        
+        /*public Event AIUpdate;
+        [HideInInspector]
+        public float AI;*/
 
         private bool gamePaused;
         
