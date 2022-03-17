@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Kart;
-using UnityEngine;
 
 namespace Game {
-    public class RaceUtils : MonoBehaviour {
+    public static class RaceUtils {
         public static List<KartBase> GetRanking(List<KartBase> levelKarts) {
             var karts = new List<KartBase>();
             for (int i = levelKarts.Count - 1; i >= 0; --i) {
