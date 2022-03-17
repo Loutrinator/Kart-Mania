@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Kart;
 using UnityEngine;
 
 namespace AI.UtilityAI
 {
     [Serializable]
-    public class UtilityAIAction
+    public class UtilityAIAction : AIAction
     {
-        [SerializeField] public string actionName = "Action";
         [SerializeField] public List<EvaluationFunctionSettings> evaluationFunctions;
 
-        public float getUtility()
+        public float getUtility(KartBase kart)
         {
             float coeffSum = 0;
             float sum = 0;
@@ -18,7 +18,7 @@ namespace AI.UtilityAI
             {
                 coeffSum += evalSetting.coefficient;
                 sum += evalSetting.coefficient *
-                       evalSetting.evaluationCurve.Evaluate(1f); //evalSetting.function.GetValue());
+                       evalSetting.evaluationCurve.Evaluate(UtilityAIKartBehaviorManager.Instance.GetValue(evalSetting.evaluationData,kart)); //evalSetting.function.GetValue());
             }
 
             return Math.Min(1,Math.Max(0,sum / coeffSum)); //keeping it between 0 and 1 just in case
