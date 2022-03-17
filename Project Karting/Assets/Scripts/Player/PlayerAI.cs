@@ -10,8 +10,7 @@ using Player;
 
 public class PlayerAI : KartController
 {
-    [SerializeField] private AIController _ai;
-    [SerializeField] private KartBase kart;
+    public AIController aiController;
 
     private Vector2 movement;
     
@@ -20,10 +19,10 @@ public class PlayerAI : KartController
         if (kart == null)
             kart = GetComponent<KartBase>();
         
-        if (_ai == null) 
-            _ai = new UtilityAIController();
+        if (aiController == null) 
+            aiController = new UtilityAIController();
         
-        _ai.kart = kart;
+        aiController.kart = kart;
         movement = Vector2.zero;
         
         GameManager.Instance.playersAiUpdate.Add(AIUpdate);
@@ -31,7 +30,7 @@ public class PlayerAI : KartController
 
     private void AIUpdate()
     {
-        AIAction bestAction = _ai.tick();
+        AIAction bestAction = aiController.tick();
 
         if (bestAction.actionName == "Accelerate")
         {

@@ -1,5 +1,4 @@
-﻿using Handlers;
-using Kart;
+﻿using Kart;
 using UnityEngine;
 
 namespace AI.UtilityAI
@@ -16,6 +15,9 @@ namespace AI.UtilityAI
             }
         }
 
+
+        private static float startTime = Time.time;
+        
         public float GetValue(EvaluationDataEnum dataType, KartBase kart)
         {
             float value = 0;
@@ -27,8 +29,11 @@ namespace AI.UtilityAI
                 case EvaluationDataEnum.curvatureOfTheRoad:
                     value = CurvatureOfRoadFunction(kart);
                     break;
-                case EvaluationDataEnum.distanceToCenterOfRoad:
-                    value = DistanceToCenterOfRoadFunction(kart);
+                case EvaluationDataEnum.constant:
+                    value = Constant(kart);
+                    break;
+                case EvaluationDataEnum.sineNormalized:
+                    value = SineNormalized(kart);
                     break;
             }
 
@@ -44,14 +49,14 @@ namespace AI.UtilityAI
         {
             return 1;
         }
+        public float Constant(KartBase kart)
+        {
+            return 1;
+        }
 
-        /**
-         * Returns 
-         */
-        public float DistanceToCenterOfRoadFunction(KartBase kart) {
-            float roadSize = GameManager.Instance.currentRace.road.bezierMeshExtrusion.roadWidth;
-            float distToCenter = Vector3.Distance(kart.closestBezierPos.GlobalOrigin, kart.transform.position);
-            return distToCenter / roadSize;
+        public float SineNormalized(KartBase kart)
+        {
+            return Mathf.Sin(Time.time - startTime) / 2 + 0.5f;
         }
     }
 }

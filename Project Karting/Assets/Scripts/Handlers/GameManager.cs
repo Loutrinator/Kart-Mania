@@ -17,6 +17,7 @@ namespace Handlers {
     }
     public class GameManager : MonoBehaviour
     {
+        public bool DONTSETUP = false;
         
         public GameState gameState;
         public Race currentRace;
@@ -85,30 +86,37 @@ namespace Handlers {
                 Destroy(gameObject);
             }
 
+            _updateAi = true;
+            StartCoroutine(AiUpdateHandler());
+            gameState = GameState.race;
             
-            
-            currentRace = LevelManager.instance.InitLevel();
-            minimap.race = currentRace;
-            minimap.DrawMinimap();
-
-            if (physicsManager != null)
+            if (!DONTSETUP)
             {
-                physicsManager.Init(currentRace.road.bezierSpline);
+                
+                currentRace = LevelManager.instance.InitLevel();
+                minimap.race = currentRace;
+                minimap.DrawMinimap();
+
+                if (physicsManager != null)
+                {
+                    physicsManager.Init(currentRace.road.bezierSpline);
+                }
+            
+                InitRace();
+
+                if (respawner != null)
+                {
+                    respawner.Init();
+                }
+            
+                TransitionController.Instance.FadeOut(() => {
+                    //raceBegan = true;  // todo enable after delay
+                });
+
+                gamePaused = false;
+                pauseMenu = FindObjectOfType<PauseMenu>();
             }
             
-            InitRace();
-
-            if (respawner != null)
-            {
-                respawner.Init();
-            }
-            
-            TransitionController.Instance.FadeOut(() => {
-                //raceBegan = true;  // todo enable after delay
-            });
-
-            gamePaused = false;
-            pauseMenu = FindObjectOfType<PauseMenu>();
         }
 
         /*private IEnumerator AIUpdate()
@@ -116,22 +124,25 @@ namespace Handlers {
         }*/
         
         private void Update() {
-            
-            if (gameState == GameState.race) {
-                PlayerRaceInfo player = playersInfo[0];
-                //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
-                //lap.text = player.lap.ToString();
-                //checkpoint.text = player.currentCheckpoint.ToString();
-                //float diff = Time.time - player.currentLapStartTime;
-                // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
-                //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
-                //timeInfo.text = info;
-                if (player.controller != null)
-                {
-                    //player.controller.active = true; // listen player inputs 
+
+            if (!DONTSETUP)
+            {
+                if (gameState == GameState.race) {
+                    PlayerRaceInfo player = playersInfo[0];
+                    //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
+                    //lap.text = player.lap.ToString();
+                    //checkpoint.text = player.currentCheckpoint.ToString();
+                    //float diff = Time.time - player.currentLapStartTime;
+                    // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
+                    //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
+                    //timeInfo.text = info;
+                    if (player.controller != null)
+                    {
+                        //player.controller.active = true; // listen player inputs 
+                    }
                 }
+                minimap.UpdateMinimap();
             }
-            minimap.UpdateMinimap();
         }
 
         public void Pause()
