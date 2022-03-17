@@ -68,6 +68,20 @@ namespace AI.UtilityAI
             return (dot1 + dot2)/2f;
         }
 
+        public Vector3 ClosestPointInCurvature(KartBase kart)
+        {
+            Vector3 pointCurvature = Vector3.zero;
+
+            float distance = kart.closestBezierPos.BezierDistance;
+            var nextPos = GameManager.Instance.currentRace.road.bezierSpline.GetBezierPos(distance + distCurve);
+            int dir = Mathf.RoundToInt(CurvatureOfRoadFunction(kart));
+
+            float roadWith = GameManager.Instance.currentRace.road.bezierMeshExtrusion.roadWidth;
+            pointCurvature = kart.closestBezierPos.GlobalOrigin + dir * nextPos.Normal * roadWith;
+
+            return pointCurvature;
+        }
+
         public float DistanceToCenterOfRoadFunction(KartBase kart) {
             float roadSize = GameManager.Instance.currentRace.road.bezierMeshExtrusion.roadWidth;
             float distCenter = Vector3.Distance(kart.closestBezierPos.GlobalOrigin, kart.transform.position);
