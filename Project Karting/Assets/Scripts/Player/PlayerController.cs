@@ -7,11 +7,10 @@ using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : KartController
     {
         private PlayerConfiguration playerConfig;
         [SerializeField] private PlayerInput input;
-        [SerializeField] private KartBase _kart;
         private PlayerControls _controls;
 
         private void Awake()
@@ -50,27 +49,19 @@ namespace Player
         
         public void OnMove(InputAction.CallbackContext context)
         {
-            if (_kart != null)
-            {
-                Vector2 movement = context.ReadValue<Vector2>();
-                float x = movement[0] > 0.1f ? 1f : movement[0] < -0.1f ? -1f : 0;
-                float y = movement[1] > 0.1f ? 1f : movement[1] < -0.1f ? -1f : 0;
-                _kart.movement = new Vector2(x,y);
-            }
+            Vector2 movement = context.ReadValue<Vector2>();
+            Move(movement);
         }
 
         public void OnDrift(InputAction.CallbackContext context)
         {
-            if (_kart != null)
-            {
-                _kart.drift = context.ReadValueAsButton();
-            }
+            Drift(context.ReadValueAsButton());
         }
         public void OnRearCamera(InputAction.CallbackContext context)
         {
-            if (_kart != null)
+            if (kart != null)
             {
-                _kart.rear = context.ReadValue<float>() > 0 ;
+                kart.rear = context.ReadValue<float>() > 0 ;
             }
         }
         public void OnPause(InputAction.CallbackContext context)

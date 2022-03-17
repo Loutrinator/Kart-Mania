@@ -6,23 +6,54 @@ using UnityEngine;
 
 using AI;
 using AI.UtilityAI;
+using Player;
 
-public class PlayerAI : MonoBehaviour
+public class PlayerAI : KartController
 {
-    [SerializeField] private KartBase _kart;
     [SerializeField] private AIController _ai;
+    [SerializeField] private KartBase kart;
 
+    private Vector2 movement;
+    
     private void Awake()
     {
-        var kart = GetComponent<KartBase>();
-        if (_ai == null)
-        {
+        if (kart == null)
+            kart = GetComponent<KartBase>();
+        
+        if (_ai == null) 
             _ai = new UtilityAIController();
-        }
+        
+        _ai.kart = kart;
+        movement = Vector2.zero;
+        
     }
 
     private void AIUpdate()
     {
+        AIAction bestAction = _ai.tick();
+
+        if (bestAction.actionName == "Accelerate")
+        {
+            movement.y = 1;
+            Move(movement);
+        }
+        else if(bestAction.actionName == "Brake")
+        {
+            
+            movement.y = 0;
+            Move(movement);
+        }
+        else if(bestAction.actionName == "TurnLeft")
+        {
+            
+            movement.x = -1;
+            Move(movement);
+        }
+        else if(bestAction.actionName == "TurnRight")
+        {
+            movement.x = 1;
+            Move(movement);
+        }
         
     }
 /*

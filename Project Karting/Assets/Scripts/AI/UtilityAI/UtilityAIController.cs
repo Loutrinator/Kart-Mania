@@ -6,7 +6,7 @@ namespace AI.UtilityAI
     public class UtilityAIController : AIController
     {
         [SerializeField] private UtilityAIAsset utilityAIAsset;
-        public void tick()
+        public override AIAction tick()
         {/*
             List<UAIAction> actions = utilityAIAsset.Actions;
             UAIAction selectedAction = actions[0];
@@ -27,6 +27,7 @@ namespace AI.UtilityAI
             {
                 defaultAction.performAction();
             }*/
+            return null;
         }
 
         public void debug()
