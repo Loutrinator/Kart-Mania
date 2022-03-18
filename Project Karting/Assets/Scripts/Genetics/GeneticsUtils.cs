@@ -3,6 +3,10 @@ using UnityEngine.Assertions;
 
 namespace Genetics {
     public static class GeneticsUtils {
+        
+        public static float mutateRate = 0.2f;
+        public static float mutateStrength = 2.0f;
+
         public static float[] Reproduce(float[] gen1, float[] gen2, bool doLerp) {
             Assert.AreEqual(gen1.Length, gen2.Length);
 
@@ -16,6 +20,20 @@ namespace Genetics {
                 result[i] = value;
             }
             
+            return result;
+        }
+
+        public static float[] Mutate(float[] gen)
+        {
+            float[] result = new float[gen.Length];
+            result = gen;
+
+            float randomValue = Random.Range(0.0f, 1.0f);
+            if (randomValue < mutateRate)
+            {
+                int randomIndex = Mathf.RoundToInt(Random.Range(0, gen.Length));
+                result[randomIndex] = Random.Range(-1.0f, 1.0f) * mutateStrength;
+            }
             return result;
         }
     }
