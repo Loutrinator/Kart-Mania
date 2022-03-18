@@ -49,22 +49,7 @@ namespace Handlers {
         public PauseMenu pauseMenu;
 
 
-        #region IA_HANDLER
-        public List<Action> playersAiUpdate = new List<Action>();
-        private float _aiFrameLength = 0.1f;    // time to wait between 2 ai update frames
-        private bool _updateAi; // true when game start, false on game stop
-        // todo start this coroutine
-        private IEnumerator AiUpdateHandler() {
-            var wait = new WaitForSeconds(_aiFrameLength);
-            while (_updateAi) {
-                for (int i = playersAiUpdate.Count - 1; i >= 0; --i) {
-                    playersAiUpdate[i].Invoke();
-                }
-
-                yield return wait;
-            }
-        }
-        #endregion
+        
 
 
         
@@ -84,8 +69,6 @@ namespace Handlers {
                 Destroy(gameObject);
             }
 
-            _updateAi = true;
-            StartCoroutine(AiUpdateHandler());
             gameState = GameState.race;
             
                 currentRace = LevelManager.instance.InitLevel();

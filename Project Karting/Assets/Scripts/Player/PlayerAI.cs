@@ -25,12 +25,15 @@ public class PlayerAI : KartController
         aiController.kart = kart;
         movement = Vector2.zero;
         
-        GameManager.Instance.playersAiUpdate.Add(AIUpdate);
+    }
+    private void Start()
+    {
+        AIManager.Instance.playersAiUpdate.Add(AIUpdate);
     }
 
     private void AIUpdate()
     {
-        AIAction bestAction = aiController.tick();
+        
 
         if (bestAction.actionName == "Accelerate")
         {
