@@ -15,7 +15,7 @@ namespace Road.RoadPhysics {
         private Vector3 _currentGravityVelocity;
 
         protected virtual void Awake() {
-            PhysicsManager.instance.AddPhysicsObject(this);
+            //PhysicsManager.instance.AddPhysicsObject(this);
             currentGravityAcceleration = Physics.gravity;
         }
 

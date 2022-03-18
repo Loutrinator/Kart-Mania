@@ -99,17 +99,18 @@ namespace Kart
         private void FixedUpdate()
         {
 
-            if (rear)
-            {
-                cameraFollowPlayer.switchCameraMode(CameraMode.rear);
-            }
-            else
-            {
-                cameraFollowPlayer.switchCameraMode(CameraMode.front);
-            }
             
             if (GameManager.Instance.gameState == GameState.start)
             {
+                if (rear)
+                {
+                    cameraFollowPlayer.switchCameraMode(CameraMode.rear);
+                }
+                else
+                {
+                    cameraFollowPlayer.switchCameraMode(CameraMode.front);
+                }
+
                 if (movement[1] > 0)
                 {
                     effects.Rewind();

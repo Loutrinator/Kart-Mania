@@ -5916,6 +5916,7 @@ MonoBehaviour:
   turningWheels:
   - {fileID: 7401823191910459289}
   - {fileID: 5171062410734496925}
+  cameraFollowPlayer: {fileID: 0}
   cameraShake: {fileID: 7751235033543211794}
   effects: {fileID: 9203804644391519208}
   keyhole: {fileID: 593124679095247912}
@@ -5931,6 +5932,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   drift: 0
   driftDirection: 0
+  rear: 0
   canMove: 0
 --- !u!114 &8756186664054783961
 MonoBehaviour:
@@ -5944,8 +5946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8e3134b8f338341b739978a43716dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kart: {fileID: 9197028294900898373}
   input: {fileID: 0}
-  _kart: {fileID: 9197028294900898373}
 --- !u!114 &1802534277707854011
 MonoBehaviour:
   m_ObjectHideFlags: 0

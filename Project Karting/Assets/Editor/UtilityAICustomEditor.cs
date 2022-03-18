@@ -25,6 +25,7 @@ namespace Editor
     {
         public override void OnInspectorGUI()
         {
+            base.DrawDefaultInspector();
             if (GUILayout.Button("Open Editor"))
             {
                 UtilityAIEditorWindow.Open((UtilityAIAsset)target);
