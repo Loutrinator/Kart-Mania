@@ -7,7 +7,7 @@ namespace AI.UtilityAI
 {
     public class UtilityAIController : AIController
     {
-        [SerializeField] private UtilityAIAsset utilityAIAsset;
+        [SerializeField] public UtilityAIAsset utilityAIAsset;
         private float[] values;
         private int selectedId = 0;
         private int valuesUpdated = 0;

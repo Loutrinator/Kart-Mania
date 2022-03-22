@@ -59,9 +59,8 @@ namespace Kart
 
         public bool canMove;
 
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
             _firstPos = transform.position;
             _firstPosTime = Time.time;
             StopDrifting();

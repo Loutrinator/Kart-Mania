@@ -31,15 +31,9 @@ public class PlayerAI : KartController
 
     private void Start()
     {
-    StartCoroutine(StartCoroutine());
-    }
-
-    private IEnumerator StartCoroutine()
-    {
-        yield return new WaitForSeconds(0.1f);
         AIManager.Instance.playersAiUpdate.Add(AIUpdate);
     }
-
+    
     private void AIUpdate()
     {
         

@@ -6,7 +6,7 @@ namespace Player
     public class KartController : MonoBehaviour
     {
 
-        [SerializeField] protected KartBase kart;
+        [SerializeField] public KartBase kart;
         protected void Move(Vector2 movement)
         {
             if (kart != null)
