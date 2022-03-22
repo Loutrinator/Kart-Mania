@@ -10,12 +10,12 @@ public class ActionDebugger : MonoBehaviour
         public static Color green = new Color(0.6f, 0.941f, 0.290f, 1f);
         public static Color red = new Color(0.941f, 0.341f, 0.294f, 1f);
     }
-    
-    
+
+
     [SerializeField] private Text nameText;
     [SerializeField] private Slider slider;
     [SerializeField] private Image image;
-    
+
 
     public void setValues(float value, bool selected)
     {

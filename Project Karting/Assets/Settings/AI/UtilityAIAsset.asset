@@ -12,296 +12,471 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1409e521b8fb3e41a0808e7ced69a4d, type: 3}
   m_Name: UtilityAIAsset
   m_EditorClassIdentifier: 
-  actions:
-  - actionName: Accelerate
-    evaluationFunctions:
-    - evaluationData: 4
-      evaluationCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 1.0596035
-          outSlope: 1.0596035
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.55580914
-          value: 0.5889373
-          inSlope: 0.9925113
-          outSlope: 0.9925113
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0.92541915
-          outSlope: 0.92541915
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 0
-      coefficient: 1
-  - actionName: Brake
-    evaluationFunctions:
-    - evaluationData: 3
-      evaluationCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0.0021634954
-          value: 0.38624555
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1.0021635
-          value: 0.38624555
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 0
-      coefficient: 0
-  - actionName: TurnLeft
-    evaluationFunctions:
-    - evaluationData: 4
-      evaluationCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.047429875
-          value: 0.06513482
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.3772551
-          value: 0.8497292
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.47222334
-          value: 0.32186118
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.47898182
-          value: 0.5733144
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.754838
-          value: 0.32737607
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.795807
-          value: 0.8517495
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 0
-      coefficient: 3
-    - evaluationData: 3
-      evaluationCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: -0.7390207
-          outSlope: -0.7390207
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.99890137
-          value: 0.26179123
-          inSlope: -0.7390207
-          outSlope: -0.7390207
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 0
-      coefficient: 3
-  - actionName: TurnRight
-    evaluationFunctions:
-    - evaluationData: 4
-      evaluationCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 0
-      coefficient: 2
-    - evaluationData: 3
-      evaluationCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 0.9988682
-          value: 0.19906962
-          inSlope: 2
-          outSlope: 2
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 0
-      coefficient: 6
-  - actionName: DriftLeft
-    evaluationFunctions:
-    - evaluationData: 4
-      evaluationCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0.11026949
-          value: 0.004030347
-          inSlope: 2.151695
-          outSlope: 2.151695
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.5758072
-          value: 1.0057255
-          inSlope: -0.43816292
-          outSlope: -0.43816292
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.90405273
-          value: 0.011791229
-          inSlope: -3.0280209
-          outSlope: -3.0280209
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 0
-      coefficient: 1
-  - actionName: DrifRight
-    evaluationFunctions:
-    - evaluationData: 2
-      evaluationCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 0
-      coefficient: 0
+  actionGroups:
+  - groupName: Speed
+    actions:
+    - actionName: Accelerate
+      evaluationFunctions:
+      - evaluationData: 2
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: -0.25
+            value: 0
+            inSlope: 3.459847
+            outSlope: 3.459847
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0
+            outWeight: 0.70908535
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.28123215
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        coefficient: 1
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: -1
+            outSlope: -1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: -1
+            outSlope: -1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 0
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+    - actionName: LetGo
+      evaluationFunctions:
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.0062111616
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 0.0062111616
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+    - actionName: Brake
+      evaluationFunctions:
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0.2587992
+            outSlope: 0.2587992
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.112836555
+          - serializedVersion: 3
+            time: 0.5317426
+            value: 0.3311076
+            inSlope: 1.0255778
+            outSlope: 1.0255778
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1.9057045
+            outSlope: 1.9057045
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.104405954
+            outWeight: 0
+          m_PreInfinity: 0
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+  - groupName: Direction
+    actions:
+    - actionName: TurnLeft
+      evaluationFunctions:
+      - evaluationData: 2
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: -0.25
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: -12.968334
+            outSlope: -12.968334
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.050731562
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: -0.07
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: -45.419144
+            outSlope: -45.419144
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.03809533
+            outWeight: 0.06111111
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+      - evaluationData: 1
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 2.080023
+            outSlope: 2.080023
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.117132016
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0.3762542
+            outSlope: 0.3762542
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.097580574
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1.5
+    - actionName: Forward
+      evaluationFunctions:
+      - evaluationData: 2
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: -0.25
+            value: 0
+            inSlope: 0.11316562
+            outSlope: 0.11316562
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0
+            outWeight: 0.87592745
+          - serializedVersion: 3
+            time: -0.07040338
+            value: 0.3440677
+            inSlope: 8.283847
+            outSlope: 8.283847
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.11201024
+            outWeight: 0.42527208
+          - serializedVersion: 3
+            time: -0.0005493164
+            value: 0.77516234
+            inSlope: 0.33839574
+            outSlope: 0.33839574
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.6110415
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        coefficient: 1
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: -0.25
+            value: 0
+            inSlope: -0.017712489
+            outSlope: -0.017712489
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0
+            outWeight: 1
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.28123215
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        coefficient: 1
+      - evaluationData: 1
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.0005569458
+            value: 1
+            inSlope: -11.309909
+            outSlope: -11.309909
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.33333334
+            outWeight: 0.1975812
+          - serializedVersion: 3
+            time: 0.5
+            value: 0
+            inSlope: -0.3153926
+            outSlope: -0.3153926
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.57174796
+            outWeight: 0.33333334
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 0
+    - actionName: TurnRight
+      evaluationFunctions:
+      - evaluationData: 2
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 13.146323
+            outSlope: 13.146323
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.050731562
+            outWeight: 0.0538504
+          - serializedVersion: 3
+            time: 0.25
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.00012207031
+            value: 0
+            inSlope: 30.861572
+            outSlope: 30.861572
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.035555627
+            outWeight: 0.03828601
+          - serializedVersion: 3
+            time: 0.07
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+      - evaluationData: 1
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: -1.0012169
+            value: 1.0034027
+            inSlope: -0.17180794
+            outSlope: -0.17180794
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.0752999
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: -2.0718064
+            outSlope: -2.0718064
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.03953951
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1.5
+  - groupName: Drift
+    actions:
+    - actionName: DriftOn
+      evaluationFunctions:
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: -0.009316802
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: -0.009316802
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+    - actionName: DriftOff
+      evaluationFunctions:
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+  - groupName: Items
+    actions:
+    - actionName: ThrowItem
+      evaluationFunctions: []
+    - actionName: HoldItem
+      evaluationFunctions: []
+    - actionName: ReleaseItem
+      evaluationFunctions: []
+    - actionName: KeepItem
+      evaluationFunctions:
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: 1
+  currentTab: 1

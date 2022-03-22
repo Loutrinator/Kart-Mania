@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Handlers;
 using System.Linq;
 using Kart;
@@ -26,40 +28,54 @@ public class PlayerAI : KartController
         movement = Vector2.zero;
         
     }
+
     private void Start()
     {
+    StartCoroutine(StartCoroutine());
+    }
+
+    private IEnumerator StartCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
         AIManager.Instance.playersAiUpdate.Add(AIUpdate);
     }
 
     private void AIUpdate()
     {
         
-
-        if (bestAction.actionName == "Accelerate")
+        List<AIAction> bestActions = aiController.tick();
+        string actionsChosenDesc = "";
+        foreach (var action in bestActions)
         {
-            movement.y = 1;
-            Move(movement);
+            actionsChosenDesc += action.actionName + " ";
+            switch (action.actionName)
+            {
+                case "Accelerate":
+                    movement.y = 1;
+                    break;
+                case "Forward":
+                    movement.x = 0;
+                    break;
+                case "Brake":
+                    Debug.Log("FREINE PUTAIING");
+                    movement.y = -1;
+                    break;
+                case "TurnLeft":
+                    movement.x = -1;
+                    break;
+                case "TurnRight":
+                    movement.x = 1;
+                    break;
+                case "LetGo":
+                    movement.y = 0;
+                    break;
+            }
         }
-        else if(bestAction.actionName == "Brake")
-        {
-            
-            movement.y = 0;
-            Move(movement);
-        }
-        else if(bestAction.actionName == "TurnLeft")
-        {
-            
-            movement.x = -1;
-            Move(movement);
-        }
-        else if(bestAction.actionName == "TurnRight")
-        {
-            movement.x = 1;
-            Move(movement);
-        }
-        
+        Debug.Log(actionsChosenDesc);
+        Move(movement);
     }
-/*
+
+    /*
     private void Input_OnActionTriggered(InputAction.CallbackContext ctx)
     {
         if (ctx.action.name == _controls.Kart.Movement.name)

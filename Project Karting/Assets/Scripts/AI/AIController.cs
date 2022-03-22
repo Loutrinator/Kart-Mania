@@ -9,7 +9,7 @@ namespace AI
 
     {
         [HideInInspector] public KartBase kart;
-        public abstract AIAction tick();
+        public abstract List<AIAction> tick();
         public abstract List<string> getActionNames();
         public abstract float[] getActionValues();
         public abstract int getSelectedActionId();

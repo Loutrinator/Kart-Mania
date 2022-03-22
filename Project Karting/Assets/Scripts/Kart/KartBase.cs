@@ -100,8 +100,9 @@ namespace Kart
         {
 
             
-            if (GameManager.Instance.gameState == GameState.start)
-            {
+            //if (GameManager.Instance.gameState == GameState.start)
+            //{
+            /*
                 if (rear)
                 {
                     cameraFollowPlayer.switchCameraMode(CameraMode.rear);
@@ -114,9 +115,9 @@ namespace Kart
                 if (movement[1] > 0)
                 {
                     effects.Rewind();
-                }
-            }
-            if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
+                }*/
+            //}
+            //if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
             ConvertStats();
             ApplyPowerups();
             Move(movement[1]);

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1008004571451031574}
+  - component: {fileID: 1596217793355050250}
   - component: {fileID: 5341481433663368015}
   - component: {fileID: 132725148892228468}
   - component: {fileID: 3656526732695113090}
-  - component: {fileID: 1596217793355050250}
   - component: {fileID: 4040084783436648365}
   m_Layer: 13
   m_Name: Checkpoint
@@ -35,6 +35,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1596217793355050250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4872971696117697879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dd8e7b5e40c59498b1801dccb58474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spline: {fileID: 0}
+  distance: 421.43
+  horizontalOffset: 0
+  verticalOffset: 9
+  computeDistanceFromPosition: 0
 --- !u!33 &5341481433663368015
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -97,23 +114,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1596217793355050250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4872971696117697879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50dd8e7b5e40c59498b1801dccb58474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spline: {fileID: 0}
-  distance: 421.43
-  horizontalOffset: 0
-  verticalOffset: 9
-  computeDistanceFromPosition: 0
 --- !u!114 &4040084783436648365
 MonoBehaviour:
   m_ObjectHideFlags: 0
