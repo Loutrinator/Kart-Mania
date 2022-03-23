@@ -57,8 +57,8 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0.13076884
           - serializedVersion: 3
-            time: 1
-            value: 0
+            time: 1.003526
+            value: 0.1451294
             inSlope: -2.2280607
             outSlope: -2.2280607
             tangentMode: 0
@@ -104,31 +104,22 @@ MonoBehaviour:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
-            time: 0
+            time: 0.5
             value: 0
-            inSlope: -0.10212629
-            outSlope: -0.10212629
+            inSlope: 0.1840914
+            outSlope: 0.1840914
             tangentMode: 0
-            weightedMode: 0
+            weightedMode: 3
             inWeight: 0
-            outWeight: 0.22982427
+            outWeight: 0.9759411
           - serializedVersion: 3
-            time: 0.72928286
-            value: 0.4971944
-            inSlope: 2.451198
-            outSlope: 2.451198
+            time: 1.0015538
+            value: 0.54953
+            inSlope: 11.692845
+            outSlope: 11.692845
             tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.21961148
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: -0.08564951
-            outSlope: -0.08564951
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.28203917
+            weightedMode: 3
+            inWeight: 0.113463074
             outWeight: 0
           m_PreInfinity: 0
           m_PostInfinity: 2
@@ -189,7 +180,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 0
-        coefficient: 0.85
+        coefficient: 1
       - evaluationData: 1
         evaluationCurve:
           serializedVersion: 2
@@ -297,7 +288,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 0
-        coefficient: 0.85
+        coefficient: 1
       - evaluationData: 1
         evaluationCurve:
           serializedVersion: 2
