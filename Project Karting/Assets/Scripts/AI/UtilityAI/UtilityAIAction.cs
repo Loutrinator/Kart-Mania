@@ -21,7 +21,7 @@ namespace AI.UtilityAI
                        evalSetting.evaluationCurve.Evaluate(UtilityAIKartBehaviorManager.Instance.GetValue(evalSetting.evaluationData,kart)); //evalSetting.function.GetValue());
             }
 
-            return Math.Min(1,Math.Max(0,sum / coeffSum)); //keeping it between 0 and 1 just in case
+            return sum; //keeping it between 0 and 1 just in case
         }
     }
 }
