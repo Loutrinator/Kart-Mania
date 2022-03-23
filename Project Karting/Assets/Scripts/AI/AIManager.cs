@@ -18,6 +18,7 @@ public class AIManager : MonoBehaviour
     public KartBase kartPrefab;
     public AICamera AICamPrefab;
     public UtilityAIAsset AIAsset;
+    public UtilityAIDebugger utilityAIDebugger;
     
     public Race circuit;
 
@@ -58,17 +59,14 @@ public class AIManager : MonoBehaviour
         StartCoroutine(AiUpdateHandler());
     }
 
-    private void Start()
-    {
-        InitRace();
+    private void Start() {
+        utilityAIDebugger.Init(InitRace());
     }
 
-    private void InitRace()
+    private PlayerAI InitRace()
     {
-        
-        
-        
         Transform[] spawnPoints = circuit.spawnPoints;
+        PlayerAI ai = null;
         if (spawnPoints.Length >= nbIA) {
             for (int id = 0; id < nbIA; ++id) {
                 
@@ -79,13 +77,17 @@ public class AIManager : MonoBehaviour
                 //Linking to controls to the Kart
                 UtilityAIController utilityAI = kart.gameObject.AddComponent<UtilityAIController>();
                 utilityAI.utilityAIAsset = AIAsset;
+                utilityAI.Init();
                 PlayerAI playerAI = kart.gameObject.AddComponent<PlayerAI>();
                 playerAI.kart = kart;
                 playerAI.aiController = utilityAI;
+                playerAI.aiController.kart = kart;
+                if (id == 0) ai = playerAI;
                 
                 
                 // Adding the camera of the player
                 var kartCam = Instantiate(AICamPrefab, kart.transform.position, kart.transform.rotation);
+                kartCam.target = kart.transform;
                 
                 //setting the camera to the KartEffect of the kart
                 KartEffects kartEffects = kart.GetComponent<KartEffects>();
@@ -109,6 +111,8 @@ public class AIManager : MonoBehaviour
             Debug.LogError("Attempting to spawn " + nbIA + " but only " + spawnPoints.Length + " available.");
 #endif
         }
+
+        return ai;
     }
 
 }

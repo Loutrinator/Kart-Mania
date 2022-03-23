@@ -14,8 +14,15 @@ namespace AI.UtilityAI
         
         private List<string> actionNames = new List<string>();
 
-        private void OnEnable()
+        public void Init()
         {
+            int size = 0;
+            foreach (var actionGroup in utilityAIAsset.actionGroups)
+            {
+                size += actionGroup.actions.Count;
+            }
+            values = new float[size];
+            
             actionNames = new List<string>();
             foreach (var actiongroup in utilityAIAsset.actionGroups)
             {
@@ -26,17 +33,6 @@ namespace AI.UtilityAI
                     actionNames.Add(action.actionName);
                 }
             }
-        }
-
-        private void Start()
-        {
-            int size = 0;
-            foreach (var actionGroup in utilityAIAsset.actionGroups)
-            {
-                size += actionGroup.actions.Count;
-            }
-            values = new float[size];
-            
         }
 
         public override List<AIAction> tick()

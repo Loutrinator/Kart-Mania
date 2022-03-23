@@ -19,10 +19,14 @@ public class UtilityAIDebugger : MonoBehaviour
 
     private Vector3 funcDebugPos;
     private float offset = 0;
-    private void Start()
-    {
+
+    private bool _initialized;
+
+    public void Init(PlayerAI ai) {
+        AI = ai;
         SetupForAI();
         SetupUtilityAI();
+        _initialized = true;
     }
 
     private void SetupUtilityAI()
@@ -68,8 +72,8 @@ public class UtilityAIDebugger : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
+        if (!_initialized) return;
         float[] values = AI.aiController.getActionValues();
         int selectedId = AI.aiController.getSelectedActionId();
         int i;
@@ -83,7 +87,7 @@ public class UtilityAIDebugger : MonoBehaviour
             }
         }
 
-        KartBase kart = AI.aiController.kart;
+        KartBase kart = AI.kart;
         UpdateFuncDebugger(0,UtilityAIKartBehaviorManager.Instance.SpeedFunction(kart));
         UpdateFuncDebugger(1,UtilityAIKartBehaviorManager.Instance.DistanceToCenterOfRoadFunction(kart));
         UpdateFuncDebugger(2,UtilityAIKartBehaviorManager.Instance.CurvatureOfRoadFunction(kart));
@@ -96,8 +100,8 @@ public class UtilityAIDebugger : MonoBehaviour
         debugger.SetValue(value);
     }
 
-    private void OnDrawGizmos()
-    {
-        UtilityAIKartBehaviorManager.Instance.OnDrawGizmos(AI.aiController.kart);
+    private void OnDrawGizmos() {
+        if (!_initialized) return;
+        UtilityAIKartBehaviorManager.Instance.OnDrawGizmos(AI.kart);
     }
 }

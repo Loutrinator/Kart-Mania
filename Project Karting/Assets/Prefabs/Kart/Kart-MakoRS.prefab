@@ -5796,7 +5796,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kartBase: {fileID: 9197028294900898373}
-  bumpForce: 50
 --- !u!1 &4686627548744261291
 GameObject:
   m_ObjectHideFlags: 0
@@ -5962,7 +5961,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kartBase: {fileID: 6669060970404059514, guid: 788e3c6fb21859241bfef9c60f187e62,
     type: 3}
-  bumpForce: 50
 --- !u!114 &5266429396722401737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6168,6 +6166,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
