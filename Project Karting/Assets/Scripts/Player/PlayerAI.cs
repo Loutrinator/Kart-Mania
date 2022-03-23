@@ -14,7 +14,7 @@ public class PlayerAI : KartController
 {
     public AIController aiController;
 
-    private Vector2 movement;
+    public Vector2 movement;
     
     private void Awake()
     {

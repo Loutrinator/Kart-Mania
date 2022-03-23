@@ -128,15 +128,45 @@ namespace AI.UtilityAI
             return Mathf.Sin(Time.time - startTime) / 2 + 0.5f;
         }
 
-        public void OnDrawGizmos(KartBase kart)
+        public void OnDrawGizmos(KartBase kart, Mesh arrowMesh)
         {
-            Gizmos.color = Color.red;
+            if (kart.closestBezierPos != null)
+            {
+                Gizmos.color = Color.red;
             
-            float distance = kart.closestBezierPos.BezierDistance;
-            var nextPos1 = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve);
-            var nextPos2 = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve + curvatureOffset);
-            Gizmos.DrawSphere(nextPos1.GlobalOrigin,1f);
-            Gizmos.DrawSphere(nextPos2.GlobalOrigin,1f);
+                float distance = kart.closestBezierPos.BezierDistance;
+                var nextPos1 = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve);
+                var nextPos2 = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve + curvatureOffset);
+                Gizmos.DrawSphere(nextPos1.GlobalOrigin,1f);
+                Gizmos.DrawSphere(nextPos2.GlobalOrigin,1f);
+                if (arrowMesh != null)
+                {
+                    float curvature = CurvatureOfRoadFunction(kart);
+                    Debug.Log("curvature " + curvature);
+                    if (Mathf.Abs(curvature) > 0.05)
+                    {
+                        Gizmos.color = Color.green;
+                        Vector3 arrowPosition = nextPos1.GlobalOrigin;
+                        Vector3 offset = 3 * nextPos1.Normal;
+                        offset *= curvature > 0 ? 1 : -1;
+                        arrowPosition += offset;
+                        Quaternion arrowRotation = nextPos1.Rotation;
+                        float rotationY = curvature < 0 ? -90 : 90;
+                        arrowRotation *= Quaternion.Euler(-90,rotationY,0);
+                        Gizmos.DrawMesh(arrowMesh,arrowPosition,arrowRotation,Vector3.one*100f);
+                        /*
+                         Gizmos.DrawSphere(arrowPosition,1f);
+                         arrowPosition += offset*0.25f;
+                         Gizmos.DrawSphere(arrowPosition,0.75f);
+                         arrowPosition += offset*0.25f;
+                         Gizmos.DrawSphere(arrowPosition,0.5f);
+                         
+                         */
+                    }
+                }
+            }
+            
+                
         }
     }
 }

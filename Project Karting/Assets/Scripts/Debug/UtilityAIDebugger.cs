@@ -5,14 +5,18 @@ using System.Linq;
 using AI.UtilityAI;
 using Kart;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UtilityAIDebugger : MonoBehaviour
 {
     [SerializeField] private PlayerAI AI;
 
+    [SerializeField] private bool showControllerDebugger = false;
     [SerializeField] private ActionDebugger ActionDebuggerPrefab;
     [SerializeField] private RectTransform container;
     [SerializeField] private FunctionDebugger FunctionDebuggerPrefab;
+    [SerializeField] private Mesh debugArrowMesh;
+    [SerializeField] private ControllerDebugger controllerDebugger;
 
     private List<ActionDebugger> actionDebuggers = new List<ActionDebugger>();
     private List<FunctionDebugger> functionDebuggers = new List<FunctionDebugger>();
@@ -88,6 +92,17 @@ public class UtilityAIDebugger : MonoBehaviour
         UpdateFuncDebugger(1,UtilityAIKartBehaviorManager.Instance.DistanceToCenterOfRoadFunction(kart));
         UpdateFuncDebugger(2,UtilityAIKartBehaviorManager.Instance.CurvatureOfRoadFunction(kart));
         UpdateFuncDebugger(3,UtilityAIKartBehaviorManager.Instance.AlignedToRoad(kart));
+
+        if (showControllerDebugger)
+        {
+            controllerDebugger.gameObject.SetActive(true);
+            controllerDebugger.SetInputs(AI.movement);
+        }
+        else
+        {
+            controllerDebugger.gameObject.SetActive(false);
+        }
+        
     }
 
     private void UpdateFuncDebugger(int index, float value)
@@ -98,6 +113,7 @@ public class UtilityAIDebugger : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        UtilityAIKartBehaviorManager.Instance.OnDrawGizmos(AI.aiController.kart);
+        UtilityAIKartBehaviorManager.Instance.OnDrawGizmos(AI.aiController.kart,debugArrowMesh);
+        
     }
 }
