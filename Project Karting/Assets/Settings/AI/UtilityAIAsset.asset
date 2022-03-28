@@ -209,32 +209,32 @@ MonoBehaviour:
         coefficient: 1.5
     - actionName: Forward
       evaluationFunctions:
-      - evaluationData: 4
+      - evaluationData: 2
         evaluationCurve:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: 0.21751404
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 34
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 1
-            value: 0.21751404
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 34
+            value: 1
+            inSlope: -9.247449
+            outSlope: -9.247449
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
-            outWeight: 0
-          m_PreInfinity: 2
+            outWeight: 0.09598326
+          - serializedVersion: 3
+            time: 0.3
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 136
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          m_PreInfinity: 0
           m_PostInfinity: 2
           m_RotationOrder: 0
-        coefficient: 1
+        coefficient: 0.95
     - actionName: TurnRight
       evaluationFunctions:
       - evaluationData: 2
@@ -319,35 +319,44 @@ MonoBehaviour:
     actions:
     - actionName: DriftOn
       evaluationFunctions:
-      - evaluationData: 3
+      - evaluationData: 2
         evaluationCurve:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: -0.009316802
+            value: 0
             inSlope: 0
             outSlope: 0
-            tangentMode: 34
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0
-            outWeight: 0.33333334
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.2
+            value: 1
+            inSlope: 0.01124901
+            outSlope: 0.01124901
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.50464404
+            outWeight: 0.0025829293
           - serializedVersion: 3
             time: 1
-            value: -0.009316802
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 34
-            weightedMode: 0
-            inWeight: 0.33333334
+            value: 1
+            inSlope: 0.015473423
+            outSlope: 0.015473423
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.3188692
             outWeight: 0
-          m_PreInfinity: 2
+          m_PreInfinity: 0
           m_PostInfinity: 2
           m_RotationOrder: 0
         coefficient: 1
     - actionName: DriftOff
       evaluationFunctions:
-      - evaluationData: 3
+      - evaluationData: 4
         evaluationCurve:
           serializedVersion: 2
           m_Curve:
@@ -372,7 +381,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 0
-        coefficient: 1
+        coefficient: 0.5
   - groupName: Items
     actions:
     - actionName: ThrowItem
@@ -409,4 +418,4 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 0
         coefficient: 1
-  currentTab: 1
+  currentTab: 2

@@ -130,7 +130,7 @@ namespace AI.UtilityAI
 
         public void OnDrawGizmos(KartBase kart, Mesh arrowMesh)
         {
-            if (kart.closestBezierPos != null)
+            if (kart != null && kart.closestBezierPos != null)
             {
                 Gizmos.color = Color.red;
             

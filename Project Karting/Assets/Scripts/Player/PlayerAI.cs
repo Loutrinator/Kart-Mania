@@ -57,7 +57,6 @@ public class PlayerAI : KartController
                     movement.x = 0;
                     break;
                 case "Brake":
-                    Debug.Log("FREINE PUTAIING");
                     movement.y = -1;
                     break;
                 case "TurnLeft":
@@ -65,6 +64,12 @@ public class PlayerAI : KartController
                     break;
                 case "TurnRight":
                     movement.x = 1;
+                    break;
+                case "DriftOn":
+                    Drift(true);
+                    break;
+                case "DriftOff":
+                    Drift(false);
                     break;
                 case "LetGo":
                     movement.y = 0;
