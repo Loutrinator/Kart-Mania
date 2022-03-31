@@ -72,10 +72,10 @@ namespace AI.UtilityAI
             if (kart.closestBezierPos != null)
             {
                 float distance = kart.closestBezierPos.BezierDistance;
-                var kartPosOnCurve = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance);
+                var kartPosOnCurve = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance);
 
-                var nextPos1 = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve);
-                var nextPos2 = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve + curvatureOffset);
+                var nextPos1 = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve);
+                var nextPos2 = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve + curvatureOffset);
                 //var nextPos3 = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve + 2*curvatureOffset);
 
                 float dot1 = Vector3.Dot(nextPos1.Normal, nextPos2.Tangent);
@@ -92,10 +92,10 @@ namespace AI.UtilityAI
             if (kart.closestBezierPos != null)
             {
                 float distance = kart.closestBezierPos.BezierDistance;
-                var nextPos = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve);
+                var nextPos = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve);
                 int dir = Mathf.RoundToInt(CurvatureOfRoadFunction(kart));
 
-                float roadWith = AIManager.Instance.circuit.bezierMeshExtrusion.roadWidth;
+                float roadWith = AIManager.Instance.circuit.road.bezierMeshExtrusion.roadWidth;
                 pointCurvature = kart.closestBezierPos.GlobalOrigin + dir * nextPos.Normal * roadWith;
             }
 
@@ -105,7 +105,7 @@ namespace AI.UtilityAI
         public float DistanceToCenterOfRoadFunction(KartBase kart) {
             if (kart.closestBezierPos != null)
             {
-                float roadSize = AIManager.Instance.circuit.bezierMeshExtrusion.roadWidth;
+                float roadSize = AIManager.Instance.circuit.road.bezierMeshExtrusion.roadWidth;
                 float dotProduct = Vector3.Dot(kart.transform.position - kart.closestBezierPos.GlobalOrigin,
                     kart.closestBezierPos.Normal);
                 float direction = Mathf.Sign(dotProduct); 
@@ -133,10 +133,10 @@ namespace AI.UtilityAI
             if (kart != null && kart.closestBezierPos != null)
             {
                 Gizmos.color = Color.red;
-            
+                
                 float distance = kart.closestBezierPos.BezierDistance;
-                var nextPos1 = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve);
-                var nextPos2 = AIManager.Instance.circuit.bezierSpline.GetBezierPos(distance + distCurve + curvatureOffset);
+                var nextPos1 = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve);
+                var nextPos2 = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve + curvatureOffset);
                 Gizmos.DrawSphere(nextPos1.GlobalOrigin,1f);
                 Gizmos.DrawSphere(nextPos2.GlobalOrigin,1f);
                 if (arrowMesh != null)
@@ -165,8 +165,6 @@ namespace AI.UtilityAI
                     }
                 }
             }
-            
-                
         }
     }
 }

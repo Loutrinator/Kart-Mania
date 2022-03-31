@@ -16,30 +16,19 @@ public class PlayerAI : KartController
 
     public Vector2 movement;
     
-    private void Awake()
+    private void Start()
     {
         if (kart == null)
             kart = GetComponent<KartBase>();
         
         if (aiController == null) 
-            aiController = new UtilityAIController();
+            aiController = gameObject.AddComponent<UtilityAIController>();
         
-        aiController.kart = kart;
+        //aiController.kart = kart;
         movement = Vector2.zero;
-        
-    }
-
-    private void Start()
-    {
-    StartCoroutine(StartCoroutine());
-    }
-
-    private IEnumerator StartCoroutine()
-    {
-        yield return new WaitForSeconds(0.1f);
         AIManager.Instance.playersAiUpdate.Add(AIUpdate);
     }
-
+    
     private void AIUpdate()
     {
         

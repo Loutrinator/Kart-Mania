@@ -15,14 +15,8 @@ namespace Road.RoadPhysics {
         public BezierUtils.BezierPos lastGroundBezierPos;
         private Vector3 _currentGravityVelocity;
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
-            StartCoroutine(AwakeCoroutine());
-        }
-
-        private IEnumerator AwakeCoroutine()
-        {
-            yield return new WaitForSeconds(0.2f);
             PhysicsManager.instance.AddPhysicsObject(this);
             currentGravityAcceleration = Physics.gravity;
         }

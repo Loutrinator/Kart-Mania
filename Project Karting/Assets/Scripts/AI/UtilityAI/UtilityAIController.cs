@@ -7,16 +7,24 @@ namespace AI.UtilityAI
 {
     public class UtilityAIController : AIController
     {
-        [SerializeField] private UtilityAIAsset utilityAIAsset;
         [SerializeField] private UtilityAIGenome genome;
+        [SerializeField] public UtilityAIAsset utilityAIAsset;
+        
         private float[] values;
         private int selectedId = 0;
         private int valuesUpdated = 0;
         
         private List<string> actionNames = new List<string>();
 
-        private void OnEnable()
+        public void Init()
         {
+            int size = 0;
+            foreach (var actionGroup in utilityAIAsset.actionGroups)
+            {
+                size += actionGroup.actions.Count;
+            }
+            values = new float[size];
+            
             actionNames = new List<string>();
             foreach (var actiongroup in utilityAIAsset.actionGroups)
             {
@@ -27,17 +35,6 @@ namespace AI.UtilityAI
                     actionNames.Add(action.actionName);
                 }
             }
-        }
-
-        private void Start()
-        {
-            int size = 0;
-            foreach (var actionGroup in utilityAIAsset.actionGroups)
-            {
-                size += actionGroup.actions.Count;
-            }
-            values = new float[size];
-            
         }
 
         public override List<AIAction> tick()
