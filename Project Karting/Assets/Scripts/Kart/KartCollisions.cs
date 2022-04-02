@@ -1,19 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Kart
 {
     public class KartCollisions : MonoBehaviour
     {
         public KartBase kartBase;
-        public float bumpForce = 50f;
-
+        
+        private Vector3 collisionNormal = Vector3.zero;
         private void OnCollisionEnter(Collision other) {
             if (other.gameObject.layer == LayerMask.NameToLayer("Wall")) {
-                Vector3 collisionNormal = other.contacts[0].normal;
+                collisionNormal = other.contacts[0].normal;
                 float forceLeftCoeff = 1 - KartPhysicsSettings.instance.borderVelocityLossPercent;
                 kartBase.currentVelocity *= forceLeftCoeff;
-                kartBase.currentForcesVelocity += collisionNormal * bumpForce;
+                kartBase.currentForcesVelocity += collisionNormal * KartPhysicsSettings.instance.bumpForce;
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(kartBase.transform.position, collisionNormal*3f);
+            
         }
     }
 

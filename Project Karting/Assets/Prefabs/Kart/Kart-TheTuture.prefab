@@ -279,6 +279,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -688,6 +689,7 @@ MonoBehaviour:
   turningWheels:
   - {fileID: 8609656235578777857}
   - {fileID: 5014659118040999078}
+  cameraFollowPlayer: {fileID: 0}
   cameraShake: {fileID: 5241838320852678701}
   effects: {fileID: 6671327005639688407}
   keyhole: {fileID: 7072082923481296565}
@@ -703,6 +705,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   drift: 0
   driftDirection: 0
+  rear: 0
   canMove: 0
 --- !u!114 &2789011401745134355
 MonoBehaviour:
@@ -717,7 +720,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kartBase: {fileID: 6669060970404059514}
-  bumpForce: 50
 --- !u!114 &4222294656709650358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,8 +750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8e3134b8f338341b739978a43716dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kart: {fileID: 6669060970404059514}
   input: {fileID: 0}
-  _kart: {fileID: 6669060970404059514}
 --- !u!1 &7072082925228471994
 GameObject:
   m_ObjectHideFlags: 0

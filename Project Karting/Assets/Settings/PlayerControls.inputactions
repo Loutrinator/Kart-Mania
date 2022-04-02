@@ -7,11 +7,12 @@
             "actions": [
                 {
                     "name": "Movement",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "375adf18-f491-4a42-bd5a-c9b372807857",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Drift",
@@ -19,7 +20,8 @@
                     "id": "d632b4fc-dcc9-4f17-89f8-4de2aafe8843",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Rear camera",
@@ -27,7 +29,8 @@
                     "id": "c30d8595-dbad-45b9-a908-4dc5d3325ada",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Pause",
@@ -35,14 +38,15 @@
                     "id": "e967a3f1-c7ea-469a-8971-5bcdd69e2dbc",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "WASD",
                     "id": "ce92f41f-c181-4de3-bc35-be5f29251db5",
-                    "path": "2DVector(mode=2)",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -227,7 +231,8 @@
                     "id": "7bc58ca0-82a1-4595-bbc8-f8c443db5a85",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Submit",
@@ -235,7 +240,8 @@
                     "id": "bf0340a1-cbfc-43df-826b-fe7012f30e5e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Cancel",
@@ -243,7 +249,8 @@
                     "id": "ae5bec96-77d0-4c6e-b2db-249ca89d82ea",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -349,7 +356,7 @@
                 {
                     "name": "left",
                     "id": "56fe3f2c-e44e-4bf7-b6d7-b75b90a1634b",
-                    "path": "<XboxOneGampadiOS>/buttonSouth",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

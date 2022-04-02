@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using SplineEditor.Runtime;
 using UnityEngine;
 
@@ -14,7 +15,8 @@ namespace Road.RoadPhysics {
         public BezierUtils.BezierPos lastGroundBezierPos;
         private Vector3 _currentGravityVelocity;
 
-        protected virtual void Awake() {
+        protected virtual void Start()
+        {
             PhysicsManager.instance.AddPhysicsObject(this);
             currentGravityAcceleration = Physics.gravity;
         }
@@ -40,6 +42,7 @@ namespace Road.RoadPhysics {
             currentForcesVelocity -= currentForcesVelocity * drag;
             
             rigidBody.AddForce(currentGravityAcceleration * KartPhysicsSettings.instance.gravityMultiplier, ForceMode.Acceleration);
+            rigidBody.AddForce(currentForcesVelocity,ForceMode.Impulse);
             rigidBody.angularVelocity = currentAngularVelocity;
         }
 
