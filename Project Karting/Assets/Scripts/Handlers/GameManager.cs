@@ -175,7 +175,9 @@ namespace Handlers {
                     kart.playerIndex = id;
                     
                     //Linking to controls to the Kart
-                    PlayerController playerController = kart.GetComponent<PlayerController>();
+                   
+                    PlayerController playerController = kart.gameObject.AddComponent<PlayerController>();
+                    playerController.kart = kart;
                     playerController.InitializePlayerConfiguration(playerConfig);
                     
                     

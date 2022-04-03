@@ -558,18 +558,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: HideKartSelector
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!95 &1407905574
 Animator:
   serializedVersion: 3
@@ -867,8 +855,8 @@ MonoBehaviour:
   brake: {fileID: 2442017463694852353}
   okayletzgo: {fileID: 5095333737552815759}
   availableKarts:
-  - {fileID: 2639054221376803220, guid: 234500fa216b12240a6979ec4e8a46f1, type: 3}
-  - {fileID: 4080713924953889256, guid: ce01bb3f244551446bb09b1413401d4d, type: 3}
+  - {fileID: 5452965995569305836, guid: a430f9b90b1c7f440b499713e157067f, type: 3}
+  - {fileID: 1401239869367080679, guid: 6c8b3400043a13a4f9b6902fb11ba468, type: 3}
   diaphragm: {fileID: 0}
   carHolder: {fileID: 0}
   spawnHeight: 10
