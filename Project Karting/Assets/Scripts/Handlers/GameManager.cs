@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Game;
 using Items;
 using Kart;
@@ -6,6 +8,7 @@ using Player;
 using Road.RoadPhysics;
 using UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Handlers {
     public enum GameState
@@ -14,7 +17,6 @@ namespace Handlers {
     }
     public class GameManager : MonoBehaviour
     {
-        
         public GameState gameState;
         public Race currentRace;
         public Minimap minimap;
@@ -46,6 +48,15 @@ namespace Handlers {
         [HideInInspector]
         public PauseMenu pauseMenu;
 
+
+        
+
+
+        
+        /*public Event AIUpdate;
+        [HideInInspector]
+        public float AI;*/
+
         private bool gamePaused;
         
         private void Awake()
@@ -57,35 +68,39 @@ namespace Handlers {
             else {
                 Destroy(gameObject);
             }
-            
-            
 
-            currentRace = LevelManager.instance.InitLevel();
-            minimap.race = currentRace;
-            minimap.DrawMinimap();
-
-            if (physicsManager != null)
-            {
-                physicsManager.Init(currentRace.road.bezierSpline);
-            }
+            gameState = GameState.race;
             
-            InitRace();
+                currentRace = LevelManager.instance.InitLevel();
+                minimap.race = currentRace;
+                minimap.DrawMinimap();
 
-            if (respawner != null)
-            {
-                respawner.Init();
-            }
+                if (physicsManager != null)
+                {
+                    physicsManager.Init(currentRace.road.bezierSpline);
+                }
             
-            TransitionController.Instance.FadeOut(() => {
-                //raceBegan = true;  // todo enable after delay
-            });
+                InitRace();
 
-            gamePaused = false;
-            pauseMenu = FindObjectOfType<PauseMenu>();
+                if (respawner != null)
+                {
+                    respawner.Init();
+                }
+            
+                TransitionController.Instance.FadeOut(() => {
+                    //raceBegan = true;  // todo enable after delay
+                });
+
+                gamePaused = false;
+                pauseMenu = FindObjectOfType<PauseMenu>();
         }
 
-        public void Update() {
-            
+        /*private IEnumerator AIUpdate()
+        {
+        }*/
+        
+        private void Update() {
+
             if (gameState == GameState.race) {
                 PlayerRaceInfo player = playersInfo[0];
                 //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);

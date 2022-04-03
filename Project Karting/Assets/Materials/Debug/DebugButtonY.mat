@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DebugButtonY
+  m_Shader: {fileID: -6465566751694194690, guid: 63227ca2366737e4d8e9bbf37c509081,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Pressed: 0
+    - Vector1_bdd82ac882424e96b0a63cb232e02d8a: 0.4
+    - Vector1_ec6517c96fb34a80b0464dcfa9d3ac77: 6
+    m_Colors:
+    - Color_4f496a35844246b7a4f8673ff030a47e: {r: 0.45174298, g: 1.4325007, b: 0.10699176,
+        a: 0}
+    - Color_df8f6a4e291944feb320327fcb24978c: {r: 0.254717, g: 0.19374111, b: 0.010813452,
+        a: 0}
+  m_BuildTextureStacks: []

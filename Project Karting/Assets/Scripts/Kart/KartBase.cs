@@ -59,9 +59,8 @@ namespace Kart
 
         public bool canMove;
 
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
             _firstPos = transform.position;
             _firstPosTime = Time.time;
             StopDrifting();
@@ -99,23 +98,25 @@ namespace Kart
         private void FixedUpdate()
         {
 
-            if (rear)
-            {
-                cameraFollowPlayer.switchCameraMode(CameraMode.rear);
-            }
-            else
-            {
-                cameraFollowPlayer.switchCameraMode(CameraMode.front);
-            }
             
-            if (GameManager.Instance.gameState == GameState.start)
-            {
+            //if (GameManager.Instance.gameState == GameState.start)
+            //{
+            /*
+                if (rear)
+                {
+                    cameraFollowPlayer.switchCameraMode(CameraMode.rear);
+                }
+                else
+                {
+                    cameraFollowPlayer.switchCameraMode(CameraMode.front);
+                }
+
                 if (movement[1] > 0)
                 {
                     effects.Rewind();
-                }
-            }
-            if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
+                }*/
+            //}
+            //if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
             ConvertStats();
             ApplyPowerups();
             Move(movement[1]);
