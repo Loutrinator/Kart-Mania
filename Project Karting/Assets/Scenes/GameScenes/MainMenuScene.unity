@@ -700,6 +700,31 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1938997335}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.17706
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.72823733
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0196
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.6423
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.33
+      objectReference: {fileID: 0}
     - target: {fileID: 6291355485830402189, guid: bdbf911806375d3499ea31e95a3ee6b6,
         type: 3}
       propertyPath: m_RootOrder
@@ -1474,21 +1499,6 @@ PrefabInstance:
       propertyPath: diaphragm
       value: 
       objectReference: {fileID: 4731848756280275003}
-    - target: {fileID: 1709895078832880951, guid: 16a614cc063828c42a89a0410dd21691,
-        type: 3}
-      propertyPath: menuManager
-      value: 
-      objectReference: {fileID: 1938997335}
-    - target: {fileID: 2172052178755191399, guid: 16a614cc063828c42a89a0410dd21691,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2172052178755191399, guid: 16a614cc063828c42a89a0410dd21691,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1938997335}
     - target: {fileID: 4099746521796739956, guid: 16a614cc063828c42a89a0410dd21691,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1598,11 +1608,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Car selection canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 4099746521796739958, guid: 16a614cc063828c42a89a0410dd21691,
-        type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4099746521796739961, guid: 16a614cc063828c42a89a0410dd21691,
         type: 3}
@@ -2967,6 +2972,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 2
   m_AntialiasingQuality: 2

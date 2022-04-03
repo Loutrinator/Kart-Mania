@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sky
-  m_Shader: {fileID: -6465566751694194690, guid: c89fa0e0f8f7bfb408839b81a68422bb,
+  m_Name: RoadStripes
+  m_Shader: {fileID: -6465566751694194690, guid: 2601c4a865c3ab14fa87f971dddaff5b,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -32,10 +32,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - Vector1_1: 0.8
+    - Vector1_3aa817cf3fe74d05bd75b48142af1cde: 0.02
     m_Colors:
-    - Color_0f3b2c913c4f43e8bc32007b7cecda04: {r: 5.992157, g: 5.992157, b: 5.992157,
+    - Color_3b5e05c10a0e497a99e29a8b274da768: {r: 0.8584906, g: 0.8584906, b: 0.8584906,
         a: 0}
-    - Color_efd99576bab5454383d61297198dd123: {r: 5.992157, g: 5.992157, b: 5.992157,
+    - Color_6a6fba3784824d35ad41c28f63d6fd88: {r: 0.14150941, g: 0.14150941, b: 0.14150941,
         a: 0}
   m_BuildTextureStacks: []
