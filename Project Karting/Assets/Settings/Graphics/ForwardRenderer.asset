@@ -17,6 +17,23 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: e656d3fdd02698f4b8ccf57cda309eb2, type: 2}
     materialPassIndex: 0
     renderEvent: 450
+--- !u!114 &-274294688236412322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0910563f23fc569418c4a9db5d3f059a, type: 3}
+  m_Name: Extras
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    material: {fileID: 2100000, guid: 61c4e893112491841abd83401c1c8906, type: 2}
+    materialPassIndex: 0
+    renderEvent: 550
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,7 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RendererFeatures:
   - {fileID: -8232385973831271315}
-  m_RendererFeatureMap: 6dfce0e792b0c08d
+  - {fileID: -274294688236412322}
+  m_RendererFeatureMap: 6dfce0e792b0c08d5e62e42f6f8231fc
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
