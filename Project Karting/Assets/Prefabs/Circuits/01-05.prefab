@@ -92,7 +92,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9df9ac361cefffb45b826fb2ca7c1436, type: 2}
+  - {fileID: 2100000, guid: da350090af462dc4aa9c83f5a14f842a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -284,8 +284,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481997607891235529}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000000046806115}
-  m_LocalPosition: {x: -68.400024, y: 2.62, z: 0.0000011233467}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -68.400024, y: 2.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8738788713797060524}
@@ -1385,10 +1385,10 @@ MonoBehaviour:
   bezierSpline: {fileID: 4270162758006377534}
   roadWidth: 23.1
   roadThickness: 3
-  upTiling: {x: 1, y: 1}
-  leftTiling: {x: 1, y: 1}
-  rightTiling: {x: 1, y: 1}
-  bottomTiling: {x: 1, y: 1}
+  upTiling: {x: 1, y: 0.05}
+  leftTiling: {x: 0, y: 0}
+  rightTiling: {x: 0, y: 0}
+  bottomTiling: {x: 0, y: 0}
   meshCollider: {fileID: 1143776649395879159}
 --- !u!1 &5688469220359071331
 GameObject:
@@ -2325,22 +2325,22 @@ PrefabInstance:
     - target: {fileID: 4613079545113500549, guid: 933e058338c9af14abc8b6022f3e5186,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -80.400024
+      value: -80.40001
       objectReference: {fileID: 0}
     - target: {fileID: 4613079545113500549, guid: 933e058338c9af14abc8b6022f3e5186,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6399999
+      value: 2.6399996
       objectReference: {fileID: 0}
     - target: {fileID: 4613079545113500549, guid: 933e058338c9af14abc8b6022f3e5186,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -24.699194
       objectReference: {fileID: 0}
     - target: {fileID: 4613079545113500549, guid: 933e058338c9af14abc8b6022f3e5186,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000046806115
+      value: 0.000000028919397
       objectReference: {fileID: 0}
     - target: {fileID: 4613079545113500549, guid: 933e058338c9af14abc8b6022f3e5186,
         type: 3}
