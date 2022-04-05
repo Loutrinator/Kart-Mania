@@ -73,6 +73,7 @@ namespace AI.UtilityAI
             {
                 float distance = kart.closestBezierPos.BezierDistance;
                 var kartPosOnCurve = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance);
+                Debug.DrawLine(kart.transform.position, kartPosOnCurve.GlobalOrigin, Color.cyan);
 
                 var nextPos1 = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve);
                 var nextPos2 = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve + curvatureOffset);

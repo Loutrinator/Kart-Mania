@@ -261,10 +261,12 @@ public class UtilityAIEditorWindow : ExtendedEditorWindow
 
             GUIContent dataLabel = new GUIContent("Data : ");
             
-            foreach (SerializedProperty evalFunc in evalFunctionListProperties)
-            {
+            foreach (SerializedProperty evalFunc in evalFunctionListProperties) {
                 EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
-                EditorGUILayout.PropertyField(evalFunc.FindPropertyRelative("evaluationData"),dataLabel);
+                float labelWidth = EditorGUIUtility.labelWidth;
+                EditorGUIUtility.labelWidth = 50f;
+                EditorGUILayout.PropertyField(evalFunc.FindPropertyRelative("evaluationData"), dataLabel, GUILayout.Width(200));
+                EditorGUIUtility.labelWidth = labelWidth;
                 EditorGUILayout.PropertyField(evalFunc.FindPropertyRelative("coefficient"));
                 EditorGUILayout.PropertyField(evalFunc.FindPropertyRelative("evaluationCurve"));
                 EditorGUILayout.EndHorizontal();
