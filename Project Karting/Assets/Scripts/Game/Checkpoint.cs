@@ -12,7 +12,8 @@ namespace Game {
             KartBase kart = other.gameObject.GetComponentInParent<KartBase>();
             if (kart != null)
             {
-                GameManager.Instance.CheckpointPassed(checkpointId,kart.GetPlayerID.Invoke());
+                //TODO: fix checkpoints
+                //GameManager.Instance.CheckpointPassed(checkpointId,kart.GetPlayerID.Invoke());
             }
         }
     }

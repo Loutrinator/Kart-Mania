@@ -51,7 +51,7 @@ public class KartAudio : MonoBehaviour
 
     private void Update()
     {
-        float camDist = (cam.transform.position - transform.position).sqrMagnitude;
+        /*float camDist = (cam.transform.position - transform.position).sqrMagnitude;
         if (_StartedSound && camDist > maxRolloffDistance * maxRolloffDistance)
         {
             StopSound();
@@ -59,10 +59,10 @@ public class KartAudio : MonoBehaviour
         {
             Debug.Log("PLAY SOUND");
             StartSound();
-        }
+        }*/
 
-        if (_StartedSound)
-        {
+        if (!_StartedSound) StartSound();
+        else{
             _speed = Mathf.Lerp(_speed, kart.CurrentSpeed(), AudioSettings.instance.kartSpeedLerp*Time.deltaTime);
             float pitch = Mathf.Lerp(AudioSettings.instance.kartPitchMin, AudioSettings.instance.kartPitchMax, _speed / AudioSettings.instance.kartMaxSpeed);
 

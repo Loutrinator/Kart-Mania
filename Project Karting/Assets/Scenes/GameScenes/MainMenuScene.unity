@@ -347,7 +347,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 2ef6e6225b4d813459945754cfe9c444, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 6db4d8ae87702a74d8d39a0e551336f0, type: 2}
 --- !u!4 &581876911
 Transform:
   m_ObjectHideFlags: 0
@@ -700,6 +700,31 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1938997335}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.17706
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.72823733
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0196
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.6423
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815492296389441235, guid: bdbf911806375d3499ea31e95a3ee6b6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.33
+      objectReference: {fileID: 0}
     - target: {fileID: 6291355485830402189, guid: bdbf911806375d3499ea31e95a3ee6b6,
         type: 3}
       propertyPath: m_RootOrder
@@ -980,6 +1005,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mode selection canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618155475832913804, guid: 814157724baddef4baec1799ac0670a0,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7618155475832913807, guid: 814157724baddef4baec1799ac0670a0,
         type: 3}
@@ -1349,7 +1379,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f4f00d14194e8e441ae6da378c8c3038, type: 2}
+  - {fileID: 2100000, guid: 8cb5ae56f5e82274a9677c7ce195267f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1469,21 +1499,6 @@ PrefabInstance:
       propertyPath: diaphragm
       value: 
       objectReference: {fileID: 4731848756280275003}
-    - target: {fileID: 1709895078832880951, guid: 16a614cc063828c42a89a0410dd21691,
-        type: 3}
-      propertyPath: menuManager
-      value: 
-      objectReference: {fileID: 1938997335}
-    - target: {fileID: 2172052178755191399, guid: 16a614cc063828c42a89a0410dd21691,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2172052178755191399, guid: 16a614cc063828c42a89a0410dd21691,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1938997335}
     - target: {fileID: 4099746521796739956, guid: 16a614cc063828c42a89a0410dd21691,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1593,11 +1608,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Car selection canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 4099746521796739958, guid: 16a614cc063828c42a89a0410dd21691,
-        type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4099746521796739961, guid: 16a614cc063828c42a89a0410dd21691,
         type: 3}
@@ -1899,7 +1909,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -2503,9 +2513,9 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f4f00d14194e8e441ae6da378c8c3038, type: 2}
+  - {fileID: 2100000, guid: 8cb5ae56f5e82274a9677c7ce195267f, type: 2}
   - {fileID: 2100000, guid: 694fb63b53bd09a49878d65e58438302, type: 2}
-  - {fileID: 2100000, guid: 3bd298c6045de6a478dc5710dc0b3423, type: 2}
+  - {fileID: 2100000, guid: 8cb5ae56f5e82274a9677c7ce195267f, type: 2}
   - {fileID: 2100000, guid: 56b9b769bd41c5140bec66eb8d23e33c, type: 2}
   - {fileID: 2100000, guid: 2dd13b52fffad5f4ba35e3b04a3c79d5, type: 2}
   m_StaticBatchInfo:
@@ -2842,7 +2852,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f4f00d14194e8e441ae6da378c8c3038, type: 2}
+  - {fileID: 2100000, guid: 8cb5ae56f5e82274a9677c7ce195267f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2953,8 +2963,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
+  m_RequiresDepthTextureOption: 1
+  m_RequiresOpaqueTextureOption: 1
   m_CameraType: 0
   m_Cameras: []
   m_RendererIndex: 0
@@ -2962,8 +2972,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 2
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
