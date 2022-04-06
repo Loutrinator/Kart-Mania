@@ -70,6 +70,7 @@ namespace AI.UtilityAI
                 }
             }
             selectedId = selected;
+            Debug.Log(actionGroup.actions[1].actionName);
             
             return selectedAction;
         }

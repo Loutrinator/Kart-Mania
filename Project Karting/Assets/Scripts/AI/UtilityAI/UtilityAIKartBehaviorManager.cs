@@ -143,7 +143,7 @@ namespace AI.UtilityAI
                 if (arrowMesh != null)
                 {
                     float curvature = CurvatureOfRoadFunction(kart);
-                    Debug.Log("curvature " + curvature);
+                    //Debug.Log("curvature " + curvature);
                     if (Mathf.Abs(curvature) > 0.05)
                     {
                         Gizmos.color = Color.green;
