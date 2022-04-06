@@ -34,6 +34,9 @@ namespace AI.UtilityAI
                 case EvaluationDataEnum.curvatureOfTheRoad:
                     value = CurvatureOfRoadFunction(kart);
                     break;
+                case EvaluationDataEnum.distanceToCenterOfRoad:
+                    value = DistanceToCenterOfRoadFunction(kart);
+                    break;
                 case EvaluationDataEnum.constant:
                     value = Constant(kart);
                     break;
@@ -43,6 +46,9 @@ namespace AI.UtilityAI
                     break;
                 case EvaluationDataEnum.sineNormalized:
                     value = SineNormalized(kart);
+                    break;
+                case EvaluationDataEnum.kartFacesBorder:
+                    value = KartFacesBorder(kart);
                     break;
                 
             }
@@ -55,6 +61,17 @@ namespace AI.UtilityAI
             if (kart.closestBezierPos != null)
             {
                 return Vector3.Dot(kart.transform.right, kart.closestBezierPos.Tangent);
+            }
+            return 0;
+        }
+
+        public float KartFacesBorder(KartBase kart)
+        {
+            if (kart.closestBezierPos != null)
+            {
+                float dot = AlignedToRoad(kart);
+                int sign = DistanceToCenterOfRoadFunction(kart) < 0 ? -1 : 1;
+                return sign * dot;
             }
             return 0;
         }
