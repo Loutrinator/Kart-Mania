@@ -96,7 +96,7 @@ namespace AI.UtilityAI
                 var nextPos = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve);
                 int dir = Mathf.RoundToInt(CurvatureOfRoadFunction(kart));
 
-                float roadWith = AIManager.Instance.circuit.road.bezierMeshExtrusion.roadWidth;
+                float roadWith = AIManager.Instance.circuit.road.bezierMeshExtrusion.roadWidth * 0.25f;
                 pointCurvature = kart.closestBezierPos.GlobalOrigin + dir * nextPos.Normal * roadWith;
             }
 
