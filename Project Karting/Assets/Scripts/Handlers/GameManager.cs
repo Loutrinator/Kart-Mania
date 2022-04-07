@@ -205,7 +205,6 @@ namespace Handlers {
                         kartAudio.cam = kartCam.cam;
                     }
 
-                    kart.cameraFollowPlayer = kartCam;
                     //Saving the kart in karts
                     karts.Add(kart);
                     

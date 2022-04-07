@@ -1,16 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using AI.UtilityAI;
 using Game;
 using Kart;
+using Player;
 using Road.RoadPhysics;
 using SplineEditor.Runtime;
 using UnityEngine;
 
-public class AIManager : MonoBehaviour
-{
-
+public class AIManager : MonoBehaviour {
     public static AIManager Instance { get; private set; }
     
     public PhysicsManager physicsManager;
@@ -60,14 +60,17 @@ public class AIManager : MonoBehaviour
     }
 
     private void Start() {
-        utilityAIDebugger.Init(InitRace());
+        if (nbIA > circuit.spawnPoints.Length) nbIA = circuit.spawnPoints.Length;
+        var karts = InitRace();
+        utilityAIDebugger.Init(karts[0]);
     }
 
-    private PlayerAI InitRace()
+    private PlayerAI[] InitRace()
     {
         Transform[] spawnPoints = circuit.spawnPoints;
-        PlayerAI ai = null;
+        PlayerAI[] ais = new PlayerAI[nbIA];
         if (spawnPoints.Length >= nbIA) {
+            AICamera kartCam = null;
             for (int id = 0; id < nbIA; ++id) {
                 
                 Transform spawn = spawnPoints[id];
@@ -82,29 +85,28 @@ public class AIManager : MonoBehaviour
                 playerAI.kart = kart;
                 playerAI.aiController = utilityAI;
                 playerAI.aiController.kart = kart;
-                if (id == 0) ai = playerAI;
                 
-                
-                // Adding the camera of the player
-                var kartCam = Instantiate(AICamPrefab, kart.transform.position, kart.transform.rotation);
-                kartCam.target = kart.transform;
+                ais[id] = playerAI;
+
+
+                KartEffects kartEffects = kart.GetComponent<KartEffects>();
+                if (id == 0) {
+                    // Adding the camera of the player
+                    kartCam = Instantiate(AICamPrefab, kart.transform.position, kart.transform.rotation);
+                    kartCam.target = kart.transform;
+                }
                 
                 //setting the camera to the KartEffect of the kart
-                KartEffects kartEffects = kart.GetComponent<KartEffects>();
-                if (kartEffects != null)
-                {
+                if (kartEffects != null) {
                     kartEffects.cameraShakeTransform = kartCam.cameraShakeTransform;
                     kartEffects.cam = kartCam.cam;
                 }
                 
                 //Setting the camera to the KartAudio of the kart
                 KartAudio kartAudio = kart.GetComponent<KartAudio>();
-                if (kartAudio != null)
-                {
+                if (kartAudio != null) {
                     kartAudio.cam = kartCam.cam;
                 }
-
-                kart.cameraFollowPlayer = kartCam;
             }
         } else {
 #if UNITY_EDITOR
@@ -112,7 +114,13 @@ public class AIManager : MonoBehaviour
 #endif
         }
 
-        return ai;
+        return ais;
     }
 
+    private void OnRaceEnd() {
+        var karts = FindObjectsOfType<KartController>();
+        var sortedKarts = RaceUtils.GetRanking(karts.Select(k => k.kart).ToList());
+        
+        // todo appel de l'algo genetique ?
+    }
 }

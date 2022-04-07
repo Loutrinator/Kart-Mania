@@ -15,8 +15,6 @@ namespace Kart
         public Transform kartBodyModel; // The main kart 3D model (no wheels)
         public List<WheelCollider> wheels; //TODO: A DEPLACER
         public List<Transform> turningWheels; // The turning wheels of the kart
-        [HideInInspector] public CameraFollowPlayer cameraFollowPlayer;
-        public ShakeTransform cameraShake;
 
         //public Transform rotationAxis;
         public KartEffects effects;
