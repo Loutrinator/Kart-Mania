@@ -9,6 +9,8 @@ using Kart;
 using Player;
 using Road.RoadPhysics;
 using UnityEngine;
+using AIGenome = System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<float>>>;
+
 
 public class AIManager : MonoBehaviour {
     [SerializeField] private string genomeFileName;
@@ -82,8 +84,9 @@ public class AIManager : MonoBehaviour {
                 UtilityAIController utilityAI = kart.gameObject.AddComponent<UtilityAIController>();
                 utilityAI.utilityAIAsset = AIAsset;
 
-                var genome = GeneticsUtils.GetDataFromFile(genomeFileName);
+                var genome = GeneticsUtils.GetDataFromFile(genomeFileName).Mutate();
                 utilityAI.Init(genome);
+                Debug.Log(genome.GetString());
                 
                 PlayerAI playerAI = kart.gameObject.AddComponent<PlayerAI>();
                 playerAI.kart = kart;
