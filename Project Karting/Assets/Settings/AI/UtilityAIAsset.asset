@@ -106,8 +106,8 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 0.44175607
-            outSlope: 0.44175607
+            inSlope: 0.20481303
+            outSlope: 0.20481303
             tangentMode: 0
             weightedMode: 3
             inWeight: 0
@@ -115,16 +115,42 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 1.0015538
             value: 1
-            inSlope: 11.692845
-            outSlope: 11.692845
+            inSlope: 18.046053
+            outSlope: 18.046053
             tangentMode: 0
             weightedMode: 3
-            inWeight: 0.113463074
+            inWeight: 0.07347546
             outWeight: 0
           m_PreInfinity: 0
           m_PostInfinity: 2
           m_RotationOrder: 0
         coefficient: 1
+      - evaluationData: 6
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 4.4873185
+            outSlope: 4.4873185
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0
+            outWeight: 0.22435229
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: -0.048700236
+            outSlope: -0.048700236
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.13840204
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: -1
   - groupName: Direction
     actions:
     - actionName: TurnLeft
@@ -154,7 +180,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 0
-        coefficient: 1
+        coefficient: 1.5
       - evaluationData: 3
         evaluationCurve:
           serializedVersion: 2
@@ -262,7 +288,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 0
-        coefficient: 1
+        coefficient: 1.5
       - evaluationData: 3
         evaluationCurve:
           serializedVersion: 2
@@ -326,14 +352,14 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 0
-            outSlope: 0
+            inSlope: 0.009922659
+            outSlope: 0.009922659
             tangentMode: 0
-            weightedMode: 0
+            weightedMode: 3
             inWeight: 0
-            outWeight: 0
+            outWeight: 0.7922911
           - serializedVersion: 3
-            time: 0.2
+            time: 0.3
             value: 1
             inSlope: 0.01124901
             outSlope: 0.01124901
@@ -354,6 +380,58 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 0
         coefficient: 1
+      - evaluationData: 3
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: -0
+            outSlope: -0
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0
+            outWeight: 0.9785867
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: -1
+      - evaluationData: 6
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: -1
+            value: 1.0090451
+            inSlope: -0.01937841
+            outSlope: -0.01937841
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.19460642
+            outWeight: 0.598244
+          - serializedVersion: 3
+            time: 0.0027374178
+            value: 0.009045124
+            inSlope: 0.021055667
+            outSlope: 0.021055667
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0.33511785
+            outWeight: 0.1795405
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        coefficient: -2
     - actionName: DriftOff
       evaluationFunctions:
       - evaluationData: 4
@@ -381,7 +459,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 0
-        coefficient: 0.5
+        coefficient: 0.7
   - groupName: Items
     actions:
     - actionName: ThrowItem
@@ -418,4 +496,4 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 0
         coefficient: 1
-  currentTab: 1
+  currentTab: 2
