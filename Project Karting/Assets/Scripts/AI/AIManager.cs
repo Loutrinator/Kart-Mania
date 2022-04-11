@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using AI.UtilityAI;
 using Game;
+using Genetics;
 using Kart;
 using Player;
 using Road.RoadPhysics;
-using SplineEditor.Runtime;
 using UnityEngine;
 
 public class AIManager : MonoBehaviour {
+    [SerializeField] private string genomeFileName;
     public static AIManager Instance { get; private set; }
     
     public PhysicsManager physicsManager;
@@ -80,7 +81,10 @@ public class AIManager : MonoBehaviour {
                 //Linking to controls to the Kart
                 UtilityAIController utilityAI = kart.gameObject.AddComponent<UtilityAIController>();
                 utilityAI.utilityAIAsset = AIAsset;
-                utilityAI.Init();
+
+                var genome = GeneticsUtils.GetDataFromFile(genomeFileName);
+                utilityAI.Init(genome);
+                
                 PlayerAI playerAI = kart.gameObject.AddComponent<PlayerAI>();
                 playerAI.kart = kart;
                 playerAI.aiController = utilityAI;

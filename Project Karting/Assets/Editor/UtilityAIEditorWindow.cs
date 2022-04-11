@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using AI.UtilityAI;
 using Editor;
+using Genetics;
+using Newtonsoft.Json;
 using UnityEditor;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class UtilityAIEditorWindow : ExtendedEditorWindow
@@ -275,6 +277,12 @@ public class UtilityAIEditorWindow : ExtendedEditorWindow
             
             EditorGUILayout.EndVertical();
             
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("Generate JSON in ClipBoard")) {
+                string fileName = "ai_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".json";
+                GeneticsUtils.WriteData(target.GetGenome(), fileName);
+                AssetDatabase.Refresh();
+            }
         }
         EditorGUILayout.EndVertical();
         /*

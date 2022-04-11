@@ -463,11 +463,35 @@ MonoBehaviour:
   - groupName: Items
     actions:
     - actionName: ThrowItem
-      evaluationFunctions: []
+      evaluationFunctions:
+      - evaluationData: 0
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        coefficient: 0
     - actionName: HoldItem
-      evaluationFunctions: []
+      evaluationFunctions:
+      - evaluationData: 0
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        coefficient: 0
     - actionName: ReleaseItem
-      evaluationFunctions: []
+      evaluationFunctions:
+      - evaluationData: 0
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        coefficient: 0
     - actionName: KeepItem
       evaluationFunctions:
       - evaluationData: 3
@@ -496,4 +520,4 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 0
         coefficient: 1
-  currentTab: 1
+  currentTab: 0

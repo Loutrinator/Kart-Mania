@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Kart;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using AIGenome = System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<float>>>;
 
 namespace AI.UtilityAI
 {
     public class UtilityAIController : AIController
     {
-        [SerializeField] private UtilityAIGenome genome;
+        private AIGenome _genome;
         [SerializeField] public UtilityAIAsset utilityAIAsset;
         
         private float[] values;
@@ -16,7 +15,7 @@ namespace AI.UtilityAI
         
         private List<string> actionNames = new List<string>();
 
-        public void Init()
+        public void Init(AIGenome genomeP)
         {
             int size = 0;
             foreach (var actionGroup in utilityAIAsset.actionGroups)
@@ -35,32 +34,34 @@ namespace AI.UtilityAI
                     actionNames.Add(action.actionName);
                 }
             }
+
+            _genome = genomeP;
         }
 
         public override List<AIAction> tick()
         {
             valuesUpdated = 0;
             List<AIAction> selectedActions = new List<AIAction>();
-            foreach (var actionGroup in utilityAIAsset.actionGroups)
-            {
-                selectedActions.Add(BestActionForGroup(actionGroup));
+            for (var index = 0; index < utilityAIAsset.actionGroups.Count; index++) {
+                var actionGroup = utilityAIAsset.actionGroups[index];
+                selectedActions.Add(BestActionForGroup(actionGroup, index));
             }
 
             return selectedActions;
         }
 
-        private AIAction BestActionForGroup(UtilityAIActionGroup actionGroup)
+        private AIAction BestActionForGroup(UtilityAIActionGroup actionGroup, int actionGroupIndex)
         {
             
             UtilityAIAction selectedAction = actionGroup.actions[0];
-            float utilityMax = selectedAction.getUtility(kart);
+            float utilityMax = selectedAction.getUtility(kart, _genome[actionGroupIndex][0]);
             values[valuesUpdated] = utilityMax;
             int selected = 0;
             valuesUpdated++;
             for (int i = 1; i < actionGroup.actions.Count; i++)
             {
                 UtilityAIAction action = actionGroup.actions[i];
-                float actionUtility = action.getUtility(kart);
+                float actionUtility = action.getUtility(kart, _genome[actionGroupIndex][i]);
                 values[valuesUpdated] = actionUtility;
                 valuesUpdated++;
                 if(actionUtility > utilityMax){

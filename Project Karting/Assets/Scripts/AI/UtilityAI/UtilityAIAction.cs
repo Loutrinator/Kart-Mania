@@ -10,15 +10,16 @@ namespace AI.UtilityAI
     {
         [SerializeField] public List<EvaluationFunctionSettings> evaluationFunctions;
 
-        public float getUtility(KartBase kart)
+        public float getUtility(KartBase kart, List<float> evalCoefficients)
         {
-            float coeffSum = 0;
             float sum = 0;
-            foreach (var evalSetting in evaluationFunctions)
-            {
-                coeffSum += evalSetting.coefficient;
-                sum += evalSetting.coefficient *
-                       evalSetting.evaluationCurve.Evaluate(UtilityAIKartBehaviorManager.Instance.GetValue(evalSetting.evaluationData,kart)); //evalSetting.function.GetValue());
+            for (var index = 0; index < evaluationFunctions.Count; index++) {
+                var evalSetting = evaluationFunctions[index];
+                //sum += evalSetting.coefficient * evalSetting.evaluationCurve.Evaluate(UtilityAIKartBehaviorManager.Instance.GetValue(evalSetting.evaluationData,kart)); //evalSetting.function.GetValue());
+                sum += evalCoefficients[index] *
+                       evalSetting.evaluationCurve.Evaluate(
+                           UtilityAIKartBehaviorManager.Instance.GetValue(evalSetting.evaluationData,
+                               kart)); //evalSetting.function.GetValue());
             }
 
             return sum; //keeping it between 0 and 1 just in case

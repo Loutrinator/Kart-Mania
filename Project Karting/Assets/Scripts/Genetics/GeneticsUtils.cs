@@ -1,7 +1,12 @@
-﻿using AI.UtilityAI;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Newtonsoft.Json;
+using UnityEditor;
+using AIGenome = System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<float>>>;
+using Random = UnityEngine.Random;
 
 namespace Genetics
 {
@@ -87,21 +92,17 @@ namespace Genetics
             return result;
         }
 
-       public static void WriteData(UtilityAIGenome gen)
+       public static void WriteData(AIGenome gen, string fileName)
        {
-            string json = JsonUtility.ToJson(gen);
-
-            System.IO.File.WriteAllText(Application.dataPath + "/Genetics/Genomes/GenomeTest.json",json);
+            string json = JsonConvert.SerializeObject(gen);
+            string path = "Assets/_Genomes/" + fileName;
+            File.WriteAllText(path, json);
        }
 
-        public static UtilityAIGenome GetDataFromFile()
+        public static AIGenome GetDataFromFile(string fileName)
         {
-            UtilityAIGenome data = new UtilityAIGenome();
-
-            string s = System.IO.File.ReadAllText(Application.dataPath + "/Genetics/Genomes/GenomeTest.json");
-            JsonUtility.FromJson<UtilityAIGenome>(s);
-
-            return data;
+            string s = File.ReadAllText("Assets/_Genomes/" + fileName);
+            return JsonConvert.DeserializeObject<AIGenome>(s);
         }
     }
 }
