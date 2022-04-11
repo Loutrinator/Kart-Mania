@@ -65,7 +65,7 @@ public class PlayerAI : KartController
                     break;
             }
         }
-        Debug.Log(actionsChosenDesc);
+        //Debug.Log(actionsChosenDesc);
         Move(movement);
     }
 

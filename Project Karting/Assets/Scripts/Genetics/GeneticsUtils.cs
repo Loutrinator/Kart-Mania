@@ -89,12 +89,19 @@ namespace Genetics
 
        public static void WriteData(UtilityAIGenome gen)
        {
-            List<UtilityAIGenome> _data = new List<UtilityAIGenome>();
-            _data.Add(gen);
-
-            string json = JsonUtility.ToJson(_data.ToArray());
+            string json = JsonUtility.ToJson(gen);
 
             System.IO.File.WriteAllText(Application.dataPath + "/Genetics/Genomes/GenomeTest.json",json);
        }
+
+        public static UtilityAIGenome GetDataFromFile()
+        {
+            UtilityAIGenome data = new UtilityAIGenome();
+
+            string s = System.IO.File.ReadAllText(Application.dataPath + "/Genetics/Genomes/GenomeTest.json");
+            JsonUtility.FromJson<UtilityAIGenome>(s);
+
+            return data;
+        }
     }
 }

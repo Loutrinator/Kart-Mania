@@ -59,7 +59,7 @@ public class UtilityAIDebugger : MonoBehaviour {
         float offset = prefabTransform.rect.height;
 
         List<string> names = AI.aiController.getActionNames();
-        Debug.Log("NAME COUNT " + names.Count);
+        //Debug.Log("NAME COUNT " + names.Count);
         for (int i = 0; i < names.Count; ++i) {
             string actionName = names[i];
             position += Vector3.down * offset;

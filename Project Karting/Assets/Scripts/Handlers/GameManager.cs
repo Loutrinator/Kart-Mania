@@ -297,7 +297,7 @@ namespace Handlers {
             // board de fin de course, il ne reste que le dernier temps dans la liste
             foreach (var t in  playersInfo[playerId].lapsTime)
             {
-                Debug.Log("time add " + Utils.DisplayHelper.FloatToTimeString(t));   
+                //Debug.Log("time add " + Utils.DisplayHelper.FloatToTimeString(t));   
             }
             if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime) {
                 playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
