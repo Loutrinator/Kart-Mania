@@ -15,10 +15,19 @@ namespace Road.RoadPhysics {
         public BezierUtils.BezierPos lastGroundBezierPos;
         private Vector3 _currentGravityVelocity;
 
+        // ReSharper disable once InconsistentNaming
+        public new Transform transform { get; private set; }
+
+        protected void InitTransform() {
+            transform = base.transform;
+        }
+
         protected virtual void Start()
         {
             PhysicsManager.instance.AddPhysicsObject(this);
             currentGravityAcceleration = Physics.gravity;
+
+            if(transform == null) InitTransform();
         }
 
         public void UpdatePhysics(Vector3 groundNormal, float drag)
@@ -54,6 +63,10 @@ namespace Road.RoadPhysics {
             _currentGravityVelocity = Vector3.zero;
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = Vector3.zero;
+        }
+
+        protected void OnDestroy() {
+            PhysicsManager.instance.RemovePhysicsObject(this);
         }
 
         private void OnDrawGizmos()

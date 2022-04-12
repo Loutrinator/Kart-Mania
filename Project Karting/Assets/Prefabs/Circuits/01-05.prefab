@@ -1390,54 +1390,6 @@ MonoBehaviour:
   rightTiling: {x: 1, y: 1}
   bottomTiling: {x: 1, y: 1}
   meshCollider: {fileID: 1143776649395879159}
---- !u!1 &5257293521528575373
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6852212892381360155}
-  - component: {fileID: 5398404244023204067}
-  m_Layer: 0
-  m_Name: SpawnPoint (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6852212892381360155
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5257293521528575373}
-  m_LocalRotation: {x: -0.000000028427774, y: 0.9714944, z: 0.000000017276463, w: -0.23706263}
-  m_LocalPosition: {x: -79.609924, y: 2.6199977, z: 83.82613}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4486705879627121082}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5398404244023204067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5257293521528575373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50dd8e7b5e40c59498b1801dccb58474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spline: {fileID: 4270162758006377534}
-  distance: 1775
-  horizontalOffset: 12
-  verticalOffset: 0
-  computeDistanceFromPosition: 0
 --- !u!1 &5688469220359071331
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,7 +1982,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3149743445185773232}
-  - {fileID: 6852212892381360155}
   m_Father: {fileID: 8738788713797060524}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2240,7 +2191,21 @@ MonoBehaviour:
   road: {fileID: 4836199134749943345}
   spawnPoints:
   - {fileID: 3149743445185773232}
-  - {fileID: 6852212892381360155}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
+  - {fileID: 3149743445185773232}
   checkpointAmount: 0
 --- !u!1 &8867762091607330734
 GameObject:

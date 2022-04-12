@@ -6,7 +6,7 @@ namespace AI.UtilityAI
 {
     public class UtilityAIController : AIController
     {
-        private AIGenome _genome;
+        public AIGenome genome;
         [SerializeField] public UtilityAIAsset utilityAIAsset;
         
         private float[] values;
@@ -35,14 +35,14 @@ namespace AI.UtilityAI
                 }
             }
 
-            _genome = genomeP;
+            genome = genomeP;
         }
 
         public override List<AIAction> tick()
         {
             valuesUpdated = 0;
             List<AIAction> selectedActions = new List<AIAction>();
-            for (var index = 0; index < utilityAIAsset.actionGroups.Count; index++) {
+            for (var index = utilityAIAsset.actionGroups.Count - 1; index >= 0; --index) {
                 var actionGroup = utilityAIAsset.actionGroups[index];
                 selectedActions.Add(BestActionForGroup(actionGroup, index));
             }
@@ -54,14 +54,14 @@ namespace AI.UtilityAI
         {
             
             UtilityAIAction selectedAction = actionGroup.actions[0];
-            float utilityMax = selectedAction.getUtility(kart, _genome[actionGroupIndex][0]);
+            float utilityMax = selectedAction.getUtility(kart, genome[actionGroupIndex][0]);
             values[valuesUpdated] = utilityMax;
             int selected = 0;
             valuesUpdated++;
             for (int i = 1; i < actionGroup.actions.Count; i++)
             {
                 UtilityAIAction action = actionGroup.actions[i];
-                float actionUtility = action.getUtility(kart, _genome[actionGroupIndex][i]);
+                float actionUtility = action.getUtility(kart, genome[actionGroupIndex][i]);
                 values[valuesUpdated] = actionUtility;
                 valuesUpdated++;
                 if(actionUtility > utilityMax){
@@ -71,7 +71,7 @@ namespace AI.UtilityAI
                 }
             }
             selectedId = selected;
-            Debug.Log(actionGroup.actions[1].actionName);
+            //Debug.Log(actionGroup.actions[1].actionName);
             
             return selectedAction;
         }

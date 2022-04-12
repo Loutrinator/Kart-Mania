@@ -124,10 +124,11 @@ namespace AI.UtilityAI
             if (kart.closestBezierPos != null)
             {
                 float roadSize = AIManager.Instance.circuit.road.bezierMeshExtrusion.roadWidth;
-                float dotProduct = Vector3.Dot(kart.transform.position - kart.closestBezierPos.GlobalOrigin,
+                var position = kart.transform.position;
+                float dotProduct = Vector3.Dot(position - kart.closestBezierPos.GlobalOrigin,
                     kart.closestBezierPos.Normal);
                 float direction = Mathf.Sign(dotProduct); 
-                float distCenter = Vector3.Distance(kart.closestBezierPos.GlobalOrigin, kart.transform.position);
+                float distCenter = Vector3.Distance(kart.closestBezierPos.GlobalOrigin, position);
                 return direction * distCenter / roadSize;
             }
 

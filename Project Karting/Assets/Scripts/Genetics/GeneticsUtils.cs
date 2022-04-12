@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Newtonsoft.Json;
-using UnityEditor;
-using AIGenome =
-    System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<float>>>;
+using AIGenome = System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<float>>>;
 using Random = UnityEngine.Random;
 
 namespace Genetics {
@@ -36,6 +34,20 @@ namespace Genetics {
 
             return result;
         }
+        
+        public static List<AIGenome> GenerateChildren(List<AIGenome> sortedKarts, int nbToGenerate, int newParentCount) {
+            var children = new List<AIGenome>(nbToGenerate);
+            var newParentGenomes = SelectionByRank(sortedKarts, newParentCount);
+
+            for (int i = 0; i < nbToGenerate; ++i) {
+                var parent1 = newParentGenomes[Random.Range(0, newParentCount)];
+                var parentsWithoutFirst = newParentGenomes.Where(p => p != parent1).ToArray();
+                var parent2 = parentsWithoutFirst[Random.Range(0, parentsWithoutFirst.Length)];
+                children[i] = Reproduce(parent1, parent2, true).Mutate();
+            }
+
+            return children;
+        }
 
         public static AIGenome Mutate(this AIGenome gen) {
             var result = gen;
@@ -52,27 +64,22 @@ namespace Genetics {
         }
 
         public static AIGenome RandomizeGenome(this AIGenome gen) {
-            var result = gen;
+            var result = new AIGenome();
 
-            foreach (var actionGroup in result) {
-                foreach (var action in actionGroup) {
-                    for (int i = action.Count - 1; i >= 0; --i) {
-                        action[i] += Random.Range(-1.0f, 1.0f) * 0.5f;
+            for (int i = 0; i < gen.Count; ++i) {
+                result.Add(new List<List<float>>());
+                for (int j = 0; j < gen[i].Count; ++j) {
+                    result[i].Add(new List<float>());
+                    for (int k = 0; k < gen[i][j].Count; ++k) {
+                        result[i][j].Add(gen[i][j][k] + Random.Range(-1.0f, 1.0f) * 0.5f);
                     }
                 }
             }
-            
             return result;
         }
 
-        public static AIGenome SelectionByRank(AIGenome gen) {
-            AIGenome result = new AIGenome();
-
-            for (int i = 0; i < nbSelected; i++) {
-                result[i] = gen[i];
-            }
-
-            return result;
+        public static List<AIGenome> SelectionByRank(List<AIGenome> gen, int parentCount) {
+            return gen.GetRange(0, parentCount);
         }
 
         public static AIGenome SelectionFortuneWheel(AIGenome gen) {

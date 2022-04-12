@@ -59,6 +59,7 @@ namespace Kart
 
         protected void Awake()
         {
+            if(transform == null) InitTransform();
             _firstPos = transform.position;
             _firstPosTime = Time.time;
             StopDrifting();
@@ -75,17 +76,21 @@ namespace Kart
             }
         }
 
+        private RaycastHit[] _overlapResults = new RaycastHit[1];
         public override bool IsGrounded()
         {
             int wheelsOnGround = 0;
+            var layerMaskEnv = LayerMask.GetMask("Environment");
+            var layerMaskGround = LayerMask.GetMask("Ground");
+            
             for (var index = 0; index < wheels.Count; index++) {
                 Vector3 wheelPos = wheels[index].transform.position;
                 //if (wheels[index].isGrounded) wheelsOnGround++;
-                if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out _, 0.5f, LayerMask.GetMask("Environement")))
+                if (Physics.SphereCastNonAlloc(wheelPos, 0.1f, -transform.up, _overlapResults, 0.5f, layerMaskEnv) > 0)
                 {
                     GameManager.Instance.respawner.Respawn(this);
                 }
-                else if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out _, 0.5f, LayerMask.GetMask("Ground"))) {
+                else if (Physics.SphereCastNonAlloc(wheelPos, 0.1f, -transform.up, _overlapResults, 0.5f, layerMaskGround) > 0) {
                     wheelsOnGround++;
                 }
             }
