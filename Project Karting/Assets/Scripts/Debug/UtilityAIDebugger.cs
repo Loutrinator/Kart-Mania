@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using AI.UtilityAI;
 using Kart;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class UtilityAIDebugger : MonoBehaviour {
     [SerializeField] private PlayerAI AI;

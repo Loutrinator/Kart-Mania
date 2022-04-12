@@ -84,7 +84,7 @@ public class AIManager : MonoBehaviour {
                 UtilityAIController utilityAI = kart.gameObject.AddComponent<UtilityAIController>();
                 utilityAI.utilityAIAsset = AIAsset;
 
-                var genome = GeneticsUtils.GetDataFromFile(genomeFileName).Mutate();
+                var genome = GeneticsUtils.GetDataFromFile(genomeFileName).RandomizeGenome();
                 utilityAI.Init(genome);
                 Debug.Log(genome.GetString());
                 

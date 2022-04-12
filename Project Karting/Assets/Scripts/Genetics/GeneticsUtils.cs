@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 namespace Genetics {
     public static class GeneticsUtils {
         public static float mutateRate = 0.2f;
-        public static float mutateStrength = 2.0f;
+        public static float mutateStrength = 1.0f;
         public static int nbSelected = 5;
 
         public static AIGenome Reproduce(AIGenome gen1, AIGenome gen2, bool doLerp) {
@@ -45,9 +45,23 @@ namespace Genetics {
                 int randomIndexI = Mathf.RoundToInt(Random.Range(0, gen.Count));
                 int randomIndexJ = Mathf.RoundToInt(Random.Range(0, gen[randomIndexI].Count));
                 int randomIndexK = Mathf.RoundToInt(Random.Range(0, gen[randomIndexI][randomIndexJ].Count));
-                result[randomIndexI][randomIndexJ][randomIndexK] = Random.Range(-1.0f, 1.0f) * mutateStrength;
+                result[randomIndexI][randomIndexJ][randomIndexK] += Random.Range(-1.0f, 1.0f) * mutateStrength;
             }
 
+            return result;
+        }
+
+        public static AIGenome RandomizeGenome(this AIGenome gen) {
+            var result = gen;
+
+            foreach (var actionGroup in result) {
+                foreach (var action in actionGroup) {
+                    for (int i = action.Count - 1; i >= 0; --i) {
+                        action[i] += Random.Range(-1.0f, 1.0f) * 0.5f;
+                    }
+                }
+            }
+            
             return result;
         }
 
