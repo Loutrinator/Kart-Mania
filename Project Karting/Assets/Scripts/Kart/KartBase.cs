@@ -56,6 +56,7 @@ namespace Kart
         private float _lerpedKartRotation;
 
         public bool canMove;
+        
 
         protected void Awake()
         {

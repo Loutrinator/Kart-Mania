@@ -20,7 +20,8 @@ namespace Kart
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawRay(kartBase.transform.position, collisionNormal*3f);
+            if(kartBase.transform != null)
+                Gizmos.DrawRay(kartBase.transform.position, collisionNormal*3f);
             
         }
     }

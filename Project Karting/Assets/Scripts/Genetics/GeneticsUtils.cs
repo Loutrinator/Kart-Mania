@@ -9,25 +9,27 @@ using Random = UnityEngine.Random;
 
 namespace Genetics {
     public static class GeneticsUtils {
-        public static float mutateRate = 0.2f;
-        public static float mutateStrength = 1.0f;
-        public static int nbSelected = 5;
+        public static float mutateRate = 0.1f;
+        public static float mutateStrength = 0.1f;
+        public static int nbSelected = 3;
+        public static float startRandomRange = 0.1f;
 
         public static AIGenome Reproduce(AIGenome gen1, AIGenome gen2, bool doLerp) {
             Assert.AreEqual(gen1.Count, gen2.Count);
 
             var result = new AIGenome();
-
             for (int i = 0; i < gen1.Count; ++i) // actiongroup
             {
-                for (int j = 0; j < gen1[i].Count; j++) // action
+                result.Add(new List<List<float>>());
+                for (int j = 0; j < gen1[i].Count; ++j) // action
                 {
+                    result[i].Add(new List<float>());
                     for (int k = 0; k < gen1[i][j].Count; ++k) {
                         var r = Random.value;
                         float value;
                         if (doLerp) value = Mathf.Lerp(gen1[i][j][k], gen2[i][j][k], r);
                         else value = r > 0.5f ? gen1[i][j][k] : gen2[i][j][k];
-                        result[i][j][k] = value;
+                        result[i][j].Add(value);
                     }
                 }
             }
@@ -43,7 +45,7 @@ namespace Genetics {
                 var parent1 = newParentGenomes[Random.Range(0, newParentCount)];
                 var parentsWithoutFirst = newParentGenomes.Where(p => p != parent1).ToArray();
                 var parent2 = parentsWithoutFirst[Random.Range(0, parentsWithoutFirst.Length)];
-                children[i] = Reproduce(parent1, parent2, true).Mutate();
+                children.Add(Reproduce(parent1, parent2, true).Mutate());
             }
 
             return children;
@@ -71,7 +73,7 @@ namespace Genetics {
                 for (int j = 0; j < gen[i].Count; ++j) {
                     result[i].Add(new List<float>());
                     for (int k = 0; k < gen[i][j].Count; ++k) {
-                        result[i][j].Add(gen[i][j][k] + Random.Range(-1.0f, 1.0f) * 0.5f);
+                        result[i][j].Add(gen[i][j][k] + Random.Range(-startRandomRange, startRandomRange) * 0.5f);
                     }
                 }
             }
