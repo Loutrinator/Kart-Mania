@@ -37,10 +37,10 @@ public class UtilityAIDebugger : MonoBehaviour {
         funcDebugPos = new Vector3(20, 25, 0);
         RectTransform prefabTransform = ActionDebuggerPrefab.GetComponent<RectTransform>();
         offset = prefabTransform.rect.height;
-        AddFunctionDebugger("Vitesse");
-        AddFunctionDebugger("Distance du centre de la route");
-        AddFunctionDebugger("Courbure de la route");
-        AddFunctionDebugger("Alignement avec la route");
+        AddFunctionDebugger("Speed");
+        AddFunctionDebugger("Distance to center of road");
+        AddFunctionDebugger("Road curvature");
+        AddFunctionDebugger("Alignment with the road");
 
         //speed, distanceToCenterOfRoad, curvatureOfTheRoad,  alignedToTheRoad, constant, sineNormalized
     }

@@ -42,7 +42,7 @@ namespace AI.UtilityAI
         {
             valuesUpdated = 0;
             List<AIAction> selectedActions = new List<AIAction>();
-            for (var index = utilityAIAsset.actionGroups.Count - 1; index >= 0; --index) {
+            for (var index = 0; index < utilityAIAsset.actionGroups.Count; ++index) {
                 var actionGroup = utilityAIAsset.actionGroups[index];
                 selectedActions.Add(BestActionForGroup(actionGroup, index));
             }

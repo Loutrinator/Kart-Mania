@@ -44,9 +44,9 @@ public class PlayerRaceInfo
 
     public float getDistanceTraveled(float roadLength)
     {
-        Debug.Log("TRAVELED : dist " + kart.closestBezierPos.BezierDistance + " lap " + lap + " roadLength " + " spawnDistance " + spawnDistance);
+        //Debug.Log("TRAVELED : dist " + kart.closestBezierPos.BezierDistance + " lap " + lap + " roadLength " + " spawnDistance " + spawnDistance);
         float res = kart.closestBezierPos.BezierDistance + lap * roadLength - spawnDistance;
-        Debug.Log("TRAVELED RES :  " + res);
+        //Debug.Log("TRAVELED RES :  " + res);
         return res;
     }
     
