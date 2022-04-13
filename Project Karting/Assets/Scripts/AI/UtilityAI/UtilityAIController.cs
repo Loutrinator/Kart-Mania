@@ -42,6 +42,7 @@ namespace AI.UtilityAI
         {
             valuesUpdated = 0;
             List<AIAction> selectedActions = new List<AIAction>();
+            int currentIndex = 0;
             for (var index = 0; index < utilityAIAsset.actionGroups.Count; ++index) {
                 var actionGroup = utilityAIAsset.actionGroups[index];
                 selectedActions.Add(BestActionForGroup(actionGroup, index, out selectedIds[index]));
@@ -57,20 +58,21 @@ namespace AI.UtilityAI
             float utilityMax = selectedAction.getUtility(kart, genome[actionGroupIndex][0]);
             values[valuesUpdated] = utilityMax;
             int selected = 0;
+            selectedId = valuesUpdated;
             valuesUpdated++;
             for (int i = 1; i < actionGroup.actions.Count; i++)
             {
                 UtilityAIAction action = actionGroup.actions[i];
                 float actionUtility = action.getUtility(kart, genome[actionGroupIndex][i]);
                 values[valuesUpdated] = actionUtility;
-                valuesUpdated++;
                 if(actionUtility > utilityMax){
                     selectedAction = action;
                     utilityMax = actionUtility;
                     selected = i;
+                    selectedId = valuesUpdated;
                 }
+                valuesUpdated++;
             }
-            selectedId = selected;
             //Debug.Log(actionGroup.actions[1].actionName);
             
             return selectedAction;

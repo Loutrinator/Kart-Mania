@@ -76,6 +76,11 @@ public class UtilityAIDebugger : MonoBehaviour {
         if (!_initialized) return;
         float[] values = AI.aiController.getActionValues();
         var selectedIds = AI.aiController.getSelectedActionsId();
+        /*string log = "";
+        for (int j = 0; j < selectedIds.Length; ++j) {
+            log += " " + selectedIds[j];
+        }
+        Debug.Log(log);*/
         int i;
         for (i = 0; i < values.Length; ++i) {
             float value = values[i];
