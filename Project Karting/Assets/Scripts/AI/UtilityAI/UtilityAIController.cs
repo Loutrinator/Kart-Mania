@@ -10,13 +10,13 @@ namespace AI.UtilityAI
         [SerializeField] public UtilityAIAsset utilityAIAsset;
         
         private float[] values;
-        private int selectedId = 0;
+        private int[] selectedIds;
         private int valuesUpdated = 0;
         
         private List<string> actionNames = new List<string>();
 
-        public void Init(AIGenome genomeP)
-        {
+        public void Init(AIGenome genomeP) {
+            selectedIds = new int[utilityAIAsset.actionGroups.Count];
             int size = 0;
             foreach (var actionGroup in utilityAIAsset.actionGroups)
             {
@@ -44,13 +44,13 @@ namespace AI.UtilityAI
             List<AIAction> selectedActions = new List<AIAction>();
             for (var index = 0; index < utilityAIAsset.actionGroups.Count; ++index) {
                 var actionGroup = utilityAIAsset.actionGroups[index];
-                selectedActions.Add(BestActionForGroup(actionGroup, index));
+                selectedActions.Add(BestActionForGroup(actionGroup, index, out selectedIds[index]));
             }
 
             return selectedActions;
         }
 
-        private AIAction BestActionForGroup(UtilityAIActionGroup actionGroup, int actionGroupIndex)
+        private AIAction BestActionForGroup(UtilityAIActionGroup actionGroup, int actionGroupIndex, out int selectedId)
         {
             
             UtilityAIAction selectedAction = actionGroup.actions[0];
@@ -86,9 +86,9 @@ namespace AI.UtilityAI
             return values;
         }
 
-        public override int getSelectedActionId()
+        public override int[] getSelectedActionsId()
         {
-            return selectedId;
+            return selectedIds;
         }
 
         public void debug()

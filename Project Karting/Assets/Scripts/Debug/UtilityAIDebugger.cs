@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using AI.UtilityAI;
 using Kart;
 using TMPro;
@@ -74,13 +75,13 @@ public class UtilityAIDebugger : MonoBehaviour {
     private void FixedUpdate() {
         if (!_initialized) return;
         float[] values = AI.aiController.getActionValues();
-        int selectedId = AI.aiController.getSelectedActionId();
+        var selectedIds = AI.aiController.getSelectedActionsId();
         int i;
         for (i = 0; i < values.Length; ++i) {
             float value = values[i];
             if (i < actionDebuggers.Count) {
                 ActionDebugger debugger = actionDebuggers[i];
-                debugger.setValues(value, i == selectedId);
+                debugger.setValues(value, selectedIds.Contains(i));
             }
         }
 
