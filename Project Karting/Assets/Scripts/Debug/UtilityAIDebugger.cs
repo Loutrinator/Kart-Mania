@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using AI.UtilityAI;
 using Kart;
 using TMPro;
@@ -37,10 +38,10 @@ public class UtilityAIDebugger : MonoBehaviour {
         funcDebugPos = new Vector3(20, 25, 0);
         RectTransform prefabTransform = ActionDebuggerPrefab.GetComponent<RectTransform>();
         offset = prefabTransform.rect.height;
-        AddFunctionDebugger("Vitesse");
-        AddFunctionDebugger("Distance du centre de la route");
-        AddFunctionDebugger("Courbure de la route");
-        AddFunctionDebugger("Alignement avec la route");
+        AddFunctionDebugger("Speed");
+        AddFunctionDebugger("Distance to center of road");
+        AddFunctionDebugger("Road curvature");
+        AddFunctionDebugger("Alignment with the road");
 
         //speed, distanceToCenterOfRoad, curvatureOfTheRoad,  alignedToTheRoad, constant, sineNormalized
     }
@@ -74,13 +75,13 @@ public class UtilityAIDebugger : MonoBehaviour {
     private void FixedUpdate() {
         if (!_initialized) return;
         float[] values = AI.aiController.getActionValues();
-        int selectedId = AI.aiController.getSelectedActionId();
+        var selectedIds = AI.aiController.getSelectedActionsId();
         int i;
         for (i = 0; i < values.Length; ++i) {
             float value = values[i];
             if (i < actionDebuggers.Count) {
                 ActionDebugger debugger = actionDebuggers[i];
-                debugger.setValues(value, i == selectedId);
+                debugger.setValues(value, selectedIds.Contains(i));
             }
         }
 

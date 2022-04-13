@@ -12,7 +12,7 @@ namespace AI
         public abstract List<AIAction> tick();
         public abstract List<string> getActionNames();
         public abstract float[] getActionValues();
-        public abstract int getSelectedActionId();
+        public abstract int[] getSelectedActionsId();
 
     }
 }
