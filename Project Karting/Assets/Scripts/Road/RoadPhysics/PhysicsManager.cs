@@ -39,5 +39,9 @@ namespace Road.RoadPhysics {
         public void AddPhysicsObject(PhysicsObject physicsObject) {
             physicsObjects.Add(physicsObject);
         }
+
+        public void RemovePhysicsObject(PhysicsObject physicsObject) {
+            physicsObjects.Remove(physicsObject);
+        }
     }
 }

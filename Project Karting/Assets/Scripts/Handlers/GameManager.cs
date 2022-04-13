@@ -18,7 +18,6 @@ namespace Handlers {
     public class GameManager : MonoBehaviour
     {
         public GameState gameState;
-        public Race currentRace;
         public Minimap minimap;
 
         public ItemManager itemManager;
@@ -30,8 +29,6 @@ namespace Handlers {
         [SerializeField] private GameObject StartUIPrefab;
 
         [HideInInspector] public List<KartBase> karts = new List<KartBase>();
-
-        private PlayerRaceInfo[] playersInfo;
 
         private StartMsgAnimation startMessage;
         private float startTime;
@@ -71,28 +68,28 @@ namespace Handlers {
 
             gameState = GameState.race;
             
-                currentRace = LevelManager.instance.InitLevel();
-                minimap.race = currentRace;
-                minimap.DrawMinimap();
+            RaceManager.Instance.currentRace = LevelManager.instance.InitLevel();
+            minimap.race = RaceManager.Instance.currentRace;
+            minimap.DrawMinimap();
 
-                if (physicsManager != null)
-                {
-                    physicsManager.Init(currentRace.road.bezierSpline);
-                }
-            
-                InitRace();
+            if (physicsManager != null)
+            {
+                physicsManager.Init(RaceManager.Instance.currentRace.road.bezierSpline);
+            }
+        
+            InitRace();
 
-                if (respawner != null)
-                {
-                    respawner.Init();
-                }
-            
-                TransitionController.Instance.FadeOut(() => {
-                    //raceBegan = true;  // todo enable after delay
-                });
+            if (respawner != null)
+            {
+                respawner.Init();
+            }
+        
+            TransitionController.Instance.FadeOut(() => {
+                //raceBegan = true;  // todo enable after delay
+            });
 
-                gamePaused = false;
-                pauseMenu = FindObjectOfType<PauseMenu>();
+            gamePaused = false;
+            pauseMenu = FindObjectOfType<PauseMenu>();
         }
 
         /*private IEnumerator AIUpdate()
@@ -102,7 +99,7 @@ namespace Handlers {
         private void Update() {
 
             if (gameState == GameState.race) {
-                PlayerRaceInfo player = playersInfo[0];
+                PlayerRaceInfo player = RaceManager.Instance.playersInfo[0];
                 //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
                 //lap.text = player.lap.ToString();
                 //checkpoint.text = player.currentCheckpoint.ToString();
@@ -110,10 +107,6 @@ namespace Handlers {
                 // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
                 //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
                 //timeInfo.text = info;
-                if (player.controller != null)
-                {
-                    //player.controller.active = true; // listen player inputs 
-                }
             }
             minimap.UpdateMinimap();
         }
@@ -135,9 +128,9 @@ namespace Handlers {
         }
         
         public void StartRace() {
-            for (int i = 0; i < playersInfo.Length; ++i) {
-                playersInfo[i].currentLapStartTime = Time.time;
-                playersInfo[i].lap = 1;
+            for (int i = 0; i < RaceManager.Instance.playersInfo.Length; ++i) {
+                RaceManager.Instance.playersInfo[i].currentLapStartTime = Time.time;
+                RaceManager.Instance.playersInfo[i].lap = 0;
             }
 
             gameState = GameState.race;
@@ -146,6 +139,17 @@ namespace Handlers {
                 kart.effects.StopRewind();
             }
             
+            LapManager.Instance.OnNewLap.Add(CheckEndRace);
+        }
+
+        private void CheckEndRace(int playerId)
+        {
+            
+            if (RaceManager.Instance.playersInfo[playerId].lap > RaceManager.Instance.currentRace.laps)
+            {
+                //RaceManager.Instance.playersInfo[playerId].FinishRace();
+                FinishRace(playerId);
+            }
         }
 
         private void InitRace()
@@ -159,8 +163,8 @@ namespace Handlers {
             minimap.SetPosition(nbPlayerRacing);
             
             
-            playersInfo = new PlayerRaceInfo[nbPlayerRacing];
-            Transform[] spawnPoints = currentRace.spawnPoints;
+            RaceManager.Instance.playersInfo = new PlayerRaceInfo[nbPlayerRacing];
+            Transform[] spawnPoints = RaceManager.Instance.currentRace.spawnPoints;
             if (spawnPoints.Length >= nbPlayerRacing) {
                 for (int id = 0; id < nbPlayerRacing; ++id) {
                     
@@ -205,13 +209,13 @@ namespace Handlers {
                         kartAudio.cam = kartCam.cam;
                     }
 
-                    kart.cameraFollowPlayer = kartCam;
                     //Saving the kart in karts
                     karts.Add(kart);
                     
                     PlayerRaceInfo info = new PlayerRaceInfo(kart, id); //TODO : if human PlayerAction, if IA ComputerAction
                     info.camera = kartCam;
-                    playersInfo[id] = info;
+                    info.currentCheckpoint = RaceManager.Instance.currentRace.checkpointAmount - 1;
+                    RaceManager.Instance.playersInfo[id] = info;
                     
                     //Flipping the UI if required
                     HUDTimeTrialController HUDPRefab = timetrialHUDLeftPrefab;
@@ -261,71 +265,13 @@ namespace Handlers {
             }
         }
         public PlayerRaceInfo GetPlayerRaceInfo(int id) {
-            foreach (var info in playersInfo) {
+            foreach (var info in RaceManager.Instance.playersInfo) {
                 if (info.playerId == id) return info;
             }
 
             return null;
         }
 
-        public void CheckpointPassed(int checkpointId, int playerId) {
-            PlayerRaceInfo player = playersInfo[playerId];
-
-            //permet de vérifier si premièrement le checkpoint est valide et si il est après le checkpoint actuel
-            if (checkpointId < currentRace.checkpointAmount) {
-                if (checkpointId - player.currentCheckpoint == 1) {
-                    playersInfo[playerId].currentCheckpoint = checkpointId;
-                }
-                else if (player.currentCheckpoint == currentRace.checkpointAmount - 1 && checkpointId == 0) {
-                    playersInfo[playerId].currentCheckpoint = checkpointId;
-                    NewLap(playerId);
-                }
-            }
-
-            //si le checkpoint validé est le dernier de la liste
-        }
-
-        private void NewLap(int playerId) {
-            //on calcule le temps du lap
-            playersInfo[playerId].previousLapTime = Time.time - playersInfo[playerId].currentLapStartTime;
-            playersInfo[playerId].currentLapStartTime = Time.time;
-
-            float diff = playersInfo[playerId].previousLapTime - playersInfo[playerId].bestLapTime;
-            playersInfo[playerId].lap += 1; // doit être appelé ici pour mettre à jour la diff dans la HUD
-            playersInfo[playerId].lapsTime.Add( playersInfo[playerId].previousLapTime); //doit être appelé ici pour être sur que le previousLapTime est à jour
-            
-            //TODO : il y a un problème, la liste n'est pas bien conservé car à l'affichage du score
-            // board de fin de course, il ne reste que le dernier temps dans la liste
-            foreach (var t in  playersInfo[playerId].lapsTime)
-            {
-                Debug.Log("time add " + Utils.DisplayHelper.FloatToTimeString(t));   
-            }
-            if (playersInfo[playerId].previousLapTime < playersInfo[playerId].bestLapTime) {
-                playersInfo[playerId].bestLapTime = playersInfo[playerId].previousLapTime;
-            }
-
-            /*bestTime.text = floatToTimeString(playersInfo[playerId].bestLapTime);
-        currentTime.text = floatToTimeString(playersInfo[playerId].previousLapTime);
-        if (playersInfo[playerId].lap != 1) {
-            timeDiff.text = floatToTimeString(diff);
-            if (diff > 0) {
-                timeDiff.color = Color.red;
-            }
-            else {
-                timeDiff.color = Color.green;
-            }
-        }*/
-            
-            // TODO : il serait préférable de terminé le race pour ce playerID
-            // mais de finir pour la totalité des participants selon une autre condition
-            // quand on sera en écran splitté (cf.  document de game design pour la condition de fin de course)
-
-            if (playersInfo[playerId].lap > currentRace.laps)
-            {
-                playersInfo[playerId].FinishRace();
-                FinishRace(playerId);
-            }
-        }
 
         private string FloatToTimeString(float time) {
             string prefix = "";

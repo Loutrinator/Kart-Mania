@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditorInternal.VersionControl;
 using UnityEngine;
 
 namespace AI.UtilityAI
@@ -12,6 +11,23 @@ namespace AI.UtilityAI
 
         [SerializeField, HideInInspector]
         public int currentTab = 0;
+
+        public List<List<List<float>>> GetGenome() {
+            var genome = new List<List<List<float>>>();
+            Debug.Log(actionGroups.Count);
+            foreach (var actionGroup in actionGroups) {
+                var actionGroupData = new List<List<float>>();
+                foreach (var action in actionGroup.actions) {
+                    var actionData = new List<float>();
+                    foreach (var evaluationFunction in action.evaluationFunctions) {
+                        actionData.Add(evaluationFunction.coefficient);
+                    }
+                    actionGroupData.Add(actionData);
+                }
+                genome.Add(actionGroupData);
+            }
+            return genome;
+        }
     }
 
     [Serializable]

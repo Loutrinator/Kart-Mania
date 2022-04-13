@@ -39,7 +39,7 @@ namespace Handlers
             }
             else
             {
-                respawnPos = GameManager.Instance.currentRace.road.bezierSpline.GetBezierPos(0);
+                respawnPos = RaceManager.Instance.currentRace.road.bezierSpline.GetBezierPos(0);
             }
             kart.transform.position = respawnPos.GlobalOrigin;
             kart.transform.rotation = respawnPos.Rotation;

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 974393620473618570}
   - component: {fileID: 974393620473618571}
   - component: {fileID: 2033935846926441275}
+  - component: {fileID: 2827280588860281560}
+  - component: {fileID: 3655261786139694035}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,7 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
-  currentRace: {fileID: 0}
   minimap: {fileID: 4557034411793747280}
   itemManager: {fileID: 11400000, guid: 4a4bb616e5b0d0244aaf6dae3cd4cc2d, type: 2}
   timetrialHUDLeftPrefab: {fileID: 671105266231658824, guid: c88fc4398f416c340b9898c29a056315,
@@ -93,6 +94,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceForRespawn: 60
+--- !u!114 &2827280588860281560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974393620473618569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4610686edd5483a851fec524e8478df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3655261786139694035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974393620473618569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9d0b926bdd439eaed21508e05ed1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRace: {fileID: 0}
 --- !u!1001 &4410900628040999315
 PrefabInstance:
   m_ObjectHideFlags: 0

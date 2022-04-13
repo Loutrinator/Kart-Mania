@@ -50,12 +50,12 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 0
             value: 1
-            inSlope: 0.061504044
-            outSlope: 0.061504044
+            inSlope: 0.0067863595
+            outSlope: 0.0067863595
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
-            outWeight: 0.13076884
+            outWeight: 0.10141988
           - serializedVersion: 3
             time: 1.003526
             value: 0.1451294
@@ -221,8 +221,8 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0.117132016
           - serializedVersion: 3
-            time: 1
-            value: 1
+            time: 1.050002
+            value: 0.9622631
             inSlope: 0.3762542
             outSlope: 0.3762542
             tangentMode: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 0
-        coefficient: 1.5
+        coefficient: 1
     - actionName: Forward
       evaluationFunctions:
       - evaluationData: 2
@@ -329,8 +329,8 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0.0752999
           - serializedVersion: 3
-            time: 0
-            value: 0
+            time: -0.048729926
+            value: -0.032956176
             inSlope: -2.0718064
             outSlope: -2.0718064
             tangentMode: 0
@@ -340,7 +340,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 0
-        coefficient: 1.5
+        coefficient: 1
   - groupName: Drift
     actions:
     - actionName: DriftOn
@@ -359,14 +359,14 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0.7922911
           - serializedVersion: 3
-            time: 0.3
-            value: 1
-            inSlope: 0.01124901
-            outSlope: 0.01124901
+            time: 0.5749939
+            value: 0.8254776
+            inSlope: -0.15349469
+            outSlope: -0.15349469
             tangentMode: 0
             weightedMode: 3
-            inWeight: 0.50464404
-            outWeight: 0.0025829293
+            inWeight: 0.50862175
+            outWeight: 0.241934
           - serializedVersion: 3
             time: 1
             value: 1
@@ -463,11 +463,35 @@ MonoBehaviour:
   - groupName: Items
     actions:
     - actionName: ThrowItem
-      evaluationFunctions: []
+      evaluationFunctions:
+      - evaluationData: 0
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        coefficient: 0
     - actionName: HoldItem
-      evaluationFunctions: []
+      evaluationFunctions:
+      - evaluationData: 0
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        coefficient: 0
     - actionName: ReleaseItem
-      evaluationFunctions: []
+      evaluationFunctions:
+      - evaluationData: 0
+        evaluationCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        coefficient: 0
     - actionName: KeepItem
       evaluationFunctions:
       - evaluationData: 3
@@ -496,4 +520,4 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 0
         coefficient: 1
-  currentTab: 2
+  currentTab: 0

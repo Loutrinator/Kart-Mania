@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using AI.UtilityAI;
 using Kart;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class UtilityAIDebugger : MonoBehaviour {
     [SerializeField] private PlayerAI AI;
@@ -16,6 +14,9 @@ public class UtilityAIDebugger : MonoBehaviour {
     [SerializeField] private FunctionDebugger FunctionDebuggerPrefab;
     [SerializeField] private Mesh debugArrowMesh;
     [SerializeField] private ControllerDebugger controllerDebugger;
+    [SerializeField] private TextMeshProUGUI previousDist;
+    [SerializeField] private TextMeshProUGUI currentDist;
+    [SerializeField] private TextMeshProUGUI nbItterationsText;
 
     private List<ActionDebugger> actionDebuggers = new List<ActionDebugger>();
     private List<FunctionDebugger> functionDebuggers = new List<FunctionDebugger>();
@@ -59,7 +60,7 @@ public class UtilityAIDebugger : MonoBehaviour {
         float offset = prefabTransform.rect.height;
 
         List<string> names = AI.aiController.getActionNames();
-        Debug.Log("NAME COUNT " + names.Count);
+        //Debug.Log("NAME COUNT " + names.Count);
         for (int i = 0; i < names.Count; ++i) {
             string actionName = names[i];
             position += Vector3.down * offset;
@@ -106,5 +107,15 @@ public class UtilityAIDebugger : MonoBehaviour {
     private void OnDrawGizmos() {
         if (!_initialized) return;
         UtilityAIKartBehaviorManager.Instance.OnDrawGizmos(AI.kart, debugArrowMesh);
+    }
+
+    public void SetDistances(float bestPreviousDistance, float furthestKartDist)
+    {
+        previousDist.text = "previous : " + bestPreviousDistance;
+        currentDist.text = "current : " + furthestKartDist;
+    }
+    public void SetItterations(int nbItterations)
+    {
+        nbItterationsText.text = "itterations : " + nbItterations;
     }
 }

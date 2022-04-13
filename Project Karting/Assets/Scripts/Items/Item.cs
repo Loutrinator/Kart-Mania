@@ -9,7 +9,6 @@ namespace Items
         public string GetName() =>  name;
         public virtual void Use(PlayerRaceInfo info)
         {
-            info.ItemIsInUse = false;
             info.Item = null;
         }
 
