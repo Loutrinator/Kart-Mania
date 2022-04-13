@@ -15,6 +15,7 @@ public class PlayerAI : KartController
     public AIController aiController;
 
     public Vector2 movement;
+    public bool driftOn;
     
     private void Start()
     {
@@ -55,9 +56,11 @@ public class PlayerAI : KartController
                     movement.x = 1;
                     break;
                 case "DriftOn":
+                    driftOn = true;
                     Drift(true);
                     break;
                 case "DriftOff":
+                    driftOn = false;
                     Drift(false);
                     break;
                 case "LetGo":

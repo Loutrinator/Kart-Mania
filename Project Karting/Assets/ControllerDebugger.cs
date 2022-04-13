@@ -9,6 +9,7 @@ public class ControllerDebugger : MonoBehaviour
     public float maxAngle = 40f;
     private PlayerAI ai;
     private Vector2 currentMovement;
+    private bool currentDrift;
     private Vector2 movements;
     [SerializeField] private Transform LJoystick;
     [SerializeField] private Transform RJoystick;
@@ -19,8 +20,9 @@ public class ControllerDebugger : MonoBehaviour
     [SerializeField] private MeshRenderer X;
     [SerializeField] private MeshRenderer Y;
 
-    public void SetInputs(Vector2 moves)
+    public void SetInputs(Vector2 moves, bool drift)
     {
+        currentDrift = drift;
         movements = moves;
     }
 
@@ -29,8 +31,7 @@ public class ControllerDebugger : MonoBehaviour
         
         currentMovement = Vector2.Lerp(currentMovement,movements,lerpSpeed * Time.fixedDeltaTime);
         LJoystick.localEulerAngles = new Vector3(maxAngle*currentMovement.x,0f,0f);
-        //LT.SetBool("Pressed",currentMovement.y>0);
-        //RT.SetBool("Pressed",currentMovement.y<0);
+        RT.SetBool("Pressed",currentDrift);
         int aPressed = currentMovement.y > 0 ? 1 : 0;
         int bPressed = currentMovement.y < 0 ? 1 : 0;
         A.material.SetInt("Pressed",aPressed);
