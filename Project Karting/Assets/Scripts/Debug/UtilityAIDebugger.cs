@@ -98,7 +98,7 @@ public class UtilityAIDebugger : MonoBehaviour {
 
         if (showControllerDebugger) {
             controllerDebugger.gameObject.SetActive(true);
-            controllerDebugger.SetInputs(AI.movement);
+            controllerDebugger.SetInputs(AI.movement,AI.driftOn);
         }
         else {
             controllerDebugger.gameObject.SetActive(false);
