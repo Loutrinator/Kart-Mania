@@ -45,6 +45,7 @@ namespace Items
             if (item != null)
             {
                 GameManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID()).Item = item;
+                Debug.Log(item.GetName());
             }
         }
 
@@ -59,10 +60,10 @@ namespace Items
         {
             if (state == LootBoxState.available)
             {
-                KartBase kart = other.GetComponent<KartCollisions>().kartBase;
+                KartCollisions kart = other.GetComponentInParent<KartCollisions>();
                 if (kart != null)
                 {
-                    BreakLootBox(1,kart);
+                    BreakLootBox(1, kart.kartBase);
                 }
             }
         }
