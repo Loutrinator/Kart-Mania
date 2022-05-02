@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AudioSettings", menuName = "ScriptableObjects/AudioSettings")]
+[CreateAssetMenu(fileName = "AudioSettings", menuName = "ScriptableObjects/Settings/AudioSettings")]
 public class AudioSettings : ScriptableObject
 {
     

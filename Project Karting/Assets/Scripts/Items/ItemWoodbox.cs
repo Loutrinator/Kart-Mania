@@ -1,7 +1,7 @@
 ﻿using Items;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="WoodBox",menuName="ScriptableObject/Items/Woodbox",order=0)]
+[CreateAssetMenu(fileName="WoodBox",menuName="ScriptableObjects/Items/Woodbox",order=0)]
 public class ItemWoodbox : Item
 {
     [SerializeField] private WoodBox prefab;

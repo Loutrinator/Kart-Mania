@@ -254,7 +254,7 @@ namespace AI {
 
         private void OnApplicationQuit() {
 
-            GeneticsUtils.WriteData(_bestGenome, "TrainedData.json");
+            //GeneticsUtils.WriteData(_bestGenome, "TrainedData.json");
 #if UNITY_EDITOR
             AssetDatabase.Refresh();
 #endif

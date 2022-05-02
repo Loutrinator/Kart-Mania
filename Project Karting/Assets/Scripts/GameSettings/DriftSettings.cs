@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DriftSettings", menuName = "ScriptableObjects/DriftSettings")]
+[CreateAssetMenu(fileName = "DriftSettings", menuName = "ScriptableObjects/Settings/DriftSettings")]
 public class DriftSettings : ScriptableObject
 {
     

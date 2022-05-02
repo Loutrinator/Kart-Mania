@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Items
 {
     
-    [CreateAssetMenu(fileName="NukeBomb",menuName="ScriptableObject/Items/NukeBomb",order=0)]
+    [CreateAssetMenu(fileName="NukeBomb",menuName="ScriptableObjects/Items/NukeBomb",order=0)]
     public class ItemNukeBomb : Item
     {
         [SerializeField] private NukeBomb prefab;

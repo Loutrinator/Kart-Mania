@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 
 namespace Handlers
 {
-    [CreateAssetMenu(fileName = "SceneManager", menuName = "ScriptableObject/SceneManager")]
+    [CreateAssetMenu(fileName = "SceneManager", menuName = "ScriptableObjects/Managers/SceneManager")]
     public class SceneManager : ScriptableObject {
         #region Singleton
         public static SceneManager instance;

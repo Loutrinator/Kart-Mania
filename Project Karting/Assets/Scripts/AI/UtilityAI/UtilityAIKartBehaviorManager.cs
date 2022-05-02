@@ -8,7 +8,7 @@ namespace AI.UtilityAI
     public class UtilityAIKartBehaviorManager
     {
         private float curvatureOffset = 35f;
-        private float distCurve = 27f;
+        private float distCurve = 30f;
         private static UtilityAIKartBehaviorManager instance;
         private GameManager manager;
         public static UtilityAIKartBehaviorManager Instance
