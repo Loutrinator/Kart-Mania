@@ -96,7 +96,7 @@ namespace Kart
                 }
             }
 
-            return wheelsOnGround >= 4;
+            return wheelsOnGround >= 1;
         }
 
         private void FixedUpdate()
@@ -123,36 +123,43 @@ namespace Kart
             //if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
             ConvertStats();
             ApplyPowerups();
-            Move(movement[1]);
-            float rotationDirection = movement[1] > 0 ? movement[0] : -movement[0];
 
-            if (drift && !drifting && (movement[0] < 0 || movement[0] > 0))
+            float rotationDirection = movement[1] > 0 ? movement[0] : -movement[0];
+            
+            
+            if (IsGrounded())
             {
-                StartDrift(rotationDirection);
+                Move(movement[1]);
+                if (IsGrounded() && drift && !drifting && (movement[0] < 0 || movement[0] > 0))
+                {
+                    StartDrift(rotationDirection);
+                }
+            }
+            else
+            {
+                if (movement[1] != 0)
+                {
+                    rotationDirection = 0;
+                    currentAngularVelocity = Vector3.zero;
+                }
+
             }
 
             if (movement[1] != 0) //on tourne pas à l'arret
             {
-                if (drifting)
-                {
-                    if (!drift)
-                    {
+                if (drifting) {
+                    if (!drift) {
                         StopDrifting();
-                    }
-                    else
-                    {
+                    }else {
                         float driftAngle = (1 + rotationDirection * driftDirection) / 2 * (KartPhysicsSettings.instance.maxDriftAngle - KartPhysicsSettings.instance.minDriftAngle) +
                                            KartPhysicsSettings.instance.minDriftAngle;
                         driftAngle *= driftDirection;
                         Rotate(driftAngle);
                     }
-                }
-                else
-                {
+                }else {
                     Rotate(rotationDirection);
                 }
-            }
-            else {
+            }else {
                 currentAngularVelocity = Vector3.zero;
             }
             
