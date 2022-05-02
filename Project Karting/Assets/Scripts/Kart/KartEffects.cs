@@ -38,6 +38,7 @@ namespace Kart
         private bool keyIsRewinding;
 
         private AudioSource _driftSoundSource;
+        private float startTime = 0;
 
         //BoostEffect
 
@@ -57,21 +58,42 @@ namespace Kart
             _driftSoundSource.clip = DriftSettings.instance.driftAudioClip;
             
         }
-        /*
-        public void LateUpdate()
-        {
-            currentIntensity = Mathf.Lerp(currentIntensity, boostIntensity[driftLevel],
-                Time.fixedDeltaTime * boostSwitchSpeed);
-            if (Mathf.Abs(currentIntensity - boostIntensity[driftLevel]) > 0.1f)
-            {
-                stopBoost();
-                stopDrift();
-                driftLevel = 0;
-                baseFOV = camera.fieldOfView;
-                baseZ = camera.transform.localPosition.z;
-            }
-        }*/
 
+        public void Update()
+        {
+            if (isDrifting)
+            {
+                float elapsed = Time.time - startTime;
+                
+                var emissionModule = driftLoadingSparksEmitter.emission;
+                var mainModule = driftLoadingSparksEmitter.main;
+                
+                if (elapsed > DriftSettings.instance.boostTimeToSwitch && driftLevel < 1)
+                {
+                    driftLoadingSparksEmitter.Play();
+                    emissionModule.rateOverTime = 75;
+                    driftLevel = 1;
+                    driftMaterial.SetInt("Drift_Mode", driftLevel);
+                    boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
+                }else if (elapsed > DriftSettings.instance.boostTimeToSwitch*2 && driftLevel < 2)
+                {
+                    driftLevel = 2;
+                    emissionModule.rateOverTime = 250;
+                    mainModule.simulationSpeed = 1.5f;
+                    driftMaterial.SetInt("Drift_Mode", driftLevel);
+                    boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
+                }else if (elapsed > DriftSettings.instance.boostTimeToSwitch*3 && driftLevel < 3)
+                {
+                    driftLevel = 3;
+                    mainModule.simulationSpeed = 2f;
+                    emissionModule.rateOverTime = 500;
+                    driftMaterial.SetInt("Drift_Mode", driftLevel);
+                    boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
+                }
+                
+            }
+        }
+        
         public void LateUpdate()
         {
             currentIntensity = Mathf.Lerp(currentIntensity, DriftSettings.instance.driftEffectIntensity[driftLevel],
@@ -121,45 +143,12 @@ namespace Kart
 
         }
 
-        private IEnumerator BoostLoading()
-        {
-            WaitForSeconds wait = new WaitForSeconds(DriftSettings.instance.boostTimeToSwitch);
-            var emissionModule = driftLoadingSparksEmitter.emission;
-            var mainModule = driftLoadingSparksEmitter.main;
-            yield return wait;
-            if (isDrifting)
-            {
-                driftLoadingSparksEmitter.Play();
-                emissionModule.rateOverTime = 75;
-                driftLevel = 1;
-                driftMaterial.SetInt("Drift_Mode", driftLevel);
-                boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
-                yield return wait;
-            }
-
-            if (isDrifting)
-            {
-                driftLevel = 2;
-                emissionModule.rateOverTime = 250;
-                mainModule.simulationSpeed = 1.5f;
-                driftMaterial.SetInt("Drift_Mode", driftLevel);
-                boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
-                yield return wait;
-            }
-
-            if (isDrifting)
-            {
-                driftLevel = 3;
-                mainModule.simulationSpeed = 2f;
-                emissionModule.rateOverTime = 500;
-                driftMaterial.SetInt("Drift_Mode", driftLevel);
-                boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
-            }
-        }
 
         public void StartDrift()
         {
             isDrifting = true;
+            startTime = Time.time;
+            
             foreach (var skid in skidEmitters)
             {
                 skid.emitting = true;
@@ -169,11 +158,8 @@ namespace Kart
             {
                 smoke.Play();
             }
-
             driftLevel = 0;
             boostLight.gameObject.SetActive(true);
-            StartCoroutine(BoostLoading());
-
             PlayBoostSound();
         }
 
