@@ -19,9 +19,9 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0.85180044, a: 0}
   driftEffectIntensity:
   - 0
-  - 1
   - 2
-  - 3
+  - 4
+  - 6
   boostSwitchSpeed: 3
   boostTimeToSwitch: 2
   boostShake:
@@ -32,12 +32,14 @@ MonoBehaviour:
   - 1
   - 1.5
   - 2
-  boostStrength:
-  - 20
-  - 35
-  - 50
-  boostFOVOffset: 6
-  transitionSpeed: 0.2
+  boostBaseStrength: 25
+  driftLevelCoeff:
+  - 1
+  - 1.5
+  - 2
+  boostFOVOffset: 8
+  boostZOffset: 0
+  transitionSpeed: 0.4
   boostCameraIn:
     serializedVersion: 2
     m_Curve:

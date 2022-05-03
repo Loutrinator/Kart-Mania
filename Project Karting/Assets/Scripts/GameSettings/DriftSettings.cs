@@ -28,12 +28,16 @@ public class DriftSettings : ScriptableObject
     #endregion
     
     #region Boost
+    [Header("Boost")]
     public List<ShakeTransformEventData> boostShake;
     public List<float> boostDuration;
-    public List<float> boostStrength;
+    public float boostBaseStrength;
+    public List<float> driftLevelCoeff;//the coeff applied to all the effects of a drift's boost
     #endregion
     #region Camera FOV effect
+    [Header("Camera boost effect")]
     public float boostFOVOffset;
+    public float boostZOffset;
     public float transitionSpeed;
     public AnimationCurve boostCameraIn;
     public AnimationCurve boostCameraOut;
@@ -41,6 +45,7 @@ public class DriftSettings : ScriptableObject
     #endregion
     #region Sound
     
+    [Header("Sound effects")]
     public AudioClip driftAudioClip;
     public float driftVolume;
     public float driftSoundAnimationSpeed;
