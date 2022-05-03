@@ -28,6 +28,9 @@ MonoBehaviour:
   boostStrength: 1.5
   engineBrakeSpeed: 0.4
   gravityMultiplier: 10
-  respawnHeight: 100
+  respawnHeight: 10
+  respawnMinDistance: 100
   borderVelocityLossPercent: 1
   bumpForce: 1000
+  minVelocityToTurn: 3
+  minVelocityToDrift: 50

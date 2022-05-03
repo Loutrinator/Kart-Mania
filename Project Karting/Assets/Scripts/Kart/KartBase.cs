@@ -101,7 +101,7 @@ namespace Kart
 
         private void FixedUpdate()
         {
-
+            Debug.Log("Velocity : " + rigidBody.velocity.magnitude);
             
             //if (GameManager.Instance.gameState == GameState.start)
             //{
@@ -131,7 +131,7 @@ namespace Kart
             if (IsGrounded())
             {
                 Move(movement[1]);
-                if (IsGrounded() && drift && !drifting && (movement[0] < 0 || movement[0] > 0))
+                if (IsGrounded() && drift && !drifting && (movement[0] < 0 || movement[0] > 0) && rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToDrift)
                 {
                     StartDrift(rotationDirection);
                 }

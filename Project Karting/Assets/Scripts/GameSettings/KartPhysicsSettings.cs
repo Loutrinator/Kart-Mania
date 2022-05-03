@@ -56,6 +56,7 @@ public class KartPhysicsSettings : ScriptableObject
     public float borderVelocityLossPercent = 0.2f;
     public float bumpForce = 3000f;
     public float minVelocityToTurn = 0.2f;
+    public float minVelocityToDrift = 10f;
 
     #endregion
 }
