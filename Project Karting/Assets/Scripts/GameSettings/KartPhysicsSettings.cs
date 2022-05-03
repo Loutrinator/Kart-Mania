@@ -59,4 +59,9 @@ public class KartPhysicsSettings : ScriptableObject
     public float minVelocityToDrift = 10f;
 
     #endregion
+    #region Camera behaviour
+    [Header("Camera behaviour")]
+    public float cameraPositionLerp = 10f;
+    public float cameraRotationLerp = 10f;
+    #endregion
 }

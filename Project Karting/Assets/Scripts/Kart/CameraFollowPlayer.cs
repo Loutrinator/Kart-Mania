@@ -12,15 +12,17 @@ namespace Kart {
         public Transform target;
         [SerializeField] private Transform frontPosition;
         [SerializeField] private Transform backPosition;
-        [SerializeField] private float rotationPercent = 0.1f;
         [SerializeField] public Camera cam;
         public ShakeTransform cameraShakeTransform;
 
         private CameraMode currentCameraMode = CameraMode.front;
+        private Vector3 desiredPosition;
+        private Quaternion desiredRotation;
 
-        private void LateUpdate() {
-            transform.position = target.position;
-            transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, rotationPercent);
+        private void LateUpdate()
+        {
+            transform.position = Vector3.Lerp(transform.position, target.position, KartPhysicsSettings.instance.cameraPositionLerp * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, KartPhysicsSettings.instance.cameraRotationLerp * Time.fixedDeltaTime);
         }
 
         public void SetViewport(int id)
