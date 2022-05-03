@@ -52,6 +52,7 @@ public class KartPhysicsSettings : ScriptableObject
     public float engineBrakeSpeed = 10f;
     public float gravityMultiplier = 10f;
     public float respawnHeight = 2f;
+    public float respawnMinDistance = 35f;
     public float borderVelocityLossPercent = 0.2f;
     public float bumpForce = 3000f;
     public float minVelocityToTurn = 0.2f;

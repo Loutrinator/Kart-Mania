@@ -211,6 +211,15 @@ namespace Kart
             kartBodyModel.localEulerAngles = Vector3.forward;
         }
 
+        public void ResetMovements()
+        {
+            _currentSpeed = 0;
+            _yVelocity = 0;
+            _currentAngularSpeed = 0;
+            _lerpedWheelDirection = 0;
+            _lerpedKartRotation = 0;
+        }
+
         private void AnimateWheels()
         {
             _lerpedWheelDirection =

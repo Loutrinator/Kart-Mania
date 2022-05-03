@@ -6,7 +6,6 @@ namespace Handlers
 {
     public class KartRespawner : MonoBehaviour
     {
-        public float distanceForRespawn = 20f;
         
         private bool _initialized;
 
@@ -22,8 +21,7 @@ namespace Handlers
             foreach (var kart in karts)
             {
                 BezierUtils.BezierPos bezierPos = kart.closestBezierPos;
-                if (Vector3.Distance(bezierPos.GlobalOrigin, kart.transform.position) > distanceForRespawn
-                    || !kart.IsGrounded() && kart.currentVelocity.magnitude < 0.1f)
+                if (Vector3.Distance(bezierPos.GlobalOrigin, kart.transform.position) > KartPhysicsSettings.instance.respawnMinDistance)
                 {
                     Respawn(kart);
                 }
@@ -41,10 +39,12 @@ namespace Handlers
             {
                 respawnPos = RaceManager.Instance.currentRace.road.bezierSpline.GetBezierPos(0);
             }
-            kart.transform.position = respawnPos.GlobalOrigin;
+            kart.transform.position = respawnPos.GlobalOrigin + respawnPos.LocalUp * KartPhysicsSettings.instance.respawnHeight;
+            
             kart.transform.rotation = respawnPos.Rotation;
 
             kart.ResetForces();
+            kart.ResetMovements();
         }
     }
 }
