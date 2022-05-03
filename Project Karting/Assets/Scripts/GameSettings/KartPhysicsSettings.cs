@@ -19,6 +19,7 @@ public class KartPhysicsSettings : ScriptableObject
     }
     #endregion
     #region Kart Stats
+    [Header("Kart's stats")]
     [MinMaxSlider(0f,200)]
     public Vector2 topSpeed = new Vector2(80f,120f);
     public float acceleration = 20f;
@@ -38,6 +39,7 @@ public class KartPhysicsSettings : ScriptableObject
     
     #endregion
     #region Kart physics
+    [Header("Kart's physics")]
     public float steeringSpeed = 80f;
     public float minDriftAngle = 0.182f;
     public float maxDriftAngle = 1.8f;
@@ -52,6 +54,7 @@ public class KartPhysicsSettings : ScriptableObject
     public float respawnHeight = 2f;
     public float borderVelocityLossPercent = 0.2f;
     public float bumpForce = 3000f;
+    public float minVelocityToTurn = 0.2f;
 
     #endregion
 }

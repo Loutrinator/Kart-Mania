@@ -124,7 +124,8 @@ namespace Kart
             ConvertStats();
             ApplyPowerups();
 
-            float rotationDirection = movement[1] > 0 ? movement[0] : -movement[0];
+            bool isReverse = Vector3.Dot(transform.forward, rigidBody.velocity.normalized) < 0;
+            float rotationDirection = isReverse ? -movement[0] : movement[0];
             
             
             if (IsGrounded())
@@ -145,7 +146,7 @@ namespace Kart
 
             }
 
-            if (movement[1] != 0) //on tourne pas à l'arret
+            if (rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToTurn) //on tourne pas à l'arret
             {
                 if (drifting) {
                     if (!drift) {

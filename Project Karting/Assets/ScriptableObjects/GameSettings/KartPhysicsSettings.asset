@@ -16,7 +16,7 @@ MonoBehaviour:
   acceleration: 80
   reverseSpeed: 100
   reverseAcceleration: 300
-  braking: 10000
+  braking: 1000
   steeringSpeed: 35
   minDriftAngle: 0.15
   maxDriftAngle: 1.3
@@ -27,7 +27,7 @@ MonoBehaviour:
   kartWheelAngle: 75
   boostStrength: 1.5
   engineBrakeSpeed: 0.4
-  gravityMultiplier: 6
-  respawnHeight: 2
+  gravityMultiplier: 10
+  respawnHeight: 100
   borderVelocityLossPercent: 1
   bumpForce: 1000

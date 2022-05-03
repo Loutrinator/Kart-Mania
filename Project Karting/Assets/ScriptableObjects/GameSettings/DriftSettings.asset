@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   driftEffectColors:
   - {r: 1, g: 1, b: 1, a: 0}
-  - {r: 0, g: 0.4659934, b: 1, a: 0}
-  - {r: 1, g: 0.5458693, b: 0, a: 0}
-  - {r: 0.877697, g: 0, b: 1, a: 0}
+  - {r: 0, g: 0.85213137, b: 1, a: 0}
+  - {r: 1, g: 0.4713461, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0.85180044, a: 0}
   driftEffectIntensity:
   - 0
   - 1
   - 2
   - 3
-  boostSwitchSpeed: 1
+  boostSwitchSpeed: 3
   boostTimeToSwitch: 2
   boostShake:
   - {fileID: 11400000, guid: ae392e8874ceab24b93bd151853e5525, type: 2}
@@ -36,7 +36,7 @@ MonoBehaviour:
   - 20
   - 35
   - 50
-  boostFOVOffset: 4
+  boostFOVOffset: 6
   transitionSpeed: 0.2
   boostCameraIn:
     serializedVersion: 2
