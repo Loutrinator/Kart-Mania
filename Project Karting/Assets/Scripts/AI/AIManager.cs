@@ -170,7 +170,7 @@ namespace AI {
                 if (id == 0)
                 {
                     kartCam = Instantiate(AICamPrefab, kart.transform.position, kart.transform.rotation);
-                    kartCam.target = kart.transform;
+                    kartCam.target = kart;
                     racingCams.Add(kartCam);
                 }
 

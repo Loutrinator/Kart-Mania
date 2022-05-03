@@ -192,7 +192,7 @@ namespace Handlers {
                         Destroy(kartCam.GetComponent<AudioListener>());
                     }
                     kartCam.SetViewport(id);
-                    kartCam.target = kart.transform;
+                    kartCam.target = kart;
                     
                     //setting the camera to the KartEffect of the kart
                     KartEffects kartEffects = kart.GetComponent<KartEffects>();

@@ -63,5 +63,8 @@ public class KartPhysicsSettings : ScriptableObject
     [Header("Camera behaviour")]
     public float cameraPositionLerp = 10f;
     public float cameraRotationLerp = 10f;
+    public float cameraSideAmplitude = 0.5f;
+    public float cameraSideAngleAmplitude = 0.5f;
+    public float cameraKartDirectionLerp = 0.5f;
     #endregion
 }

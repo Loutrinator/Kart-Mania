@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Handlers;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Kart {
     }
     public class CameraFollowPlayer : MonoBehaviour
     {
-        public Transform target;
+        public KartBase target;
         [SerializeField] private Transform frontPosition;
         [SerializeField] private Transform backPosition;
         [SerializeField] public Camera cam;
@@ -19,10 +20,29 @@ namespace Kart {
         private Vector3 desiredPosition;
         private Quaternion desiredRotation;
 
+        private float kartDir = 0;
+
+        private void Update()
+        {
+            kartDir = Mathf.Lerp(kartDir, target.GetDirection(), KartPhysicsSettings.instance.cameraKartDirectionLerp * Time.deltaTime);
+        }
+
         private void LateUpdate()
         {
-            transform.position = Vector3.Lerp(transform.position, target.position, KartPhysicsSettings.instance.cameraPositionLerp * Time.fixedDeltaTime);
-            transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, KartPhysicsSettings.instance.cameraRotationLerp * Time.fixedDeltaTime);
+            Vector3 targetPos = target.transform.position;
+            targetPos += transform.right * kartDir * KartPhysicsSettings.instance.cameraSideAmplitude;
+            transform.position = Vector3.Lerp(transform.position, targetPos, KartPhysicsSettings.instance.cameraPositionLerp * Time.fixedDeltaTime);
+            Quaternion targetRot = target.transform.rotation;
+            targetRot *= Quaternion.Lerp(Quaternion.identity, Quaternion.AngleAxis(KartPhysicsSettings.instance.cameraSideAngleAmplitude * kartDir,target.transform.up),Mathf.Abs(this.kartDir)*2f);// new Quaternion(transform.up.x, transform.up.y, transform.up.z, KartPhysicsSettings.instance.cameraSideAngleAmplitude * kartDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, KartPhysicsSettings.instance.cameraRotationLerp * Time.fixedDeltaTime);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(target.transform.position, transform.up*5f);
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(target.transform.position, target.transform.up*5f);
         }
 
         public void SetViewport(int id)

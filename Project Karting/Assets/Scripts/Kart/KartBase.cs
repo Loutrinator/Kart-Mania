@@ -99,6 +99,11 @@ namespace Kart
             return wheelsOnGround >= 1;
         }
 
+        public float GetDirection()
+        {
+            return drifting ? driftDirection : movement[0];
+        }
+
         private void FixedUpdate()
         {
             Debug.Log("Velocity : " + rigidBody.velocity.magnitude);
