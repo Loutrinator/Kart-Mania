@@ -9,7 +9,7 @@ namespace Kart
     {
         public KartBase kart;
         public Camera cam;
-        [HideInInspector] public ShakeTransform cameraShakeTransform;
+        public CameraFollowPlayer cameraFollowPlayer;
         public List<TrailRenderer> skidEmitters;
         public List<ParticleSystem> driftSmokeEmitters;
 
@@ -138,7 +138,9 @@ namespace Kart
                     // boostCoeff : a value scaled based on the drift level
                     cam.fieldOfView = baseFOV + boostEffect * boostStrength * DriftSettings.instance.boostFOVOffset * boostCoeff;
                     Vector3 previousPos = cam.transform.localPosition;
-                    cam.transform.localPosition =  new Vector3(previousPos.x,previousPos.y, baseZ - boostEffect * boostCoeff * DriftSettings.instance.boostZOffset);
+                    if (cameraFollowPlayer.currentCameraMode == CameraMode.front)
+                        previousPos.z = baseZ - boostEffect * boostCoeff * DriftSettings.instance.boostZOffset;
+                    cam.transform.localPosition = previousPos;
 
                 }
                 else
@@ -246,7 +248,7 @@ namespace Kart
         public void startBoost(float length, float force)
         {
 
-            cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[driftLevel - 1]); 
+            cameraFollowPlayer.cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[driftLevel - 1]); 
             boostCoeff = DriftSettings.instance.driftLevelCoeff[driftLevel-1];
             Stats statModifier = new Stats();
             statModifier.acceleration = 200000f;
@@ -304,7 +306,7 @@ namespace Kart
                 _keyhole.StopRewind(duration);
                 if(duration > 1.6)
                 {
-                    cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[1]);
+                    cameraFollowPlayer.cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[1]);
                     Stats statModifier = new Stats();
                     statModifier.acceleration = 500f;
                     statModifier.topSpeed = 35;

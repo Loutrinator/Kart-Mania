@@ -172,12 +172,13 @@ namespace AI {
                     kartCam = Instantiate(AICamPrefab, kart.transform.position, kart.transform.rotation);
                     kartCam.target = kart;
                     racingCams.Add(kartCam);
-                }
+                    
+                    //setting the camera to the KartEffect of the kart
+                    if (kartEffects != null) {
+                        kartEffects.cameraFollowPlayer = kartCam;
+                        kartEffects.cam = kartCam.cam;
+                    }
 
-                //setting the camera to the KartEffect of the kart
-                if (kartEffects != null) {
-                    kartEffects.cameraShakeTransform = kartCam.cameraShakeTransform;
-                    kartEffects.cam = kartCam.cam;
                 }
 
                 //Setting the camera to the KartAudio of the kart

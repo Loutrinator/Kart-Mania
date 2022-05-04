@@ -16,7 +16,7 @@ namespace Kart {
         [SerializeField] public Camera cam;
         public ShakeTransform cameraShakeTransform;
 
-        private CameraMode currentCameraMode = CameraMode.front;
+        [HideInInspector] public CameraMode currentCameraMode = CameraMode.front;
         private Vector3 desiredPosition;
         private Quaternion desiredRotation;
 

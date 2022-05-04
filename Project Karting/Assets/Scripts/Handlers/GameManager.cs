@@ -199,7 +199,7 @@ namespace Handlers {
                     KartEffects kartEffects = kart.GetComponent<KartEffects>();
                     if (kartEffects != null)
                     {
-                        kartEffects.cameraShakeTransform = kartCam.cameraShakeTransform;
+                        kartEffects.cameraFollowPlayer = kartCam;
                         kartEffects.cam = kartCam.cam;
                     }
                     
