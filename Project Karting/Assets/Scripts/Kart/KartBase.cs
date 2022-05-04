@@ -120,17 +120,15 @@ namespace Kart
                 }
             }
             
-            //if (GameManager.Instance.gameState == GameState.start)
-            //{
-            /*
-                
-
+            if (RaceManager.Instance.gameState == GameState.start)
+            {
                 if (movement[1] > 0)
                 {
                     effects.Rewind();
-                }*/
-            //}
-            //if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
+                }
+            }
+            if (!RaceManager.Instance.RaceHadBegun() || !canMove) return;
+            
             ConvertStats();
             ApplyPowerups();
 

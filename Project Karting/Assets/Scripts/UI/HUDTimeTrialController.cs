@@ -71,7 +71,7 @@ namespace UI {
 
         private void Update()
         {
-            if (GameManager.Instance.RaceHadBegun())
+            if (RaceManager.Instance.RaceHadBegun())
             {
                 currentTime.text = Utils.DisplayHelper.FloatToTimeString(Time.time - _info.currentLapStartTime);
             }
