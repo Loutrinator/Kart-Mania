@@ -30,11 +30,12 @@ namespace Kart {
         private void LateUpdate()
         {
             Vector3 targetPos = target.transform.position;
-            targetPos += transform.right * kartDir * KartPhysicsSettings.instance.cameraSideAmplitude;
-            transform.position = Vector3.Lerp(transform.position, targetPos, KartPhysicsSettings.instance.cameraPositionLerp * Time.fixedDeltaTime);
+            if(currentCameraMode == CameraMode.front) targetPos += transform.right * kartDir * KartPhysicsSettings.instance.cameraSideAmplitude;
+            
+            transform.position = Vector3.Lerp(transform.position, targetPos, KartPhysicsSettings.instance.cameraPositionLerp * Time.deltaTime);
             Quaternion targetRot = target.transform.rotation;
             targetRot *= Quaternion.Lerp(Quaternion.identity, Quaternion.AngleAxis(KartPhysicsSettings.instance.cameraSideAngleAmplitude * kartDir,target.transform.up),Mathf.Abs(this.kartDir)*2f);// new Quaternion(transform.up.x, transform.up.y, transform.up.z, KartPhysicsSettings.instance.cameraSideAngleAmplitude * kartDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, KartPhysicsSettings.instance.cameraRotationLerp * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, KartPhysicsSettings.instance.cameraRotationLerp * Time.deltaTime);
         }
 
         private void OnDrawGizmos()

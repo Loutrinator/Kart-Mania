@@ -193,6 +193,7 @@ namespace Handlers {
                     }
                     kartCam.SetViewport(id);
                     kartCam.target = kart;
+                    kart.cameraFollowPlayer = kartCam;
                     
                     //setting the camera to the KartEffect of the kart
                     KartEffects kartEffects = kart.GetComponent<KartEffects>();

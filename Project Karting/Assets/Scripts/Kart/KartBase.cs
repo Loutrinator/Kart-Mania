@@ -41,6 +41,7 @@ namespace Kart
         [HideInInspector] public bool drift;
         [HideInInspector] public int driftDirection;
         [HideInInspector] public bool rear;
+        [HideInInspector] public CameraFollowPlayer cameraFollowPlayer;
 
         private bool drifting;
 
@@ -107,10 +108,8 @@ namespace Kart
         private void FixedUpdate()
         {
             Debug.Log("Velocity : " + rigidBody.velocity.magnitude);
-            
-            //if (GameManager.Instance.gameState == GameState.start)
-            //{
-            /*
+            if (cameraFollowPlayer != null)
+            {
                 if (rear)
                 {
                     cameraFollowPlayer.switchCameraMode(CameraMode.rear);
@@ -119,6 +118,12 @@ namespace Kart
                 {
                     cameraFollowPlayer.switchCameraMode(CameraMode.front);
                 }
+            }
+            
+            //if (GameManager.Instance.gameState == GameState.start)
+            //{
+            /*
+                
 
                 if (movement[1] > 0)
                 {
