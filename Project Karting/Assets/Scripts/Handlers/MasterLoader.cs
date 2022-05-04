@@ -9,8 +9,13 @@ namespace Handlers {
                 yield return null;
             }
             
+            TransitionController.Instance.InNoFade();
+            TransitionController.Instance.ShowLoading();
+            
+            // initialisations
             LevelManager.instance.Init();
-            SceneManager.instance.LoadMainMenu();
+            
+            SceneManager.instance.LoadMainMenu(() => TransitionController.Instance.FadeOut());
         }
     }
 }

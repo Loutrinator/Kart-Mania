@@ -53,7 +53,6 @@ namespace Kart
         private float _yVelocity;
         private float _currentAngularSpeed;
         private float _lerpedWheelDirection;
-        private float _lerpedKartRotation;
 
         public bool canMove;
         
@@ -231,7 +230,6 @@ namespace Kart
         private void StopDrifting()
         {
             driftDirection = 0;
-            _lerpedKartRotation = 0f;
             drifting = false;
             effects.StopDrift();
         }
