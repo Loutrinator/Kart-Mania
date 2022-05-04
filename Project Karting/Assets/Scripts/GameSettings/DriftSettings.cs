@@ -60,8 +60,10 @@ public class DriftSettings : ScriptableObject
     
     #region Vibrations
     [Header("Vibrations")]
-    public float lowVibration;
-    public float highVibration;
+    public float driftLowVibration;
+    public float driftHighVibration;
+    public float boostLowVibration;
+    public float boostHighVibration;
     
     #endregion
 }

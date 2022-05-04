@@ -7,13 +7,13 @@ using UnityEngine.InputSystem;
 
 public enum RumblePattern
 {
-    Constant, Pulse, Linear
+    None, Constant, Pulse, Linear, Hold
 }
 
 public class Rumbler : MonoBehaviour
 {
     private PlayerInput _playerInput;
-    private RumblePattern activeRumblePattern;
+    public RumblePattern activeRumblePattern;
     private float _low;
     private float _high;
     private float _rumbleDuration;
@@ -43,6 +43,15 @@ public class Rumbler : MonoBehaviour
         rumbleStep = burstLength;
         Invoke(nameof(StopRumble), duration);
     }
+    public void RumbleHold(float low, float high)
+    {
+        activeRumblePattern = RumblePattern.Hold;
+        _low = low;
+        _high = high;
+        isMotorActive = true;
+        var g = GetGamepad();
+        g?.SetMotorSpeeds(low,high);
+    }
 
     public void StopRumble()
     {
@@ -51,6 +60,9 @@ public class Rumbler : MonoBehaviour
         {
             gamepad.SetMotorSpeeds(0, 0);
         }
+
+        activeRumblePattern = RumblePattern.None;
+        isMotorActive = false;
     }
 
     public void SetPlayerInput(PlayerInput p)
@@ -59,7 +71,7 @@ public class Rumbler : MonoBehaviour
     }
     private void Update()
     {
-        if (Time.time > _rumbleDuration) return;
+        if (Time.time > _rumbleDuration && activeRumblePattern != RumblePattern.Hold) return;
         var gamepad = GetGamepad();
         if (gamepad == null) return;
 
@@ -85,6 +97,18 @@ public class Rumbler : MonoBehaviour
                     }
                 }
                 break;
+            case RumblePattern.Hold:
+                if (isMotorActive)
+                {
+                    gamepad.SetMotorSpeeds(_low,_high);
+                }
+                else
+                {
+                    gamepad.SetMotorSpeeds(0,0);
+                }
+                break;
+            case RumblePattern.None:
+                return;
         }
     }
 

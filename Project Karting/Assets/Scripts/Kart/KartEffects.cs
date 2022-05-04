@@ -12,7 +12,7 @@ namespace Kart
         public CameraFollowPlayer cameraFollowPlayer;
         public List<TrailRenderer> skidEmitters;
         public List<ParticleSystem> driftSmokeEmitters;
-
+        
 
         public List<ParticleSystem> boostSparksEmitters;
         public ParticleSystem driftLoadingSparksEmitter;
@@ -29,7 +29,6 @@ namespace Kart
         private bool isDrifting;
         private bool FOVFadedIn;
 
-
         private float currentIntensity;
         private float baseFOV;
         private float baseZ;
@@ -41,7 +40,6 @@ namespace Kart
         private float startTime = 0;
 
         //BoostEffect
-
         [HideInInspector] public int driftLevel;
 
         public void Start()
@@ -169,10 +167,16 @@ namespace Kart
             driftLevel = 0;
             boostLight.gameObject.SetActive(true);
             PlayBoostSound();
+            float low = DriftSettings.instance.driftLowVibration;
+            float high = DriftSettings.instance.driftHighVibration;
+                            
+            kart.rumbler.RumbleHold(low,high);
         }
 
         public void StopDrift()
         {
+            if(kart.rumbler != null && kart.rumbler.activeRumblePattern == RumblePattern.Hold)
+                kart.rumbler.StopRumble();
             driftLoadingSparksEmitter.Stop();
             isDrifting = false;
             driftMaterial.SetInt("Drift_Mode", 0);
@@ -270,8 +274,8 @@ namespace Kart
 
             if (kart.rumbler != null)
             {
-                float low = DriftSettings.instance.lowVibration * boostCoeff;
-                float high = DriftSettings.instance.highVibration * boostCoeff;
+                float low = DriftSettings.instance.boostLowVibration * boostCoeff;
+                float high = DriftSettings.instance.boostHighVibration * boostCoeff;
                             
                 kart.rumbler.RumbleConstant(low,high, duration);
             }
