@@ -35,6 +35,7 @@ namespace Kart
 
         private float timeWhenKeyInserted;
         private bool keyIsRewinding;
+        private bool keyIsInserted;
 
         private AudioSource _driftSoundSource;
         private float startTime = 0;
@@ -293,11 +294,15 @@ namespace Kart
 
         public void InsertKey()
         {
+            Debug.Log("INSERT KEY BETCH");
+            keyIsInserted = true;
             _keyhole.InsertKey(Keyhole.RewindMode.startRewindMode, null);
             keyIsRewinding = false;
         }
+        
         public void Rewind()
         {
+            Debug.Log("REWIND KEY BETCH");
             if (!keyIsRewinding)
             {
                 timeWhenKeyInserted = Time.time;
@@ -305,14 +310,22 @@ namespace Kart
                 keyIsRewinding = true;
             }
         }
+        
         public void StopRewind()
         {
+            if (!keyIsRewinding)
+            {
+                Debug.Log("REMOVE KEY BETCH");
+                _keyhole.RemoveKey();
+                return;
+            }
             float now = Time.time;
             float duration = now - timeWhenKeyInserted;
+            
             if (duration > 2)
             {
-                _keyhole.StopRewind(0);
                 ExplodeMotor();
+                _keyhole.StopRewind(0);
             }
             else {
                 
@@ -339,6 +352,7 @@ namespace Kart
                 }
             }
             keyIsRewinding = false;
+            keyIsInserted = false;
         }
 
         private void ExplodeMotor()

@@ -194,6 +194,7 @@ public class Keyhole : MonoBehaviour
             
             // ------ EXTRACTION STATE ------
             case KeyHoleState.extraction:
+                Debug.Log("EXTRACTION BETCH");
                 elapsed = Time.time - currentStateStartTime;
                 animationPercent = elapsed / extractionDuration;
                 position = extractionPositionAC.Evaluate(animationPercent);
