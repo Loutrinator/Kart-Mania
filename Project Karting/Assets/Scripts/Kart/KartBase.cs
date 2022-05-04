@@ -9,7 +9,8 @@ namespace Kart
     public class KartBase : PhysicsObject
     {
         public int playerIndex;
-        
+
+        public Rumbler rumbler;
         public GameObject minimapRenderer;
         public Transform kartRootModel; // The kart's root 3D model
         public Transform kartBodyModel; // The main kart 3D model (no wheels)

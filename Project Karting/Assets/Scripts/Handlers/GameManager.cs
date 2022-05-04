@@ -182,7 +182,10 @@ namespace Handlers {
                     PlayerController playerController = kart.gameObject.AddComponent<PlayerController>();
                     playerController.kart = kart;
                     playerController.InitializePlayerConfiguration(playerConfig);
-                    
+
+                    Rumbler rumbler = kart.gameObject.AddComponent<Rumbler>();
+                    rumbler.SetPlayerInput(playerConfig.Input);
+                    kart.rumbler = rumbler;
                     
                     // Adding the camera of the player
                     var kartCam = Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
@@ -236,7 +239,6 @@ namespace Handlers {
                     minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer, playerConfig.Color);
 
                 }
-                
                     
                 //Adding the start countdown HUD    
                 startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();

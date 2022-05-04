@@ -43,8 +43,8 @@ public class DriftSettings : ScriptableObject
     public AnimationCurve boostCameraOut;
 
     #endregion
-    #region Sound
     
+    #region Sound
     [Header("Sound effects")]
     public AudioClip driftAudioClip;
     public float driftVolume;
@@ -55,6 +55,13 @@ public class DriftSettings : ScriptableObject
     public float driftPitchMax;
     public AnimationCurve driftPitchEaseIn;
     public AnimationCurve driftPitchEaseOut;
+    
+    #endregion
+    
+    #region Vibrations
+    [Header("Vibrations")]
+    public float lowVibration;
+    public float highVibration;
     
     #endregion
 }

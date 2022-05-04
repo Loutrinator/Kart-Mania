@@ -253,7 +253,8 @@ namespace Kart
             Stats statModifier = new Stats();
             statModifier.acceleration = 200000f;
             statModifier.topSpeed = DriftSettings.instance.boostBaseStrength * boostCoeff;
-            StatPowerup boost = new StatPowerup(statModifier, DriftSettings.instance.boostDuration[driftLevel - 1]);
+            float duration = DriftSettings.instance.boostDuration[driftLevel - 1];
+            StatPowerup boost = new StatPowerup(statModifier, duration);
             kart.AddPowerup(boost);
 
             foreach (var spark in boostSparksEmitters)
@@ -266,6 +267,14 @@ namespace Kart
             boostStartTime = Time.time;
             boostActivated = true;
             FOVFadedIn = false;
+
+            if (kart.rumbler != null)
+            {
+                float low = DriftSettings.instance.lowVibration * boostCoeff;
+                float high = DriftSettings.instance.highVibration * boostCoeff;
+                            
+                kart.rumbler.RumbleConstant(low,high, duration);
+            }
         }
 
         public void stopBoost()
