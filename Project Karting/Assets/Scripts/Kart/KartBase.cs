@@ -225,7 +225,6 @@ namespace Kart
             _yVelocity = 0;
             _currentAngularSpeed = 0;
             _lerpedWheelDirection = 0;
-            _lerpedKartRotation = 0;
         }
 
         private void AnimateWheels()

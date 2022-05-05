@@ -107,13 +107,8 @@ public class MenuManager : MonoBehaviour
         mainCameraAnimator.SetTrigger("back");
     }
 
-    public void ShowTransition()
-    {
-        TransitionController.Instance.FadeIn(StartLevel);//TODO
-    }
-
-    private void StartLevel() {
-        SceneManager.instance.LoadGameMode(LevelManager.instance.gameConfig.mode);//TODO
+    public void StartLevel() {
+        SceneManager.instance.LoadGameMode(LevelManager.instance.gameConfig.mode);
     }
     public void QuitGame()
     {
