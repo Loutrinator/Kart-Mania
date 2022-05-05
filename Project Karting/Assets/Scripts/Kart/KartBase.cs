@@ -9,7 +9,8 @@ namespace Kart
     public class KartBase : PhysicsObject
     {
         public int playerIndex;
-        
+
+        public Rumbler rumbler;
         public GameObject minimapRenderer;
         public Transform kartRootModel; // The kart's root 3D model
         public Transform kartBodyModel; // The main kart 3D model (no wheels)
@@ -41,6 +42,7 @@ namespace Kart
         [HideInInspector] public bool drift;
         [HideInInspector] public int driftDirection;
         [HideInInspector] public bool rear;
+        [HideInInspector] public CameraFollowPlayer cameraFollowPlayer;
 
         private bool drifting;
 
@@ -95,16 +97,19 @@ namespace Kart
                 }
             }
 
-            return wheelsOnGround >= 4;
+            return wheelsOnGround >= 1;
+        }
+
+        public float GetDirection()
+        {
+            return drifting ? driftDirection : movement[0];
         }
 
         private void FixedUpdate()
         {
-
-            
-            //if (GameManager.Instance.gameState == GameState.start)
-            //{
-            /*
+            Debug.Log("Velocity : " + rigidBody.velocity.magnitude);
+            if (cameraFollowPlayer != null)
+            {
                 if (rear)
                 {
                     cameraFollowPlayer.switchCameraMode(CameraMode.rear);
@@ -113,45 +118,57 @@ namespace Kart
                 {
                     cameraFollowPlayer.switchCameraMode(CameraMode.front);
                 }
-
+            }
+            
+            if (RaceManager.Instance.gameState == GameState.start)
+            {
                 if (movement[1] > 0)
                 {
                     effects.Rewind();
-                }*/
-            //}
-            //if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
+                }
+            }
+            if (!RaceManager.Instance.RaceHadBegun() || !canMove) return;
+            
             ConvertStats();
             ApplyPowerups();
-            Move(movement[1]);
-            float rotationDirection = movement[1] > 0 ? movement[0] : -movement[0];
 
-            if (drift && !drifting && (movement[0] < 0 || movement[0] > 0))
+            bool isReverse = Vector3.Dot(transform.forward, rigidBody.velocity.normalized) < 0;
+            float rotationDirection = isReverse ? -movement[0] : movement[0];
+            
+            
+            if (IsGrounded())
             {
-                StartDrift(rotationDirection);
+                Move(movement[1]);
+                if (IsGrounded() && drift && !drifting && (movement[0] < 0 || movement[0] > 0) && rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToDrift)
+                {
+                    StartDrift(rotationDirection);
+                }
+            }
+            else
+            {
+                if (movement[1] != 0)
+                {
+                    rotationDirection = 0;
+                    currentAngularVelocity = Vector3.zero;
+                }
+
             }
 
-            if (movement[1] != 0) //on tourne pas à l'arret
+            if (rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToTurn) //on tourne pas à l'arret
             {
-                if (drifting)
-                {
-                    if (!drift)
-                    {
+                if (drifting) {
+                    if (!drift) {
                         StopDrifting();
-                    }
-                    else
-                    {
+                    }else {
                         float driftAngle = (1 + rotationDirection * driftDirection) / 2 * (KartPhysicsSettings.instance.maxDriftAngle - KartPhysicsSettings.instance.minDriftAngle) +
                                            KartPhysicsSettings.instance.minDriftAngle;
                         driftAngle *= driftDirection;
                         Rotate(driftAngle);
                     }
-                }
-                else
-                {
+                }else {
                     Rotate(rotationDirection);
                 }
-            }
-            else {
+            }else {
                 currentAngularVelocity = Vector3.zero;
             }
             
@@ -200,6 +217,15 @@ namespace Kart
         public void ResetKart() {
             kartRootModel.localEulerAngles = Vector3.up;
             kartBodyModel.localEulerAngles = Vector3.forward;
+        }
+
+        public void ResetMovements()
+        {
+            _currentSpeed = 0;
+            _yVelocity = 0;
+            _currentAngularSpeed = 0;
+            _lerpedWheelDirection = 0;
+            _lerpedKartRotation = 0;
         }
 
         private void AnimateWheels()

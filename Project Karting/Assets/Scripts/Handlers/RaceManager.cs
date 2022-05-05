@@ -8,6 +8,7 @@ namespace Handlers
         
         public PlayerRaceInfo[] playersInfo;
         public Race currentRace;
+        public GameState gameState;
         
         public static RaceManager Instance { get; private set; }
 
@@ -24,5 +25,8 @@ namespace Handlers
         }
         
         
+        public bool RaceHadBegun() {
+            return  (gameState == GameState.race);
+        }
     }
 }

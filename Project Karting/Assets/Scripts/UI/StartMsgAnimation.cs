@@ -43,7 +43,7 @@ public class StartMsgAnimation : MonoBehaviour
         yield return AnimateNumber(icons[1]);
         yield return AnimateNumber(icons[2]);
         yield return AnimateGo(icons[3]);
-        if (!GameManager.Instance.RaceHadBegun()) GameManager.Instance.StartRace();
+        if (!RaceManager.Instance.RaceHadBegun()) GameManager.Instance.StartRace();
     }
 
     private IEnumerator AnimateNumber(Sprite sprite)
@@ -99,7 +99,7 @@ public class StartMsgAnimation : MonoBehaviour
             else {
                 DebugPrinter.Instance.changeColor(Color.red);
             }
-            DebugPrinter.Instance.print("" + GameManager.Instance.gameState);
+            DebugPrinter.Instance.print("" + RaceManager.Instance.gameState);
         }
     }
 

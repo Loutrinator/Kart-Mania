@@ -1,5 +1,7 @@
-﻿using Handlers;
+﻿using System;
+using Handlers;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Kart;
 using UnityEditor;
 using UnityEngine;
@@ -12,7 +14,6 @@ namespace Player
         private PlayerConfiguration playerConfig;
         [SerializeField] private PlayerInput input;
         private PlayerControls _controls;
-
         private void Awake()
         {
             var kart = GetComponent<KartBase>();
@@ -49,8 +50,7 @@ namespace Player
         
         public void OnMove(InputAction.CallbackContext context)
         {
-            Vector2 movement = context.ReadValue<Vector2>();
-            Move(movement);
+            Move(context.ReadValue<Vector2>());
         }
 
         public void OnDrift(InputAction.CallbackContext context)

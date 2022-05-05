@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityExtendedEditor.Editor;
 
-[CreateAssetMenu(fileName = "KartPhysicsSettings", menuName = "ScriptableObjects/KartPhysicsSettings")]
+[CreateAssetMenu(fileName = "KartPhysicsSettings", menuName = "ScriptableObjects/Settings/KartPhysicsSettings")]
 public class KartPhysicsSettings : ScriptableObject
 {
     
@@ -19,6 +19,7 @@ public class KartPhysicsSettings : ScriptableObject
     }
     #endregion
     #region Kart Stats
+    [Header("Kart's stats")]
     [MinMaxSlider(0f,200)]
     public Vector2 topSpeed = new Vector2(80f,120f);
     public float acceleration = 20f;
@@ -38,6 +39,7 @@ public class KartPhysicsSettings : ScriptableObject
     
     #endregion
     #region Kart physics
+    [Header("Kart's physics")]
     public float steeringSpeed = 80f;
     public float minDriftAngle = 0.182f;
     public float maxDriftAngle = 1.8f;
@@ -50,8 +52,19 @@ public class KartPhysicsSettings : ScriptableObject
     public float engineBrakeSpeed = 10f;
     public float gravityMultiplier = 10f;
     public float respawnHeight = 2f;
+    public float respawnMinDistance = 35f;
     public float borderVelocityLossPercent = 0.2f;
     public float bumpForce = 3000f;
+    public float minVelocityToTurn = 0.2f;
+    public float minVelocityToDrift = 10f;
 
+    #endregion
+    #region Camera behaviour
+    [Header("Camera behaviour")]
+    public float cameraPositionLerp = 10f;
+    public float cameraRotationLerp = 10f;
+    public float cameraSideAmplitude = 0.5f;
+    public float cameraSideAngleAmplitude = 0.5f;
+    public float cameraKartDirectionLerp = 0.5f;
     #endregion
 }

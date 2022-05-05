@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Items
 {
     
-    [CreateAssetMenu(fileName="SpeedKey",menuName="ScriptableObject/Items/SpeedKey",order=0)]
+    [CreateAssetMenu(fileName="SpeedKey",menuName="ScriptableObjects/Items/SpeedKey",order=0)]
     public class ItemSpeedKey : Item
     {
         public Stats boost;

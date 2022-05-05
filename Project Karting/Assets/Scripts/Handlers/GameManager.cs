@@ -17,7 +17,6 @@ namespace Handlers {
     }
     public class GameManager : MonoBehaviour
     {
-        public GameState gameState;
         public Minimap minimap;
 
         public ItemManager itemManager;
@@ -66,7 +65,7 @@ namespace Handlers {
                 Destroy(gameObject);
             }
 
-            gameState = GameState.race;
+            RaceManager.Instance.gameState = GameState.idle;
             
             RaceManager.Instance.currentRace = LevelManager.instance.InitLevel();
             minimap.race = RaceManager.Instance.currentRace;
@@ -94,8 +93,8 @@ namespace Handlers {
         
         private void Update() {
 
-            if (gameState == GameState.race) {
-                PlayerRaceInfo player = RaceManager.Instance.playersInfo[0];
+            //if (gameState == GameState.race) {
+            //    PlayerRaceInfo player = RaceManager.Instance.playersInfo[0];
                 //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
                 //lap.text = player.lap.ToString();
                 //checkpoint.text = player.currentCheckpoint.ToString();
@@ -103,7 +102,7 @@ namespace Handlers {
                 // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
                 //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
                 //timeInfo.text = info;
-            }
+            //}
             minimap.UpdateMinimap();
         }
 
@@ -129,7 +128,7 @@ namespace Handlers {
                 RaceManager.Instance.playersInfo[i].lap = 0;
             }
 
-            gameState = GameState.race;
+            RaceManager.Instance.gameState = GameState.race;
             foreach (var kart in karts)
             {
                 kart.effects.StopRewind();
@@ -153,7 +152,7 @@ namespace Handlers {
             SoundManager.Instance.PlayRaceMusic();
             HUDTimeTrialController._nbInstances = 0;
             
-            gameState = GameState.start;
+            RaceManager.Instance.gameState = GameState.start;
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
 
             minimap.SetPosition(nbPlayerRacing);
@@ -179,7 +178,10 @@ namespace Handlers {
                     PlayerController playerController = kart.gameObject.AddComponent<PlayerController>();
                     playerController.kart = kart;
                     playerController.InitializePlayerConfiguration(playerConfig);
-                    
+
+                    Rumbler rumbler = kart.gameObject.AddComponent<Rumbler>();
+                    rumbler.SetPlayerInput(playerConfig.Input);
+                    kart.rumbler = rumbler;
                     
                     // Adding the camera of the player
                     var kartCam = Instantiate(cameraParentPrefab, kart.transform.position, kart.transform.rotation);
@@ -188,13 +190,14 @@ namespace Handlers {
                         Destroy(kartCam.GetComponent<AudioListener>());
                     }
                     kartCam.SetViewport(id);
-                    kartCam.target = kart.transform;
+                    kartCam.target = kart;
+                    kart.cameraFollowPlayer = kartCam;
                     
                     //setting the camera to the KartEffect of the kart
                     KartEffects kartEffects = kart.GetComponent<KartEffects>();
                     if (kartEffects != null)
                     {
-                        kartEffects.cameraShakeTransform = kartCam.cameraShakeTransform;
+                        kartEffects.cameraFollowPlayer = kartCam;
                         kartEffects.cam = kartCam.cam;
                     }
                     
@@ -232,7 +235,6 @@ namespace Handlers {
                     minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer, playerConfig.Color);
 
                 }
-                
                     
                 //Adding the start countdown HUD    
                 startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
@@ -243,9 +245,6 @@ namespace Handlers {
                 {
                     startUI.placeKeysAction = placeKeys;
                 }
-                
-                
-                gameState = GameState.start;
             } else {
 #if UNITY_EDITOR
                 Debug.LogError("Attempting to spawn " + nbPlayerRacing + " but only " + spawnPoints.Length + " available.");
@@ -279,9 +278,6 @@ namespace Handlers {
             return prefix + string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
         }
 
-        public bool RaceHadBegun() {
-            return  (gameState == GameState.race);
-        }
 
         public void ShakeCameras(ShakeTransformEventData shake) {
             /*foreach (var cam in cameras) {
@@ -290,7 +286,7 @@ namespace Handlers {
         }
 
         public void FinishRace(int playerID) {
-            gameState = GameState.finish;
+            RaceManager.Instance.gameState = GameState.finish;
             karts[playerID].canMove = false;
             karts[playerID].effects.driftLevel = 0;
             karts[playerID].effects.StopDrift();
