@@ -15,57 +15,38 @@ public struct Stats
     [Range(0f,1f)]
     public float acceleration;
 
-    [Tooltip("The maximum speed backward.")]
+    [Tooltip("controls the overall maniability of a kart.")]
     [Range(0f,1f)]
-    public float reverseSpeed;
+    public float maniability;
 
-    [Tooltip("The rate at which the kart increases its backward speed.")]
+    [Tooltip("Changes the gravity but also the bumps when bumping against other karts.")]
     [Range(0f,1f)]
-    public float reverseAcceleration;
-
-    [Tooltip("How quickly the Kart slows down when going in the opposite direction.")]
+    public float weight;
+    [Tooltip("Will help to get better items.")]
     [Range(0f,1f)]
-    public float braking;
-
-    [Tooltip("How quickly the Kart can turn left and right.")]
-    [Range(0f,1f)]
-    public float steer;
-
-    [Tooltip("Additional gravity for when the Kart is in the air.")]
-    [Range(0f,1f)]
-    public float addedGravity;
-
-    [Tooltip("How much the Kart tries to keep going forward when on bumpy terrain.")]
-    [Range(0f,1f)]
-    public float suspension;
+    public float luck;
 
     // allow for stat adding for powerups.
     public static Stats operator +(Stats a, Stats b)
     {
         return new Stats
         {
-            acceleration        = a.acceleration + b.acceleration,
-            braking             = a.braking + b.braking,
-            addedGravity        = a.addedGravity + b.addedGravity,
-            reverseAcceleration = a.reverseAcceleration + b.reverseAcceleration,
-            reverseSpeed        = a.reverseSpeed + b.reverseSpeed,
-            topSpeed            = a.topSpeed + b.topSpeed,
-            steer               = a.steer + b.steer,
-            suspension          = a.suspension + b.suspension
+            topSpeed     = a.topSpeed + b.topSpeed,
+            acceleration = a.acceleration + b.acceleration,
+            maniability  = a.maniability + b.maniability,
+            weight       = a.weight + b.weight,
+            luck         = a.luck + b.luck
         };
     }
     public static Stats operator *(Stats a, float c)
     {
         return new Stats
         {
-            acceleration        = a.acceleration * c,
-            braking             = a.braking * c,
-            addedGravity        = a.addedGravity * c,
-            reverseAcceleration = a.reverseAcceleration * c,
-            reverseSpeed        = a.reverseSpeed * c,
-            topSpeed            = a.topSpeed * c,
-            steer               = a.steer * c,
-            suspension          = a.suspension * c
+            topSpeed     = a.topSpeed * c,
+            acceleration = a.acceleration * c,
+            maniability  = a.maniability * c,
+            weight       = a.weight * c,
+            luck         = a.luck * c
         };
     }
 }
