@@ -1,14 +1,17 @@
-﻿using System;
+﻿using DG.Tweening;
 using Game;
 using Handlers;
+using MainMenu;
+using ProceduralAnimations;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.UI;
 
 public class MenuManager : MonoBehaviour
 {
 
-    [SerializeField] private Animator mainCameraAnimator;
+    //[SerializeField] private Animator mainCameraAnimator;
+    [SerializeField] private MainMenuCamera mainCamera;
+    [SerializeField] private ProceduralAnimationData cameraAnimationData;
     [SerializeField] private Animator soloAnimator;
     [SerializeField] private Animator multiAnimator;
     [SerializeField] private Animator levelEditorAnimator;
@@ -46,7 +49,9 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.PlayUIClick();
         soloAnimator.SetBool("NotSelected",true);
         multiAnimator.SetBool("Choosen",true);
-        mainCameraAnimator.SetTrigger("move");
+        
+        cameraAnimationData.PlayTransition(mainCamera.transform, "DeskToClipboard");
+        
         _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
     }
 
@@ -56,13 +61,18 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.PlayUIClick();
         soloAnimator.SetBool("Choosen",true);
         multiAnimator.SetBool("NotSelected",true);
-        mainCameraAnimator.SetTrigger("move");
+        
+        cameraAnimationData.PlayTransition(mainCamera.transform, "DeskToClipboard");
+
         _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
     }
 
     public void KartConfigsReady()
     {
-        ShowNextScreen();
+        SoundManager.Instance.PlayUIClick();
+        cameraAnimationData.PlayTransition(mainCamera.transform, "CarToRaceSelection");
+        var lightTvDelay = cameraAnimationData.transitions["CarToRaceSelection"].duration * 0.75f;
+        DOVirtual.DelayedCall(lightTvDelay, () => mainCamera.SwitchTV(), false);
         
         kartSelectorAnimator.SetBool("isHidden", true);
         _eventSystem.SetSelectedGameObject(circuitCanvas.firstButton.gameObject);
@@ -70,7 +80,8 @@ public class MenuManager : MonoBehaviour
     }
     public void SelectRace()
     {
-        ShowNextScreen();
+        SoundManager.Instance.PlayUIClick();
+        cameraAnimationData.PlayTransition(mainCamera.transform, "ScreenToDoorGo");
         _eventSystem.SetSelectedGameObject(goCanvas.firstButton.gameObject);
         
     }
@@ -94,17 +105,19 @@ public class MenuManager : MonoBehaviour
                 break;
         }
 
-        ShowNextScreen();
+        //ShowNextScreen();
+        SoundManager.Instance.PlayUIClick();
+        cameraAnimationData.PlayTransition(mainCamera.transform, "ClipboardToCar");
         _eventSystem.SetSelectedGameObject(kartCanvas.firstButton.gameObject);
     }
     public void ShowNextScreen()
     {
         SoundManager.Instance.PlayUIClick();
-        mainCameraAnimator.SetTrigger("move");
+        //mainCameraAnimator.SetTrigger("move"); todo
     }
     public void ShowPreviousScreen()
     {
-        mainCameraAnimator.SetTrigger("back");
+        //mainCameraAnimator.SetTrigger("back"); todo
     }
 
     public void StartLevel() {
