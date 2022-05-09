@@ -61,7 +61,7 @@ namespace Handlers
             }
         }
         
-        public void LoadMainMenu(Action onComplete = null) {
+        public void LoadMainMenu(Action onComplete) {
             var operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenuScene");
             if (onComplete == null) return;
             operation.completed += CallBack;
@@ -70,6 +70,11 @@ namespace Handlers
                 onComplete.Invoke();
                 operation.completed -= CallBack;
             }
+        }
+
+        // overload does not work for unityevents
+        public void LoadMainMenu() {
+            LoadMainMenu(null);
         }
         
         public void LoadCredits() {

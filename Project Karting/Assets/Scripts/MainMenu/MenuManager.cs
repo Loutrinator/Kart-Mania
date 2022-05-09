@@ -47,8 +47,8 @@ public class MenuManager : MonoBehaviour
         PlayerConfigurationManager.Instance.EnableJoining();
         PlayerConfigurationManager.Instance.multiplayer = true;
         SoundManager.Instance.PlayUIClick();
-        soloAnimator.SetBool("NotSelected",true);
-        multiAnimator.SetBool("Choosen",true);
+        /*soloAnimator.SetBool("NotSelected",true);
+        multiAnimator.SetBool("Choosen",true);*/
         
         _eventSystem.SetSelectedGameObject(null);
         cameraAnimationData.PlayTransition(mainCamera.transform, "DeskToClipboard", () => {
@@ -60,8 +60,8 @@ public class MenuManager : MonoBehaviour
     {
         PlayerConfigurationManager.Instance.DisableJoining();
         SoundManager.Instance.PlayUIClick();
-        soloAnimator.SetBool("Choosen",true);
-        multiAnimator.SetBool("NotSelected",true);
+        /*soloAnimator.SetBool("Choosen",true);
+        multiAnimator.SetBool("NotSelected",true);*/
         
         _eventSystem.SetSelectedGameObject(null);
         cameraAnimationData.PlayTransition(mainCamera.transform, "DeskToClipboard", () => {
