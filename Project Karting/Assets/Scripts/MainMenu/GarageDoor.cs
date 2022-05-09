@@ -8,6 +8,6 @@ public class GarageDoor : MonoBehaviour
     
     public void DoorIsOpen()
     {
-        menuManager.ShowTransition();
+        menuManager.StartLevel();
     }
 }

@@ -82,10 +82,6 @@ namespace Handlers {
             {
                 respawner.Init();
             }
-        
-            TransitionController.Instance.FadeOut(() => {
-                //raceBegan = true;  // todo enable after delay
-            });
 
             gamePaused = false;
             pauseMenu = FindObjectOfType<PauseMenu>();

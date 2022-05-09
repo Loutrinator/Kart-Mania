@@ -520,7 +520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0402db7c86bf38439ea41bede030843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCameraAnimator: {fileID: 6509208819017775319}
+  mainCamera: {fileID: 6509208819017775320}
+  cameraAnimationData: {fileID: 11400000, guid: 63079e773f41c4a4a9fe204dfb5cb90b,
+    type: 2}
   soloAnimator: {fileID: 612968297}
   multiAnimator: {fileID: 1392685984}
   levelEditorAnimator: {fileID: 48695090}
@@ -2926,7 +2928,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6509208819017775317}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b58f4eab7790fa74fa9ab01b82100717, type: 2}
   m_CullingMode: 0
