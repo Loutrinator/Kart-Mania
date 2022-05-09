@@ -49,7 +49,8 @@ namespace Road.RoadPhysics {
             
             // drag
             currentForcesVelocity -= currentForcesVelocity * drag;
-            
+
+            rigidBody.AddForce(currentVelocity, ForceMode.Acceleration);
             rigidBody.AddForce(currentGravityAcceleration * 10f, ForceMode.Acceleration);
             rigidBody.AddForce(currentForcesVelocity,ForceMode.Impulse);
             rigidBody.angularVelocity = currentAngularVelocity;
