@@ -20,18 +20,28 @@ public class KartPhysicsSettings : ScriptableObject
     #endregion
     #region Kart Stats
     [Header("Kart's stats")]
-    [MinMaxSlider(0f,200)]
-    public Vector2 topSpeed = new Vector2(80f,120f);
-    public float acceleration = 20f;
-    public float reverseSpeed = 15;
-    public float reverseAcceleration = 5f;
-    public float braking = 15;
+    [SerializeField][MinMaxSlider(0f,300f)]
+    private Vector2 topSpeed = new Vector2(150,200f);
+    [SerializeField][MinMaxSlider(0f,150f)]
+    private Vector2 acceleration = new Vector2(50,125f);
+    [SerializeField][MinMaxSlider(0f,65f)]
+    private Vector2 steeringSpeed = new Vector2(20,45f);
+    [SerializeField][MinMaxSlider(0f,25f)]
+    private Vector2 weight = new Vector2(6,18f);
+    [SerializeField][MinMaxSlider(0f,1f)]
+    private Vector2 minDriftAngle = new Vector2(0.1f,0.25f);
+    [SerializeField][MinMaxSlider(0f,2f)]
+    private Vector2 maxDriftAngle =new Vector2(1.25f,1.5f);
 
     public float getTopSpeed(float stat)
     {
         return getStat(stat, topSpeed);
     }
-
+    public float getAcceleration(float stat) { return getStat(stat, acceleration); }
+    public float getSteeringSpeed(float stat) { return getStat(stat, steeringSpeed); }
+    public float getGravity(float stat) { return getStat(stat, weight); }
+    public float getMinDrift(float stat) { return getStat(1-stat, minDriftAngle); }
+    public float getMaxDrift(float stat) { return getStat(stat, maxDriftAngle); }
     private float getStat(float value, Vector2 range)
     {
         return range.x + (range.y - range.x) * value;
@@ -40,9 +50,9 @@ public class KartPhysicsSettings : ScriptableObject
     #endregion
     #region Kart physics
     [Header("Kart's physics")]
-    public float steeringSpeed = 80f;
-    public float minDriftAngle = 0.182f;
-    public float maxDriftAngle = 1.8f;
+    public float reverseSpeedCoeff = 0.5f;
+    public float reverseAccelerationCoeff = 3f;
+    public float braking = 15;
     public float kartRotationCoeff = 15f;
     public float kartModelRotationCoeff = 15f;
     public float kartRollCoeff = 4f;
@@ -50,7 +60,6 @@ public class KartPhysicsSettings : ScriptableObject
     public float kartWheelAngle = 25f;
     public float boostStrength = 1f;
     public float engineBrakeSpeed = 10f;
-    public float gravityMultiplier = 10f;
     public float respawnHeight = 2f;
     public float respawnMinDistance = 35f;
     public float borderVelocityLossPercent = 0.2f;

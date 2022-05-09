@@ -25,12 +25,9 @@ namespace Kart
         {
             topSpeed = .5f,
             acceleration = .5f,
-            braking = .5f,
-            reverseAcceleration = .5f,
-            reverseSpeed = .5f,
-            steer = .5f,
-            addedGravity = .5f,
-            suspension = .5f
+            maniability = .5f,
+            weight = .5f,
+            luck = .5f
         };
         
         List<StatPowerup> activePowerupList = new List<StatPowerup>();
@@ -107,7 +104,6 @@ namespace Kart
 
         private void FixedUpdate()
         {
-            Debug.Log("Velocity : " + rigidBody.velocity.magnitude);
             if (cameraFollowPlayer != null)
             {
                 if (rear)
@@ -159,9 +155,10 @@ namespace Kart
                 if (drifting) {
                     if (!drift) {
                         StopDrifting();
-                    }else {
-                        float driftAngle = (1 + rotationDirection * driftDirection) / 2 * (KartPhysicsSettings.instance.maxDriftAngle - KartPhysicsSettings.instance.minDriftAngle) +
-                                           KartPhysicsSettings.instance.minDriftAngle;
+                    }else
+                    {
+                        float minDrift = KartPhysicsSettings.instance.getMinDrift(vehicleStats.maniability);
+                        float driftAngle = (1 + rotationDirection * driftDirection) / 2 * (KartPhysicsSettings.instance.getMaxDrift(vehicleStats.maniability) - minDrift) + minDrift;
                         driftAngle *= driftDirection;
                         Rotate(driftAngle);
                     }
@@ -177,10 +174,8 @@ namespace Kart
 
         private void ConvertStats()
         {
-            convertedStats.acceleration = vehicleStats.acceleration * KartPhysicsSettings.instance.acceleration;
+            convertedStats.acceleration = KartPhysicsSettings.instance.getAcceleration(vehicleStats.acceleration);
             convertedStats.topSpeed = KartPhysicsSettings.instance.getTopSpeed(vehicleStats.topSpeed);
-            convertedStats.reverseAcceleration = vehicleStats.reverseAcceleration * KartPhysicsSettings.instance.reverseAcceleration;
-            convertedStats.reverseSpeed = vehicleStats.reverseSpeed * KartPhysicsSettings.instance.reverseSpeed;
         }
 
 
@@ -191,9 +186,12 @@ namespace Kart
                 _currentSpeed += finalStats.acceleration * Time.fixedDeltaTime;
                 _currentSpeed = Mathf.Min(finalStats.topSpeed, _currentSpeed);
             }
-            else if (direction < 0) {
-                _currentSpeed -= finalStats.reverseAcceleration* Time.fixedDeltaTime;
-                _currentSpeed = Mathf.Max(-finalStats.reverseSpeed, _currentSpeed);
+            else if (direction < 0)
+            {
+                float reverseAcceleration = KartPhysicsSettings.instance.reverseAccelerationCoeff * convertedStats.acceleration;
+                float reverseSpeed = KartPhysicsSettings.instance.reverseSpeedCoeff * convertedStats.topSpeed;
+                _currentSpeed -= reverseAcceleration* Time.fixedDeltaTime;
+                _currentSpeed = Mathf.Max(-reverseSpeed, _currentSpeed);
             }
             else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, KartPhysicsSettings.instance.engineBrakeSpeed * Time.fixedDeltaTime);
 
@@ -205,7 +203,8 @@ namespace Kart
         {
                 
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime);
-            float steerAngle = lerpedAngle * (finalStats.steer * 2 + KartPhysicsSettings.instance.steeringSpeed) * Time.fixedDeltaTime;
+            
+            float steerAngle = lerpedAngle * (KartPhysicsSettings.instance.getSteeringSpeed(vehicleStats.maniability) ) * Time.fixedDeltaTime;
 
             currentAngularVelocity = transform.up * steerAngle * KartPhysicsSettings.instance.kartRotationCoeff;
             
@@ -292,7 +291,7 @@ namespace Kart
             finalStats = convertedStats + powerups;
             
             // on clamp toutes les valeurs des stats qui nécessitent de pas dépasser [0,1]
-            finalStats.suspension = Mathf.Clamp(finalStats.suspension, 0, 1);
+            //finalStats.suspension = Mathf.Clamp(finalStats.suspension, 0, 1);
         }
 
         public void AddPowerup(StatPowerup powerup)
