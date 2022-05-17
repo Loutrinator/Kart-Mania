@@ -117,11 +117,7 @@ public class MenuManager : MonoBehaviour
             _eventSystem.SetSelectedGameObject(kartCanvas.firstButton.gameObject);
         });
     }
-    public void ShowNextScreen()
-    {
-        SoundManager.Instance.PlayUIClick();
-        //mainCameraAnimator.SetTrigger("move"); todo
-    }
+    
     public void ShowPreviousScreen()
     {
         //mainCameraAnimator.SetTrigger("back"); todo
