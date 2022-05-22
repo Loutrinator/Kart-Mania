@@ -1,4 +1,6 @@
-﻿using Kart;
+﻿using Handlers;
+using Items;
+using Kart;
 using UnityEngine;
 
 namespace Player
@@ -7,6 +9,13 @@ namespace Player
     {
 
         [SerializeField] public KartBase kart;
+        
+        private PlayerRaceInfo info;
+
+        private void Start()
+        {
+            info = RaceManager.Instance.GetPlayerRaceInfo(kart.playerIndex);
+        }
         protected void Move(Vector2 movement)
         {
             if (kart != null)
@@ -24,6 +33,48 @@ namespace Player
             }
         }
         
-        //TODO: fonction UseItem()
+        
+        
+        public void OnItemUp()
+        {
+            Debug.Log("ON ITEM UP");
+            Item item = info.Item;
+            if (item != null)
+            {
+                item.OnKeyUp(info);
+            }
+            else
+            {
+                Debug.Log("No item");
+            }
+        }
+        
+        public void OnItemHold()
+        {
+            Debug.Log("ON ITEM HOLD");
+            Item item = info.Item;
+            if (item != null)
+            {
+                item.OnKeyHold(info);
+            }
+            else
+            {
+                Debug.Log("No item");
+            }
+        }
+        
+        public void OnItemDown()
+        {
+            Debug.Log("ON ITEM DOWN");
+            Item item = info.Item;
+            if (item != null)
+            {
+                item.OnKeyDown(info);
+            }
+            else
+            {
+                Debug.Log("No item");
+            }
+        }
     }
 }

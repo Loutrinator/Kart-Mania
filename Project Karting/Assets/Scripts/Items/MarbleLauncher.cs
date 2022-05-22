@@ -34,10 +34,12 @@ public class MarbleLauncher : MonoBehaviour
 
     public void StretchRubber()
     {
-        marbleHolder.DOMove(restPosition + marbleHolder.up * stretchMaxDistance,stretchSpeed).SetEase(Ease.OutCubic);
+        Debug.Log("MarbleLauncher : StretchRubber");
+        marbleHolder.DOLocalMove(restPosition + marbleHolder.up * stretchMaxDistance,stretchSpeed).SetEase(Ease.OutCubic);
     }
     public void ShootMarble()
     {
-        marbleHolder.DOMove(restPosition,releaseSpeed).SetEase(Ease.OutElastic);
+        Debug.Log("MarbleLauncher : ShootMarble");
+        marbleHolder.DOLocalMove(restPosition,releaseSpeed).SetEase(Ease.OutElastic);
     }
 }

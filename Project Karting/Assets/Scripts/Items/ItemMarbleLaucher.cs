@@ -10,18 +10,22 @@ namespace Items
         
         public override void OnKeyHold(PlayerRaceInfo info)
         {
+            Debug.Log("MarbleLauncher : OnKeyHold");
             throw new System.NotImplementedException();
         }
 
         public override void OnKeyDown(PlayerRaceInfo info)
         {
-            marbleLauncher = Instantiate(marbleLauncherPrefab, Vector3.zero, Quaternion.identity, info.kart.transform);
+            Debug.Log("MarbleLauncher : OnKeyDown");
+            Transform parent = info.kart.transform;
+            marbleLauncher = Instantiate(marbleLauncherPrefab,parent.position, parent.rotation, parent);
             marbleLauncher.name = "Marble Launcher";
             marbleLauncher.StretchRubber();
         }
 
         public override void OnKeyUp(PlayerRaceInfo info)
         {
+            Debug.Log("MarbleLauncher : OnKeyUp");
             marbleLauncher.ShootMarble();
         }
     }

@@ -2,7 +2,9 @@
 using Handlers;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Items;
 using Kart;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,6 +20,10 @@ namespace Player
         {
             var kart = GetComponent<KartBase>();
             _controls = new PlayerControls();
+            _controls.Enable();
+            _controls.Kart.Item.started += OnItemDown;
+            _controls.Kart.Item.performed += OnItemHold;
+            _controls.Kart.Item.canceled += OnItemUp;
         }
 
         public void InitializePlayerConfiguration(PlayerConfiguration pc)
@@ -32,26 +38,43 @@ namespace Player
             if (ctx.action.name == _controls.Kart.Movement.name)
             {
                 OnMove(ctx);
-            }
-            if (ctx.action.name == _controls.Kart.Drift.name)
+            }else if (ctx.action.name == _controls.Kart.Drift.name)
             {
                 OnDrift(ctx);
-            }
-            if (ctx.action.name == _controls.Kart.Rearcamera.name)
+            }else if (ctx.action.name == _controls.Kart.Rearcamera.name)
             {
                 OnRearCamera(ctx);
-            }
-            if (ctx.action.name == _controls.Kart.Pause.name)
+            }else if (ctx.action.name == _controls.Kart.Pause.name)
+            {
+                OnPause(ctx);
+            }else if (ctx.action.name == _controls.Kart.Pause.name)
             {
                 OnPause(ctx);
             }
         }
         
         
+        
+        public void OnItemUp(InputAction.CallbackContext context)
+        {
+            OnItemUp();
+        }
+        
+        public void OnItemHold(InputAction.CallbackContext context)
+        {
+            OnItemHold();
+        }
+        
+        public void OnItemDown(InputAction.CallbackContext context)
+        {
+            OnItemDown();
+        }
+        
         public void OnMove(InputAction.CallbackContext context)
         {
             Move(context.ReadValue<Vector2>());
         }
+
 
         public void OnDrift(InputAction.CallbackContext context)
         {

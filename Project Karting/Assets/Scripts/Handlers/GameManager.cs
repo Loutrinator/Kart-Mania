@@ -19,7 +19,6 @@ namespace Handlers {
     {
         public Minimap minimap;
 
-        public ItemManager itemManager;
 
         [Header("UI and HUD")] 
         [SerializeField] private HUDTimeTrialController timetrialHUDLeftPrefab;
@@ -170,7 +169,7 @@ namespace Handlers {
                     
                     //Spawning the kart
                     Transform spawn = spawnPoints[id];
-                    KartBase kart = Instantiate(playerConfig.KartPrefab, spawn.position, spawn.rotation);
+                    KartBase kart = Instantiate(playerConfig.Kart, spawn.position, spawn.rotation);
                     kart.playerIndex = id;
                     
                     //Linking to controls to the Kart
@@ -259,12 +258,9 @@ namespace Handlers {
                 kart.effects.InsertKey();
             }
         }
-        public PlayerRaceInfo GetPlayerRaceInfo(int id) {
-            foreach (var info in RaceManager.Instance.playersInfo) {
-                if (info.playerId == id) return info;
-            }
-
-            return null;
+        public PlayerRaceInfo GetPlayerRaceInfo(int id)
+        {
+            return RaceManager.Instance.GetPlayerRaceInfo(id);
         }
 
 

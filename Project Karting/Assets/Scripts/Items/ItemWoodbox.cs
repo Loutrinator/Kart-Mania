@@ -15,14 +15,14 @@ public class ItemWoodbox : Item
     {
         // Calling this will change info.ItemIsUsing and invoke info.onItemUsed
         // who call wb.Throw ( cf line 22 ). 
+        Transform transform = info.kart.transform;
+        WoodBox wb = Instantiate(prefab, transform.position - transform.forward*distanceFromKartBack, Quaternion.identity, transform);
         Use(info); 
     }
 
     public override void OnKeyHold(PlayerRaceInfo info)
     {
         //if(info.ItemIsInUse) return;
-        Transform transform = info.kart.transform;
-        WoodBox wb = Instantiate(prefab, transform.position - transform.forward*distanceFromKartBack, Quaternion.identity, transform);
         //info.onItemUsed += wb.Throw;
         //info.ItemIsInUse = true;
     }
