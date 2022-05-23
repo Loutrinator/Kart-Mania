@@ -7,19 +7,23 @@ namespace Items
     {
         [SerializeField] private MarbleLauncher marbleLauncherPrefab;
         private MarbleLauncher marbleLauncher;
+        private bool instanciated;
         
         public override void OnKeyHold(PlayerRaceInfo info)
         {
             Debug.Log("MarbleLauncher : OnKeyHold");
-            throw new System.NotImplementedException();
         }
 
         public override void OnKeyDown(PlayerRaceInfo info)
         {
             Debug.Log("MarbleLauncher : OnKeyDown");
-            Transform parent = info.kart.transform;
-            marbleLauncher = Instantiate(marbleLauncherPrefab,parent.position, parent.rotation, parent);
-            marbleLauncher.name = "Marble Launcher";
+            if (!instanciated)
+            {
+                Transform parent = info.kart.transform;
+                marbleLauncher = Instantiate(marbleLauncherPrefab,parent.position, parent.rotation, parent);
+                marbleLauncher.name = "Marble Launcher";
+                instanciated = true;
+            }
             marbleLauncher.StretchRubber();
         }
 

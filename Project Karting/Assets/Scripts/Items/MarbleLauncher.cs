@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Core;
 
 public class MarbleLauncher : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class MarbleLauncher : MonoBehaviour
 
     private void Start()
     {
-        restPosition = marbleHolder.position;
+        restPosition = marbleHolder.localPosition;
         leftRubber.positionCount = leftRubberAttachment.Count;
         rightRubber.positionCount = rightRubberAttachment.Count;
     }
@@ -35,11 +36,13 @@ public class MarbleLauncher : MonoBehaviour
     public void StretchRubber()
     {
         Debug.Log("MarbleLauncher : StretchRubber");
-        marbleHolder.DOLocalMove(restPosition + marbleHolder.up * stretchMaxDistance,stretchSpeed).SetEase(Ease.OutCubic);
+        marbleHolder.DOKill();
+        marbleHolder.DOLocalMove(restPosition - Vector3.forward * stretchMaxDistance,stretchSpeed).SetEase(Ease.OutCubic);
     }
     public void ShootMarble()
     {
         Debug.Log("MarbleLauncher : ShootMarble");
+        marbleHolder.DOKill();
         marbleHolder.DOLocalMove(restPosition,releaseSpeed).SetEase(Ease.OutElastic);
     }
 }
