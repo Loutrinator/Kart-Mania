@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Items
 {
-    public class WoodBox : MonoBehaviour
+    public class WoodBox : ItemObject
     {
         [Header("Effect")] 
         [SerializeField] private Stats effect;
@@ -82,6 +82,31 @@ namespace Items
                 kart.AddPowerup(_powerup);
                 Destroy(gameObject);
             }
+        }
+        
+        public override void OnKeyDown(PlayerRaceInfo info) {
+        
+        }
+
+        public override void OnKeyUp(PlayerRaceInfo info)
+        {
+            // Calling this will change info.ItemIsUsing and invoke info.onItemUsed
+            // who call wb.Throw ( cf line 22 ). 
+            Transform transform = info.kart.transform;
+            //WoodBox wb = Instantiate(prefab, transform.position - transform.forward*distanceFromKartBack, Quaternion.identity, transform);
+            Use(info); 
+        }
+
+        public override void ResetItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnKeyHold(PlayerRaceInfo info)
+        {
+            //if(info.ItemIsInUse) return;
+            //info.onItemUsed += wb.Throw;
+            //info.ItemIsInUse = true;
         }
     }
 }

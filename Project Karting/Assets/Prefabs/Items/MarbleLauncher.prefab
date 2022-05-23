@@ -415,10 +415,19 @@ MonoBehaviour:
   rightRubberAttachment:
   - {fileID: 3076918779249919375}
   - {fileID: 3076918778956693573}
+  renderers:
+  - {fileID: 8893559130201686580}
+  - {fileID: 8893559130201686580}
+  - {fileID: 3076918779878933537}
+  - {fileID: 3076918779892284938}
+  - {fileID: 1755864227254628384}
+  - {fileID: 2856396963147231558}
   marbleHolder: {fileID: 8501175983059884462}
-  releaseSpeed: 0.5
+  marble: {fileID: 8177839309338668498}
+  releaseSpeed: 10
   stretchSpeed: 3
   stretchMaxDistance: 5
+  maxMarbles: 3
 --- !u!1 &3076918778689489722
 GameObject:
   m_ObjectHideFlags: 0

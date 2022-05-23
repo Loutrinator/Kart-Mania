@@ -38,7 +38,7 @@ namespace Player
         public void OnItemUp()
         {
             Debug.Log("ON ITEM UP");
-            Item item = info.Item;
+            ItemObject item = info.Item;
             if (item != null)
             {
                 item.OnKeyUp(info);
@@ -52,7 +52,7 @@ namespace Player
         public void OnItemHold()
         {
             Debug.Log("ON ITEM HOLD");
-            Item item = info.Item;
+            ItemObject item = info.Item;
             if (item != null)
             {
                 item.OnKeyHold(info);
@@ -66,7 +66,7 @@ namespace Player
         public void OnItemDown()
         {
             Debug.Log("ON ITEM DOWN");
-            Item item = info.Item;
+            ItemObject item = info.Item;
             if (item != null)
             {
                 item.OnKeyDown(info);

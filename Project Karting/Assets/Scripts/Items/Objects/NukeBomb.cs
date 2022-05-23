@@ -1,7 +1,8 @@
 ﻿using Handlers;
+using Items;
 using UnityEngine;
 
-public class NukeBomb : MonoBehaviour
+public class NukeBomb : ItemObject
 {
     public GameObject explosion;
     public float timeBeforeLaunch = 1f;
@@ -67,5 +68,26 @@ public class NukeBomb : MonoBehaviour
         //faire un spherecast
         GameManager.Instance.ShakeCameras(nukeShake);
         Destroy(gameObject);
+    }
+
+    public override void ResetItem()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnKeyHold(PlayerRaceInfo info) {
+            
+    }
+
+    public override void OnKeyDown(PlayerRaceInfo info)
+    {
+        Transform transform = info.kart.transform;
+        //NukeBomb bomb = Instantiate(prefab, spawnPoint, Quaternion.identity, transform);
+        target = new GameObject("Target").transform;
+        Use(info); 
+    }
+
+    public override void OnKeyUp(PlayerRaceInfo info) {
+            
     }
 }

@@ -41,10 +41,10 @@ namespace Items
 
         private void GiveItem(int position, KartBase kart)
         {
-            Item item = RaceManager.Instance.itemManager.GetRandomItem(position);
+            ItemData item = RaceManager.Instance.itemManager.GetRandomItem(position);
             if (item != null)
             {
-                RaceManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID()).Item = item;
+                RaceManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID()).Item = item.GiveItem(kart.transform);
             }
         }
 

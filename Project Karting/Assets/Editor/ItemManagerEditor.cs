@@ -17,7 +17,7 @@ using UnityEngine;
                 var itemManager = (ItemManager) target;
                 if (itemManager == null) return;
                 if (itemManager.itemProbabilities == null) itemManager.itemProbabilities = new List<ListProbability>();
-                if (itemManager.items == null) itemManager.items = new List<Item>();
+                if (itemManager.items == null) itemManager.items = new List<ItemData>();
                 if (itemColors == null) itemColors = new  Color[itemManager.items.Count];
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Positions");
@@ -52,7 +52,7 @@ using UnityEngine;
                 EditorGUILayout.LabelField("Items");
                 EditorGUILayout.Space();
 
-                List<Item> list = itemManager.items;
+                List<ItemData> list = itemManager.items;
                 itemManager.nbItems = Math.Max(0, EditorGUILayout.IntField("Size", list.Count));
 
                 while (itemManager.nbItems > list.Count)
@@ -70,8 +70,8 @@ using UnityEngine;
                 for (int i = 0; i < list.Count; i++)
                 {
                     EditorGUILayout.BeginHorizontal();
-                    list[i] = EditorGUILayout.ObjectField("Item " + i, list[i], typeof(Item),
-                        true) as Item;
+                    list[i] = EditorGUILayout.ObjectField("Item " + i, list[i], typeof(ItemData),
+                        true) as ItemData;
                     //EditorGUI.DrawRect(GUILayoutUtility.GetRect(5,10,20,20), itemColors[i]); affichage de couleur
                     EditorGUILayout.EndHorizontal();
                 }
