@@ -9,18 +9,19 @@ public class Plunger : MonoBehaviour
     public BoxCollider head;
     public Transform centerOfGravity;
     private Quaternion stuckRotation;
-    private Vector3 originalScale;
 
     private bool isStuck = false;
+    private int nbCollisions = 0;
     public float lerpSpeed = 0.4f;
     public float speed = 30f;
+    public float lifeTime = 10f;
+    public int maxCollisions = 3;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfGravity.localPosition;
         rb.AddForce(-transform.forward * speed, ForceMode.Impulse);
-        originalScale = transform.lossyScale;
 
     }
 
@@ -31,14 +32,13 @@ public class Plunger : MonoBehaviour
         {
             Ray ray = new Ray(transform.position, -transform.forward);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 2.0f))
+            if (Physics.Raycast(ray, out hit, 0.9f))
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
 
                 rb.velocity = Vector3.zero;
                 rb.isKinematic = true;
-                //transform.SetParent(hit.transform, true);
-                //transform.localScale = hit.transform.lossyScale - originalScale;
+                transform.SetParent(hit.transform, true);
 
                 rb.useGravity = false;
 
@@ -60,6 +60,24 @@ public class Plunger : MonoBehaviour
         else
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, stuckRotation, lerpSpeed * Time.deltaTime);
+            lifeTime -= Time.deltaTime;
+            if (lifeTime < 0) Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.GetComponent<Plunger>())
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            nbCollisions++;
+            if(nbCollisions >= maxCollisions)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
