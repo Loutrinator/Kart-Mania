@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Items
 {
     [CreateAssetMenu(fileName = "Plunger", menuName = "ScriptableObject/Items/Plunger", order = 0)]
-    public class ItemPlunger : Item
+    public class ItemPlunger : ItemObject
     {
         [SerializeField] private Plunger plunger;
         public float offset = 2.0f;
@@ -26,6 +26,11 @@ namespace Items
         public override void OnKeyUp(PlayerRaceInfo info)
         {
 
+        }
+
+        public override void ResetItem()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
