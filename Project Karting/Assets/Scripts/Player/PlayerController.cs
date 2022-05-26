@@ -41,7 +41,7 @@ namespace Player
             {
                 OnRearCamera(ctx);
             }
-            if (ctx.action.name == _controls.Kart.Pause.name)
+            if (ctx.action.name == _controls.Kart.Pause.name || ctx.action.name == _controls.UI.Back.name)
             {
                 OnPause(ctx);
             }
@@ -66,7 +66,7 @@ namespace Player
         }
         public void OnPause(InputAction.CallbackContext context)
         {
-            GameManager.Instance.Pause();
+            GameManager.Instance.Pause(playerConfig);
         }
         
     }

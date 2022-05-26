@@ -44,11 +44,13 @@ namespace Handlers {
         [HideInInspector]
         public PauseMenu pauseMenu;
 
+        private float _lastPauseTime;
+        private const float MinPauseTime = 0.5f;
 
-        
 
 
-        
+
+
         /*public Event AIUpdate;
         [HideInInspector]
         public float AI;*/
@@ -85,6 +87,7 @@ namespace Handlers {
 
             gamePaused = false;
             pauseMenu = FindObjectOfType<PauseMenu>();
+            _lastPauseTime = Time.unscaledTime;
         }
 
         /*private IEnumerator AIUpdate()
@@ -106,18 +109,18 @@ namespace Handlers {
             minimap.UpdateMinimap();
         }
 
-        public void Pause()
-        {
-            Debug.Log("PAUSE");
+        public void Pause(PlayerConfiguration playerConfiguration) {
+            if (Time.unscaledTime - _lastPauseTime < MinPauseTime) return;
+            _lastPauseTime = Time.unscaledTime;
+            
             gamePaused = !gamePaused;
             if (gamePaused)
             {
                 Time.timeScale = 0;
-                pauseMenu.PauseGame();
+                pauseMenu.PauseGame(playerConfiguration);
             }
             else
             {
-                Time.timeScale = 1;
                 pauseMenu.ResumeGame();
             }
         }
@@ -299,7 +302,6 @@ namespace Handlers {
 
         public void ResumeGame()
         {
-            
             Time.timeScale = 1;
             gamePaused = false;
         }

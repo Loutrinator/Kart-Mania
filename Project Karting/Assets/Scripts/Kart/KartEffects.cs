@@ -294,7 +294,6 @@ namespace Kart
 
         public void InsertKey()
         {
-            Debug.Log("INSERT KEY BETCH");
             keyIsInserted = true;
             _keyhole.InsertKey(Keyhole.RewindMode.startRewindMode, null);
             keyIsRewinding = false;
@@ -302,7 +301,6 @@ namespace Kart
         
         public void Rewind()
         {
-            Debug.Log("REWIND KEY BETCH");
             if (!keyIsRewinding)
             {
                 timeWhenKeyInserted = Time.time;
@@ -315,7 +313,6 @@ namespace Kart
         {
             if (!keyIsRewinding)
             {
-                Debug.Log("REMOVE KEY BETCH");
                 _keyhole.RemoveKey();
                 return;
             }
