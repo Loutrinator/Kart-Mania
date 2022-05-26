@@ -37,8 +37,10 @@ namespace Handlers {
             return currentRace;
         }
 
-        public void OnRaceQuit() {
+        public void OnRaceQuit(PlayerConfiguration configuration) {
             Init();
+            if(configuration != null)
+                gameConfig.players.Add(configuration);
         }
     }
 }
