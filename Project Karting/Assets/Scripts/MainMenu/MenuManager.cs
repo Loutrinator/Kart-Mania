@@ -1,14 +1,17 @@
-﻿using System;
+﻿using DG.Tweening;
 using Game;
 using Handlers;
+using MainMenu;
+using ProceduralAnimations;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.UI;
 
 public class MenuManager : MonoBehaviour
 {
 
-    [SerializeField] private Animator mainCameraAnimator;
+    //[SerializeField] private Animator mainCameraAnimator;
+    [SerializeField] private MainMenuCamera mainCamera;
+    [SerializeField] private ProceduralAnimationData cameraAnimationData;
     [SerializeField] private Animator soloAnimator;
     [SerializeField] private Animator multiAnimator;
     [SerializeField] private Animator levelEditorAnimator;
@@ -44,35 +47,48 @@ public class MenuManager : MonoBehaviour
         PlayerConfigurationManager.Instance.EnableJoining();
         PlayerConfigurationManager.Instance.multiplayer = true;
         SoundManager.Instance.PlayUIClick();
-        soloAnimator.SetBool("NotSelected",true);
-        multiAnimator.SetBool("Choosen",true);
-        mainCameraAnimator.SetTrigger("move");
-        _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
+        /*soloAnimator.SetBool("NotSelected",true);
+        multiAnimator.SetBool("Choosen",true);*/
+        
+        _eventSystem.SetSelectedGameObject(null);
+        cameraAnimationData.PlayTransition(mainCamera.transform, "DeskToClipboard", () => {
+            _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
+        });
     }
 
     public void SelectSolo()
     {
         PlayerConfigurationManager.Instance.DisableJoining();
         SoundManager.Instance.PlayUIClick();
-        soloAnimator.SetBool("Choosen",true);
-        multiAnimator.SetBool("NotSelected",true);
-        mainCameraAnimator.SetTrigger("move");
-        _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
+        /*soloAnimator.SetBool("Choosen",true);
+        multiAnimator.SetBool("NotSelected",true);*/
+        
+        _eventSystem.SetSelectedGameObject(null);
+        cameraAnimationData.PlayTransition(mainCamera.transform, "DeskToClipboard", () => {
+            _eventSystem.SetSelectedGameObject(gamemodeCanvas.firstButton.gameObject);
+        });
     }
 
     public void KartConfigsReady()
     {
-        ShowNextScreen();
+        SoundManager.Instance.PlayUIClick();
         
         kartSelectorAnimator.SetBool("isHidden", true);
-        _eventSystem.SetSelectedGameObject(circuitCanvas.firstButton.gameObject);
         
+        _eventSystem.SetSelectedGameObject(null);
+        var lightTvDelay = cameraAnimationData.transitions["CarToRaceSelection"].duration * 0.75f;
+        DOVirtual.DelayedCall(lightTvDelay, () => mainCamera.SwitchTV(), false);
+        cameraAnimationData.PlayTransition(mainCamera.transform, "CarToRaceSelection", () => {
+            _eventSystem.SetSelectedGameObject(circuitCanvas.firstButton.gameObject);
+        });
     }
     public void SelectRace()
     {
-        ShowNextScreen();
-        _eventSystem.SetSelectedGameObject(goCanvas.firstButton.gameObject);
-        
+        SoundManager.Instance.PlayUIClick();
+        _eventSystem.SetSelectedGameObject(null);
+        cameraAnimationData.PlayTransition(mainCamera.transform, "ScreenToDoorGo", () => {
+            _eventSystem.SetSelectedGameObject(goCanvas.firstButton.gameObject);
+        });
     }
     public void SelectMode(int i)
     {
@@ -94,26 +110,26 @@ public class MenuManager : MonoBehaviour
                 break;
         }
 
-        ShowNextScreen();
-        _eventSystem.SetSelectedGameObject(kartCanvas.firstButton.gameObject);
+        //ShowNextScreen();
+        SoundManager.Instance.PlayUIClick();
+        _eventSystem.SetSelectedGameObject(null);
+        cameraAnimationData.PlayTransition(mainCamera.transform, "ClipboardToCar", () => {
+            _eventSystem.SetSelectedGameObject(kartCanvas.firstButton.gameObject);
+        });
     }
     public void ShowNextScreen()
     {
         SoundManager.Instance.PlayUIClick();
-        mainCameraAnimator.SetTrigger("move");
+        //mainCameraAnimator.SetTrigger("move"); todo
     }
     public void ShowPreviousScreen()
     {
-        mainCameraAnimator.SetTrigger("back");
+        //mainCameraAnimator.SetTrigger("back"); todo
     }
 
-    public void ShowTransition()
-    {
-        TransitionController.Instance.FadeIn(StartLevel);//TODO
-    }
-
-    private void StartLevel() {
-        SceneManager.instance.LoadGameMode(LevelManager.instance.gameConfig.mode);//TODO
+    public void StartLevel() {
+        _eventSystem.SetSelectedGameObject(null);
+        SceneManager.instance.LoadGameMode(LevelManager.instance.gameConfig.mode);
     }
     public void QuitGame()
     {

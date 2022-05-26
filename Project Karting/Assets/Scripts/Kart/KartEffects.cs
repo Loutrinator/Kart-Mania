@@ -9,10 +9,10 @@ namespace Kart
     {
         public KartBase kart;
         public Camera cam;
-        [HideInInspector] public ShakeTransform cameraShakeTransform;
+        public CameraFollowPlayer cameraFollowPlayer;
         public List<TrailRenderer> skidEmitters;
         public List<ParticleSystem> driftSmokeEmitters;
-
+        
 
         public List<ParticleSystem> boostSparksEmitters;
         public ParticleSystem driftLoadingSparksEmitter;
@@ -25,10 +25,9 @@ namespace Kart
         private float boostStrength;
         private float boostStartTime;
         private float boostLength;
-        private float FOVeffect;
+        private float boostCoeff;
         private bool isDrifting;
         private bool FOVFadedIn;
-
 
         private float currentIntensity;
         private float baseFOV;
@@ -36,11 +35,12 @@ namespace Kart
 
         private float timeWhenKeyInserted;
         private bool keyIsRewinding;
+        private bool keyIsInserted;
 
         private AudioSource _driftSoundSource;
+        private float startTime = 0;
 
         //BoostEffect
-
         [HideInInspector] public int driftLevel;
 
         public void Start()
@@ -57,23 +57,45 @@ namespace Kart
             _driftSoundSource.clip = DriftSettings.instance.driftAudioClip;
             
         }
-        /*
-        public void LateUpdate()
-        {
-            currentIntensity = Mathf.Lerp(currentIntensity, boostIntensity[driftLevel],
-                Time.fixedDeltaTime * boostSwitchSpeed);
-            if (Mathf.Abs(currentIntensity - boostIntensity[driftLevel]) > 0.1f)
-            {
-                stopBoost();
-                stopDrift();
-                driftLevel = 0;
-                baseFOV = camera.fieldOfView;
-                baseZ = camera.transform.localPosition.z;
-            }
-        }*/
 
+        public void Update()
+        {
+            if (isDrifting)
+            {
+                float elapsed = Time.time - startTime;
+                
+                var emissionModule = driftLoadingSparksEmitter.emission;
+                var mainModule = driftLoadingSparksEmitter.main;
+                
+                if (elapsed > DriftSettings.instance.boostTimeToSwitch && driftLevel < 1)
+                {
+                    driftLoadingSparksEmitter.Play();
+                    emissionModule.rateOverTime = 75;
+                    driftLevel = 1;
+                    driftMaterial.SetInt("Drift_Mode", driftLevel);
+                    boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
+                }else if (elapsed > DriftSettings.instance.boostTimeToSwitch*2 && driftLevel < 2)
+                {
+                    driftLevel = 2;
+                    emissionModule.rateOverTime = 250;
+                    mainModule.simulationSpeed = 1.5f;
+                    driftMaterial.SetInt("Drift_Mode", driftLevel);
+                    boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
+                }else if (elapsed > DriftSettings.instance.boostTimeToSwitch*3 && driftLevel < 3)
+                {
+                    driftLevel = 3;
+                    mainModule.simulationSpeed = 2f;
+                    emissionModule.rateOverTime = 500;
+                    driftMaterial.SetInt("Drift_Mode", driftLevel);
+                    boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
+                }
+                
+            }
+        }
+        
         public void LateUpdate()
         {
+            //drift light intensity
             currentIntensity = Mathf.Lerp(currentIntensity, DriftSettings.instance.driftEffectIntensity[driftLevel],
                 Time.fixedDeltaTime * DriftSettings.instance.boostSwitchSpeed);
             if (Mathf.Abs(currentIntensity - DriftSettings.instance.driftEffectIntensity[driftLevel]) > 0.1f)
@@ -85,6 +107,7 @@ namespace Kart
                 boostLight.intensity = DriftSettings.instance.driftEffectIntensity[driftLevel];
             }
 
+            //drift released, the boosts activates 
             if (boostActivated)
             {
                 float elapsed = Time.time - boostStartTime;
@@ -95,7 +118,7 @@ namespace Kart
                     {
                         float fadePercent = elapsed / DriftSettings.instance.transitionSpeed;
                         boostEffect = DriftSettings.instance.boostCameraIn.Evaluate(fadePercent);
-                        if (fadePercent > 1)
+                        if (fadePercent >= 1)
                         {
                             FOVFadedIn = true;
                         }
@@ -108,9 +131,15 @@ namespace Kart
                         boostEffect = DriftSettings.instance.boostCameraOut.Evaluate(fadePercent);
                     }
 
-                    cam.fieldOfView = baseFOV + boostEffect * boostStrength * FOVeffect;
+                    // baseFOV : the FOV at the start
+                    // boostEffect : the coefficient given by the animation curves for the transition
+                    // boostStrength: a general coefficient to increase the strength of the effect
+                    // boostCoeff : a value scaled based on the drift level
+                    cam.fieldOfView = baseFOV + boostEffect * boostStrength * DriftSettings.instance.boostFOVOffset * boostCoeff;
                     Vector3 previousPos = cam.transform.localPosition;
-                    //cam.transform.localPosition =  new Vector3(previousPos.x,previousPos.y, baseZ - boostEffect * DriftSettings.instance.boostZOffset);
+                    if (cameraFollowPlayer.currentCameraMode == CameraMode.front)
+                        previousPos.z = baseZ - boostEffect * boostCoeff * DriftSettings.instance.boostZOffset;
+                    cam.transform.localPosition = previousPos;
 
                 }
                 else
@@ -121,45 +150,12 @@ namespace Kart
 
         }
 
-        private IEnumerator BoostLoading()
-        {
-            WaitForSeconds wait = new WaitForSeconds(DriftSettings.instance.boostTimeToSwitch);
-            var emissionModule = driftLoadingSparksEmitter.emission;
-            var mainModule = driftLoadingSparksEmitter.main;
-            yield return wait;
-            if (isDrifting)
-            {
-                driftLoadingSparksEmitter.Play();
-                emissionModule.rateOverTime = 75;
-                driftLevel = 1;
-                driftMaterial.SetInt("Drift_Mode", driftLevel);
-                boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
-                yield return wait;
-            }
-
-            if (isDrifting)
-            {
-                driftLevel = 2;
-                emissionModule.rateOverTime = 250;
-                mainModule.simulationSpeed = 1.5f;
-                driftMaterial.SetInt("Drift_Mode", driftLevel);
-                boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
-                yield return wait;
-            }
-
-            if (isDrifting)
-            {
-                driftLevel = 3;
-                mainModule.simulationSpeed = 2f;
-                emissionModule.rateOverTime = 500;
-                driftMaterial.SetInt("Drift_Mode", driftLevel);
-                boostLight.color = DriftSettings.instance.driftEffectColors[driftLevel];
-            }
-        }
 
         public void StartDrift()
         {
             isDrifting = true;
+            startTime = Time.time;
+            
             foreach (var skid in skidEmitters)
             {
                 skid.emitting = true;
@@ -169,16 +165,19 @@ namespace Kart
             {
                 smoke.Play();
             }
-
             driftLevel = 0;
             boostLight.gameObject.SetActive(true);
-            StartCoroutine(BoostLoading());
-
             PlayBoostSound();
+            float low = DriftSettings.instance.driftLowVibration;
+            float high = DriftSettings.instance.driftHighVibration;
+                            
+            kart.rumbler.RumbleHold(low,high);
         }
 
         public void StopDrift()
         {
+            if(kart.rumbler != null && kart.rumbler.activeRumblePattern == RumblePattern.Hold)
+                kart.rumbler.StopRumble();
             driftLoadingSparksEmitter.Stop();
             isDrifting = false;
             driftMaterial.SetInt("Drift_Mode", 0);
@@ -254,12 +253,13 @@ namespace Kart
         public void startBoost(float length, float force)
         {
 
-            cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[driftLevel - 1]);
-            FOVeffect = DriftSettings.instance.boostFOVOffset * driftLevel;
+            cameraFollowPlayer.cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[driftLevel - 1]); 
+            boostCoeff = DriftSettings.instance.driftLevelCoeff[driftLevel-1];
             Stats statModifier = new Stats();
-            statModifier.acceleration = 50f;
-            statModifier.topSpeed = DriftSettings.instance.boostStrength[driftLevel - 1];
-            StatPowerup boost = new StatPowerup(statModifier, DriftSettings.instance.boostDuration[driftLevel - 1]);
+            statModifier.acceleration = 200000f;
+            statModifier.topSpeed = DriftSettings.instance.boostBaseStrength * boostCoeff;
+            float duration = DriftSettings.instance.boostDuration[driftLevel - 1];
+            StatPowerup boost = new StatPowerup(statModifier, duration);
             kart.AddPowerup(boost);
 
             foreach (var spark in boostSparksEmitters)
@@ -272,6 +272,14 @@ namespace Kart
             boostStartTime = Time.time;
             boostActivated = true;
             FOVFadedIn = false;
+
+            if (kart.rumbler != null)
+            {
+                float low = DriftSettings.instance.boostLowVibration * boostCoeff;
+                float high = DriftSettings.instance.boostHighVibration * boostCoeff;
+                            
+                kart.rumbler.RumbleConstant(low,high, duration);
+            }
         }
 
         public void stopBoost()
@@ -286,11 +294,15 @@ namespace Kart
 
         public void InsertKey()
         {
+            Debug.Log("INSERT KEY BETCH");
+            keyIsInserted = true;
             _keyhole.InsertKey(Keyhole.RewindMode.startRewindMode, null);
             keyIsRewinding = false;
         }
+        
         public void Rewind()
         {
+            Debug.Log("REWIND KEY BETCH");
             if (!keyIsRewinding)
             {
                 timeWhenKeyInserted = Time.time;
@@ -298,22 +310,29 @@ namespace Kart
                 keyIsRewinding = true;
             }
         }
+        
         public void StopRewind()
         {
+            if (!keyIsRewinding)
+            {
+                Debug.Log("REMOVE KEY BETCH");
+                _keyhole.RemoveKey();
+                return;
+            }
             float now = Time.time;
             float duration = now - timeWhenKeyInserted;
+            
             if (duration > 2)
             {
-                _keyhole.StopRewind(0);
                 ExplodeMotor();
+                _keyhole.StopRewind(0);
             }
             else {
                 
                 _keyhole.StopRewind(duration);
                 if(duration > 1.6)
                 {
-                    cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[1]);
-                    FOVeffect = DriftSettings.instance.boostFOVOffset * driftLevel;
+                    cameraFollowPlayer.cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[1]);
                     Stats statModifier = new Stats();
                     statModifier.acceleration = 500f;
                     statModifier.topSpeed = 35;
@@ -333,6 +352,7 @@ namespace Kart
                 }
             }
             keyIsRewinding = false;
+            keyIsInserted = false;
         }
 
         private void ExplodeMotor()

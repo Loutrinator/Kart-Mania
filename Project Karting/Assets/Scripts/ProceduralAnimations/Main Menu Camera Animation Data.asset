@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1cc0f3517d292459df592a557570d9, type: 3}
+  m_Name: Main Menu Camera Animation Data
+  m_EditorClassIdentifier: 
+  poses:
+    m_keys:
+    - DeskPose
+    - ClipboardPose
+    - CarPickPose
+    - RaceSelectionPose
+    - GarageDoorGoPose
+    m_values:
+    - position: {x: -12.4, y: 2.56, z: -11.2}
+      rotation: {x: 0.0029514402, y: -0.53390646, z: -0.0018636608, w: -0.84553635}
+    - position: {x: -7.2, y: 2.84, z: -8.2}
+      rotation: {x: 0.5529303, y: 0.40392932, z: -0.34914327, w: 0.6396938}
+    - position: {x: -11.38, y: 3.22, z: 6.5}
+      rotation: {x: 0.047599755, y: 0.79249376, z: -0.062370613, w: 0.60481215}
+    - position: {x: 4, y: 3.64, z: 8.1}
+      rotation: {x: 0.05435087, y: 0.71073914, z: -0.055249944, w: 0.6991733}
+    - position: {x: 2.3, y: 3.64, z: -0.57}
+      rotation: {x: -5.385179e-10, y: -0.071410395, z: 0.000000007521919, w: 0.997447}
+  transitions:
+    m_keys:
+    - DeskToClipboard
+    - ClipboardToCar
+    - CarToRaceSelection
+    - ScreenToDoorGo
+    m_values:
+    - toPose: ClipboardPose
+      duration: 1
+      positionEasing: 4
+      rotationEasing: 4
+    - toPose: CarPickPose
+      duration: 2
+      positionEasing: 10
+      rotationEasing: 3
+    - toPose: RaceSelectionPose
+      duration: 1.167
+      positionEasing: 4
+      rotationEasing: 4
+    - toPose: GarageDoorGoPose
+      duration: 1.3
+      positionEasing: 4
+      rotationEasing: 4

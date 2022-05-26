@@ -13,9 +13,9 @@ public class KartSelectionManager : MonoBehaviour
     public TextMeshProUGUI kartNameDisplay;
     public StatDisplay speed;
     public StatDisplay acceleration;
-    public StatDisplay steering;
-    public StatDisplay brake;
-    public StatDisplay okayletzgo;
+    public StatDisplay maniability;
+    public StatDisplay weight;
+    public StatDisplay luck;
     [Header("Other")]
     public List<KartPreview> availableKarts;
     public Diaphragm diaphragm;
@@ -53,9 +53,9 @@ public class KartSelectionManager : MonoBehaviour
             kartNameDisplay.text = selectedKart.kartName;
             speed.SetValue( stats.topSpeed);
             acceleration.SetValue( stats.acceleration);
-            brake.SetValue( stats.braking);
-            steering.SetValue( stats.steer);
-            okayletzgo.SetValue( stats.addedGravity);
+            maniability.SetValue( stats.maniability);
+            weight.SetValue( stats.weight);
+            luck.SetValue( stats.luck);
             
         }
     }

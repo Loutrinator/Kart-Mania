@@ -62,13 +62,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1777b6a-05fb-455b-8446-adf5fcc693a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": ""WASD"",
                     ""id"": ""ce92f41f-c181-4de3-bc35-be5f29251db5"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -123,7 +132,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Gamepad"",
                     ""id"": ""7aa5ad82-1d97-43ad-86ad-38382170913d"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -238,6 +247,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d87e5b2b-c303-4019-88f6-b488ef40216d"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e05e7d3-8d4a-4fc9-a61a-089b1d20d5ab"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -463,6 +494,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Kart_Drift = m_Kart.FindAction("Drift", throwIfNotFound: true);
         m_Kart_Rearcamera = m_Kart.FindAction("Rear camera", throwIfNotFound: true);
         m_Kart_Pause = m_Kart.FindAction("Pause", throwIfNotFound: true);
+        m_Kart_Item = m_Kart.FindAction("Item", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -531,6 +563,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Kart_Drift;
     private readonly InputAction m_Kart_Rearcamera;
     private readonly InputAction m_Kart_Pause;
+    private readonly InputAction m_Kart_Item;
     public struct KartActions
     {
         private @PlayerControls m_Wrapper;
@@ -539,6 +572,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Drift => m_Wrapper.m_Kart_Drift;
         public InputAction @Rearcamera => m_Wrapper.m_Kart_Rearcamera;
         public InputAction @Pause => m_Wrapper.m_Kart_Pause;
+        public InputAction @Item => m_Wrapper.m_Kart_Item;
         public InputActionMap Get() { return m_Wrapper.m_Kart; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -560,6 +594,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
+                @Item.started -= m_Wrapper.m_KartActionsCallbackInterface.OnItem;
+                @Item.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnItem;
+                @Item.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnItem;
             }
             m_Wrapper.m_KartActionsCallbackInterface = instance;
             if (instance != null)
@@ -576,6 +613,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Item.started += instance.OnItem;
+                @Item.performed += instance.OnItem;
+                @Item.canceled += instance.OnItem;
             }
         }
     }
@@ -635,6 +675,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDrift(InputAction.CallbackContext context);
         void OnRearcamera(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnItem(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

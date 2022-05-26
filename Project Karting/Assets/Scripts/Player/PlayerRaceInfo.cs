@@ -14,7 +14,7 @@ public class PlayerRaceInfo
     public CameraFollowPlayer camera;
     
     //Items
-    public Item Item;
+    public ItemObject Item;
     public bool hasItem;
     public bool itemIsInUse;
     

@@ -10,6 +10,7 @@ namespace UI {
         [SerializeField] private TextMeshProUGUI currentTime;
         [SerializeField] private TextMeshProUGUI timeDiff;
         [SerializeField] private TextMeshProUGUI lap;
+        [SerializeField] private TextMeshProUGUI speed;
         [SerializeField] private Image iconPlaceholder;
 
         private PlayerRaceInfo _info;
@@ -70,13 +71,15 @@ namespace UI {
 
         private void Update()
         {
-            if (GameManager.Instance.RaceHadBegun())
+            if (RaceManager.Instance.RaceHadBegun())
             {
                 currentTime.text = Utils.DisplayHelper.FloatToTimeString(Time.time - _info.currentLapStartTime);
             }
             else {
                 currentTime.text = Utils.DisplayHelper.FloatToTimeString(0f);
             }
+
+            speed.text = (int)(_info.kart.rigidBody.velocity.magnitude) + " km/h";
         }
 
     }

@@ -8,7 +8,7 @@ namespace AI.UtilityAI
     public class UtilityAIKartBehaviorManager
     {
         private float curvatureOffset = 35f;
-        private float distCurve = 27f;
+        private float distCurve = 30f;
         private static UtilityAIKartBehaviorManager instance;
         private GameManager manager;
         public static UtilityAIKartBehaviorManager Instance
@@ -90,7 +90,6 @@ namespace AI.UtilityAI
             {
                 float distance = kart.closestBezierPos.BezierDistance;
                 var kartPosOnCurve = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance);
-                Debug.DrawLine(kart.transform.position, kartPosOnCurve.GlobalOrigin, Color.cyan);
 
                 var nextPos1 = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve);
                 var nextPos2 = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve + curvatureOffset);

@@ -851,9 +851,9 @@ MonoBehaviour:
   kartNameDisplay: {fileID: 3026118294479697280}
   speed: {fileID: 5778112235168403278}
   acceleration: {fileID: 7582203713306669164}
-  steering: {fileID: 5461819452120128668}
-  brake: {fileID: 2442017463694852353}
-  okayletzgo: {fileID: 5095333737552815759}
+  maniability: {fileID: 5461819452120128668}
+  weight: {fileID: 2442017463694852353}
+  luck: {fileID: 5095333737552815759}
   availableKarts:
   - {fileID: 5452965995569305836, guid: a430f9b90b1c7f440b499713e157067f, type: 3}
   - {fileID: 1401239869367080679, guid: 6c8b3400043a13a4f9b6902fb11ba468, type: 3}
@@ -1005,12 +1005,12 @@ PrefabInstance:
     - target: {fileID: 2020659275630070197, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
       propertyPath: m_Name
-      value: Braking
+      value: Weight
       objectReference: {fileID: 0}
     - target: {fileID: 2807419247322811236, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
       propertyPath: m_Name
-      value: Braking
+      value: Weight
       objectReference: {fileID: 0}
     - target: {fileID: 4394485224682549783, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
@@ -1180,7 +1180,7 @@ PrefabInstance:
     - target: {fileID: 7772594470109155093, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
       propertyPath: m_text
-      value: Braking
+      value: WEIGHT
       objectReference: {fileID: 0}
     - target: {fileID: 7772594470109155093, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
@@ -1354,6 +1354,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7772594470109155093, guid: db15ffd2baf54e845a37c3444f60a862,
+        type: 3}
+      propertyPath: m_text
+      value: SPEED
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db15ffd2baf54e845a37c3444f60a862, type: 3}
 --- !u!114 &5778112235168403278 stripped
@@ -1389,12 +1394,12 @@ PrefabInstance:
     - target: {fileID: 2020659275630070197, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
       propertyPath: m_Name
-      value: Okay Let'sgo
+      value: Luck
       objectReference: {fileID: 0}
     - target: {fileID: 2807419247322811236, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
       propertyPath: m_Name
-      value: Okay Let'sgo
+      value: Luck
       objectReference: {fileID: 0}
     - target: {fileID: 4683562967963438711, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
@@ -1559,9 +1564,7 @@ PrefabInstance:
     - target: {fileID: 7772594470109155093, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
       propertyPath: m_text
-      value: 'Jsp frerr
-
-'
+      value: LUCK
       objectReference: {fileID: 0}
     - target: {fileID: 7772594470109155093, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
@@ -1638,12 +1641,12 @@ PrefabInstance:
     - target: {fileID: 2020659275630070197, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
       propertyPath: m_Name
-      value: Steering
+      value: Maniability
       objectReference: {fileID: 0}
     - target: {fileID: 2807419247322811236, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
       propertyPath: m_Name
-      value: Steering
+      value: Maniability
       objectReference: {fileID: 0}
     - target: {fileID: 4394485224682549783, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
@@ -1813,7 +1816,7 @@ PrefabInstance:
     - target: {fileID: 7772594470109155093, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}
       propertyPath: m_text
-      value: Steering
+      value: MANIABILITY
       objectReference: {fileID: 0}
     - target: {fileID: 7772594470109155093, guid: db15ffd2baf54e845a37c3444f60a862,
         type: 3}

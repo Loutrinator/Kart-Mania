@@ -36465,6 +36465,11 @@ PrefabInstance:
       objectReference: {fileID: 3151152718604852560}
     - target: {fileID: 6669060970404059514, guid: f635f7f76ac7e26458df032c12637383,
         type: 3}
+      propertyPath: vehicleStats.luck
+      value: 0.376
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669060970404059514, guid: f635f7f76ac7e26458df032c12637383,
+        type: 3}
       propertyPath: wheels.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -36472,6 +36477,11 @@ PrefabInstance:
         type: 3}
       propertyPath: vehicleStats.steer
       value: 0.889
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669060970404059514, guid: f635f7f76ac7e26458df032c12637383,
+        type: 3}
+      propertyPath: vehicleStats.weight
+      value: 0.272
       objectReference: {fileID: 0}
     - target: {fileID: 6669060970404059514, guid: f635f7f76ac7e26458df032c12637383,
         type: 3}
@@ -36525,8 +36535,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6669060970404059514, guid: f635f7f76ac7e26458df032c12637383,
         type: 3}
+      propertyPath: vehicleStats.maniability
+      value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669060970404059514, guid: f635f7f76ac7e26458df032c12637383,
+        type: 3}
       propertyPath: vehicleStats.acceleration
-      value: 0.769
+      value: 0.69
       objectReference: {fileID: 0}
     - target: {fileID: 6669060970404059514, guid: f635f7f76ac7e26458df032c12637383,
         type: 3}
@@ -36616,7 +36631,7 @@ PrefabInstance:
     - target: {fileID: 7072082925053140372, guid: f635f7f76ac7e26458df032c12637383,
         type: 3}
       propertyPath: m_Name
-      value: KART-TheTuture
+      value: Player 1
       objectReference: {fileID: 0}
     - target: {fileID: 7072082925053140393, guid: f635f7f76ac7e26458df032c12637383,
         type: 3}
