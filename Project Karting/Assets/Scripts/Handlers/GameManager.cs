@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Game;
 using Items;
 using Kart;
 using Player;
 using Road.RoadPhysics;
 using UI;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Handlers {
     public enum GameState
@@ -32,7 +29,6 @@ namespace Handlers {
         private StartMsgAnimation startMessage;
         private float startTime;
 
-        //private List<ShakeTransform> cameras;
         public CameraFollowPlayer cameraParentPrefab;
 
         public static GameManager Instance { get; private set; }
@@ -47,21 +43,12 @@ namespace Handlers {
         private float _lastPauseTime;
         private const float MinPauseTime = 0.5f;
 
-
-
-
-
-        /*public Event AIUpdate;
-        [HideInInspector]
-        public float AI;*/
-
         private bool gamePaused;
         
-        private void Awake()
+        private IEnumerator Start()
         {
             if (Instance == null) {
                 Instance = this;
-                //cameras = new List<ShakeTransform>();
             }
             else {
                 Destroy(gameObject);
@@ -88,24 +75,10 @@ namespace Handlers {
             gamePaused = false;
             pauseMenu = FindObjectOfType<PauseMenu>();
             _lastPauseTime = Time.unscaledTime;
+            yield return null;
         }
 
-        /*private IEnumerator AIUpdate()
-        {
-        }*/
-        
         private void Update() {
-
-            //if (gameState == GameState.race) {
-            //    PlayerRaceInfo player = RaceManager.Instance.playersInfo[0];
-                //currentTime.text = floatToTimeString(Time.time - player.currentLapStartTime);
-                //lap.text = player.lap.ToString();
-                //checkpoint.text = player.currentCheckpoint.ToString();
-                //float diff = Time.time - player.currentLapStartTime;
-                // info = "Time : " + floatToTimeString(Time.time) + "\nLap start time : " +
-                //              floatToTimeString(player.currentLapStartTime) + "\nDiff : " + floatToTimeString(diff);
-                //timeInfo.text = info;
-            //}
             minimap.UpdateMinimap();
         }
 
@@ -145,7 +118,6 @@ namespace Handlers {
             
             if (RaceManager.Instance.playersInfo[playerId].lap > RaceManager.Instance.currentRace.laps)
             {
-                //RaceManager.Instance.playersInfo[playerId].FinishRace();
                 FinishRace(playerId);
             }
         }

@@ -47,17 +47,18 @@ namespace Handlers
         [SerializeField] private SerializedDictionary<GameMode, string> sceneMap;
 
         public void LoadGameMode(GameMode mode) {
-            TransitionController.Instance.FadeIn();
-            TransitionController.Instance.ShowLoading();
-            
-            PlayerConfigurationManager.Instance.HideJoinUI();
-            var operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneMap[mode]);
+            TransitionController.Instance.FadeIn(OnLoadingStart);
 
-            operation.completed += CallBack;
+            void OnLoadingStart() {
+                PlayerConfigurationManager.Instance.HideJoinUI();
+                var operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneMap[mode]);
 
-            void CallBack(AsyncOperation asyncOperation) {
-                TransitionController.Instance.FadeOut();
-                operation.completed -= CallBack;
+                operation.completed += CallBack;
+                
+                void CallBack(AsyncOperation asyncOperation) {
+                    TransitionController.Instance.FadeOut();
+                    operation.completed -= CallBack;
+                }
             }
         }
         

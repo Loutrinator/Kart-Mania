@@ -124,7 +124,6 @@ public class MenuManager : MonoBehaviour
     }
 
     public void StartLevel() {
-        _eventSystem.SetSelectedGameObject(null);
         SceneManager.instance.LoadGameMode(LevelManager.instance.gameConfig.mode);
     }
     public void QuitGame()
