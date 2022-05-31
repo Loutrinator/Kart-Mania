@@ -53,6 +53,7 @@ public class PauseMenu : MonoBehaviour
         SoundManager.Instance.PlayUIClick();
         _playerConfigurationPaused = null;
         ResumeGame();
-        SceneManager.instance.LoadMainMenu();
+        TransitionController.Instance.FadeIn(() =>
+            SceneManager.instance.LoadMainMenu(() => TransitionController.Instance.FadeOut()));
     }
 }
