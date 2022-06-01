@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Handlers;
 using UnityEngine;
 
 /// <summary>
@@ -11,7 +12,7 @@ public class GhostRecorder : MonoBehaviour
     public GhostController ghost;
     public bool isRecording = true;
     public bool isReplaying = false;
-    [SerializeField] private float timeBetweenRecords = 0.1f;
+    [SerializeField] private float timeBetweenRecords = 1/25f;
     [SerializeField] private float maxTimeRecorded = 20f;//in seconds 
 
     private float timeElapsed = 0; //time elapsed since previous record
@@ -61,12 +62,12 @@ public class GhostRecorder : MonoBehaviour
         }
         else if(isReplaying)
         {
-            if (replayIndex >= recording.count)
+            if (replayIndex >= recording.count-1)
             {
                 recordedTime = 0f;
             }
-            replayIndex = (int)(recordedTime / recording.timeBetweenRecords);
-            float lerp = (recordedTime-replayIndex) / recording.timeBetweenRecords;
+            replayIndex = (int)Mathf.Floor(recordedTime / recording.timeBetweenRecords);
+            float lerp = (recordedTime-(replayIndex*recording.timeBetweenRecords)) / recording.timeBetweenRecords;
             PlayRecordValues(replayIndex, lerp);
         }
     }
@@ -80,14 +81,20 @@ public class GhostRecorder : MonoBehaviour
     private void SaveRecording()
     {
         string recordingJson = JsonUtility.ToJson(recording);
-        PlayerPrefs.SetString("ghost",recordingJson);
+        PlayerPrefs.SetString(GetRecordSaveName(),recordingJson);
         PlayerPrefs.Save();
         Debug.Log("Ghost data saved !");
     }
+
+    private string GetRecordSaveName()
+    {
+        return "timetrial-" + RaceManager.Instance.currentRace.circuitName;
+    }
+
     private void LoadRecording()
     {
         Debug.Log("Loading ghost data");
-        string recordingJson = PlayerPrefs.GetString("ghost");
+        string recordingJson = PlayerPrefs.GetString(GetRecordSaveName());
         recording = JsonUtility.FromJson<GhostRecording>(recordingJson);
     }
 
@@ -100,7 +107,6 @@ public class GhostRecorder : MonoBehaviour
     }
     private void PlayRecordValues(int index, float lerp)
     {
-        Debug.Log("index " + index + " lerp " + lerp);
         int secondIndex = index < recording.count - 1 ? index + 1 : index;
         Vector3 pos1 = recording.kartPositions[index];
         Vector3 pos2 = recording.kartPositions[secondIndex];
@@ -110,5 +116,12 @@ public class GhostRecorder : MonoBehaviour
         Quaternion rot2 = recording.kartRotations[secondIndex];
         //ghost.SetKartRotation(rot1); //
         ghost.SetKartRotation(Quaternion.Lerp(rot1,rot2,lerp));
+    }
+
+    public void SetToReplayMode()
+    {
+        isRecording = false;
+        isReplaying = true;
+        ghost.kart.effects.ChangeToGhost();
     }
 }

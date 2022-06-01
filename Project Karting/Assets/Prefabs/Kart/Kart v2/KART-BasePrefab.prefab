@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kart: {fileID: 6669060970404059514}
   cam: {fileID: 0}
-  cameraShakeTransform: {fileID: 0}
+  cameraFollowPlayer: {fileID: 0}
   skidEmitters:
   - {fileID: 0}
   - {fileID: 0}
@@ -67,6 +67,7 @@ MonoBehaviour:
   _keyhole: {fileID: 0}
   explosionMotorEffect: {fileID: 78476274015600624, guid: 0e3441130f8562c4d81031533ae14038,
     type: 3}
+  ghostMaterial: {fileID: 2100000, guid: 622360c21eb3a2a4db71cfb37472381e, type: 2}
   driftLevel: 0
 --- !u!54 &7072082925053140395
 Rigidbody:
@@ -102,6 +103,7 @@ MonoBehaviour:
   currentForcesVelocity: {x: 0, y: 0, z: 0}
   rigidBody: {fileID: 7072082925053140395}
   playerIndex: 0
+  rumbler: {fileID: 0}
   minimapRenderer: {fileID: 6588004904838852241, guid: f86b4441d2c5df546a3a07e2e4e2d8a6,
     type: 3}
   kartRootModel: {fileID: 0}
@@ -114,23 +116,19 @@ MonoBehaviour:
   turningWheels:
   - {fileID: 0}
   - {fileID: 0}
-  cameraFollowPlayer: {fileID: 0}
-  cameraShake: {fileID: 0}
   effects: {fileID: 6671327005639688407}
   keyhole: {fileID: 0}
   vehicleStats:
     topSpeed: 0.5
     acceleration: 0.5
-    reverseSpeed: 0.5
-    reverseAcceleration: 0.5
-    braking: 0.5
-    steer: 0.5
-    addedGravity: 0.5
-    suspension: 0.5
+    maniability: 0.5
+    weight: 0.5
+    luck: 0.5
   movement: {x: 0, y: 0}
   drift: 0
   driftDirection: 0
   rear: 0
+  cameraFollowPlayer: {fileID: 0}
   canMove: 0
 --- !u!114 &2789011401745134355
 MonoBehaviour:

@@ -10,17 +10,18 @@ namespace Kart
         public KartBase kart;
         public Camera cam;
         public CameraFollowPlayer cameraFollowPlayer;
-        public List<TrailRenderer> skidEmitters;
-        public List<ParticleSystem> driftSmokeEmitters;
+        [SerializeField] private  List<TrailRenderer> skidEmitters;
+        [SerializeField] private  List<ParticleSystem> driftSmokeEmitters;
         
 
-        public List<ParticleSystem> boostSparksEmitters;
-        public ParticleSystem driftLoadingSparksEmitter;
-        public Light boostLight;
-        public Material driftMaterial;
+        [SerializeField] private  List<ParticleSystem> boostSparksEmitters;
+        [SerializeField] private  ParticleSystem driftLoadingSparksEmitter;
+        [SerializeField] private  Light boostLight;
+        [SerializeField] private  Material driftMaterial;
         [SerializeField] private Keyhole _keyhole;
 
-        public GameObject explosionMotorEffect;
+        [SerializeField] private  GameObject explosionMotorEffect;
+        [SerializeField] private  Material ghostMaterial;
         private bool boostActivated;
         private float boostStrength;
         private float boostStartTime;
@@ -246,10 +247,6 @@ namespace Kart
             }
         }
 
-        
-        
-        
-        
         public void startBoost(float length, float force)
         {
 
@@ -366,6 +363,32 @@ namespace Kart
             kart.canMove = false;
             yield return new WaitForSeconds(2f);
             kart.canMove = true;
+        }
+        
+        /// <summary>
+        /// Changes the Kart to be a ghost. It includes deactivating hitboxes, stopping rigidbody and changing shaders
+        /// </summary>
+        public void ChangeToGhost()
+        {
+            Collider[] colliders = kart.gameObject.GetComponentsInChildren<Collider>();
+            Renderer[] renderers = kart.gameObject.GetComponentsInChildren<Renderer>();
+            foreach (var collider in colliders)
+            {
+                collider.enabled = false;
+            }
+            foreach (var renderer in renderers)
+            {
+                renderer.material = ghostMaterial;
+                Material[] materials = renderer.materials;
+                for (int i = 0; i < materials.Length; i++)
+                {
+                    materials[i] = ghostMaterial;
+                }
+
+                renderer.materials = materials;
+            }
+            kart.rigidBody.isKinematic = true;
+            kart.rigidBody.interpolation = RigidbodyInterpolation.None;
         }
     }
 }

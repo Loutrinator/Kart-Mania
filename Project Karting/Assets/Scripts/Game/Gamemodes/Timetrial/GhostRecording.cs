@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GhostRecording
 {
+    public float finalTime;
     public int count;
     public float timeBetweenRecords;
     public List<Vector3> kartPositions;
