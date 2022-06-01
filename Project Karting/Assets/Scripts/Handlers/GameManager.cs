@@ -174,10 +174,23 @@ namespace Handlers {
                     
                     //Linking to controls to the Kart
                    
-                    PlayerController playerController = kart.gameObject.AddComponent<PlayerController>();
-                    playerController.kart = kart;
-                    playerController.InitializePlayerConfiguration(playerConfig);
-
+                    //PlayerController playerController = kart.gameObject.AddComponent<PlayerController>();
+                    //playerController.kart = kart;
+                    //playerController.InitializePlayerConfiguration(playerConfig);
+                    
+                    //GHOST
+                    if (id == 0)
+                    {
+                        GhostController ghost = kart.gameObject.AddComponent<GhostController>();
+                        ghost.kart = kart;
+                        GhostRecorder ghostRecorder = gameObject.AddComponent<GhostRecorder>();
+                        ghostRecorder.ghost = ghost;
+                        ghostRecorder.isRecording = false;
+                        ghostRecorder.isReplaying = true;
+                        kart.rigidBody.isKinematic = true;
+                        kart.rigidBody.interpolation = RigidbodyInterpolation.None;
+                    }
+                    
                     Rumbler rumbler = kart.gameObject.AddComponent<Rumbler>();
                     rumbler.SetPlayerInput(playerConfig.Input);
                     kart.rumbler = rumbler;
