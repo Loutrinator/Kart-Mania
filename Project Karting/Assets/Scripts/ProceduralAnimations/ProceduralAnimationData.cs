@@ -11,6 +11,7 @@ namespace ProceduralAnimations {
     
     [Serializable]
     public class AnimationTransition {
+        public string fromPose;
         public string toPose;
         public float duration = 1;
 
@@ -34,6 +35,22 @@ namespace ProceduralAnimations {
             
             objectTransform.DORotateQuaternion(destPose.rotation, animationTransition.duration)
                 .SetEase(animationTransition.rotationEasing);
+        }
+
+        public void PlayTransitionReverse(Transform objectTransform, string transitionKey, Action onComplete = null) {
+            var animationTransition = transitions[transitionKey];
+            var destPose = poses[animationTransition.fromPose];
+
+            var tween = objectTransform.DOMove(destPose.position, animationTransition.duration)
+                .SetEase(animationTransition.positionEasing)
+                .From();
+            if (onComplete != null)
+                tween.OnComplete(onComplete.Invoke);
+            tween.PlayBackwards();
+
+            objectTransform.DORotateQuaternion(destPose.rotation, animationTransition.duration)
+                .SetEase(animationTransition.rotationEasing)
+                .From();
         }
     }
 }
