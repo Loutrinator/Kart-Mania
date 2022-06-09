@@ -42,15 +42,13 @@ namespace ProceduralAnimations {
             var destPose = poses[animationTransition.fromPose];
 
             var tween = objectTransform.DOMove(destPose.position, animationTransition.duration)
-                .SetEase(animationTransition.positionEasing)
-                .From();
+                .SetEase(animationTransition.positionEasing);
             if (onComplete != null)
                 tween.OnComplete(onComplete.Invoke);
-            tween.PlayBackwards();
+            //tween.PlayBackwards();
 
             objectTransform.DORotateQuaternion(destPose.rotation, animationTransition.duration)
-                .SetEase(animationTransition.rotationEasing)
-                .From();
+                .SetEase(animationTransition.rotationEasing);
         }
     }
 }

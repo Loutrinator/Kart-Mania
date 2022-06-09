@@ -54,7 +54,7 @@ namespace MainMenu {
         public void KartConfigsReady() {
             SoundManager.Instance.PlayUIClick();
 
-            kartSelectorAnimator.SetBool("isHidden", true);
+            kartSelectorAnimator.SetTrigger("isHidden");
 
             _eventSystem.SetSelectedGameObject(null);
             var lightTvDelay = cameraAnimationData.transitions["CarToRaceSelection"].duration * 0.75f;

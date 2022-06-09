@@ -37,19 +37,23 @@ MonoBehaviour:
     - CarToRaceSelection
     - ScreenToDoorGo
     m_values:
-    - toPose: ClipboardPose
+    - fromPose: DeskPose
+      toPose: ClipboardPose
       duration: 1
       positionEasing: 4
       rotationEasing: 4
-    - toPose: CarPickPose
+    - fromPose: ClipboardPose
+      toPose: CarPickPose
       duration: 2
       positionEasing: 10
       rotationEasing: 3
-    - toPose: RaceSelectionPose
+    - fromPose: CarPickPose
+      toPose: RaceSelectionPose
       duration: 1.167
       positionEasing: 4
       rotationEasing: 4
-    - toPose: GarageDoorGoPose
+    - fromPose: RaceSelectionPose
+      toPose: GarageDoorGoPose
       duration: 1.3
       positionEasing: 4
       rotationEasing: 4
