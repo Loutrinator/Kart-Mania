@@ -38,27 +38,30 @@ namespace Items
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 0.9f))
                 {
-                    //Debug.Log(hit.transform.name);
+                    if (!(hit.transform.name.Contains("Checkpoint")))
+                    {
+                        //Debug.Log(hit.transform.name);
 
-                    rb.velocity = Vector3.zero;
-                    rb.isKinematic = true;
-                    transform.SetParent(hit.transform, true);
+                        rb.velocity = Vector3.zero;
+                        rb.isKinematic = true;
+                        transform.SetParent(hit.transform, true);
 
-                    rb.useGravity = false;
+                        rb.useGravity = false;
 
-                    Vector3 newForward = hit.normal;
+                        Vector3 newForward = hit.normal;
 
-                    Vector3 newUp = transform.up;
+                        Vector3 newUp = transform.up;
 
-                    Vector3 newRight = Vector3.Cross(newUp, newForward);
+                        Vector3 newRight = Vector3.Cross(newUp, newForward);
 
-                    newUp = Vector3.Cross(newForward, newRight);
+                        newUp = Vector3.Cross(newForward, newRight);
 
-                    transform.forward = newForward;
-                    transform.up = newUp;
-                    transform.right = newRight;
-                    stuckRotation = Quaternion.LookRotation(newForward, newUp);
-                    isStuck = true;
+                        transform.forward = newForward;
+                        transform.up = newUp;
+                        transform.right = newRight;
+                        stuckRotation = Quaternion.LookRotation(newForward, newUp);
+                        isStuck = true;
+                    }
                 }
             }
             else
