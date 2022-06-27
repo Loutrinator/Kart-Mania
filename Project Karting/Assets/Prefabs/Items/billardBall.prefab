@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 2073479065764407503}
   - component: {fileID: 3940798033894511289}
   - component: {fileID: 8006434621347900614}
+  - component: {fileID: -7438190861002182159}
   m_Layer: 12
   m_Name: billardBall
   m_TagString: Untagged
@@ -79,8 +80,21 @@ MonoBehaviour:
   currentAngularVelocity: {x: 0, y: 0, z: 0}
   currentForcesVelocity: {x: 0, y: 0, z: 0}
   rigidBody: {fileID: 3940798033894511289}
-  coeff: 100
+  coeff: 300
   lifetime: 20
+  isThrown: 0
+--- !u!114 &-7438190861002182159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073479065764407536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3c337ea3129b043a63121c23006ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2073479064286308440
 PrefabInstance:
   m_ObjectHideFlags: 0
