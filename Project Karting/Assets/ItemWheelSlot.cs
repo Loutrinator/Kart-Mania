@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Handlers;
+using Items;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -12,6 +14,13 @@ public class ItemWheelSlot : MonoBehaviour
     private float rotation = 200f; 
     private float resetAngleOffset = 45f;
     private bool updated = false;
+    private ItemData item;
+
+    private void Start()
+    {
+        UpdateItem();
+    }
+
     private void Update()
     {
         if (!updated)
@@ -20,11 +29,21 @@ public class ItemWheelSlot : MonoBehaviour
             if (transform.rotation.eulerAngles.z > rotation)
             {
                 updated = true;
-                image.enabled = !image.enabled;
+                UpdateItem();
             }  
         }else if(transform.eulerAngles.z < resetAngleOffset)
         {
             updated = false;
         }
+    }
+
+    public ItemData GetItem()
+    {
+        return item;
+    }
+    private void UpdateItem()
+    {
+        item = RaceManager.Instance.itemManager.GetRandomItem(0);
+        image.sprite = item.GetIcon();
     }
 }
