@@ -47,7 +47,6 @@ public class PlayerConfigurationManager : MonoBehaviour
         _inputManager = gameObject.GetComponent<PlayerInputManager>();
         playerDisplay.ShowJoinMessage();
         ControlTypeDisplays = new List<ControlTypeDisplay>();
-
     }
 
     public void EnableJoining()
