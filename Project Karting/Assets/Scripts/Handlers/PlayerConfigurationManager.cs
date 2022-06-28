@@ -53,6 +53,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void EnableJoining()
     {
         _inputManager.EnableJoining();
+        playerDisplay.gameObject.SetActive(true);
         playerDisplay.ShowAddPlayerMessage();
     }
     public void DisableJoining()

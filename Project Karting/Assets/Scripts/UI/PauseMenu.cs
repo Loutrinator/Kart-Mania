@@ -54,6 +54,9 @@ public class PauseMenu : MonoBehaviour
         _playerConfigurationPaused = null;
         ResumeGame();
         TransitionController.Instance.FadeIn(() =>
-            SceneManager.instance.LoadMainMenu(() => TransitionController.Instance.FadeOut()));
+            SceneManager.instance.LoadMainMenu(() => {
+                TransitionController.Instance.FadeOut();
+                PlayerConfigurationManager.Instance.EnableJoining();
+            }));
     }
 }
