@@ -14,7 +14,7 @@ public class WoodboxData : ItemData
     }
     public override ItemObject GiveItem(Transform parent)
     {
-        WoodBox woodbox = Instantiate(prefab,parent.position,parent.rotation,parent);
+        WoodBox woodbox = Instantiate(prefab,parent.position - parent.forward * distanceFromKartBack, parent.rotation,parent);
         woodbox.ResetItem();
         return woodbox;
     }

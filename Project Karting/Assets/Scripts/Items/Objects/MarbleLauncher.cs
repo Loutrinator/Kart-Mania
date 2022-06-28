@@ -122,7 +122,6 @@ public class MarbleLauncher : ItemObject
     public override void OnKeyDown(PlayerRaceInfo info)
     {
         Debug.Log("MarbleLauncher : OnKeyDown");
-        Transform parent = info.kart.transform;
         if (!inUse)
         {
             inUse = true;
