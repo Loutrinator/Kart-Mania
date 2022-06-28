@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Items
 {
     [Serializable]
-    public class ListProbability : IEnumerable
+    public class ListProbability
     {
-        private List<ItemProbability> values;
+        [SerializeField] private List<ItemProbability> values;
 
         public ListProbability()
         {
@@ -15,13 +16,11 @@ namespace Items
         }
         public ItemProbability this[int i]
         {
-            get { return values[i]; }
-            set { values[i] = value; }
+            get => values[i];
+            set => values[i] = value;
         }
-        public int Count
-        {
-            get { return values.Count; }
-        }
+        public int Count => values.Count;
+
         public void Add(ItemProbability item)
         {
             values.Add(item);

@@ -41,10 +41,10 @@ namespace Items
 
         private void GiveItem(int position, KartBase kart)
         {
-            Item item = GameManager.Instance.itemManager.GetRandomItem(position);
+            ItemData item = RaceManager.Instance.itemManager.GetRandomItem(position);
             if (item != null)
             {
-                GameManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID()).Item = item;
+                RaceManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID()).Item = item.GiveItem(kart.transform);
             }
         }
 
@@ -59,7 +59,7 @@ namespace Items
         {
             if (state == LootBoxState.available)
             {
-                KartBase kart = other.GetComponent<KartCollisions>().kartBase;
+                KartBase kart = other.GetComponentInParent<KartCollisions>().kartBase;
                 if (kart != null)
                 {
                     BreakLootBox(1,kart);
