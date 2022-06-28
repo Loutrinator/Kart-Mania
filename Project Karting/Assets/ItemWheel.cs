@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = System.Random;
 
 public class ItemWheel : MonoBehaviour
 {
@@ -23,8 +25,12 @@ public class ItemWheel : MonoBehaviour
     [SerializeField] private float zoomOutLength = 0.8f;
     [SerializeField] private float spinLength = 3f;
     [SerializeField] private float spinSpeed = 3f;
+    [Header("Sprites")]
+    [SerializeField] private List<ItemWheelSlot> slots;
+    [SerializeField] private List<Sprite> sprites;
 
     private float rotationSpeed = 0f;
+    private float rotationCounter = 0f;
     private void Start()
     {
         movingParts.localScale = Vector3.one * minScale;
@@ -41,9 +47,17 @@ public class ItemWheel : MonoBehaviour
     private void Update()
     {
         Vector3 movingPartsRotation = movingParts.rotation.eulerAngles;
-        Debug.Log("rotationSpeed " + rotationSpeed);
         movingPartsRotation.z += rotationSpeed * Time.deltaTime;
+        rotationCounter += rotationSpeed * Time.deltaTime;
         movingParts.rotation = Quaternion.Euler(movingPartsRotation);
+        if (rotationCounter > 360f)
+        {
+            Random rnd = new Random();
+
+            rotationCounter -= 360f;
+        }
+        
+        
     }
 
     IEnumerator Animate()
