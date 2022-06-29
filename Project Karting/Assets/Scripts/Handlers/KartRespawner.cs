@@ -1,5 +1,6 @@
 using Kart;
 using SplineEditor.Runtime;
+using UI;
 using UnityEngine;
 
 namespace Handlers
@@ -30,21 +31,23 @@ namespace Handlers
 
         public void Respawn(KartBase kart)
         {
-            BezierUtils.BezierPos respawnPos;
-            if (kart.lastGroundBezierPos != null)
-            {
-                respawnPos = kart.lastGroundBezierPos;
-            }
-            else
-            {
-                respawnPos = RaceManager.Instance.currentRace.road.bezierSpline.GetBezierPos(0);
-            }
-            kart.transform.position = respawnPos.GlobalOrigin + respawnPos.LocalUp * KartPhysicsSettings.instance.respawnHeight;
+            ScreenEffects.BlackFade(() => {
+                BezierUtils.BezierPos respawnPos;
+                if (kart.lastGroundBezierPos != null)
+                {
+                    respawnPos = kart.lastGroundBezierPos;
+                }
+                else
+                {
+                    respawnPos = RaceManager.Instance.currentRace.road.bezierSpline.GetBezierPos(0);
+                }
+                kart.transform.position = respawnPos.GlobalOrigin + respawnPos.LocalUp * KartPhysicsSettings.instance.respawnHeight;
             
-            kart.transform.rotation = respawnPos.Rotation;
+                kart.transform.rotation = respawnPos.Rotation;
 
-            kart.ResetForces();
-            kart.ResetMovements();
+                kart.ResetForces();
+                kart.ResetMovements();
+            });
         }
     }
 }
