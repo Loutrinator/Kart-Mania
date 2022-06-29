@@ -10,6 +10,8 @@ public class ItemWheel : MonoBehaviour
 {
     [Header("Wheel")]
     [SerializeField] private RectTransform movingParts;
+    [SerializeField] private Image currentItemImage;
+    [SerializeField] private RectTransform RectTransform;
     [SerializeField] private float minScale = 0.23f;
     [SerializeField] private float maxScale = 1;
 
@@ -41,7 +43,7 @@ public class ItemWheel : MonoBehaviour
         minArrowPos = arrowPos;
         
         arrow.localPosition = minArrowPos;
-        StartCoroutine(Animate());
+        StartSelection();
     }
 
     private void Update()
@@ -60,28 +62,46 @@ public class ItemWheel : MonoBehaviour
         
     }
 
-    IEnumerator Animate()
+    /// <summary>
+    /// Starts the complete animation of the wheel and picks an item
+    /// </summary>
+    public void StartSelection()
     {
-        WaitForSeconds wait1s = new WaitForSeconds(1f);
-        int count = 0;
-        while (count < 100)
+        ShowWheel();
+    }
+
+    private void ShowWheel()
+    {
+        arrow.DOLocalMove(maxArrowPos, zoomInLength).SetEase(Ease.OutBack);
+        movingParts.DOScale(maxScale, zoomInLength).SetEase(Ease.OutBack).OnComplete(Spin);
+    }
+    private void HideWheel()
+    {
+        arrow.DOLocalMove(minArrowPos, zoomInLength).SetEase(Ease.InBack);
+        movingParts.DOScale(minScale, zoomInLength).SetEase(Ease.InBack);
+    }
+
+    private void Spin()
+    {
+        DOTween.To(() => rotationSpeed, x => rotationSpeed = x, spinSpeed, 0.5f).SetEase(Ease.OutCubic).OnComplete(
+            () => DOTween.To(() => rotationSpeed, x => rotationSpeed = x, 0, 1.0f).SetDelay(spinLength-1.5f).SetEase(Ease.InOutCubic).OnComplete(PickItem).OnComplete(HideWheel));
+    }
+
+    private void PickItem()
+    {
+        foreach (var slot in slots)
         {
-            yield return wait1s;
-            arrow.DOLocalMove(maxArrowPos, zoomInLength).SetEase(Ease.OutBack);
-            movingParts.DOScale(maxScale, zoomInLength).SetEase(Ease.OutBack);
-            yield return new WaitForSeconds(zoomInLength);
-            DOTween.To(() => rotationSpeed, x => rotationSpeed = x, spinSpeed, 0.5f).SetEase(Ease.OutCubic);
-            yield return new WaitForSeconds(spinLength-1f);
-            DOTween.To(() => rotationSpeed, x => rotationSpeed = x, 0, 1.0f).SetEase(Ease.InOutCubic);
-            yield return wait1s;
-            Debug.Log("Item picked !");
-            yield return new WaitForSeconds(3f);
-            arrow.DOLocalMove(minArrowPos, zoomInLength).SetEase(Ease.InBack);
-            movingParts.DOScale(minScale, zoomInLength).SetEase(Ease.InBack);
-            yield return wait1s;
-            movingParts.DOKill();
-            arrow.DOKill();
-            count++;
+            if (slot.isPointedByArrow(8, 45f))
+            {
+                currentItemImage.sprite = slot.GetItem().GetIcon();
+                return;
+            }
         }
+        RectTransform.DOScale(1, 0.2f).SetEase(Ease.OutBack);
+        Debug.LogError("PAS DE SLOT CHOISIS");
+    }
+    public void UseItem()
+    {
+        RectTransform.DOScale(0, 0.2f).SetEase(Ease.InBack);
     }
 }
