@@ -5,7 +5,7 @@ using DG.Tweening;
 using Items;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public class ItemWheel : MonoBehaviour
 {
@@ -31,6 +31,14 @@ public class ItemWheel : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private List<ItemWheelSlot> slots;
     [SerializeField] private List<Sprite> sprites;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioSource clickSource;
+    [SerializeField] private AudioSource obtainedItemSource;
+    [SerializeField] private List<AudioClip> clickSounds;
+    private float elapsedBetweenClicks;
+    private bool playClicks;
+    
 
     private float rotationSpeed = 0f;
     private float rotationCounter = 0f;
@@ -57,11 +65,25 @@ public class ItemWheel : MonoBehaviour
         movingParts.rotation = Quaternion.Euler(movingPartsRotation);
         if (rotationCounter > 360f)
         {
-            Random rnd = new Random();
-
             rotationCounter -= 360f;
         }
-        
+
+        if (playClicks)
+        {
+            elapsedBetweenClicks += Time.deltaTime;
+            if (rotationSpeed > 0)
+            {
+                float timeBeforeClick = 45f / rotationSpeed;
+                if (elapsedBetweenClicks >= timeBeforeClick)
+                {
+                    //elapsedBetweenClicks -= timeBeforeClick;
+                    elapsedBetweenClicks = 0;
+                    AudioClip clickSound = clickSounds[Random.Range(0,clickSounds.Count)];
+                    clickSource.clip = clickSound;
+                    clickSource.Play();
+                }
+            }
+        }
         
     }
 
@@ -76,9 +98,20 @@ public class ItemWheel : MonoBehaviour
 
     private void ShowWheel()
     {
+        ResetWheel();
         arrow.DOLocalMove(maxArrowPos, zoomInLength).SetEase(Ease.OutBack);
         movingParts.DOScale(maxScale, zoomInLength).SetEase(Ease.OutBack).OnComplete(Spin);
     }
+
+    private void ResetWheel()
+    {
+        movingParts.rotation = Quaternion.Euler(Vector3.zero);
+        foreach (var slot in slots)
+        {
+            slot.Reset();
+        }
+    }
+
     private void HideWheel()
     {
         arrow.DOLocalMove(minArrowPos, zoomInLength).SetEase(Ease.InBack);
@@ -87,12 +120,16 @@ public class ItemWheel : MonoBehaviour
 
     private void Spin()
     {
+        playClicks = true;
+        elapsedBetweenClicks = 0;
         DOTween.To(() => rotationSpeed, x => rotationSpeed = x, spinSpeed, 0.5f).SetEase(Ease.OutCubic).OnComplete(
             () => DOTween.To(() => rotationSpeed, x => rotationSpeed = x, 0, 2.5f).SetEase(Ease.InOutSine).OnComplete(PickItem));
     }
 
     private void PickItem()
     {
+        obtainedItemSource.Play();
+        playClicks = false;
         currentItemTransform.DOScale(1, 0.2f).SetEase(Ease.OutBack).OnComplete(HideWheel);
         
         foreach (var slot in slots)

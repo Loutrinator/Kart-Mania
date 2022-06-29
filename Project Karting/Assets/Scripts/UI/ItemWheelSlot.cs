@@ -71,4 +71,10 @@ public class ItemWheelSlot : MonoBehaviour
         item = RaceManager.Instance.itemManager.GetRandomItem(0);
         image.sprite = item.GetIcon();
     }
+
+    public void Reset()
+    {
+        hidden = false;
+        image.enabled = true;
+    }
 }
