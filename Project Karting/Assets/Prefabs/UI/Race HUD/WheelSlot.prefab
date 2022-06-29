@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 880852586400914154}
+  rotationz: 0
 --- !u!1 &4097253367676358360
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,8 +85,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -160}
-  m_SizeDelta: {x: -320, y: -320}
+  m_AnchoredPosition: {x: 0, y: -225}
+  m_SizeDelta: {x: -450, y: -450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8417722162697509085
 CanvasRenderer:

@@ -1366,16 +1366,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingParts: {fileID: 5735169704727085202}
   currentItemImage: {fileID: 2197528710486993004}
-  RectTransform: {fileID: 4192826557609550513}
+  currentItemTransform: {fileID: 4192826557609550513}
   minScale: 0.23
   maxScale: 1
   arrow: {fileID: 6255364115331752967}
   minArrowX: 80
-  maxArrowX: 250
+  maxArrowX: 360
   zoomInLength: 0.5
   zoomOutLength: 0.8
-  spinLength: 6
-  spinSpeed: 50
+  spinLength: 2.5
+  spinSpeed: 500
   slots:
   - {fileID: 4715481268023344348}
   - {fileID: 2584648527028392409}
@@ -1414,7 +1414,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7634702959277593548}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.19080894, w: 0.9816273}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1422,7 +1422,7 @@ RectTransform:
   - {fileID: 6017847583063662283}
   m_Father: {fileID: 5012116485387632133}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 22}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}

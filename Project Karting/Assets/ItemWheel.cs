@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Items;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -11,7 +12,7 @@ public class ItemWheel : MonoBehaviour
     [Header("Wheel")]
     [SerializeField] private RectTransform movingParts;
     [SerializeField] private Image currentItemImage;
-    [SerializeField] private RectTransform RectTransform;
+    [SerializeField] private RectTransform currentItemTransform;
     [SerializeField] private float minScale = 0.23f;
     [SerializeField] private float maxScale = 1;
 
@@ -33,6 +34,8 @@ public class ItemWheel : MonoBehaviour
 
     private float rotationSpeed = 0f;
     private float rotationCounter = 0f;
+
+    private PlayerRaceInfo kart;
     private void Start()
     {
         movingParts.localScale = Vector3.one * minScale;
@@ -43,7 +46,7 @@ public class ItemWheel : MonoBehaviour
         minArrowPos = arrowPos;
         
         arrow.localPosition = minArrowPos;
-        StartSelection();
+        currentItemTransform.localScale = Vector3.zero;
     }
 
     private void Update()
@@ -65,8 +68,9 @@ public class ItemWheel : MonoBehaviour
     /// <summary>
     /// Starts the complete animation of the wheel and picks an item
     /// </summary>
-    public void StartSelection()
+    public void StartSelection(PlayerRaceInfo kartInfo)
     {
+        kart = kartInfo;
         ShowWheel();
     }
 
@@ -84,24 +88,30 @@ public class ItemWheel : MonoBehaviour
     private void Spin()
     {
         DOTween.To(() => rotationSpeed, x => rotationSpeed = x, spinSpeed, 0.5f).SetEase(Ease.OutCubic).OnComplete(
-            () => DOTween.To(() => rotationSpeed, x => rotationSpeed = x, 0, 1.0f).SetDelay(spinLength-1.5f).SetEase(Ease.InOutCubic).OnComplete(PickItem).OnComplete(HideWheel));
+            () => DOTween.To(() => rotationSpeed, x => rotationSpeed = x, 0, 2.5f).SetEase(Ease.InOutSine).OnComplete(PickItem));
     }
 
     private void PickItem()
     {
+        currentItemTransform.DOScale(1, 0.2f).SetEase(Ease.OutBack).OnComplete(HideWheel);
+        
         foreach (var slot in slots)
         {
             if (slot.isPointedByArrow(8, 45f))
             {
-                currentItemImage.sprite = slot.GetItem().GetIcon();
+                ItemData item = slot.GetItem();
+                Sprite sprite = item.GetIcon();
+                currentItemImage.sprite = sprite;
+                kart.Item = item.GiveItem(kart.kart.transform);
+                Debug.Log("foundSlot "+ sprite.name);
                 return;
             }
         }
-        RectTransform.DOScale(1, 0.2f).SetEase(Ease.OutBack);
         Debug.LogError("PAS DE SLOT CHOISIS");
     }
     public void UseItem()
     {
-        RectTransform.DOScale(0, 0.2f).SetEase(Ease.InBack);
+        currentItemTransform.DOKill();
+        currentItemTransform.DOScale(0, 0.2f).SetEase(Ease.InBack);
     }
 }

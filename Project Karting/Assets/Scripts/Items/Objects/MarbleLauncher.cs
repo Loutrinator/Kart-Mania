@@ -29,6 +29,8 @@ public class MarbleLauncher : ItemObject
     private Marble currentMarble;
     private bool marbleLocked;
 
+    private PlayerRaceInfo kartInfo;
+
     private void Start()
     {
         restPosition = marbleHolder.localPosition;
@@ -91,6 +93,7 @@ public class MarbleLauncher : ItemObject
         if (remainingMarbles <= 0)
         {
             yield return new WaitForSeconds(2f);
+            Use(kartInfo);
             Destroy(gameObject);
         }
     }
@@ -121,6 +124,7 @@ public class MarbleLauncher : ItemObject
 
     public override void OnKeyDown(PlayerRaceInfo info)
     {
+        kartInfo = info;
         Debug.Log("MarbleLauncher : OnKeyDown");
         if (!inUse)
         {
