@@ -93,6 +93,7 @@ namespace Items
         {
             if (collision.transform.GetComponent<Kart.KartBase>() && isStuck)
             {
+                if (collision.transform == transform.parent) return;
                 Debug.Log("collision : " + collision.transform.name);
                 Vector3 dir = collision.transform.position - transform.position;
                 Debug.DrawRay(transform.position, dir, Color.red, 2.0f);
