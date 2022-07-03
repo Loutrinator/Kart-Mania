@@ -12,6 +12,11 @@ namespace Items
         public Transform centerOfGravity;
         private Quaternion stuckRotation;
 
+        [SerializeField] private AudioSource source;
+        [SerializeField] private AudioClip soundThrown;
+        [SerializeField] private AudioClip soundStick;
+        [SerializeField] private AudioClip soundBump;
+
         private bool isStuck = false;
         private bool isThrown = false;
         private int nbCollisions = 0;
@@ -68,6 +73,10 @@ namespace Items
                             transform.right = newRight;
                             stuckRotation = Quaternion.LookRotation(newForward, newUp);
                             isStuck = true;
+                            source.clip = soundStick;
+                            source.Play();
+                            source.clip = soundBump;
+                            source.spatialBlend = 0;
                         }
                     }
                 }
@@ -82,7 +91,14 @@ namespace Items
 
         private void OnCollisionEnter(Collision collision)
         {
-            
+            if (collision.transform.GetComponent<Kart.KartBase>() && isStuck)
+            {
+                Debug.Log("collision : " + collision.transform.name);
+                Vector3 dir = collision.transform.position - transform.position;
+                Debug.DrawRay(transform.position, dir, Color.red, 2.0f);
+                collision.transform.GetComponent<Kart.KartBase>().currentForcesVelocity += dir * 1000;
+                source.Play();
+            }
         }
 
         private void OnDrawGizmos()
@@ -112,6 +128,8 @@ namespace Items
             rb.constraints = RigidbodyConstraints.None;
             rb.AddForce(-transform.forward * speed + info.kart.currentVelocity, ForceMode.Impulse);
             timeShooted = Time.time;
+            source.clip = soundThrown;
+            source.Play();
         }
 
         public override void OnKeyUp(PlayerRaceInfo info)
