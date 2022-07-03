@@ -45,6 +45,10 @@ namespace Player
             {
                 OnPause(ctx);
             }
+
+            if (ctx.action.name == _controls.Kart.Respawn.name) {
+                OnRespawn(ctx);
+            }
         }
         
         
@@ -68,6 +72,12 @@ namespace Player
         {
             if(GameManager.Instance != null)
                 GameManager.Instance.Pause(playerConfig);
+        }
+
+        public void OnRespawn(InputAction.CallbackContext context) {
+            if (GameManager.Instance != null) {
+                GameManager.Instance.respawner.Respawn(kart);
+            }
         }
         
     }
