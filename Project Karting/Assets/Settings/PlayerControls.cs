@@ -64,9 +64,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1777b6a-05fb-455b-8446-adf5fcc693a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Respawn"",
                     ""type"": ""Button"",
-                    ""id"": ""15d82aeb-a01f-4192-a4a8-6f5ec5382c05"",
+                    ""id"": ""ee66a8b6-4807-4faa-9138-eeefdee9d7d9"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -252,7 +261,29 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""335d1d70-482f-47bb-913a-f6c0d1bdadb2"",
+                    ""id"": ""d87e5b2b-c303-4019-88f6-b488ef40216d"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e05e7d3-8d4a-4fc9-a61a-089b1d20d5ab"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66147766-c26e-44ba-992b-212b53a8bcea"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -263,7 +294,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b04e2492-78b2-4ed6-9f88-22d110628ef3"",
+                    ""id"": ""b472788f-c9b5-44cf-82bd-1569d6009d9d"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -308,7 +339,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Back"",
                     ""type"": ""Button"",
-                    ""id"": ""dac727e8-4f96-4b43-ba0b-87de974345d8"",
+                    ""id"": ""8c14ac4a-8084-446b-b20d-87ad932df52e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -494,8 +525,19 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fc5649b0-8434-490b-ab5f-e8959eea6fbe"",
+                    ""id"": ""1880f5e6-ef70-4f87-bfa4-b2ab74682ed1"",
                     ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d17dc90-3500-48dc-9c60-72308d29c16f"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -514,6 +556,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Kart_Drift = m_Kart.FindAction("Drift", throwIfNotFound: true);
         m_Kart_Rearcamera = m_Kart.FindAction("Rear camera", throwIfNotFound: true);
         m_Kart_Pause = m_Kart.FindAction("Pause", throwIfNotFound: true);
+        m_Kart_Item = m_Kart.FindAction("Item", throwIfNotFound: true);
         m_Kart_Respawn = m_Kart.FindAction("Respawn", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -584,6 +627,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Kart_Drift;
     private readonly InputAction m_Kart_Rearcamera;
     private readonly InputAction m_Kart_Pause;
+    private readonly InputAction m_Kart_Item;
     private readonly InputAction m_Kart_Respawn;
     public struct KartActions
     {
@@ -593,6 +637,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Drift => m_Wrapper.m_Kart_Drift;
         public InputAction @Rearcamera => m_Wrapper.m_Kart_Rearcamera;
         public InputAction @Pause => m_Wrapper.m_Kart_Pause;
+        public InputAction @Item => m_Wrapper.m_Kart_Item;
         public InputAction @Respawn => m_Wrapper.m_Kart_Respawn;
         public InputActionMap Get() { return m_Wrapper.m_Kart; }
         public void Enable() { Get().Enable(); }
@@ -615,6 +660,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
+                @Item.started -= m_Wrapper.m_KartActionsCallbackInterface.OnItem;
+                @Item.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnItem;
+                @Item.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnItem;
                 @Respawn.started -= m_Wrapper.m_KartActionsCallbackInterface.OnRespawn;
                 @Respawn.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnRespawn;
                 @Respawn.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnRespawn;
@@ -634,6 +682,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Item.started += instance.OnItem;
+                @Item.performed += instance.OnItem;
+                @Item.canceled += instance.OnItem;
                 @Respawn.started += instance.OnRespawn;
                 @Respawn.performed += instance.OnRespawn;
                 @Respawn.canceled += instance.OnRespawn;
@@ -704,6 +755,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDrift(InputAction.CallbackContext context);
         void OnRearcamera(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnItem(InputAction.CallbackContext context);
         void OnRespawn(InputAction.CallbackContext context);
     }
     public interface IUIActions

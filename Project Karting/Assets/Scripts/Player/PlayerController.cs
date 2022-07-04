@@ -2,47 +2,48 @@
 using Handlers;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Items;
 using Kart;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Player
-{
-    public class PlayerController : KartController
-    {
+namespace Player {
+    public class PlayerController : KartController {
         private PlayerConfiguration playerConfig;
         [SerializeField] private PlayerInput input;
         private PlayerControls _controls;
-        private void Awake()
-        {
+
+        private void Awake() {
             var kart = GetComponent<KartBase>();
             _controls = new PlayerControls();
+            _controls.Enable();
+            _controls.Kart.Item.started += OnItemDown;
+            _controls.Kart.Item.performed += OnItemHold;
+            _controls.Kart.Item.canceled += OnItemUp;
         }
 
-        public void InitializePlayerConfiguration(PlayerConfiguration pc)
-        {
+        public void InitializePlayerConfiguration(PlayerConfiguration pc) {
             playerConfig = pc;
             playerConfig.Input.onActionTriggered += Input_OnActionTriggered;
             input = playerConfig.Input;
         }
 
-        private void Input_OnActionTriggered(InputAction.CallbackContext ctx)
-        {
-            if (ctx.action.name == _controls.Kart.Movement.name)
-            {
+        private void Input_OnActionTriggered(InputAction.CallbackContext ctx) {
+            if (ctx.action.name == _controls.Kart.Movement.name) {
                 OnMove(ctx);
             }
-            if (ctx.action.name == _controls.Kart.Drift.name)
-            {
+            else if (ctx.action.name == _controls.Kart.Drift.name) {
                 OnDrift(ctx);
             }
-            if (ctx.action.name == _controls.Kart.Rearcamera.name)
-            {
+            else if (ctx.action.name == _controls.Kart.Rearcamera.name) {
                 OnRearCamera(ctx);
             }
-            if (ctx.action.name == _controls.Kart.Pause.name || ctx.action.name == _controls.UI.Back.name)
-            {
+            else if (ctx.action.name == _controls.Kart.Pause.name || ctx.action.name == _controls.UI.Back.name) {
+                OnPause(ctx);
+            }
+            else if (ctx.action.name == _controls.Kart.Pause.name) {
                 OnPause(ctx);
             }
 
@@ -50,27 +51,37 @@ namespace Player
                 OnRespawn(ctx);
             }
         }
-        
-        
-        public void OnMove(InputAction.CallbackContext context)
-        {
+
+
+        public void OnItemUp(InputAction.CallbackContext context) {
+            OnItemUp();
+        }
+
+        public void OnItemHold(InputAction.CallbackContext context) {
+            OnItemHold();
+        }
+
+        public void OnItemDown(InputAction.CallbackContext context) {
+            OnItemDown();
+        }
+
+        public void OnMove(InputAction.CallbackContext context) {
             Move(context.ReadValue<Vector2>());
         }
 
-        public void OnDrift(InputAction.CallbackContext context)
-        {
+
+        public void OnDrift(InputAction.CallbackContext context) {
             Drift(context.ReadValueAsButton());
         }
-        public void OnRearCamera(InputAction.CallbackContext context)
-        {
-            if (kart != null)
-            {
-                kart.rear = context.ReadValue<float>() > 0 ;
+
+        public void OnRearCamera(InputAction.CallbackContext context) {
+            if (kart != null) {
+                kart.rear = context.ReadValue<float>() > 0;
             }
         }
-        public void OnPause(InputAction.CallbackContext context)
-        {
-            if(GameManager.Instance != null)
+
+        public void OnPause(InputAction.CallbackContext context) {
+            if (GameManager.Instance != null)
                 GameManager.Instance.Pause(playerConfig);
         }
 
@@ -79,7 +90,6 @@ namespace Player
                 GameManager.Instance.respawner.Respawn(kart);
             }
         }
-        
     }
 }
 /*public void Update()

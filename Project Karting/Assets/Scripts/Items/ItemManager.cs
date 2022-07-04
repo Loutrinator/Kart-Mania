@@ -17,7 +17,7 @@ namespace Items {
     public class ItemManager : ScriptableObject {
         [HideInInspector, SerializeField] public int nbItems;
         [HideInInspector, SerializeField] public int nbPositions;
-        [HideInInspector, SerializeField] public List<Item> items;
+        [HideInInspector, SerializeField] public List<ItemData> items;
         [HideInInspector, SerializeField] public List<ListProbability> itemProbabilities;
 
 
@@ -63,7 +63,7 @@ namespace Items {
 */
 
         [CanBeNull]
-        public Item GetRandomItem(int position) {
+        public ItemData GetRandomItem(int position) {
             float rnd = Random.value;
             for (int i = 0; i < itemProbabilities[position].Count; i++) {
                 ItemProbability proba = itemProbabilities[position][i];

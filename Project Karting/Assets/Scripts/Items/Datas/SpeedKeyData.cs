@@ -3,12 +3,24 @@ using UnityEngine;
 namespace Items
 {
     
-    [CreateAssetMenu(fileName="SpeedKey",menuName="ScriptableObjects/Items/SpeedKey",order=0)]
-    public class ItemSpeedKey : Item
+    [CreateAssetMenu(fileName="SpeedKeyData",menuName="ScriptableObjects/Items/SpeedKeyData",order=0)]
+    public class SpeedKeyData : ItemData
     {
         public Stats boost;
         public float duration;
-        public override void Use(PlayerRaceInfo info )
+        [SerializeField] private Sprite icon;
+
+        public override Sprite GetIcon()
+        {
+            return icon;
+        }
+        public override ItemObject GiveItem(Transform parent)
+        {
+            //WoodBox marbleLauncher = Instantiate(prefab,parent.position,parent.rotation,parent);
+            //marbleLauncher.ResetItem();
+            return null;//marbleLauncher;
+        }
+        /*public override void Use(PlayerRaceInfo info )
         {
             info.kart.keyhole.InsertKey(Keyhole.RewindMode.auto,() => KeyCrankedUp(info));
             base.Use(info);
@@ -37,6 +49,6 @@ namespace Items
 
         public override void OnKeyUp(PlayerRaceInfo info) {
             
-        }
+        }*/
     }
 }
