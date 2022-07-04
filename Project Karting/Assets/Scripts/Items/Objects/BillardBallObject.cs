@@ -11,10 +11,12 @@ namespace Items
         private void Start()
         {
             billardBall = GetComponent<BillardBall>();
+            billardBall.transform.GetChild(0).GetComponent<SphereCollider>().enabled = false;
         }
 
         public override void OnKeyDown(PlayerRaceInfo info)
         {
+            billardBall.transform.GetChild(0).GetComponent<SphereCollider>().enabled = true;
             transform.parent = null;
             billardBall.audioSource.PlayOneShot(billardBall.spawn);
             billardBall.isThrown = true;

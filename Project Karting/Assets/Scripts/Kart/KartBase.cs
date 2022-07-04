@@ -53,6 +53,9 @@ namespace Kart
         private float _currentAngularSpeed;
         private float _lerpedWheelDirection;
 
+        private Vector3 posFixed;
+        private Vector3 posLate;
+
         public bool canMove;
         
 
@@ -73,6 +76,8 @@ namespace Kart
                         Physics.IgnoreCollision(wheel, col);
                 }
             }
+            posFixed = transform.position;
+            posLate = transform.position;
         }
 
         private RaycastHit[] _overlapResults = new RaycastHit[1];
@@ -104,6 +109,8 @@ namespace Kart
 
         private void FixedUpdate()
         {
+            posFixed = transform.position;
+            AnimateWheels();
             if (cameraFollowPlayer != null)
             {
                 if (rear)
@@ -172,6 +179,11 @@ namespace Kart
             rigidBody.AddForce(transform.forward * (_currentSpeed), ForceMode.Acceleration);
         }
 
+        private void LateUpdate()
+        {
+            posLate = transform.position;
+        }
+
         private void ConvertStats()
         {
             convertedStats.acceleration = KartPhysicsSettings.instance.getAcceleration(vehicleStats.acceleration);
@@ -230,7 +242,8 @@ namespace Kart
         {
             _lerpedWheelDirection =
                 Mathf.Lerp(_lerpedWheelDirection, movement[0], KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime * 2f);
-            float angularSpeed = (_currentSpeed / (0.38f * (float) Math.PI) * 360f) % 360f;
+            Vector3 dir = posFixed - posLate;
+            float angularSpeed = (Vector3.Dot(dir.normalized, transform.forward.normalized) * dir.magnitude/ 0.38f * Mathf.PI * 360f) / 360f;
             foreach (var turningWheel in turningWheels)
             {
                 turningWheel.localEulerAngles = Vector3.up * (_lerpedWheelDirection * KartPhysicsSettings.instance.kartWheelAngle);
@@ -238,7 +251,7 @@ namespace Kart
 
             foreach (var wheel in wheels)
             {
-                //wheel.localEulerAngles = Vector3.right * angularSpeed;
+                wheel.transform.GetChild(0).Rotate(Vector3.right, angularSpeed);
             }
         }
 
