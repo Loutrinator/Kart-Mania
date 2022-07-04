@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 798430383561658300}
   - component: {fileID: 6750125388984460949}
   - component: {fileID: 4909379082798383015}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: WoodBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +82,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6750125388984460949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +95,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5469d9e575814bb2839bada9ae26c774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effect:
+    topSpeed: 0
+    acceleration: 0
+    maniability: 0
+    weight: 0
+    luck: 0
+  effectDuration: 0
   throwingDistance: 0.1
   spawnAnimationDuration: 0.15
   throwAnimationDuration: 0.4
@@ -188,7 +197,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158661248045149801}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.7005959, y: 1.7039835, z: 1.7282156}

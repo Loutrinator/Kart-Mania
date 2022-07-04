@@ -57,6 +57,7 @@ namespace Kart
         private Vector3 posLate;
 
         public bool canMove;
+        public bool isDamaged = false;
         
 
         protected void Awake()
@@ -109,74 +110,89 @@ namespace Kart
 
         private void FixedUpdate()
         {
-            posFixed = transform.position;
-            AnimateWheels();
-            if (cameraFollowPlayer != null)
+            if (isDamaged)
             {
-                if (rear)
-                {
-                    cameraFollowPlayer.switchCameraMode(CameraMode.rear);
-                }
-                else
-                {
-                    cameraFollowPlayer.switchCameraMode(CameraMode.front);
-                }
-            }
-            
-            if (RaceManager.Instance.gameState == GameState.start)
-            {
-                if (movement[1] > 0)
-                {
-                    effects.Rewind();
-                }
-            }
-            if (!RaceManager.Instance.RaceHadBegun() || !canMove) return;
-            
-            ConvertStats();
-            ApplyPowerups();
-
-            bool isReverse = Vector3.Dot(transform.forward, rigidBody.velocity.normalized) < 0;
-            float rotationDirection = isReverse ? -movement[0] : movement[0];
-            
-            
-            if (IsGrounded())
-            {
-                Move(movement[1]);
-                if (IsGrounded() && drift && !drifting && (movement[0] < 0 || movement[0] > 0) && rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToDrift)
-                {
-                    StartDrift(rotationDirection);
-                }
+                var voiture = transform.Find("Voiture");
+                voiture.Rotate(Vector3.up, Time.deltaTime * 250.0f);
             }
             else
             {
-                if (movement[1] != 0)
+                posFixed = transform.position;
+                AnimateWheels();
+                if (cameraFollowPlayer != null)
                 {
-                    rotationDirection = 0;
+                    if (rear)
+                    {
+                        cameraFollowPlayer.switchCameraMode(CameraMode.rear);
+                    }
+                    else
+                    {
+                        cameraFollowPlayer.switchCameraMode(CameraMode.front);
+                    }
+                }
+
+                if (RaceManager.Instance.gameState == GameState.start)
+                {
+                    if (movement[1] > 0)
+                    {
+                        effects.Rewind();
+                    }
+                }
+                if (!RaceManager.Instance.RaceHadBegun() || !canMove) return;
+
+                ConvertStats();
+                ApplyPowerups();
+
+                bool isReverse = Vector3.Dot(transform.forward, rigidBody.velocity.normalized) < 0;
+                float rotationDirection = isReverse ? -movement[0] : movement[0];
+
+
+                if (IsGrounded())
+                {
+                    Move(movement[1]);
+                    if (IsGrounded() && drift && !drifting && (movement[0] < 0 || movement[0] > 0) && rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToDrift)
+                    {
+                        StartDrift(rotationDirection);
+                    }
+                }
+                else
+                {
+                    if (movement[1] != 0)
+                    {
+                        rotationDirection = 0;
+                        currentAngularVelocity = Vector3.zero;
+                    }
+
+                }
+
+                if (rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToTurn) //on tourne pas à l'arret
+                {
+                    if (drifting)
+                    {
+                        if (!drift)
+                        {
+                            StopDrifting();
+                        }
+                        else
+                        {
+                            float minDrift = KartPhysicsSettings.instance.getMinDrift(vehicleStats.maniability);
+                            float driftAngle = (1 + rotationDirection * driftDirection) / 2 * (KartPhysicsSettings.instance.getMaxDrift(vehicleStats.maniability) - minDrift) + minDrift;
+                            driftAngle *= driftDirection;
+                            Rotate(driftAngle);
+                        }
+                    }
+                    else
+                    {
+                        Rotate(rotationDirection);
+                    }
+                }
+                else
+                {
                     currentAngularVelocity = Vector3.zero;
                 }
 
+                rigidBody.AddForce(transform.forward * (_currentSpeed), ForceMode.Acceleration);
             }
-
-            if (rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToTurn) //on tourne pas à l'arret
-            {
-                if (drifting) {
-                    if (!drift) {
-                        StopDrifting();
-                    }else
-                    {
-                        float minDrift = KartPhysicsSettings.instance.getMinDrift(vehicleStats.maniability);
-                        float driftAngle = (1 + rotationDirection * driftDirection) / 2 * (KartPhysicsSettings.instance.getMaxDrift(vehicleStats.maniability) - minDrift) + minDrift;
-                        driftAngle *= driftDirection;
-                        Rotate(driftAngle);
-                    }
-                }else {
-                    Rotate(rotationDirection);
-                }
-            }else {
-                currentAngularVelocity = Vector3.zero;
-            }
-            
-            rigidBody.AddForce(transform.forward * (_currentSpeed), ForceMode.Acceleration);
         }
 
         private void LateUpdate()
