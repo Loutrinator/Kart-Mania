@@ -11,11 +11,14 @@ public class BillardBall : PhysicsObject
     [SerializeField] private AudioClip roll;
     [SerializeField] private AudioClip bounce;
 
+    private bool onGround = true;
+
     public float coeff;
     public float lifetime = 20.0f;
 
     public bool isThrown = false;
     public float time;
+    public float invulOffGround = 5.0f;
     public override bool IsGrounded()
     {
         return false;
@@ -50,10 +53,30 @@ public class BillardBall : PhysicsObject
                     if(!audioSource.isPlaying) audioSource.Play();
                 }
                 time -= Time.deltaTime;
-                if (time <= 0)
+                if (time <= 0 && onGround)
                 {
                     isThrown = false;
                     Destroy(gameObject);
+                }
+            }
+
+            if (!onGround)
+            {
+                invulOffGround -= Time.deltaTime;
+                if(invulOffGround < 0)
+                {
+                    if (!audioSource.clip != pop)
+                    {
+                        audioSource.loop = false;
+                        audioSource.clip = pop;
+                        if (!audioSource.isPlaying) audioSource.Play();
+                    }
+                    time -= Time.deltaTime;
+                    if (time <= 0)
+                    {
+                        isThrown = false;
+                        Destroy(gameObject);
+                    }
                 }
             }
         }
@@ -61,9 +84,23 @@ public class BillardBall : PhysicsObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 10) return;
+        if (collision.gameObject.layer == 10)
+        {
+            onGround = true;
+            time = pop.length;
+            invulOffGround = 5.0f;
+            return;
+        }
         audioSource.loop = false;
         audioSource.clip = bounce;
         audioSource.Play();
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.layer == 10)
+        {
+            onGround = false;
+        }
     }
 }

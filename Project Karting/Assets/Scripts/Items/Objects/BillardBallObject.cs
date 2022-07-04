@@ -15,9 +15,8 @@ namespace Items
 
         public override void OnKeyDown(PlayerRaceInfo info)
         {
-            //billardBall.audioSource.clip = billardBall.spawn;
-            //billardBall.audioSource.Play();
             transform.parent = null;
+            billardBall.audioSource.PlayOneShot(billardBall.spawn);
             billardBall.isThrown = true;
             billardBall.rigidBody.isKinematic = false;
             billardBall.rigidBody.constraints = RigidbodyConstraints.None;
