@@ -22,13 +22,10 @@ namespace Kart {
 
         private float kartDir = 0;
 
-        private void Update()
-        {
-            kartDir = Mathf.Lerp(kartDir, target.GetDirection(), KartPhysicsSettings.instance.cameraKartDirectionLerp * Time.deltaTime);
-        }
-
         private void LateUpdate()
         {
+            kartDir = Mathf.Lerp(kartDir, target.GetDirection(), KartPhysicsSettings.instance.cameraKartDirectionLerp * Time.deltaTime);
+
             Vector3 targetPos = target.transform.position;
             if(currentCameraMode == CameraMode.front) targetPos += transform.right * kartDir * KartPhysicsSettings.instance.cameraSideAmplitude;
             

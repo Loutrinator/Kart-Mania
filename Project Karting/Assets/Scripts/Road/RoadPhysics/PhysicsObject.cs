@@ -36,12 +36,14 @@ namespace Road.RoadPhysics {
 
             if (IsGrounded())
             {
-                _currentGravityVelocity = currentGravityAcceleration * Time.fixedDeltaTime;
+                //_currentGravityVelocity = currentGravityAcceleration * Time.fixedDeltaTime;
+                rigidBody.AddForce(currentGravityAcceleration, ForceMode.Acceleration);
                 lastGroundBezierPos = closestBezierPos;
             }
             else
             {
-                _currentGravityVelocity += currentGravityAcceleration * (Time.fixedDeltaTime * 10f);
+                rigidBody.AddForce(currentGravityAcceleration * 10f, ForceMode.Acceleration);
+                //_currentGravityVelocity += currentGravityAcceleration * (Time.fixedDeltaTime * 10f);
             }
             
             /*rigidBody.velocity = currentVelocity + _currentGravityVelocity + currentForcesVelocity;
@@ -51,7 +53,7 @@ namespace Road.RoadPhysics {
             currentForcesVelocity -= currentForcesVelocity * drag;
 
             rigidBody.AddForce(currentVelocity, ForceMode.Acceleration);
-            rigidBody.AddForce(currentGravityAcceleration * 10f, ForceMode.Acceleration);
+            //rigidBody.AddForce(currentGravityAcceleration * 10f, ForceMode.Acceleration);
             rigidBody.AddForce(currentForcesVelocity,ForceMode.Impulse);
             rigidBody.angularVelocity = currentAngularVelocity;
         }
