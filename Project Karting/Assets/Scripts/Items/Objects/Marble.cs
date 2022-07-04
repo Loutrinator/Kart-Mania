@@ -51,5 +51,10 @@ namespace Items
             yield return new WaitForSeconds(10f);
             Destroy(gameObject);
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Destroy(marbleExplosion.gameObject);
+        }
     }
 }
