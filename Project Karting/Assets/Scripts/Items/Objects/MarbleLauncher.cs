@@ -28,6 +28,7 @@ public class MarbleLauncher : ItemObject
     private int remainingMarbles = 3;
     private Marble currentMarble;
     private bool marbleLocked;
+    private List<Marble> marblePreviews;
 
     private PlayerRaceInfo kartInfo;
 
@@ -37,6 +38,15 @@ public class MarbleLauncher : ItemObject
         leftRubber.positionCount = leftRubberAttachment.Count;
         rightRubber.positionCount = rightRubberAttachment.Count;
         ResetItem();
+        ShowItem();
+    }
+
+    private void Update()
+    {
+        foreach (var m in marblePreviews)
+        {
+            m.transform.RotateAround(transform.position,transform.up,360*Time.deltaTime);
+        }
     }
 
     private void FixedUpdate()
@@ -107,6 +117,14 @@ public class MarbleLauncher : ItemObject
 
         remainingMarbles = maxMarbles;
         inUse = false;
+        marblePreviews = new List<Marble>();
+        for (int i = 0; i < 3; i++)
+        {
+            Marble m = Instantiate(marblePrefab, transform.position + transform.forward * 3f,transform.rotation,transform);
+            m.transform.RotateAround(transform.position,transform.up,120f*i);
+            marblePreviews.Add(m);
+        }
+    
     }
 
     private void ShowItem()
@@ -126,11 +144,6 @@ public class MarbleLauncher : ItemObject
     {
         kartInfo = info;
         Debug.Log("MarbleLauncher : OnKeyDown");
-        if (!inUse)
-        {
-            inUse = true;
-            ShowItem();
-        }
         StretchRubber();
     }
 
