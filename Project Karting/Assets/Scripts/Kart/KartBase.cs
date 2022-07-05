@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Handlers;
 using Road.RoadPhysics;
 using UnityEngine;
@@ -113,7 +114,7 @@ namespace Kart
             if (isDamaged)
             {
                 var voiture = transform.Find("Voiture");
-                voiture.Rotate(Vector3.up, Time.deltaTime * 250.0f);
+                voiture.DOLocalRotate(Vector3.up, 1, RotateMode.FastBeyond360).SetLoops(3, LoopType.Incremental).OnComplete(()=> { isDamaged = false; });
             }
             else
             {
@@ -334,5 +335,6 @@ namespace Kart
         {
             return _currentSpeed;
         }
+
     }
 }
