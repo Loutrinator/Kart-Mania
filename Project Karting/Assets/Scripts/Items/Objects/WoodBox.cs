@@ -85,13 +85,13 @@ namespace Items
             //}
         }*/
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            if (collision.gameObject.GetComponent<KartBase>())
+            if (other.GetComponentInParent<KartBase>())
             {
-                KartBase kart = collision.transform.GetComponent<KartBase>();
-                kart.isDamaged = true;
-                Debug.Log("Collision Caisse : " + collision.transform.name);
+                KartBase kart = other.GetComponentInParent<KartBase>();
+                kart.Damaged();
+                Debug.Log("Collision Caisse : " + other.name);
                 Destroy(gameObject);
             }
         }

@@ -111,12 +111,7 @@ namespace Kart
 
         private void FixedUpdate()
         {
-            if (isDamaged)
-            {
-                var voiture = transform.Find("Voiture");
-                voiture.DOLocalRotate(Vector3.up, 1, RotateMode.FastBeyond360).SetLoops(3, LoopType.Incremental).OnComplete(()=> { isDamaged = false; });
-            }
-            else
+            if (!isDamaged)
             {
                 posFixed = transform.position;
                 AnimateWheels();
@@ -334,6 +329,13 @@ namespace Kart
         public float CurrentSpeed()
         {
             return _currentSpeed;
+        }
+
+        public void Damaged()
+        {
+            isDamaged = true;
+            var voiture = transform.Find("Voiture");
+            voiture.DOLocalRotate(Vector3.up, 0.6f, RotateMode.FastBeyond360).SetLoops(3, LoopType.Restart).SetEase(Ease.Linear).OnComplete(() => { isDamaged = false; });
         }
 
     }
