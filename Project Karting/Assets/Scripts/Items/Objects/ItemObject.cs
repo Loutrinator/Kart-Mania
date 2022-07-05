@@ -9,6 +9,10 @@ namespace Items
         public virtual void Use(PlayerRaceInfo info)
         {
             info.Item = null;
+            if (info.kart.itemWheel != null)
+            {
+                info.kart.itemWheel.UseItem();
+            }
         }
 
         public abstract void ResetItem();

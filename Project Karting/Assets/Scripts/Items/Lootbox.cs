@@ -41,10 +41,23 @@ namespace Items
 
         private void GiveItem(int position, KartBase kart)
         {
+            PlayerRaceInfo infos = RaceManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID());
+            if (kart.itemWheel != null)
+            {
+                kart.itemWheel.StartSelection(infos);
+            }else
+            {
+                StartCoroutine(giveItemNoUI(position, infos));
+            }
+        }
+
+        private IEnumerator giveItemNoUI(int position, PlayerRaceInfo infos)
+        {
             ItemData item = RaceManager.Instance.itemManager.GetRandomItem(position);
             if (item != null)
             {
-                RaceManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID()).Item = item.GiveItem(kart.transform);
+                yield return new WaitForSeconds(3f);
+                infos.Item = item.GiveItem(infos.kart.transform);
             }
         }
 
