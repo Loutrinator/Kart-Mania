@@ -225,10 +225,12 @@ namespace Handlers {
                     }
                     
                     //Adding a the HUD and linking it to the cam
-                    Canvas timetrialHUD = Instantiate(HUDPRefab).GetComponent<Canvas>(); // id automatically set inside the class
-                    timetrialHUD.worldCamera = kartCam.cam;
-                    timetrialHUD.planeDistance = 1;
-                    timetrialHUD.sortingOrder = 100000;
+                    HUDTimeTrialController timetrialHUD = Instantiate(HUDPRefab); // id automatically set inside the class
+                    kart.itemWheel = timetrialHUD.itemWheel;
+                    Canvas timeTrialCanvas = timetrialHUD.GetComponent<Canvas>();
+                    timeTrialCanvas.worldCamera = kartCam.cam;
+                    timeTrialCanvas.planeDistance = 1;
+                    timeTrialCanvas.sortingOrder = 100000;
                     
                     //Adding the kart marker to the minimap
                     minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer, playerConfig.Color);

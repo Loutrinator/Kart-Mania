@@ -11,7 +11,7 @@ namespace UI {
         [SerializeField] private TextMeshProUGUI timeDiff;
         [SerializeField] private TextMeshProUGUI lap;
         [SerializeField] private TextMeshProUGUI speed;
-        [SerializeField] private Image iconPlaceholder;
+        public ItemWheel itemWheel;
 
         private PlayerRaceInfo _info;
         private int _id;

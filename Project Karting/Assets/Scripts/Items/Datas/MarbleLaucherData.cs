@@ -17,6 +17,7 @@ namespace Items
         {
             MarbleLauncher marbleLauncher = Instantiate(marbleLauncherPrefab,parent.position,parent.rotation,parent);
             marbleLauncher.ResetItem();
+            marbleLauncher.ShowItem();
             return marbleLauncher;
         }
     }

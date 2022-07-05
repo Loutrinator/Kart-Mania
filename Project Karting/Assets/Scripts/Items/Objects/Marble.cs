@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Items
 {
@@ -15,7 +16,7 @@ namespace Items
 
         public void LateUpdate()
         {
-            if (shockwaveActivated)
+            if (shockwaveActivated && marbleExplosion != null)
             {
                 marbleExplosion.transform.localRotation = Quaternion.LookRotation(Vector3.right,-rb.velocity);
             }
@@ -24,6 +25,10 @@ namespace Items
         public void SetColor(Color color)
         {
             insideRenderer.material.SetColor("MainColor", color);
+        }
+        public void SetRandomColor()
+        {
+            insideRenderer.material.SetColor("MainColor", Random.ColorHSV(0f, 1f, 0f, 0.9f, 1f, 1f));
         }
 
         public void Freeze()
@@ -50,6 +55,11 @@ namespace Items
         {
             yield return new WaitForSeconds(10f);
             Destroy(gameObject);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Destroy(marbleExplosion.gameObject);
         }
     }
 }
