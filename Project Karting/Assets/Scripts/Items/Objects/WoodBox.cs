@@ -74,18 +74,30 @@ namespace Items
         {
             
         }
+        /*private void OnTriggerEnter(Collider other)
+        {
+            //if (other.transform.name.Contains("kart"))
+            //{
+                //KartBase kart = other.GetComponent<KartCollisions>().kartBase;
+                //kart.AddPowerup(_powerup);
+                Debug.Log("Collision Caisse : " + other.name);
+                //Destroy(gameObject);
+            //}
+        }*/
+
         private void OnTriggerEnter(Collider other)
         {
-            KartBase kart = other.GetComponent<KartCollisions>()?.kartBase;
-            if (kart != null)
+            if (other.GetComponentInParent<KartBase>())
             {
-                kart.AddPowerup(_powerup);
+                KartBase kart = other.GetComponentInParent<KartBase>();
+                kart.Damaged();
+                Debug.Log("Collision Caisse : " + other.name);
                 Destroy(gameObject);
             }
         }
-        
+
         public override void OnKeyDown(PlayerRaceInfo info) {
-        
+            transform.parent = null;
         }
 
         public override void OnKeyUp(PlayerRaceInfo info)
@@ -99,7 +111,7 @@ namespace Items
 
         public override void ResetItem()
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public override void OnKeyHold(PlayerRaceInfo info)
