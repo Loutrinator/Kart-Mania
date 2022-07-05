@@ -98,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3950626799811348594
 Transform:
   m_ObjectHideFlags: 0
@@ -392,6 +392,7 @@ Transform:
   - {fileID: 8501175983059884462}
   - {fileID: 582435406672038735}
   - {fileID: 3950626799811348594}
+  - {fileID: 3658044863153529727}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -426,6 +427,8 @@ MonoBehaviour:
   - {fileID: 2856396963147231558}
   - {fileID: 4904347193758867297}
   marbleHolder: {fileID: 8501175983059884462}
+  marblePreviewParent: {fileID: 3658044863153529727}
+  previewRotateSpeed: 180
   releaseSpeed: 0.5
   releaseTiming: 0.1
   throwIntensity: 3
@@ -776,6 +779,36 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1 &4415057181401648306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3658044863153529727}
+  m_Layer: 0
+  m_Name: preview
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3658044863153529727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4415057181401648306}
+  m_LocalRotation: {x: 0.000000029802326, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 5.185, z: -4.218994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3076918778419459089}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6948131290754655201
 GameObject:
   m_ObjectHideFlags: 0

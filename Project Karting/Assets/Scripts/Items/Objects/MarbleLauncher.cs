@@ -16,6 +16,8 @@ public class MarbleLauncher : ItemObject
     [SerializeField] private List<Transform> rightRubberAttachment;
     [SerializeField] private List<Renderer> renderers;
     [SerializeField] private Transform marbleHolder;
+    [SerializeField] private Transform marblePreviewParent;
+    [SerializeField] private float  previewRotateSpeed = 180f;
     [SerializeField] private float releaseSpeed = 0.25f;
     [SerializeField] private float releaseTiming = 0.10f;
     [SerializeField] private float throwIntensity = 0.01f;
@@ -27,7 +29,7 @@ public class MarbleLauncher : ItemObject
     private Vector3 restPosition;
     private int remainingMarbles = 3;
     private Marble currentMarble;
-    private bool marbleLocked;
+    private bool marbleLocked = false;
     private List<Marble> marblePreviews;
 
     private PlayerRaceInfo kartInfo;
@@ -37,24 +39,11 @@ public class MarbleLauncher : ItemObject
         restPosition = marbleHolder.localPosition;
         leftRubber.positionCount = leftRubberAttachment.Count;
         rightRubber.positionCount = rightRubberAttachment.Count;
-        ResetItem();
-        ShowItem();
     }
 
     private void Update()
     {
-        foreach (var m in marblePreviews)
-        {
-            m.transform.RotateAround(transform.position,transform.up,360*Time.deltaTime);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        leftRubber.SetPosition(0,leftRubberAttachment[0].position);
-        leftRubber.SetPosition(1,leftRubberAttachment[1].position);
-        rightRubber.SetPosition(0,rightRubberAttachment[0].position);
-        rightRubber.SetPosition(1,rightRubberAttachment[1].position);
+        marblePreviewParent.localEulerAngles += Vector3.up * previewRotateSpeed * Time.deltaTime;
     }
 
     private void LateUpdate()
@@ -63,6 +52,11 @@ public class MarbleLauncher : ItemObject
         {
             currentMarble.transform.position = marbleHolder.position;
         }
+        
+        leftRubber.SetPosition(0,leftRubberAttachment[0].position);
+        leftRubber.SetPosition(1,leftRubberAttachment[1].position);
+        rightRubber.SetPosition(0,rightRubberAttachment[0].position);
+        rightRubber.SetPosition(1,rightRubberAttachment[1].position);
     }
 
     public void StretchRubber()
@@ -85,9 +79,11 @@ public class MarbleLauncher : ItemObject
 
     private void LoadMarble()
     {
+        Destroy(marblePreviews[remainingMarbles-1].gameObject);
+        marblePreviews.RemoveAt(remainingMarbles-1);
         marbleLocked = true;
         currentMarble = Instantiate(marblePrefab, marbleHolder.position, marbleHolder.rotation);
-        currentMarble.SetColor(Random.ColorHSV(0f, 1f, 0f, 0.9f, 1f, 1f));
+        currentMarble.SetRandomColor();
     }
     private IEnumerator waitToRelease()
     {
@@ -120,14 +116,20 @@ public class MarbleLauncher : ItemObject
         marblePreviews = new List<Marble>();
         for (int i = 0; i < 3; i++)
         {
-            Marble m = Instantiate(marblePrefab, transform.position + transform.forward * 3f,transform.rotation,transform);
-            m.transform.RotateAround(transform.position,transform.up,120f*i);
+            Marble m = Instantiate(marblePrefab, marblePreviewParent.position,marblePreviewParent.rotation,marblePreviewParent);
+            Destroy(m.GetComponent<Collider>());
+            Destroy(m.GetComponent<Rigidbody>());
+            m.transform.localEulerAngles = new Vector3(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
+            m.SetRandomColor();
+            float angleRadian = 120f * i * Mathf.Deg2Rad;
+            m.transform.localPosition +=  new Vector3(Mathf.Cos(angleRadian)*2f,0f,Mathf.Sin(angleRadian)*2f);
+            //m.transform.RotateAround(marblePreviewParent.position,marblePreviewParent.up,120f*i);
             marblePreviews.Add(m);
         }
     
     }
 
-    private void ShowItem()
+    public void ShowItem()
     {
         foreach (var renderer in renderers)
         {
