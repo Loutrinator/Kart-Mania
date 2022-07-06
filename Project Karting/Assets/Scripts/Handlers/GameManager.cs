@@ -74,6 +74,7 @@ namespace Handlers {
             gamePaused = false;
             pauseMenu = FindObjectOfType<PauseMenu>();
             _lastPauseTime = Time.unscaledTime;
+
             yield return null;
         }
 
@@ -125,7 +126,14 @@ namespace Handlers {
         {
             SoundManager.Instance.PlayRaceMusic();
             HUDTimeTrialController._nbInstances = 0;
-            
+
+            var mode = LevelManager.instance.gameConfig.mode;
+            if (mode == Game.GameMode.TimeTrial)
+            {
+                //Debug.Log();
+                RaceManager.Instance.currentRace.road.transform.parent.Find("LOOTBOX").gameObject.SetActive(false);
+            }
+
             RaceManager.Instance.gameState = GameState.start;
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
 
