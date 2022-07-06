@@ -51,6 +51,7 @@ public class PauseMenu : MonoBehaviour
     public void MainMenu()
     {
         SoundManager.Instance.PlayUIClick();
+        LevelManager.instance.OnRaceQuit(_playerConfigurationPaused);
         _playerConfigurationPaused = null;
         ResumeGame();
         TransitionController.Instance.FadeIn(() =>
