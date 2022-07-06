@@ -246,27 +246,17 @@ namespace Kart
             }
         }
 
-        
-        
-        
-        
-        public void startBoost(float length, float force)
+
+
+        public void ApplyPowerup(StatPowerup powerup, ShakeTransformEventData shake,float length, float force)
         {
-
-            cameraFollowPlayer.cameraShakeTransform.AddShakeEvent(DriftSettings.instance.boostShake[driftLevel - 1]); 
-            boostCoeff = DriftSettings.instance.driftLevelCoeff[driftLevel-1];
-            Stats statModifier = new Stats();
-            statModifier.acceleration = 200000f;
-            statModifier.topSpeed = DriftSettings.instance.boostBaseStrength * boostCoeff;
-            float duration = DriftSettings.instance.boostDuration[driftLevel - 1];
-            StatPowerup boost = new StatPowerup(statModifier, duration);
-            kart.AddPowerup(boost);
-
+            kart.AddPowerup(powerup);
+            cameraFollowPlayer.cameraShakeTransform.AddShakeEvent(shake);
             foreach (var spark in boostSparksEmitters)
             {
                 spark.Play();
             }
-
+            
             boostLength = length;
             boostStrength = force;
             boostStartTime = Time.time;
@@ -278,8 +268,20 @@ namespace Kart
                 float low = DriftSettings.instance.boostLowVibration * boostCoeff;
                 float high = DriftSettings.instance.boostHighVibration * boostCoeff;
                             
-                kart.rumbler.RumbleConstant(low,high, duration);
+                kart.rumbler.RumbleConstant(low,high, length);
             }
+        }
+        
+        public void startBoost(float length, float force)
+        {
+            ShakeTransformEventData shake = DriftSettings.instance.boostShake[driftLevel - 1];
+            boostCoeff = DriftSettings.instance.driftLevelCoeff[driftLevel-1];
+            Stats statModifier = new Stats();
+            statModifier.acceleration = 200000f;
+            statModifier.topSpeed = DriftSettings.instance.boostBaseStrength * boostCoeff;
+            float duration = DriftSettings.instance.boostDuration[driftLevel - 1];
+            StatPowerup boost = new StatPowerup(statModifier, duration);
+            ApplyPowerup(boost, shake,length,force);
         }
 
         public void stopBoost()
@@ -304,7 +306,7 @@ namespace Kart
             if (!keyIsRewinding)
             {
                 timeWhenKeyInserted = Time.time;
-                _keyhole.Rewind();
+                _keyhole.Rewind(null);
                 keyIsRewinding = true;
             }
         }

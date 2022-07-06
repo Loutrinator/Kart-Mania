@@ -295,6 +295,7 @@ namespace Kart
             {
                 if (p.elapsedTime > p.maxTime)
                 {
+                    Debug.Log("REMOVE POWERUP");
                     p.powerupUsed?.Invoke();
                     return true;
                 }
@@ -306,6 +307,7 @@ namespace Kart
             for (int i = 0; i < activePowerupList.Count; i++)
             {
                 
+                Debug.Log("activePowerupList powerup : " + i);
                 var p = activePowerupList[i];
                 // on met a jour le compteur de temps écoulé depuis l'obtention du powerup
                 p.elapsedTime += Time.fixedDeltaTime;
@@ -322,6 +324,7 @@ namespace Kart
 
         public void AddPowerup(StatPowerup powerup)
         {
+            Debug.Log("Add pawarap");
             activePowerupList.Add(powerup);
         }
 

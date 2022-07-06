@@ -37,43 +37,28 @@ namespace Player
         
         public void OnItemUp()
         {
-            Debug.Log("ON ITEM UP");
             ItemObject item = info.Item;
             if (item != null)
             {
                 item.OnKeyUp(info);
             }
-            else
-            {
-                Debug.Log("No item");
-            }
         }
         
         public void OnItemHold()
         {
-            Debug.Log("ON ITEM HOLD");
             ItemObject item = info.Item;
             if (item != null)
             {
                 item.OnKeyHold(info);
             }
-            else
-            {
-                Debug.Log("No item");
-            }
         }
         
         public void OnItemDown()
         {
-            Debug.Log("ON ITEM DOWN");
             ItemObject item = info.Item;
             if (item != null)
             {
                 item.OnKeyDown(info);
-            }
-            else
-            {
-                Debug.Log("No item");
             }
         }
     }
