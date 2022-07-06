@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Kart;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -59,7 +60,14 @@ namespace Items
 
         private void OnCollisionEnter(Collision collision)
         {
+            
             Destroy(marbleExplosion.gameObject);
+            KartBase k = collision.collider.GetComponentInParent<KartBase>();
+            if (k != null)
+            {
+                k.Damaged();
+                Destroy(gameObject);
+            }
         }
     }
 }
