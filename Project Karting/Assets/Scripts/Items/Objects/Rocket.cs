@@ -16,6 +16,7 @@ namespace Items {
         private bool _active;
 
         private KartBase _target;
+        private bool targetFound;
 
         public override void ResetItem() {
             rocketObject.localPosition = Vector3.zero;
@@ -39,6 +40,10 @@ namespace Items {
                 .Aggregate((curMin, x) =>
                     x.getDistanceTraveled(roadLength) < curMin.getDistanceTraveled(roadLength) ? x : curMin)
                 .kart;
+            if (_target != null)
+            {
+                targetFound = true;
+            }
         }
 
         public override void OnKeyUp(PlayerRaceInfo info) {
@@ -47,14 +52,18 @@ namespace Items {
 
         private void Update() {
             if (!_active) return;
-            var distToTarget = Mathf.Abs(_bezierPos - _target.closestBezierPos.BezierDistance);
-            if (distToTarget < 20) {
-                _active = false;
-                rocketObject.DOMove(_target.transform.position, 0.25f).OnUpdate(() => {
-                    rocketObject.LookAt(_target.transform.position);
-                }).SetEase(Ease.Linear);
-                return;
+            if (targetFound == true)
+            {
+                var distToTarget = Mathf.Abs(_bezierPos - _target.closestBezierPos.BezierDistance);
+                if (distToTarget < 20) {
+                    _active = false;
+                    rocketObject.DOMove(_target.transform.position, 0.25f).OnUpdate(() => {
+                        rocketObject.LookAt(_target.transform.position);
+                    }).SetEase(Ease.Linear);
+                    return;
+                }
             }
+            
             _bezierPos += Time.deltaTime * 150f;
             var bPos = _bezierPath.bezierSpline.GetBezierPos(_bezierPos, true);
             var randomCoef = (Mathf.Sin(Time.time) + Mathf.Sin(Time.time * 2.6f) * 0.5f) / 1.5f;
