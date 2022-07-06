@@ -6,7 +6,7 @@ namespace Items
     [CreateAssetMenu(fileName="NukeBombData",menuName="ScriptableObjects/Items/NukeBombData",order=0)]
     public class NukeBombData : ItemData
     {
-        [SerializeField] private NukeBomb prefab;
+        [SerializeField] private NukeBombObject prefab;
         public Vector3 spawnPoint = new Vector3(550,600,150);
         [SerializeField] private Sprite icon;
 
@@ -16,7 +16,7 @@ namespace Items
         }
         public override ItemObject GiveItem(Transform parent)
         {
-            NukeBomb nuke = Instantiate(prefab,parent.position,parent.rotation,parent);
+            NukeBombObject nuke = Instantiate(prefab,parent.position,parent.rotation,parent);
             nuke.ResetItem();
             return nuke;
         }
