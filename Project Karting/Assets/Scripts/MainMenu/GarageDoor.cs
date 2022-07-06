@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MainMenu;
 using UnityEngine;
 
 public class GarageDoor : MonoBehaviour
@@ -8,6 +9,6 @@ public class GarageDoor : MonoBehaviour
     
     public void DoorIsOpen()
     {
-        menuManager.ShowTransition();
+        menuManager.StartLevel();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Handlers;
 using Road.RoadPhysics;
 using UnityEngine;
@@ -9,14 +10,14 @@ namespace Kart
     public class KartBase : PhysicsObject
     {
         public int playerIndex;
-        
+
+        public Rumbler rumbler;
         public GameObject minimapRenderer;
         public Transform kartRootModel; // The kart's root 3D model
         public Transform kartBodyModel; // The main kart 3D model (no wheels)
         public List<WheelCollider> wheels; //TODO: A DEPLACER
         public List<Transform> turningWheels; // The turning wheels of the kart
-        [HideInInspector] public CameraFollowPlayer cameraFollowPlayer;
-        public ShakeTransform cameraShake;
+        public ItemWheel itemWheel;
 
         //public Transform rotationAxis;
         public KartEffects effects;
@@ -26,12 +27,9 @@ namespace Kart
         {
             topSpeed = .5f,
             acceleration = .5f,
-            braking = .5f,
-            reverseAcceleration = .5f,
-            reverseSpeed = .5f,
-            steer = .5f,
-            addedGravity = .5f,
-            suspension = .5f
+            maniability = .5f,
+            weight = .5f,
+            luck = .5f
         };
         
         List<StatPowerup> activePowerupList = new List<StatPowerup>();
@@ -43,6 +41,7 @@ namespace Kart
         [HideInInspector] public bool drift;
         [HideInInspector] public int driftDirection;
         [HideInInspector] public bool rear;
+        [HideInInspector] public CameraFollowPlayer cameraFollowPlayer;
 
         private bool drifting;
 
@@ -55,12 +54,17 @@ namespace Kart
         private float _yVelocity;
         private float _currentAngularSpeed;
         private float _lerpedWheelDirection;
-        private float _lerpedKartRotation;
+
+        private Vector3 posFixed;
+        private Vector3 posLate;
 
         public bool canMove;
+        public bool isDamaged = false;
+        
 
         protected void Awake()
         {
+            if(transform == null) InitTransform();
             _firstPos = transform.position;
             _firstPosTime = Time.time;
             StopDrifting();
@@ -75,92 +79,128 @@ namespace Kart
                         Physics.IgnoreCollision(wheel, col);
                 }
             }
+            posFixed = transform.position;
+            posLate = transform.position;
         }
 
+        private RaycastHit[] _overlapResults = new RaycastHit[1];
         public override bool IsGrounded()
         {
             int wheelsOnGround = 0;
+            var layerMaskEnv = LayerMask.GetMask("Environment");
+            var layerMaskGround = LayerMask.GetMask("Ground");
+            
             for (var index = 0; index < wheels.Count; index++) {
                 Vector3 wheelPos = wheels[index].transform.position;
                 //if (wheels[index].isGrounded) wheelsOnGround++;
-                if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out _, 0.5f, LayerMask.GetMask("Environement")))
+                if (Physics.SphereCastNonAlloc(wheelPos, 0.1f, -transform.up, _overlapResults, 0.5f, layerMaskEnv) > 0)
                 {
                     GameManager.Instance.respawner.Respawn(this);
                 }
-                else if (Physics.SphereCast(wheelPos, 0.1f, -transform.up, out _, 0.5f, LayerMask.GetMask("Ground"))) {
+                else if (Physics.SphereCastNonAlloc(wheelPos, 0.1f, -transform.up, _overlapResults, 0.5f, layerMaskGround) > 0) {
                     wheelsOnGround++;
                 }
             }
 
-            return wheelsOnGround >= 4;
+            return wheelsOnGround >= 1;
+        }
+
+        public float GetDirection()
+        {
+            return drifting ? driftDirection : movement[0];
         }
 
         private void FixedUpdate()
         {
-
-            
-            //if (GameManager.Instance.gameState == GameState.start)
-            //{
-            /*
-                if (rear)
-                {
-                    cameraFollowPlayer.switchCameraMode(CameraMode.rear);
-                }
-                else
-                {
-                    cameraFollowPlayer.switchCameraMode(CameraMode.front);
-                }
-
-                if (movement[1] > 0)
-                {
-                    effects.Rewind();
-                }*/
-            //}
-            //if (!GameManager.Instance.RaceHadBegun() || !canMove) return;
-            ConvertStats();
-            ApplyPowerups();
-            Move(movement[1]);
-            float rotationDirection = movement[1] > 0 ? movement[0] : -movement[0];
-
-            if (drift && !drifting && (movement[0] < 0 || movement[0] > 0))
+            if (!isDamaged)
             {
-                StartDrift(rotationDirection);
-            }
-
-            if (movement[1] != 0) //on tourne pas à l'arret
-            {
-                if (drifting)
+                posFixed = transform.position;
+                AnimateWheels();
+                if (cameraFollowPlayer != null)
                 {
-                    if (!drift)
+                    if (rear)
                     {
-                        StopDrifting();
+                        cameraFollowPlayer.switchCameraMode(CameraMode.rear);
                     }
                     else
                     {
-                        float driftAngle = (1 + rotationDirection * driftDirection) / 2 * (KartPhysicsSettings.instance.maxDriftAngle - KartPhysicsSettings.instance.minDriftAngle) +
-                                           KartPhysicsSettings.instance.minDriftAngle;
-                        driftAngle *= driftDirection;
-                        Rotate(driftAngle);
+                        cameraFollowPlayer.switchCameraMode(CameraMode.front);
+                    }
+                }
+
+                if (RaceManager.Instance.gameState == GameState.start)
+                {
+                    if (movement[1] > 0)
+                    {
+                        effects.Rewind();
+                    }
+                }
+                if (!RaceManager.Instance.RaceHadBegun() || !canMove) return;
+
+                ConvertStats();
+                ApplyPowerups();
+
+                bool isReverse = Vector3.Dot(transform.forward, rigidBody.velocity.normalized) < 0;
+                float rotationDirection = isReverse ? -movement[0] : movement[0];
+
+
+                if (IsGrounded())
+                {
+                    Move(movement[1]);
+                    if (IsGrounded() && drift && !drifting && (movement[0] < 0 || movement[0] > 0) && rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToDrift)
+                    {
+                        StartDrift(rotationDirection);
                     }
                 }
                 else
                 {
-                    Rotate(rotationDirection);
+                    if (movement[1] != 0)
+                    {
+                        rotationDirection = 0;
+                        currentAngularVelocity = Vector3.zero;
+                    }
+
                 }
+
+                if (rigidBody.velocity.magnitude > KartPhysicsSettings.instance.minVelocityToTurn) //on tourne pas à l'arret
+                {
+                    if (drifting)
+                    {
+                        if (!drift)
+                        {
+                            StopDrifting();
+                        }
+                        else
+                        {
+                            float minDrift = KartPhysicsSettings.instance.getMinDrift(vehicleStats.maniability);
+                            float driftAngle = (1 + rotationDirection * driftDirection) / 2 * (KartPhysicsSettings.instance.getMaxDrift(vehicleStats.maniability) - minDrift) + minDrift;
+                            driftAngle *= driftDirection;
+                            Rotate(driftAngle);
+                        }
+                    }
+                    else
+                    {
+                        Rotate(rotationDirection);
+                    }
+                }
+                else
+                {
+                    currentAngularVelocity = Vector3.zero;
+                }
+
+                rigidBody.AddForce(transform.forward * (_currentSpeed), ForceMode.Acceleration);
             }
-            else {
-                currentAngularVelocity = Vector3.zero;
-            }
-            
-            rigidBody.AddForce(transform.forward * (_currentSpeed), ForceMode.Acceleration);
+        }
+        
+        private void LateUpdate()
+        {
+            posLate = transform.position;
         }
 
         private void ConvertStats()
         {
-            convertedStats.acceleration = vehicleStats.acceleration * KartPhysicsSettings.instance.acceleration;
+            convertedStats.acceleration = KartPhysicsSettings.instance.getAcceleration(vehicleStats.acceleration);
             convertedStats.topSpeed = KartPhysicsSettings.instance.getTopSpeed(vehicleStats.topSpeed);
-            convertedStats.reverseAcceleration = vehicleStats.reverseAcceleration * KartPhysicsSettings.instance.reverseAcceleration;
-            convertedStats.reverseSpeed = vehicleStats.reverseSpeed * KartPhysicsSettings.instance.reverseSpeed;
         }
 
 
@@ -171,9 +211,12 @@ namespace Kart
                 _currentSpeed += finalStats.acceleration * Time.fixedDeltaTime;
                 _currentSpeed = Mathf.Min(finalStats.topSpeed, _currentSpeed);
             }
-            else if (direction < 0) {
-                _currentSpeed -= finalStats.reverseAcceleration* Time.fixedDeltaTime;
-                _currentSpeed = Mathf.Max(-finalStats.reverseSpeed, _currentSpeed);
+            else if (direction < 0)
+            {
+                float reverseAcceleration = KartPhysicsSettings.instance.reverseAccelerationCoeff * convertedStats.acceleration;
+                float reverseSpeed = KartPhysicsSettings.instance.reverseSpeedCoeff * convertedStats.topSpeed;
+                _currentSpeed -= reverseAcceleration* Time.fixedDeltaTime;
+                _currentSpeed = Mathf.Max(-reverseSpeed, _currentSpeed);
             }
             else _currentSpeed = Mathf.Lerp(_currentSpeed, 0, KartPhysicsSettings.instance.engineBrakeSpeed * Time.fixedDeltaTime);
 
@@ -185,7 +228,8 @@ namespace Kart
         {
                 
             lerpedAngle = Mathf.Lerp(lerpedAngle, angle, KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime);
-            float steerAngle = lerpedAngle * (finalStats.steer * 2 + KartPhysicsSettings.instance.steeringSpeed) * Time.fixedDeltaTime;
+            
+            float steerAngle = lerpedAngle * (KartPhysicsSettings.instance.getSteeringSpeed(vehicleStats.maniability) ) * Time.fixedDeltaTime;
 
             currentAngularVelocity = transform.up * steerAngle * KartPhysicsSettings.instance.kartRotationCoeff;
             
@@ -199,11 +243,20 @@ namespace Kart
             kartBodyModel.localEulerAngles = Vector3.forward;
         }
 
+        public void ResetMovements()
+        {
+            _currentSpeed = 0;
+            _yVelocity = 0;
+            _currentAngularSpeed = 0;
+            _lerpedWheelDirection = 0;
+        }
+
         private void AnimateWheels()
         {
             _lerpedWheelDirection =
                 Mathf.Lerp(_lerpedWheelDirection, movement[0], KartPhysicsSettings.instance.kartRotationLerpSpeed * Time.fixedDeltaTime * 2f);
-            float angularSpeed = (_currentSpeed / (0.38f * (float) Math.PI) * 360f) % 360f;
+            Vector3 dir = posFixed - posLate;
+            float angularSpeed = (Vector3.Dot(dir.normalized, transform.forward.normalized) * dir.magnitude/ 0.38f * Mathf.PI * 360f) / 360f;
             foreach (var turningWheel in turningWheels)
             {
                 turningWheel.localEulerAngles = Vector3.up * (_lerpedWheelDirection * KartPhysicsSettings.instance.kartWheelAngle);
@@ -211,7 +264,7 @@ namespace Kart
 
             foreach (var wheel in wheels)
             {
-                //wheel.localEulerAngles = Vector3.right * angularSpeed;
+                wheel.transform.GetChild(0).Rotate(Vector3.right, angularSpeed);
             }
         }
 
@@ -227,7 +280,6 @@ namespace Kart
         private void StopDrifting()
         {
             driftDirection = 0;
-            _lerpedKartRotation = 0f;
             drifting = false;
             effects.StopDrift();
         }
@@ -265,7 +317,7 @@ namespace Kart
             finalStats = convertedStats + powerups;
             
             // on clamp toutes les valeurs des stats qui nécessitent de pas dépasser [0,1]
-            finalStats.suspension = Mathf.Clamp(finalStats.suspension, 0, 1);
+            //finalStats.suspension = Mathf.Clamp(finalStats.suspension, 0, 1);
         }
 
         public void AddPowerup(StatPowerup powerup)
@@ -279,5 +331,13 @@ namespace Kart
         {
             return _currentSpeed;
         }
+
+        public void Damaged()
+        {
+            isDamaged = true;
+            var voiture = transform.Find("Voiture");
+            voiture.DOLocalRotate(Vector3.up, 0.6f, RotateMode.FastBeyond360).SetLoops(3, LoopType.Restart).SetEase(Ease.Linear).OnComplete(() => { isDamaged = false; });
+        }
+
     }
 }

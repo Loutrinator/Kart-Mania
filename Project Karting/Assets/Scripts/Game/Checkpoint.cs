@@ -12,7 +12,7 @@ namespace Game {
             KartBase kart = other.gameObject.GetComponentInParent<KartBase>();
             if (kart != null)
             {
-                GameManager.Instance.CheckpointPassed(checkpointId,kart.GetPlayerID.Invoke());
+                LapManager.Instance.CheckpointPassed(checkpointId,kart.GetPlayerID.Invoke());
             }
         }
     }

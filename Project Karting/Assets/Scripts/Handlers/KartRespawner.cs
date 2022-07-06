@@ -1,12 +1,12 @@
 using Kart;
 using SplineEditor.Runtime;
+using UI;
 using UnityEngine;
 
 namespace Handlers
 {
     public class KartRespawner : MonoBehaviour
     {
-        public float distanceForRespawn = 20f;
         
         private bool _initialized;
 
@@ -19,11 +19,9 @@ namespace Handlers
         {
             if (!_initialized) return;
             var karts = GameManager.Instance.karts;
-            foreach (var kart in karts)
-            {
+            foreach (var kart in karts) {
                 BezierUtils.BezierPos bezierPos = kart.closestBezierPos;
-                if (Vector3.Distance(bezierPos.GlobalOrigin, kart.transform.position) > distanceForRespawn
-                    || !kart.IsGrounded() && kart.currentVelocity.magnitude < 0.1f)
+                if (Vector3.Distance(bezierPos.GlobalOrigin, kart.transform.position) > KartPhysicsSettings.instance.respawnMinDistance)
                 {
                     Respawn(kart);
                 }
@@ -32,19 +30,23 @@ namespace Handlers
 
         public void Respawn(KartBase kart)
         {
-            BezierUtils.BezierPos respawnPos;
-            if (kart.lastGroundBezierPos != null)
-            {
-                respawnPos = kart.lastGroundBezierPos;
-            }
-            else
-            {
-                respawnPos = GameManager.Instance.currentRace.road.bezierSpline.GetBezierPos(0);
-            }
-            kart.transform.position = respawnPos.GlobalOrigin;
-            kart.transform.rotation = respawnPos.Rotation;
+            ScreenEffects.BlackFade(() => {
+                BezierUtils.BezierPos respawnPos;
+                if (kart.lastGroundBezierPos != null)
+                {
+                    respawnPos = kart.lastGroundBezierPos;
+                }
+                else
+                {
+                    respawnPos = RaceManager.Instance.currentRace.road.bezierSpline.GetBezierPos(0);
+                }
+                kart.transform.position = respawnPos.GlobalOrigin + respawnPos.LocalUp * KartPhysicsSettings.instance.respawnHeight;
+            
+                kart.transform.rotation = respawnPos.Rotation;
 
-            kart.ResetForces();
+                kart.ResetForces();
+                kart.ResetMovements();
+            });
         }
     }
 }

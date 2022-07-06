@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using AI.UtilityAI;
 using Editor;
+using Genetics;
+using Newtonsoft.Json;
 using UnityEditor;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class UtilityAIEditorWindow : ExtendedEditorWindow
@@ -261,10 +263,12 @@ public class UtilityAIEditorWindow : ExtendedEditorWindow
 
             GUIContent dataLabel = new GUIContent("Data : ");
             
-            foreach (SerializedProperty evalFunc in evalFunctionListProperties)
-            {
+            foreach (SerializedProperty evalFunc in evalFunctionListProperties) {
                 EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
-                EditorGUILayout.PropertyField(evalFunc.FindPropertyRelative("evaluationData"),dataLabel);
+                float labelWidth = EditorGUIUtility.labelWidth;
+                EditorGUIUtility.labelWidth = 50f;
+                EditorGUILayout.PropertyField(evalFunc.FindPropertyRelative("evaluationData"), dataLabel, GUILayout.Width(200));
+                EditorGUIUtility.labelWidth = labelWidth;
                 EditorGUILayout.PropertyField(evalFunc.FindPropertyRelative("coefficient"));
                 EditorGUILayout.PropertyField(evalFunc.FindPropertyRelative("evaluationCurve"));
                 EditorGUILayout.EndHorizontal();
@@ -273,6 +277,12 @@ public class UtilityAIEditorWindow : ExtendedEditorWindow
             
             EditorGUILayout.EndVertical();
             
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("Generate JSON in ClipBoard")) {
+                string fileName = "ai_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".json";
+                GeneticsUtils.WriteData(target.GetGenome(), fileName);
+                AssetDatabase.Refresh();
+            }
         }
         EditorGUILayout.EndVertical();
         /*

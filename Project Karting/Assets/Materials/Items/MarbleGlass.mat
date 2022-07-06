@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MarbleGlass
+  m_Shader: {fileID: -6465566751694194690, guid: 971f0c0dd8ad4ae4fb9527f309dcae30,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_6e1cb7a9111f4430b81db3f8bde160dc: 0.83
+    - Vector1_82b4624523d94265be5e33978ac40397: 1
+    - Vector1_f40ba33d1a09449c8b5ad3af940be4ad: 22.2
+    - Vector1_f6dbe15bbf2d40b490a1b782f25f27f4: 1.86
+    m_Colors:
+    - Color_1e445134ba9045fdbca7c798cfcd63a0: {r: 5.095723, g: 4.3594494, b: 2.7641897,
+        a: 0.6745098}
+    - Color_3a0c79a93d9b44c1a56b6b5db51c3f58: {r: 0.8457191, g: 0.9558476, b: 0.990566,
+        a: 0.015686275}
+    - Color_938723fe33984b6a81eb79321049646d: {r: 0.9575472, g: 0.98787063, b: 1,
+        a: 0.6156863}
+    - Vector3_eabd9bc7aaef4659bda7046b718c2f54: {r: 1, g: 2, b: 1, a: 0}
+  m_BuildTextureStacks: []

@@ -8,7 +8,7 @@ namespace AI.UtilityAI
     public class UtilityAIKartBehaviorManager
     {
         private float curvatureOffset = 35f;
-        private float distCurve = 15f;
+        private float distCurve = 30f;
         private static UtilityAIKartBehaviorManager instance;
         private GameManager manager;
         public static UtilityAIKartBehaviorManager Instance
@@ -34,6 +34,9 @@ namespace AI.UtilityAI
                 case EvaluationDataEnum.curvatureOfTheRoad:
                     value = CurvatureOfRoadFunction(kart);
                     break;
+                case EvaluationDataEnum.distanceToCenterOfRoad:
+                    value = DistanceToCenterOfRoadFunction(kart);
+                    break;
                 case EvaluationDataEnum.constant:
                     value = Constant(kart);
                     break;
@@ -43,6 +46,9 @@ namespace AI.UtilityAI
                     break;
                 case EvaluationDataEnum.sineNormalized:
                     value = SineNormalized(kart);
+                    break;
+                case EvaluationDataEnum.kartFacesBorder:
+                    value = KartFacesBorder(kart);
                     break;
                 
             }
@@ -55,6 +61,17 @@ namespace AI.UtilityAI
             if (kart.closestBezierPos != null)
             {
                 return Vector3.Dot(kart.transform.right, kart.closestBezierPos.Tangent);
+            }
+            return 0;
+        }
+
+        public float KartFacesBorder(KartBase kart)
+        {
+            if (kart.closestBezierPos != null)
+            {
+                float dot = AlignedToRoad(kart);
+                int sign = DistanceToCenterOfRoadFunction(kart) < 0 ? -1 : 1;
+                return sign * dot;
             }
             return 0;
         }
@@ -95,7 +112,7 @@ namespace AI.UtilityAI
                 var nextPos = AIManager.Instance.circuit.road.bezierSpline.GetBezierPos(distance + distCurve);
                 int dir = Mathf.RoundToInt(CurvatureOfRoadFunction(kart));
 
-                float roadWith = AIManager.Instance.circuit.road.bezierMeshExtrusion.roadWidth;
+                float roadWith = AIManager.Instance.circuit.road.bezierMeshExtrusion.roadWidth - 3;
                 pointCurvature = kart.closestBezierPos.GlobalOrigin + dir * nextPos.Normal * roadWith;
             }
 
@@ -106,10 +123,11 @@ namespace AI.UtilityAI
             if (kart.closestBezierPos != null)
             {
                 float roadSize = AIManager.Instance.circuit.road.bezierMeshExtrusion.roadWidth;
-                float dotProduct = Vector3.Dot(kart.transform.position - kart.closestBezierPos.GlobalOrigin,
+                var position = kart.transform.position;
+                float dotProduct = Vector3.Dot(position - kart.closestBezierPos.GlobalOrigin,
                     kart.closestBezierPos.Normal);
                 float direction = Mathf.Sign(dotProduct); 
-                float distCenter = Vector3.Distance(kart.closestBezierPos.GlobalOrigin, kart.transform.position);
+                float distCenter = Vector3.Distance(kart.closestBezierPos.GlobalOrigin, position);
                 return direction * distCenter / roadSize;
             }
 
@@ -142,7 +160,7 @@ namespace AI.UtilityAI
                 if (arrowMesh != null)
                 {
                     float curvature = CurvatureOfRoadFunction(kart);
-                    Debug.Log("curvature " + curvature);
+                    //Debug.Log("curvature " + curvature);
                     if (Mathf.Abs(curvature) > 0.05)
                     {
                         Gizmos.color = Color.green;

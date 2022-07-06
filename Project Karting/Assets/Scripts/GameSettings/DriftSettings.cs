@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DriftSettings", menuName = "ScriptableObjects/DriftSettings")]
+[CreateAssetMenu(fileName = "DriftSettings", menuName = "ScriptableObjects/Settings/DriftSettings")]
 public class DriftSettings : ScriptableObject
 {
     
@@ -28,19 +28,24 @@ public class DriftSettings : ScriptableObject
     #endregion
     
     #region Boost
+    [Header("Boost")]
     public List<ShakeTransformEventData> boostShake;
     public List<float> boostDuration;
-    public List<float> boostStrength;
+    public float boostBaseStrength;
+    public List<float> driftLevelCoeff;//the coeff applied to all the effects of a drift's boost
     #endregion
     #region Camera FOV effect
+    [Header("Camera boost effect")]
     public float boostFOVOffset;
+    public float boostZOffset;
     public float transitionSpeed;
     public AnimationCurve boostCameraIn;
     public AnimationCurve boostCameraOut;
 
     #endregion
-    #region Sound
     
+    #region Sound
+    [Header("Sound effects")]
     public AudioClip driftAudioClip;
     public float driftVolume;
     public float driftSoundAnimationSpeed;
@@ -50,6 +55,15 @@ public class DriftSettings : ScriptableObject
     public float driftPitchMax;
     public AnimationCurve driftPitchEaseIn;
     public AnimationCurve driftPitchEaseOut;
+    
+    #endregion
+    
+    #region Vibrations
+    [Header("Vibrations")]
+    public float driftLowVibration;
+    public float driftHighVibration;
+    public float boostLowVibration;
+    public float boostHighVibration;
     
     #endregion
 }

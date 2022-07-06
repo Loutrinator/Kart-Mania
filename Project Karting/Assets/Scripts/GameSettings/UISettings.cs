@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "UISettings", menuName = "ScriptableObjects/UISettings")]
+[CreateAssetMenu(fileName = "UISettings", menuName = "ScriptableObjects/Settings/UISettings")]
 public class UISettings : ScriptableObject
 {
     

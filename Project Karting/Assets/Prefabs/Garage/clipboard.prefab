@@ -656,6 +656,7 @@ GameObject:
   - component: {fileID: 1702859323461370343}
   - component: {fileID: 5278252328831779621}
   - component: {fileID: 1148851064759340628}
+  - component: {fileID: 4202024900496243341}
   m_Layer: 0
   m_Name: Back
   m_TagString: Untagged
@@ -764,7 +765,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1702859323461370343}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4202024900496243341}
+        m_TargetAssemblyTypeName: ProceduralAnimations.PlayAnimation, Assembly-CSharp
+        m_MethodName: Invoke
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &1148851064759340628
 Animator:
   serializedVersion: 3
@@ -784,6 +797,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4202024900496243341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130994748696849523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f59d2155c1dc1f48a4a2850c9f6c5a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationData: {fileID: 11400000, guid: 63079e773f41c4a4a9fe204dfb5cb90b, type: 2}
+  objectTransform: {fileID: 0}
+  transitionKey: 
+  playReverse: 0
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2926814711787788115
 GameObject:
   m_ObjectHideFlags: 0

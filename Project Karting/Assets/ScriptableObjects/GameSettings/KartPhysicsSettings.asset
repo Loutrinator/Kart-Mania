@@ -12,22 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9e36bf42ece1240877440c0ee2a60f, type: 3}
   m_Name: KartPhysicsSettings
   m_EditorClassIdentifier: 
-  topSpeed: {x: 180, y: 200}
-  acceleration: 80
-  reverseSpeed: 100
-  reverseAcceleration: 300
-  braking: 10000
-  steeringSpeed: 35
-  minDriftAngle: 0.15
-  maxDriftAngle: 1.3
+  topSpeed: {x: 90, y: 110}
+  acceleration: {x: 50, y: 125}
+  steeringSpeed: {x: 20, y: 45}
+  weight: {x: 9, y: 16}
+  minDriftAngle: {x: 0.1, y: 0.25}
+  maxDriftAngle: {x: 1.25, y: 1.5}
+  reverseSpeedCoeff: 0.5
+  reverseAccelerationCoeff: 3
+  braking: 1000
   kartRotationCoeff: 3.8
   kartModelRotationCoeff: 60
-  kartRollCoeff: 10
+  kartRollCoeff: 15
   kartRotationLerpSpeed: 3
-  kartWheelAngle: 75
-  boostStrength: 1.5
+  kartWheelAngle: 40
+  boostStrength: 5
   engineBrakeSpeed: 0.4
-  gravityMultiplier: 6
-  respawnHeight: 2
+  respawnHeight: 10
+  respawnMinDistance: 100
   borderVelocityLossPercent: 1
-  bumpForce: 3000
+  bumpForce: 1000
+  minVelocityToTurn: 3
+  minVelocityToDrift: 50
+  cameraPositionLerp: 20
+  cameraRotationLerp: 8
+  cameraSideAmplitude: 3
+  cameraSideAngleAmplitude: 25
+  cameraKartDirectionLerp: 1

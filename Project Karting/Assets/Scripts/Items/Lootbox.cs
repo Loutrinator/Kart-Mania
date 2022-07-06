@@ -41,10 +41,23 @@ namespace Items
 
         private void GiveItem(int position, KartBase kart)
         {
-            Item item = GameManager.Instance.itemManager.GetRandomItem(position);
+            PlayerRaceInfo infos = RaceManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID());
+            if (kart.itemWheel != null)
+            {
+                kart.itemWheel.StartSelection(infos);
+            }else
+            {
+                StartCoroutine(giveItemNoUI(position, infos));
+            }
+        }
+
+        private IEnumerator giveItemNoUI(int position, PlayerRaceInfo infos)
+        {
+            ItemData item = RaceManager.Instance.itemManager.GetRandomItem(position);
             if (item != null)
             {
-                GameManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID()).Item = item;
+                yield return new WaitForSeconds(3f);
+                infos.Item = item.GiveItem(infos.kart.transform);
             }
         }
 
@@ -59,7 +72,7 @@ namespace Items
         {
             if (state == LootBoxState.available)
             {
-                KartBase kart = other.GetComponent<KartCollisions>().kartBase;
+                KartBase kart = other.GetComponentInParent<KartCollisions>().kartBase;
                 if (kart != null)
                 {
                     BreakLootBox(1,kart);

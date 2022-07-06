@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 
 namespace Handlers
 {
-    [CreateAssetMenu(fileName = "SceneManager", menuName = "ScriptableObject/SceneManager")]
+    [CreateAssetMenu(fileName = "SceneManager", menuName = "ScriptableObjects/Managers/SceneManager")]
     public class SceneManager : ScriptableObject {
         #region Singleton
         public static SceneManager instance;
@@ -47,14 +47,39 @@ namespace Handlers
         [SerializeField] private SerializedDictionary<GameMode, string> sceneMap;
 
         public void LoadGameMode(GameMode mode) {
-            PlayerConfigurationManager.Instance.HideJoinUI();
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneMap[mode]);
+            TransitionController.Instance.FadeIn(OnLoadingStart);
+
+            void OnLoadingStart() {
+                PlayerConfigurationManager.Instance.HideJoinUI();
+                var operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneMap[mode]);
+
+                operation.completed += CallBack;
+                
+                void CallBack(AsyncOperation asyncOperation) {
+                    TransitionController.Instance.FadeOut();
+                    operation.completed -= CallBack;
+                }
+            }
         }
+        
+        public void LoadMainMenu(Action onComplete) {
+            var operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenuScene");
+            if (onComplete == null) return;
+            operation.completed += CallBack;
+
+            void CallBack(AsyncOperation asyncOperation) {
+                onComplete.Invoke();
+                operation.completed -= CallBack;
+            }
+        }
+
+        // overload does not work for unityevents
         public void LoadMainMenu() {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            LoadMainMenu(null);
         }
+        
         public void LoadCredits() {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("CreditsScene");
         }
 
         public void QuitGame() {

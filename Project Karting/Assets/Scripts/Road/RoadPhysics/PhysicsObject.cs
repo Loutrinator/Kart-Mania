@@ -15,10 +15,19 @@ namespace Road.RoadPhysics {
         public BezierUtils.BezierPos lastGroundBezierPos;
         private Vector3 _currentGravityVelocity;
 
+        // ReSharper disable once InconsistentNaming
+        public new Transform transform { get; private set; }
+
+        protected void InitTransform() {
+            transform = base.transform;
+        }
+
         protected virtual void Start()
         {
             PhysicsManager.instance.AddPhysicsObject(this);
             currentGravityAcceleration = Physics.gravity;
+
+            if(transform == null) InitTransform();
         }
 
         public void UpdatePhysics(Vector3 groundNormal, float drag)
@@ -27,12 +36,14 @@ namespace Road.RoadPhysics {
 
             if (IsGrounded())
             {
-                _currentGravityVelocity = currentGravityAcceleration * Time.fixedDeltaTime;
+                //_currentGravityVelocity = currentGravityAcceleration * Time.fixedDeltaTime;
+                rigidBody.AddForce(currentGravityAcceleration, ForceMode.Acceleration);
                 lastGroundBezierPos = closestBezierPos;
             }
             else
             {
-                _currentGravityVelocity += currentGravityAcceleration * (Time.fixedDeltaTime * KartPhysicsSettings.instance.gravityMultiplier);
+                rigidBody.AddForce(currentGravityAcceleration * 10f, ForceMode.Acceleration);
+                //_currentGravityVelocity += currentGravityAcceleration * (Time.fixedDeltaTime * 10f);
             }
             
             /*rigidBody.velocity = currentVelocity + _currentGravityVelocity + currentForcesVelocity;
@@ -40,8 +51,9 @@ namespace Road.RoadPhysics {
             
             // drag
             currentForcesVelocity -= currentForcesVelocity * drag;
-            
-            rigidBody.AddForce(currentGravityAcceleration * KartPhysicsSettings.instance.gravityMultiplier, ForceMode.Acceleration);
+
+            rigidBody.AddForce(currentVelocity, ForceMode.Acceleration);
+            //rigidBody.AddForce(currentGravityAcceleration * 10f, ForceMode.Acceleration);
             rigidBody.AddForce(currentForcesVelocity,ForceMode.Impulse);
             rigidBody.angularVelocity = currentAngularVelocity;
         }
@@ -54,6 +66,10 @@ namespace Road.RoadPhysics {
             _currentGravityVelocity = Vector3.zero;
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = Vector3.zero;
+        }
+
+        protected void OnDestroy() {
+            PhysicsManager.instance.RemovePhysicsObject(this);
         }
 
         private void OnDrawGizmos()

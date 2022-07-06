@@ -3,7 +3,7 @@ using Game;
 using UnityEngine;
 
 namespace Handlers {
-    [CreateAssetMenu(fileName = "LevelManager", menuName = "ScriptableObject/LevelManager")]
+    [CreateAssetMenu(fileName = "LevelManager", menuName = "ScriptableObjects/Managers/LevelManager")]
     public class LevelManager : ScriptableObject
     {
         #region Singleton
@@ -37,8 +37,10 @@ namespace Handlers {
             return currentRace;
         }
 
-        public void OnRaceQuit() {
+        public void OnRaceQuit(PlayerConfiguration configuration) {
             Init();
+            if(configuration != null)
+                gameConfig.players.Add(configuration);
         }
     }
 }

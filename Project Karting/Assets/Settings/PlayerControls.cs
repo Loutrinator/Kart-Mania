@@ -62,13 +62,31 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1777b6a-05fb-455b-8446-adf5fcc693a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Respawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee66a8b6-4807-4faa-9138-eeefdee9d7d9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": ""WASD"",
                     ""id"": ""ce92f41f-c181-4de3-bc35-be5f29251db5"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -123,7 +141,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Gamepad"",
                     ""id"": ""7aa5ad82-1d97-43ad-86ad-38382170913d"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -240,6 +258,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d87e5b2b-c303-4019-88f6-b488ef40216d"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e05e7d3-8d4a-4fc9-a61a-089b1d20d5ab"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66147766-c26e-44ba-992b-212b53a8bcea"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b472788f-c9b5-44cf-82bd-1569d6009d9d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -269,6 +331,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""ae5bec96-77d0-4c6e-b2db-249ca89d82ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c14ac4a-8084-446b-b20d-87ad932df52e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -451,6 +522,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1880f5e6-ef70-4f87-bfa4-b2ab74682ed1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d17dc90-3500-48dc-9c60-72308d29c16f"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -463,11 +556,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Kart_Drift = m_Kart.FindAction("Drift", throwIfNotFound: true);
         m_Kart_Rearcamera = m_Kart.FindAction("Rear camera", throwIfNotFound: true);
         m_Kart_Pause = m_Kart.FindAction("Pause", throwIfNotFound: true);
+        m_Kart_Item = m_Kart.FindAction("Item", throwIfNotFound: true);
+        m_Kart_Respawn = m_Kart.FindAction("Respawn", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
+        m_UI_Back = m_UI.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -531,6 +627,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Kart_Drift;
     private readonly InputAction m_Kart_Rearcamera;
     private readonly InputAction m_Kart_Pause;
+    private readonly InputAction m_Kart_Item;
+    private readonly InputAction m_Kart_Respawn;
     public struct KartActions
     {
         private @PlayerControls m_Wrapper;
@@ -539,6 +637,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Drift => m_Wrapper.m_Kart_Drift;
         public InputAction @Rearcamera => m_Wrapper.m_Kart_Rearcamera;
         public InputAction @Pause => m_Wrapper.m_Kart_Pause;
+        public InputAction @Item => m_Wrapper.m_Kart_Item;
+        public InputAction @Respawn => m_Wrapper.m_Kart_Respawn;
         public InputActionMap Get() { return m_Wrapper.m_Kart; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -560,6 +660,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnPause;
+                @Item.started -= m_Wrapper.m_KartActionsCallbackInterface.OnItem;
+                @Item.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnItem;
+                @Item.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnItem;
+                @Respawn.started -= m_Wrapper.m_KartActionsCallbackInterface.OnRespawn;
+                @Respawn.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnRespawn;
+                @Respawn.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnRespawn;
             }
             m_Wrapper.m_KartActionsCallbackInterface = instance;
             if (instance != null)
@@ -576,6 +682,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Item.started += instance.OnItem;
+                @Item.performed += instance.OnItem;
+                @Item.canceled += instance.OnItem;
+                @Respawn.started += instance.OnRespawn;
+                @Respawn.performed += instance.OnRespawn;
+                @Respawn.canceled += instance.OnRespawn;
             }
         }
     }
@@ -587,6 +699,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Navigate;
     private readonly InputAction m_UI_Submit;
     private readonly InputAction m_UI_Cancel;
+    private readonly InputAction m_UI_Back;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
@@ -594,6 +707,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputAction @Back => m_Wrapper.m_UI_Back;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -612,6 +726,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Cancel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
                 @Cancel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
                 @Cancel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                @Back.started -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -625,6 +742,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
             }
         }
     }
@@ -635,11 +755,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDrift(InputAction.CallbackContext context);
         void OnRearcamera(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnItem(InputAction.CallbackContext context);
+        void OnRespawn(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnNavigate(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
 }

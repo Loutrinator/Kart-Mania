@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
-using Kart;
+using AI.UtilityAI;
 
 namespace Game {
     public static class RaceUtils {
-        public static List<KartBase> GetRanking(List<KartBase> levelKarts) {
-            var karts = new List<KartBase>();
-            for (int i = levelKarts.Count - 1; i >= 0; --i) {
-                karts.Add(levelKarts[i]);
+        public static List<PlayerRaceInfo> GetRankingUtilityAI(IEnumerable<PlayerRaceInfo> levelKarts, float raceLength) {
+            var karts = new List<PlayerRaceInfo>();
+            foreach (var kart in levelKarts) {
+                karts.Add(kart);
             }
 
             karts.Sort((kart1, kart2) =>
-                Math.Sign(kart2.closestBezierPos.BezierDistance - kart1.closestBezierPos.BezierDistance));
+                Math.Sign(kart2.getDistanceTraveled(raceLength) - kart1.getDistanceTraveled(raceLength)));
 
             return karts;
         }

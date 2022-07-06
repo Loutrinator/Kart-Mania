@@ -14,7 +14,6 @@ public class StartMsgAnimation : MonoBehaviour
     [SerializeField] private float timeBeforeCountDown = 2f;
     [SerializeField] private float fadeInDuration = 1f;
     [SerializeField] private float startSFX = 0.2f;
-    private int _iconIndex;
     private Image _image;//image affichant le sprite
     private AudioSource _audioSource;
     private bool countDown;
@@ -23,7 +22,6 @@ public class StartMsgAnimation : MonoBehaviour
 
     private void Awake()
     {
-        _iconIndex = 0;
         _image = GetComponent<Image>();
         _audioSource = GetComponent<AudioSource>();
         
@@ -45,7 +43,7 @@ public class StartMsgAnimation : MonoBehaviour
         yield return AnimateNumber(icons[1]);
         yield return AnimateNumber(icons[2]);
         yield return AnimateGo(icons[3]);
-        if (!GameManager.Instance.RaceHadBegun()) GameManager.Instance.StartRace();
+        if (!RaceManager.Instance.RaceHadBegun()) GameManager.Instance.StartRace();
     }
 
     private IEnumerator AnimateNumber(Sprite sprite)
@@ -101,7 +99,7 @@ public class StartMsgAnimation : MonoBehaviour
             else {
                 DebugPrinter.Instance.changeColor(Color.red);
             }
-            DebugPrinter.Instance.print("" + GameManager.Instance.gameState);
+            DebugPrinter.Instance.print("" + RaceManager.Instance.gameState);
         }
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Handlers;
 using Kart;
+using MainMenu;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.DualShock;
@@ -46,12 +47,12 @@ public class PlayerConfigurationManager : MonoBehaviour
         _inputManager = gameObject.GetComponent<PlayerInputManager>();
         playerDisplay.ShowJoinMessage();
         ControlTypeDisplays = new List<ControlTypeDisplay>();
-
     }
 
     public void EnableJoining()
     {
         _inputManager.EnableJoining();
+        playerDisplay.gameObject.SetActive(true);
         playerDisplay.ShowAddPlayerMessage();
     }
     public void DisableJoining()
@@ -63,7 +64,8 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         Debug.Log("SetPlayer " + currentPlayerIndex);
         LevelManager.instance.gameConfig.players[currentPlayerIndex].Name = "Player " + (currentPlayerIndex+1);
-        LevelManager.instance.gameConfig.players[currentPlayerIndex].KartPrefab = kart;
+        kart.name = "Player " + (currentPlayerIndex + 1);
+        LevelManager.instance.gameConfig.players[currentPlayerIndex].Kart = kart;
         ControlTypeDisplays[currentPlayerIndex].PlayerIsReady();
         ReadyPlayer(currentPlayerIndex);
     }
@@ -169,6 +171,6 @@ public class PlayerConfiguration
     public int PlayerIndex { get; set; }
     public string Name { get; set; }
     public bool IsReady { get; set; }
-    public KartBase KartPrefab { get; set; }
+    public KartBase Kart { get; set; }
     public Color Color { get; set; }
 }
