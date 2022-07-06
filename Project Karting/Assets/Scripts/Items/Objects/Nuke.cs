@@ -18,6 +18,7 @@ namespace Items
         private float startAnimationTime;
         private bool launched;
         private bool exploded;
+        private bool targetFound;
         private void Start()
         {
             startAnimationTime = Time.time;
@@ -38,9 +39,10 @@ namespace Items
                 float elapsed = Time.time - startLauchTime;
                 float percent = elapsed / travelDuration;
                 float yPercent = trajectory.Evaluate(percent);
-                float x = Mathf.Lerp(startPosition.x, target.position.x, percent);
-                float y = Mathf.Lerp(startPosition.y, target.position.y, yPercent);
-                float z = Mathf.Lerp(startPosition.z, target.position.z, percent);
+                Vector3 targetPos = targetFound ? target.position : Vector3.zero;
+                float x = Mathf.Lerp(startPosition.x, targetPos.x, percent);
+                float y = Mathf.Lerp(startPosition.y, targetPos.y, yPercent);
+                float z = Mathf.Lerp(startPosition.z, targetPos.z, percent);
                 Vector3 oldPos = transform.position;
                 Vector3 newPos = new Vector3(x, y, z);
                 transform.position = newPos;
@@ -57,13 +59,15 @@ namespace Items
             launched = true;
             startLauchTime = Time.time;
             transform.position = startPosition;
-            flightEffect.Play();
+            //flightEffect.Play();
+            targetFound = target != null;
         }
 
         private void Explode()
         {
             exploded = true;
-            Instantiate(explosion, target.position, Quaternion.identity);
+            Vector3 targetPos = targetFound ? target.position : Vector3.zero;
+            Instantiate(explosion, targetPos, Quaternion.identity);
             //faire un spherecast
             GameManager.Instance.ShakeCameras(nukeShake);
             Destroy(gameObject);
