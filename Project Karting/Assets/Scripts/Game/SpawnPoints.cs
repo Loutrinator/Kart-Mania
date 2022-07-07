@@ -11,6 +11,7 @@ public class SpawnPoints : MonoBehaviour
     private List<ObjectAlongSpline> obj;
 
     public float distanceOffset;
+    public float offset;
     public float horizontalOffset;
 
     public void SetSpawners()
@@ -23,7 +24,10 @@ public class SpawnPoints : MonoBehaviour
             if (i % 2 == 0) obj[i].horizontalOffset = -horizontalOffset;
             else obj[i].horizontalOffset = horizontalOffset;
 
-            obj[i].distance = flag.distance - (i * distanceOffset);
+            obj[i].distance = flag.distance - (i * distanceOffset) - offset;
+            obj[i].computeDistanceFromPosition = false;
+            obj[i].doLerp = true;
+            obj[i].OnValidate();
         }
     }
 }
