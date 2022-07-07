@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &5452965995569305836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7755096692250616380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccbc901bd0cf4c946b0e16d465d0fbbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kartName: The Tuture
-  kartPrefab: {fileID: 6792561579519028587, guid: 01d7e814af7ef5e469d576fcc08e67c6,
-    type: 3}
 --- !u!1001 &825271385196317625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232,6 +217,7 @@ PrefabInstance:
     - {fileID: 4058270773458817959, guid: 01d7e814af7ef5e469d576fcc08e67c6, type: 3}
     - {fileID: 6792561579519028587, guid: 01d7e814af7ef5e469d576fcc08e67c6, type: 3}
     - {fileID: 6799333496628606150, guid: 01d7e814af7ef5e469d576fcc08e67c6, type: 3}
+    - {fileID: 2629480189580658434, guid: 01d7e814af7ef5e469d576fcc08e67c6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 01d7e814af7ef5e469d576fcc08e67c6, type: 3}
 --- !u!1 &7755096692250616380 stripped
 GameObject:
@@ -239,3 +225,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 825271385196317625}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5452965995569305836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7755096692250616380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccbc901bd0cf4c946b0e16d465d0fbbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kartName: The Tuture
+  kartPrefab: {fileID: 6792561579519028587, guid: 01d7e814af7ef5e469d576fcc08e67c6,
+    type: 3}

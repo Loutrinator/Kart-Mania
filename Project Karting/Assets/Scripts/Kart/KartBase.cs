@@ -305,7 +305,6 @@ namespace Kart
             // on ajoute à 'powerups' les modifiers de chaque powerup
             for (int i = 0; i < activePowerupList.Count; i++)
             {
-                
                 var p = activePowerupList[i];
                 // on met a jour le compteur de temps écoulé depuis l'obtention du powerup
                 p.elapsedTime += Time.fixedDeltaTime;
@@ -332,11 +331,10 @@ namespace Kart
             return _currentSpeed;
         }
 
-        public void Damaged()
-        {
+        public void Damaged() {
+            if (isDamaged) return;
             isDamaged = true;
-            var voiture = transform.Find("Voiture");
-            voiture.DOLocalRotate(Vector3.up, 0.6f, RotateMode.FastBeyond360).SetLoops(3, LoopType.Restart).SetEase(Ease.Linear).OnComplete(() => { isDamaged = false; });
+            kartRootModel.DOLocalRotate(Vector3.up, 0.6f, RotateMode.FastBeyond360).SetLoops(3, LoopType.Restart).SetEase(Ease.Linear).OnComplete(() => { isDamaged = false; });
         }
 
     }

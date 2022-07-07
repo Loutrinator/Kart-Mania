@@ -10,13 +10,14 @@ namespace Items {
     public class Rocket : ItemObject {
         [SerializeField] private Transform rocketObject;
         [SerializeField] private Transform rotationPivot;
+        [SerializeField] private RocketTrigger rocketTrigger;
         
         private BezierPath _bezierPath;
         private float _bezierPos;
         private bool _active;
 
         private KartBase _target;
-        private bool targetFound;
+        private bool _targetFound;
 
         public override void ResetItem() {
             rocketObject.localPosition = Vector3.zero;
@@ -36,13 +37,14 @@ namespace Items {
             _active = true;
 
             float roadLength = _bezierPath.bezierSpline.bezierLength;
+            rocketTrigger.player = info.kart;
             _target = RaceManager.Instance.playersInfo.Where(i => i.kart != info.kart)
                 .Aggregate((curMin, x) =>
                     x.getDistanceTraveled(roadLength) < curMin.getDistanceTraveled(roadLength) ? x : curMin)
                 .kart;
             if (_target != null)
             {
-                targetFound = true;
+                _targetFound = true;
             }
         }
 
@@ -52,12 +54,13 @@ namespace Items {
 
         private void Update() {
             if (!_active) return;
-            if (targetFound == true)
+            if (_targetFound)
             {
                 var distToTarget = Mathf.Abs(_bezierPos - _target.closestBezierPos.BezierDistance);
                 if (distToTarget < 20) {
                     _active = false;
-                    rocketObject.DOMove(_target.transform.position, 0.25f).OnUpdate(() => {
+                    rocketObject.parent = _target.transform;
+                    rocketObject.DOLocalMove(Vector3.zero, 0.25f).OnUpdate(() => {
                         rocketObject.LookAt(_target.transform.position);
                     }).SetEase(Ease.Linear);
                     return;

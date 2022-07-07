@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Kart;
 using UnityEngine;
 
 public class NukeExplosion : MonoBehaviour
@@ -38,6 +39,15 @@ public class NukeExplosion : MonoBehaviour
         if (particleSystems.Count == 0 && !explosionEffect.isPlaying)
         {
             Destroy(gameObject);
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponentInParent<KartBase>())
+        {
+            KartBase kart = other.GetComponentInParent<KartBase>();
+            kart.Damaged();
         }
     }
 }

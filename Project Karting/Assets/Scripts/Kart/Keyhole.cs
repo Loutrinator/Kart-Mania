@@ -227,6 +227,10 @@ public class Keyhole : MonoBehaviour
 
     public bool InsertKey(RewindMode mode, [CanBeNull] Action callback)
     {
+        if (callback != null)
+        {
+            powerupCallback = callback;
+        }
         
         _insertionSoundPlayed = false;
         
@@ -238,10 +242,6 @@ public class Keyhole : MonoBehaviour
             keyPopSound.Play();
             ResetKeyhole();
             keyMeshRenderer.enabled = true;
-            if (callback != null)
-            {
-                powerupCallback = callback;
-            }
             return true;
         }
         return false;
@@ -258,13 +258,17 @@ public class Keyhole : MonoBehaviour
         keyhole.eulerAngles = new Vector3(oldRotation.x, oldRotation.y, 0);
     }
 
-    public void Rewind()
+    public void Rewind([CanBeNull] Action callback)
     {
         if (rewindMode == RewindMode.startRewindMode && keyHoleState == KeyHoleState.insertion)
         {
             currentStateStartTime = Time.time;
             keyHoleState = KeyHoleState.rewind;
             ratchetSound.Play();
+        }
+        if (callback != null)
+        {
+            powerupCallback = callback;
         }
     }
     public void StopRewind(float duration)

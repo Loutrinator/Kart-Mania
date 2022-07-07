@@ -819,7 +819,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4099746521796739959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,7 +858,6 @@ MonoBehaviour:
   availableKarts:
   - {fileID: 5452965995569305836, guid: a430f9b90b1c7f440b499713e157067f, type: 3}
   - {fileID: 1401239869367080679, guid: 6c8b3400043a13a4f9b6902fb11ba468, type: 3}
-  - {fileID: 2840564581031535684, guid: 7bc0d7a2b2e4e594abe99bdfa61a33ad, type: 3}
   diaphragm: {fileID: 0}
   carHolder: {fileID: 0}
   spawnHeight: 10
@@ -1164,7 +1163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -25.806065, y: 552.4287}
+  m_AnchoredPosition: {x: -25.806065, y: -746}
   m_SizeDelta: {x: 975.4, y: 172.93}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &3794346108663020009

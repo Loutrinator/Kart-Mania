@@ -91,7 +91,6 @@ namespace Items
             {
                 KartBase kart = other.GetComponentInParent<KartBase>();
                 kart.Damaged();
-                Debug.Log("Collision Caisse : " + other.name);
                 Destroy(gameObject);
             }
         }
