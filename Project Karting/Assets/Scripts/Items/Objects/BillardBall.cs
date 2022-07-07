@@ -100,7 +100,6 @@ public class BillardBall : PhysicsObject
         if (k != null)
         {
             k.Damaged();
-            Destroy(gameObject);
         }
     }
 

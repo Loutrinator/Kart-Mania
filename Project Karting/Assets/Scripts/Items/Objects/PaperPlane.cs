@@ -39,6 +39,7 @@ namespace Items {
             }, _startDistance + moveDistance, planeSpeed).OnComplete(() => {
                 info.kart.kartRootModel.gameObject.SetActive(true);
                 info.kart.enabled = true;
+                Use(info);
                 Destroy(gameObject);
             }).SetSpeedBased().SetEase(Ease.Linear);
         }

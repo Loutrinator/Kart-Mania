@@ -80,6 +80,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Horn"",
+                    ""type"": ""Button"",
+                    ""id"": ""3bc34425-29c9-47af-a777-ecc1fc17b8d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -300,6 +309,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5bede00-ab89-41e0-96d9-ca01bc6645e0"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Horn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd03e75d-f65f-422c-8424-6497734ccbc5"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Horn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -558,6 +589,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Kart_Pause = m_Kart.FindAction("Pause", throwIfNotFound: true);
         m_Kart_Item = m_Kart.FindAction("Item", throwIfNotFound: true);
         m_Kart_Respawn = m_Kart.FindAction("Respawn", throwIfNotFound: true);
+        m_Kart_Horn = m_Kart.FindAction("Horn", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -629,6 +661,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Kart_Pause;
     private readonly InputAction m_Kart_Item;
     private readonly InputAction m_Kart_Respawn;
+    private readonly InputAction m_Kart_Horn;
     public struct KartActions
     {
         private @PlayerControls m_Wrapper;
@@ -639,6 +672,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Kart_Pause;
         public InputAction @Item => m_Wrapper.m_Kart_Item;
         public InputAction @Respawn => m_Wrapper.m_Kart_Respawn;
+        public InputAction @Horn => m_Wrapper.m_Kart_Horn;
         public InputActionMap Get() { return m_Wrapper.m_Kart; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -666,6 +700,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Respawn.started -= m_Wrapper.m_KartActionsCallbackInterface.OnRespawn;
                 @Respawn.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnRespawn;
                 @Respawn.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnRespawn;
+                @Horn.started -= m_Wrapper.m_KartActionsCallbackInterface.OnHorn;
+                @Horn.performed -= m_Wrapper.m_KartActionsCallbackInterface.OnHorn;
+                @Horn.canceled -= m_Wrapper.m_KartActionsCallbackInterface.OnHorn;
             }
             m_Wrapper.m_KartActionsCallbackInterface = instance;
             if (instance != null)
@@ -688,6 +725,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Respawn.started += instance.OnRespawn;
                 @Respawn.performed += instance.OnRespawn;
                 @Respawn.canceled += instance.OnRespawn;
+                @Horn.started += instance.OnHorn;
+                @Horn.performed += instance.OnHorn;
+                @Horn.canceled += instance.OnHorn;
             }
         }
     }
@@ -757,6 +797,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnItem(InputAction.CallbackContext context);
         void OnRespawn(InputAction.CallbackContext context);
+        void OnHorn(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

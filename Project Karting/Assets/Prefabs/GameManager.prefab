@@ -49,14 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad2395f6e484734994d2f6a202eb7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 0
   minimap: {fileID: 4557034411793747280}
-  itemManager: {fileID: 11400000, guid: 4a4bb616e5b0d0244aaf6dae3cd4cc2d, type: 2}
-  timetrialHUDLeftPrefab: {fileID: 671105266231658824, guid: c88fc4398f416c340b9898c29a056315,
+  raceHudPrefab: {fileID: 671105266231658824, guid: c88fc4398f416c340b9898c29a056315,
     type: 3}
-  timetrialHUDRightPrefab: {fileID: 4833919748350756490, guid: 08af166ffa7a73a4fa8feab186c4e67c,
-    type: 3}
-  StartUIPrefab: {fileID: 4545681373983826033, guid: 24b9c1952b0ed7742a40ee0a11942240,
+  startUIPrefab: {fileID: 4545681373983826033, guid: 24b9c1952b0ed7742a40ee0a11942240,
     type: 3}
   karts: []
   cameraParentPrefab: {fileID: 589774808360774384, guid: 71c17ac6747a0f449a68f354cb30795b,
@@ -93,7 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5923baa9973e0304cbbf44b1cc171e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceForRespawn: 60
 --- !u!114 &2827280588860281560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRace: {fileID: 0}
+  gameState: 0
+  itemManager: {fileID: 0}
 --- !u!1001 &4410900628040999315
 PrefabInstance:
   m_ObjectHideFlags: 0

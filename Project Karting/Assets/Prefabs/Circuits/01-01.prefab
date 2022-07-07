@@ -1781,6 +1781,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3946411319706891105}
+  - component: {fileID: 1892673376552394386}
   m_Layer: 0
   m_Name: SPAWN POINTS
   m_TagString: Untagged
@@ -1810,6 +1811,23 @@ Transform:
   m_Father: {fileID: 8738788713797060524}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1892673376552394386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537421733248045068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eab04fa617fe0a42b7ce7508b55cf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spline: {fileID: 4270162758006377534}
+  flag: {fileID: 3196275414309972572}
+  distanceOffset: 6
+  offset: 10
+  horizontalOffset: 12
 --- !u!1 &3563387280141325870
 GameObject:
   m_ObjectHideFlags: 0
@@ -4408,6 +4426,7 @@ MonoBehaviour:
   - {fileID: 1890221696717612430}
   - {fileID: 2773703210607215967}
   - {fileID: 9164408341935652992}
+  spawner: {fileID: 1892673376552394386}
   checkpointAmount: 0
 --- !u!1 &9103438836228780979
 GameObject:
@@ -5147,6 +5166,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 933e058338c9af14abc8b6022f3e5186, type: 3}
+--- !u!114 &3196275414309972572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3769738577988345106, guid: 933e058338c9af14abc8b6022f3e5186,
+    type: 3}
+  m_PrefabInstance: {fileID: 1732688271602251598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dd8e7b5e40c59498b1801dccb58474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6345375793338264779 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4613079545113500549, guid: 933e058338c9af14abc8b6022f3e5186,

@@ -37,6 +37,10 @@ namespace Handlers {
             return currentRace;
         }
 
+        public void OnRaceQuit() {
+            OnRaceQuit(null);
+        }
+        
         public void OnRaceQuit(PlayerConfiguration configuration) {
             Init();
             if(configuration != null)

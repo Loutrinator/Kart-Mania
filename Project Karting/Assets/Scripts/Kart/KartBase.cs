@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Handlers;
 using Road.RoadPhysics;
+using UI;
 using UnityEngine;
 
 namespace Kart
@@ -31,6 +32,8 @@ namespace Kart
             weight = .5f,
             luck = .5f
         };
+
+        [SerializeField] private AudioSource klaxon;
         
         List<StatPowerup> activePowerupList = new List<StatPowerup>();
         private Stats convertedStats;
@@ -48,11 +51,7 @@ namespace Kart
         // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
         public Func<int> GetPlayerID;
 
-        private Vector3 _firstPos;
-        private float _firstPosTime;
         private float _currentSpeed;
-        private float _yVelocity;
-        private float _currentAngularSpeed;
         private float _lerpedWheelDirection;
 
         private Vector3 posFixed;
@@ -65,8 +64,6 @@ namespace Kart
         protected void Awake()
         {
             if(transform == null) InitTransform();
-            _firstPos = transform.position;
-            _firstPosTime = Time.time;
             StopDrifting();
             canMove = true;
 
@@ -128,7 +125,7 @@ namespace Kart
                     }
                 }
 
-                if (RaceManager.Instance.gameState == GameState.start)
+                if (RaceManager.Instance.gameState == GameState.Start)
                 {
                     if (movement[1] > 0)
                     {
@@ -246,8 +243,6 @@ namespace Kart
         public void ResetMovements()
         {
             _currentSpeed = 0;
-            _yVelocity = 0;
-            _currentAngularSpeed = 0;
             _lerpedWheelDirection = 0;
         }
 
@@ -337,5 +332,14 @@ namespace Kart
             kartRootModel.DOLocalRotate(Vector3.up, 0.6f, RotateMode.FastBeyond360).SetLoops(3, LoopType.Restart).SetEase(Ease.Linear).OnComplete(() => { isDamaged = false; });
         }
 
+        public void DisableKlaxon()
+        {
+            klaxon.Stop();
+        }
+
+        public void EnableKlaxon()
+        {
+            klaxon.Play();
+        }
     }
 }
