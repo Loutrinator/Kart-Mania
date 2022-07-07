@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Items;
 using Kart;
 using Player;
 using Road.RoadPhysics;
@@ -8,25 +7,22 @@ using UI;
 using UnityEngine;
 
 namespace Handlers {
-    public enum GameState
-    {
-        idle,start,race, finish
+    public enum GameState {
+        Idle,
+        Start,
+        Race,
+        Finish
     }
     public class GameManager : MonoBehaviour
     {
         public Minimap minimap;
-
-
-        [Header("UI and HUD")] 
-        [SerializeField] private HUDTimeTrialController timetrialHUDLeftPrefab;
-        [SerializeField] private HUDTimeTrialController timetrialHUDRightPrefab;
-
-        [SerializeField] private GameObject StartUIPrefab;
+        
+        [SerializeField] private RaceHUDController raceHudPrefab;
+        [SerializeField] private GameObject startUIPrefab;
 
         [HideInInspector] public List<KartBase> karts = new List<KartBase>();
 
-        private StartMsgAnimation startMessage;
-        private float startTime;
+        private StartMsgAnimation _startMessage;
 
         public CameraFollowPlayer cameraParentPrefab;
 
@@ -42,7 +38,7 @@ namespace Handlers {
         private float _lastPauseTime;
         private const float MinPauseTime = 0.5f;
 
-        private bool gamePaused;
+        private bool _gamePaused;
         
         private IEnumerator Start()
         {
@@ -53,7 +49,7 @@ namespace Handlers {
                 Destroy(gameObject);
             }
 
-            RaceManager.Instance.gameState = GameState.idle;
+            RaceManager.Instance.gameState = GameState.Idle;
             
             RaceManager.Instance.currentRace = LevelManager.instance.InitLevel();
             minimap.race = RaceManager.Instance.currentRace;
@@ -71,7 +67,7 @@ namespace Handlers {
                 respawner.Init();
             }
 
-            gamePaused = false;
+            _gamePaused = false;
             pauseMenu = FindObjectOfType<PauseMenu>();
             _lastPauseTime = Time.unscaledTime;
 
@@ -86,8 +82,8 @@ namespace Handlers {
             if (Time.unscaledTime - _lastPauseTime < MinPauseTime) return;
             _lastPauseTime = Time.unscaledTime;
             
-            gamePaused = !gamePaused;
-            if (gamePaused)
+            _gamePaused = !_gamePaused;
+            if (_gamePaused)
             {
                 Time.timeScale = 0;
                 pauseMenu.PauseGame(playerConfiguration);
@@ -104,7 +100,7 @@ namespace Handlers {
                 RaceManager.Instance.playersInfo[i].lap = 0;
             }
 
-            RaceManager.Instance.gameState = GameState.race;
+            RaceManager.Instance.gameState = GameState.Race;
             foreach (var kart in karts)
             {
                 kart.effects.StopRewind();
@@ -125,7 +121,7 @@ namespace Handlers {
         private void InitRace()
         {
             SoundManager.Instance.PlayRaceMusic();
-            HUDTimeTrialController._nbInstances = 0;
+            RaceHUDController.nbInstances = 0;
 
             var mode = LevelManager.instance.gameConfig.mode;
             if (mode == Game.GameMode.TimeTrial)
@@ -134,7 +130,7 @@ namespace Handlers {
                 RaceManager.Instance.currentRace.road.transform.parent.Find("LOOTBOX").gameObject.SetActive(false);
             }
 
-            RaceManager.Instance.gameState = GameState.start;
+            RaceManager.Instance.gameState = GameState.Start;
             int nbPlayerRacing = LevelManager.instance.gameConfig.players.Count;
 
             minimap.SetPosition(nbPlayerRacing);
@@ -199,21 +195,24 @@ namespace Handlers {
                     RaceManager.Instance.playersInfo[id] = info;
                     
                     //Flipping the UI if required
-                    HUDTimeTrialController HUDPRefab = timetrialHUDLeftPrefab;
+                    var hudPrefab = raceHudPrefab;
 
-                    if ((nbPlayerRacing == 2 && id == 1) || (nbPlayerRacing == 3 && id == 2) ||
+                    // todo flip maybe
+                    /*if ((nbPlayerRacing == 2 && id == 1) || (nbPlayerRacing == 3 && id == 2) ||
                         (nbPlayerRacing == 4 && id >= 2))
                     {
                         HUDPRefab = timetrialHUDRightPrefab;
-                    }
+                    }*/
                     
                     //Adding a the HUD and linking it to the cam
-                    HUDTimeTrialController timetrialHUD = Instantiate(HUDPRefab); // id automatically set inside the class
-                    kart.itemWheel = timetrialHUD.itemWheel;
-                    Canvas timeTrialCanvas = timetrialHUD.GetComponent<Canvas>();
+                    var raceHud = Instantiate(hudPrefab); // id automatically set inside the class
+                    kart.itemWheel = raceHud.itemWheel;
+                    Canvas timeTrialCanvas = raceHud.GetComponent<Canvas>();
                     timeTrialCanvas.worldCamera = kartCam.cam;
                     timeTrialCanvas.planeDistance = 1;
                     timeTrialCanvas.sortingOrder = 100000;
+                    
+                    raceHud.Init(mode);
                     
                     //Adding the kart marker to the minimap
                     minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer, playerConfig.Color);
@@ -221,13 +220,12 @@ namespace Handlers {
                 }
                     
                 //Adding the start countdown HUD    
-                startMessage = Instantiate(StartUIPrefab).GetComponentInChildren<StartMsgAnimation>();
+                _startMessage = Instantiate(startUIPrefab).GetComponentInChildren<StartMsgAnimation>();
                     
-                startTime = startMessage.getStartTime();
-                StartMsgAnimation startUI = startMessage.GetComponent<StartMsgAnimation>();
+                StartMsgAnimation startUI = _startMessage.GetComponent<StartMsgAnimation>();
                 if (startUI != null)
                 {
-                    startUI.placeKeysAction = placeKeys;
+                    startUI.placeKeysAction = PlaceKeys;
                 }
             } else {
 #if UNITY_EDITOR
@@ -236,7 +234,7 @@ namespace Handlers {
             }
         }
 
-        private void placeKeys()
+        private void PlaceKeys()
         {
             foreach (var kart in karts)
             {
@@ -248,18 +246,6 @@ namespace Handlers {
             return RaceManager.Instance.GetPlayerRaceInfo(id);
         }
 
-
-        private string FloatToTimeString(float time) {
-            string prefix = "";
-            if (time < 0) prefix = "-";
-            time = Mathf.Abs(time);
-            int minutes = (int) time / 60;
-            int seconds = (int) time - 60 * minutes;
-            int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
-            return prefix + string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
-        }
-
-
         public void ShakeCameras(ShakeTransformEventData shake) {
             /*foreach (var cam in cameras) {
                 cam.AddShakeEvent(shake);
@@ -267,7 +253,7 @@ namespace Handlers {
         }
 
         public void FinishRace(int playerID) {
-            RaceManager.Instance.gameState = GameState.finish;
+            RaceManager.Instance.gameState = GameState.Finish;
             karts[playerID].canMove = false;
             karts[playerID].effects.driftLevel = 0;
             karts[playerID].effects.StopDrift();
@@ -281,7 +267,7 @@ namespace Handlers {
         public void ResumeGame()
         {
             Time.timeScale = 1;
-            gamePaused = false;
+            _gamePaused = false;
         }
     }
 }

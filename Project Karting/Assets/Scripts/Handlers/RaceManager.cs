@@ -35,7 +35,7 @@ namespace Handlers
         }
         
         public bool RaceHadBegun() {
-            return  (gameState == GameState.race);
+            return  (gameState == GameState.Race);
         }
     }
 }

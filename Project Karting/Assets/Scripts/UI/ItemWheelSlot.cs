@@ -1,80 +1,66 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Handlers;
 using Items;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
-public class ItemWheelSlot : MonoBehaviour
-{
-    [SerializeField] private Image image;
-    public float rotationz = 0; 
-    private float rotation = 200f; 
-    private float resetAngleOffset = 45f;
-    private bool updated = false;
-    private bool hidden = false;
-    private ItemData item;
+namespace UI {
+    public class ItemWheelSlot : MonoBehaviour {
+        [SerializeField] private Image image;
 
-    private void Start()
-    {
-        UpdateItem();
-    }
+        private const float Rotation = 200f;
+        private const float ResetAngleOffset = 45f;
+        private bool _updated;
+        private bool _hidden;
+        private ItemData _item;
 
-    private void Update()
-    {
-        rotationz = transform.rotation.eulerAngles.z;
-        if (!updated)
-        {
-            //Debug.Log("transform.eulerAngles.z " + transform.eulerAngles.z);
-            if (transform.rotation.eulerAngles.z > rotation)
-            {
-                updated = true;
-                UpdateItem();
-            } 
-        }else if(transform.eulerAngles.z < resetAngleOffset)
-        {
-            updated = false;
+        private void Start() {
+            UpdateItem();
         }
 
-        if (!hidden)
-        {
-            if ((transform.eulerAngles.z+180)%360 > 350)
-            {
-                hidden = true;
-                image.enabled = false;
+        private void Update() {
+            if (!_updated) {
+                //Debug.Log("transform.eulerAngles.z " + transform.eulerAngles.z);
+                if (transform.rotation.eulerAngles.z > Rotation) {
+                    _updated = true;
+                    UpdateItem();
+                }
             }
-        }else if((transform.eulerAngles.z+90)%360 < 45)
-        {
-            hidden = false;
+            else if (transform.eulerAngles.z < ResetAngleOffset) {
+                _updated = false;
+            }
+
+            if (!_hidden) {
+                if ((transform.eulerAngles.z + 180) % 360 > 350) {
+                    _hidden = true;
+                    image.enabled = false;
+                }
+            }
+            else if ((transform.eulerAngles.z + 90) % 360 < 45) {
+                _hidden = false;
+                image.enabled = true;
+            }
+        }
+
+        public bool IsPointedByArrow(int numberOfSubdivisions, float arrowAngle) {
+            float angleOffset = 360f / (numberOfSubdivisions * 2f);
+            float angle = (transform.rotation.eulerAngles.z + 360) % 360;
+            float borneMin = (arrowAngle - angleOffset + 360) % 360;
+            float borneMax = (arrowAngle + angleOffset + 360) % 360;
+            return angle >= borneMin && angle < borneMax;
+        }
+
+        public ItemData GetItem() {
+            return _item;
+        }
+
+        private void UpdateItem() {
+            _item = RaceManager.Instance.itemManager.GetRandomItem(0);
+            image.sprite = _item.GetIcon();
+        }
+
+        public void Reset() {
+            _hidden = false;
             image.enabled = true;
         }
-    }
-
-    public bool isPointedByArrow(int numberOfSubdivisions, float arrowAngle)
-    {
-        float angleOffset = 360f / (numberOfSubdivisions * 2f);
-        float angle = (transform.rotation.eulerAngles.z + 360)%360;
-        float borneMin = (arrowAngle - angleOffset + 360) % 360;
-        float borneMax = (arrowAngle + angleOffset + 360) % 360;
-        return angle >= borneMin && angle < borneMax;
-    }
-    
-    public ItemData GetItem()
-    {
-        return item;
-    }
-    private void UpdateItem()
-    {
-        item = RaceManager.Instance.itemManager.GetRandomItem(0);
-        image.sprite = item.GetIcon();
-    }
-
-    public void Reset()
-    {
-        hidden = false;
-        image.enabled = true;
     }
 }

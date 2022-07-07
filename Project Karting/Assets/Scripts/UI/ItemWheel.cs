@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Items;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -134,7 +135,7 @@ public class ItemWheel : MonoBehaviour
         
         foreach (var slot in slots)
         {
-            if (slot.isPointedByArrow(8, 45f))
+            if (slot.IsPointedByArrow(8, 45f))
             {
                 ItemData item = slot.GetItem();
                 Sprite sprite = item.GetIcon();

@@ -48,11 +48,7 @@ namespace Kart
         // PlayerRaceInfo (who's listening is own kart GetPlayerID) will return the associated player ID
         public Func<int> GetPlayerID;
 
-        private Vector3 _firstPos;
-        private float _firstPosTime;
         private float _currentSpeed;
-        private float _yVelocity;
-        private float _currentAngularSpeed;
         private float _lerpedWheelDirection;
 
         private Vector3 posFixed;
@@ -65,8 +61,6 @@ namespace Kart
         protected void Awake()
         {
             if(transform == null) InitTransform();
-            _firstPos = transform.position;
-            _firstPosTime = Time.time;
             StopDrifting();
             canMove = true;
 
@@ -128,7 +122,7 @@ namespace Kart
                     }
                 }
 
-                if (RaceManager.Instance.gameState == GameState.start)
+                if (RaceManager.Instance.gameState == GameState.Start)
                 {
                     if (movement[1] > 0)
                     {
@@ -246,8 +240,6 @@ namespace Kart
         public void ResetMovements()
         {
             _currentSpeed = 0;
-            _yVelocity = 0;
-            _currentAngularSpeed = 0;
             _lerpedWheelDirection = 0;
         }
 
