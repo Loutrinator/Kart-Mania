@@ -22,6 +22,8 @@ namespace Player {
             _controls.Kart.Item.started += OnItemDown;
             _controls.Kart.Item.performed += OnItemHold;
             _controls.Kart.Item.canceled += OnItemUp;
+            _controls.Kart.Horn.started += OnKlaxonDown;
+            _controls.Kart.Horn.canceled += OnKlaxonUp;
         }
 
         public void InitializePlayerConfiguration(PlayerConfiguration pc) {
@@ -63,6 +65,12 @@ namespace Player {
 
         public void OnItemDown(InputAction.CallbackContext context) {
             OnItemDown();
+        }
+        public void OnKlaxonUp(InputAction.CallbackContext context) {
+            OnKlaxonUp();
+        }
+        public void OnKlaxonDown(InputAction.CallbackContext context) {
+            OnKlaxonDown();
         }
 
         public void OnMove(InputAction.CallbackContext context) {

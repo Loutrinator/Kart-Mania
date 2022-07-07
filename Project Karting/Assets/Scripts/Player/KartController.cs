@@ -61,5 +61,15 @@ namespace Player
                 item.OnKeyDown(info);
             }
         }
+        
+        public void OnKlaxonUp()
+        {
+            kart.DisableKlaxon();
+        }
+        
+        public void OnKlaxonDown()
+        {
+            kart.EnableKlaxon();
+        }
     }
 }
