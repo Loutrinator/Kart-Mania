@@ -24,6 +24,7 @@ namespace Items
         private Transform _transform;
         private Vector3 _startPosition;
         private Vector3 _forward;
+        private bool isAttached = true;
         public void Throw(bool isHoldingKey)
         {
             if (!isHoldingKey)
@@ -87,15 +88,28 @@ namespace Items
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<KartBase>())
+            if (isAttached)
+            {
+                if (other.transform == transform.parent) return;
+                else if (other.GetComponentInParent<KartBase>())
+                {
+                    KartBase kart = other.GetComponentInParent<KartBase>();
+                    kart.Damaged();
+                    isAttached = true;
+                    Destroy(gameObject);
+                }
+            }
+            else
             {
                 KartBase kart = other.GetComponentInParent<KartBase>();
                 kart.Damaged();
+                isAttached = true;
                 Destroy(gameObject);
             }
         }
 
         public override void OnKeyDown(PlayerRaceInfo info) {
+            isAttached = false;
             transform.parent = null;
         }
 
