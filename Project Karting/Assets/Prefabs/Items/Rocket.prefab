@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7418304866301580235}
-  m_Layer: 0
+  - component: {fileID: 358555479584951784}
+  - component: {fileID: 5250255983205797720}
+  - component: {fileID: 6423108593160634647}
+  m_Layer: 12
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +34,47 @@ Transform:
   m_Father: {fileID: 7675605611381746436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &358555479584951784
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760030937650796271}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.75, y: 0.75, z: 2.35}
+  m_Center: {x: 0, y: 0, z: 0.175}
+--- !u!54 &5250255983205797720
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760030937650796271}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &6423108593160634647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760030937650796271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2df603c3d6919b4e9cd0335164b4513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5385767362382135835
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,7 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1622776820985787919}
   - component: {fileID: 1736910922608088729}
-  m_Layer: 0
+  - component: {fileID: 7862557886747968381}
+  m_Layer: 12
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,6 +122,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketObject: {fileID: 7418304866301580235}
   rotationPivot: {fileID: 7388473299139140954}
+  rocketTrigger: {fileID: 6423108593160634647}
+--- !u!54 &7862557886747968381
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5385767362382135835}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &8581283823400034752
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7675605611381746436}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7388473299139140954}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RotationPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,6 +268,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: df7d0df1578070f428867d40089d0308, type: 2}
+    - target: {fileID: -4219859510393569081, guid: 3e5fa274c514d9b46a096462f8fae11d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -258515987366392897, guid: 3e5fa274c514d9b46a096462f8fae11d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -215,6 +282,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: rocket
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e5fa274c514d9b46a096462f8fae11d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657383028934767861, guid: 3e5fa274c514d9b46a096462f8fae11d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e5fa274c514d9b46a096462f8fae11d, type: 3}
