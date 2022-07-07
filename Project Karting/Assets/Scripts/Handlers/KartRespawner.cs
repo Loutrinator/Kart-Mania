@@ -21,6 +21,7 @@ namespace Handlers
             var karts = GameManager.Instance.karts;
             foreach (var kart in karts) {
                 BezierUtils.BezierPos bezierPos = kart.closestBezierPos;
+                if (bezierPos == null) continue;
                 if (Vector3.Distance(bezierPos.GlobalOrigin, kart.transform.position) > KartPhysicsSettings.instance.respawnMinDistance)
                 {
                     Respawn(kart);
