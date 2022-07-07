@@ -4,8 +4,8 @@ using TMPro;
 using UnityEngine;
 
 namespace UI {
-    public class RaceHUDController : MonoBehaviour
-    {
+    public class RaceHUDController : MonoBehaviour {
+        [SerializeField] public Canvas canvas;
         [Header("Front")] [SerializeField] private TextMeshProUGUI bestTime;
         [SerializeField] private TextMeshProUGUI currentTime;
         [SerializeField] private TextMeshProUGUI timeDiff;

@@ -213,6 +213,9 @@ namespace Handlers {
                     timeTrialCanvas.sortingOrder = 100000;
                     
                     raceHud.Init(mode);
+
+                    raceHud.canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                    raceHud.canvas.worldCamera = kart.cameraFollowPlayer.cam;
                     
                     //Adding the kart marker to the minimap
                     minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer, playerConfig.Color);
