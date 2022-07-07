@@ -12,6 +12,7 @@ namespace Game {
         public BezierPath road;
         
         public Transform[] spawnPoints;
+        public SpawnPoints spawner;
 
         [HideInInspector] public int checkpointAmount;
 
