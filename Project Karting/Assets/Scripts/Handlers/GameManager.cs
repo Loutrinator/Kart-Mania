@@ -43,7 +43,7 @@ namespace Handlers {
         private const float MinPauseTime = 0.5f;
 
         private bool gamePaused;
-        
+
         private IEnumerator Start()
         {
             if (Instance == null) {
@@ -127,10 +127,11 @@ namespace Handlers {
             SoundManager.Instance.PlayRaceMusic();
             HUDTimeTrialController._nbInstances = 0;
 
+            RaceManager.Instance.currentRace.spawner.SetSpawners();
+
             var mode = LevelManager.instance.gameConfig.mode;
             if (mode == Game.GameMode.TimeTrial)
             {
-                //Debug.Log();
                 RaceManager.Instance.currentRace.road.transform.parent.Find("LOOTBOX").gameObject.SetActive(false);
             }
 
