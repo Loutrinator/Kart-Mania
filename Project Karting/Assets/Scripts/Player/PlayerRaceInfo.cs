@@ -15,7 +15,7 @@ public class PlayerRaceInfo
     
     //Items
     public ItemObject Item;
-    public bool hasItem;
+    public bool hasItem => Item != null;
     public bool itemIsInUse;
     
     //Race laps and checkpoints

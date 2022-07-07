@@ -31,6 +31,8 @@ namespace Kart
             weight = .5f,
             luck = .5f
         };
+
+        [SerializeField] private AudioSource klaxon;
         
         List<StatPowerup> activePowerupList = new List<StatPowerup>();
         private Stats convertedStats;
@@ -337,5 +339,14 @@ namespace Kart
             kartRootModel.DOLocalRotate(Vector3.up, 0.6f, RotateMode.FastBeyond360).SetLoops(3, LoopType.Restart).SetEase(Ease.Linear).OnComplete(() => { isDamaged = false; });
         }
 
+        public void DisableKlaxon()
+        {
+            klaxon.Stop();
+        }
+
+        public void EnableKlaxon()
+        {
+            klaxon.Play();
+        }
     }
 }

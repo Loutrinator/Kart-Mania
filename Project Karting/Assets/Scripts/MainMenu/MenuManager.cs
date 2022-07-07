@@ -77,14 +77,14 @@ namespace MainMenu {
                 case 0: //timetrial
                     LevelManager.instance.gameConfig.mode = GameMode.TimeTrial;
                     break;
-                case 1: //levelEditor
-                    LevelManager.instance.gameConfig.mode = GameMode.Editor;
+                case 1: //Versus
+                    LevelManager.instance.gameConfig.mode = GameMode.Versus;
                     break;
                 case 2: //Championship
                     LevelManager.instance.gameConfig.mode = GameMode.Championship;
                     break;
-                case 3: //Championship
-                    LevelManager.instance.gameConfig.mode = GameMode.Versus;
+                case 3: //level editor
+                    LevelManager.instance.gameConfig.mode = GameMode.Editor;
                     break;
             }
 
