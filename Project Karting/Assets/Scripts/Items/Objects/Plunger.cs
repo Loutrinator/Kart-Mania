@@ -123,6 +123,7 @@ namespace Items
 
         public override void OnKeyDown(PlayerRaceInfo info)
         {
+            Use(info);
             isThrown = true;
             transform.parent = null;
             rb.isKinematic = false;

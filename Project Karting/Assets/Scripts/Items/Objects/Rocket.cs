@@ -31,7 +31,9 @@ namespace Items {
             
         }
 
-        public override void OnKeyDown(PlayerRaceInfo info) {
+        public override void OnKeyDown(PlayerRaceInfo info)
+        {
+            Use(info);
             _bezierPos = _bezierPath.bezierSpline.GetClosestBezierPos(rocketObject.position).BezierDistance;
             rocketObject.parent = null;
             _active = true;

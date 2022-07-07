@@ -11,6 +11,7 @@ namespace Items
     {
         [SerializeField] private Plunger plungerPrefab;
         [SerializeField] private Sprite icon;
+        [SerializeField] private Vector3 offset;
 
         public override Sprite GetIcon()
         {
@@ -21,7 +22,7 @@ namespace Items
         {
             var plunger = Instantiate(plungerPrefab, parent.position, parent.rotation, parent);
             plunger.transform.rotation *= Quaternion.AngleAxis(180, plunger.transform.up);
-            plunger.transform.position += plunger.transform.localPosition + parent.up * 5.0f;
+            plunger.transform.localPosition += offset;
             return plunger;
         }
     }
