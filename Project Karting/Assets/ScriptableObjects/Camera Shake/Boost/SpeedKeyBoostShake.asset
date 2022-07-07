@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d66417a2f1ebf42b9c15a9f3b51769, type: 3}
+  m_Name: SpeedKeyBoostShake
+  m_EditorClassIdentifier: 
+  target: 0
+  amplitude: 0.4
+  frequency: 20
+  duration: 5
+  blendOverLifeTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 29.371077
+      outSlope: 29.371077
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.079365075
+    - serializedVersion: 3
+      time: 0.10055666
+      value: 1.0023584
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.86253095
+      value: 0.89199203
+      inSlope: -1.8282114
+      outSlope: -1.8282114
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.092122205
+      outWeight: 0.8183318
+    - serializedVersion: 3
+      time: 1.0021414
+      value: -0.0023584962
+      inSlope: -80.0351
+      outSlope: -80.0351
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.009915386
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

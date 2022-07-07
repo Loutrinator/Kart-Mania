@@ -305,7 +305,6 @@ namespace Kart
             // on ajoute à 'powerups' les modifiers de chaque powerup
             for (int i = 0; i < activePowerupList.Count; i++)
             {
-                
                 var p = activePowerupList[i];
                 // on met a jour le compteur de temps écoulé depuis l'obtention du powerup
                 p.elapsedTime += Time.fixedDeltaTime;

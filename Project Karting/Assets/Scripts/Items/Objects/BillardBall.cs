@@ -1,6 +1,7 @@
 using Road.RoadPhysics;
 using System.Collections;
 using System.Collections.Generic;
+using Kart;
 using UnityEngine;
 
 public class BillardBall : PhysicsObject
@@ -94,6 +95,13 @@ public class BillardBall : PhysicsObject
         audioSource.loop = false;
         audioSource.clip = bounce;
         audioSource.Play();
+
+        KartBase k = collision.collider.GetComponentInParent<KartBase>();
+        if (k != null)
+        {
+            k.Damaged();
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionExit(Collision collision)

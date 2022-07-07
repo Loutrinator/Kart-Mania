@@ -12,11 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d57e3a669e4581b74115d33ded1148, type: 3}
   m_Name: SpeedKey
   m_EditorClassIdentifier: 
-  boost:
-    topSpeed: 50
-    acceleration: 100
-    maniability: 0
-    weight: 0
-    luck: 0
-  duration: 5
+  speedKeyPrefab: {fileID: 4086817231245988437, guid: c8a1bc720690d694d9d31b0490ca1fcf,
+    type: 3}
   icon: {fileID: 21300000, guid: c5bc57f58e6003443ba137bdfc496ab7, type: 3}
