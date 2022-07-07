@@ -34,20 +34,23 @@ namespace Items
         private void BreakLootBox(int position,KartBase kart)
         {
             state = LootBoxState.opened;
-            GiveItem(position, kart);
+            PlayerRaceInfo infos = RaceManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID());
+            if (!infos.hasItem)
+            {
+                GiveItem(position, infos);
+            }
             StartCoroutine(WaitToRespawn());
             prism.localScale = Vector3.zero;
         }
 
-        private void GiveItem(int position, KartBase kart)
+        private void GiveItem(int position, PlayerRaceInfo info)
         {
-            PlayerRaceInfo infos = RaceManager.Instance.GetPlayerRaceInfo(kart.GetPlayerID());
-            if (kart.itemWheel != null)
+            if (info.kart.itemWheel != null)
             {
-                kart.itemWheel.StartSelection(infos);
+                info.kart.itemWheel.StartSelection(info);
             }else
             {
-                StartCoroutine(giveItemNoUI(position, infos));
+                StartCoroutine(giveItemNoUI(position, info));
             }
         }
 
