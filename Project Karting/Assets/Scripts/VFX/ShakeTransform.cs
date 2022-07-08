@@ -22,8 +22,8 @@ public class ShakeTransform : MonoBehaviour {
         Vector3 noiseOffset;
         public Vector3 noise;
 
-        public ShakeEvent(ShakeTransformEventData data)
-        {
+        public ShakeEvent(ShakeTransformEventData data) {
+            if (data == null) return;
             this.data = data;
             duration = data.duration;
             timeRemaning = duration;

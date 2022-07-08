@@ -23,6 +23,7 @@ namespace Items {
             rocketObject.localPosition = Vector3.zero;
             rocketObject.localRotation = Quaternion.identity;
             _active = false;
+            _targetFound = false;
 
             _bezierPath = RaceManager.Instance.currentRace.road;
         }
@@ -44,10 +45,10 @@ namespace Items {
                 .Aggregate((curMin, x) =>
                     x.getDistanceTraveled(roadLength) < curMin.getDistanceTraveled(roadLength) ? x : curMin)
                 .kart;
-            if (_target != null)
-            {
+            if (_target != null) {
                 _targetFound = true;
             }
+            else _active = false;
         }
 
         public override void OnKeyUp(PlayerRaceInfo info) {
