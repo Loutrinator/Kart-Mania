@@ -14,6 +14,7 @@ namespace Kart {
         [SerializeField] private Transform frontPosition;
         [SerializeField] private Transform backPosition;
         [SerializeField] public Camera cam;
+        [SerializeField] public AudioListener audioListener;
         public ShakeTransform cameraShakeTransform;
 
         [HideInInspector] public CameraMode currentCameraMode = CameraMode.front;
@@ -35,8 +36,8 @@ namespace Kart {
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, KartPhysicsSettings.instance.cameraRotationLerp * Time.deltaTime);
         }
 
-        private void OnDrawGizmos()
-        {
+        private void OnDrawGizmos() {
+            if (target == null) return;
             Gizmos.color = Color.red;
             Gizmos.DrawRay(target.transform.position, transform.up*5f);
             Gizmos.color = Color.green;

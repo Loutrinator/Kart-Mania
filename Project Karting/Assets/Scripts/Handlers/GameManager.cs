@@ -217,6 +217,8 @@ namespace Handlers {
                     if (LevelManager.instance.gameConfig.players.Count > 1) {
                         raceHud.canvas.renderMode = RenderMode.ScreenSpaceCamera;
                         raceHud.canvas.worldCamera = kart.cameraFollowPlayer.cam;
+
+                        Destroy(kart.cameraFollowPlayer.audioListener);
                     }
 
                     LapManager.Instance.OnNewLap.Add(raceHud.UpdateLap);
