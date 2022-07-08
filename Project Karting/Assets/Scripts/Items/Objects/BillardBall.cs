@@ -83,7 +83,7 @@ public class BillardBall : PhysicsObject
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.layer == 10)
         {
@@ -96,7 +96,7 @@ public class BillardBall : PhysicsObject
         audioSource.clip = bounce;
         audioSource.Play();
 
-        KartBase k = collision.collider.GetComponentInParent<KartBase>();
+        KartBase k = collision.gameObject.GetComponentInParent<KartBase>();
         if (k != null)
         {
             k.Damaged();

@@ -73,12 +73,13 @@ namespace Items
 
         private void OnTriggerEnter(Collider other)
         {
-            if (state == LootBoxState.available)
-            {
-                KartBase kart = other.GetComponentInParent<KartCollisions>().kartBase;
-                if (kart != null)
+            if (state == LootBoxState.available) {
+                var kart = other.GetComponentInParent<KartCollisions>();
+                if (kart == null) return;
+                var kartBase = kart.kartBase;
+                if (kartBase != null)
                 {
-                    BreakLootBox(1,kart);
+                    BreakLootBox(1,kartBase);
                 }
             }
         }

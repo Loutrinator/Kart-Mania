@@ -19,6 +19,7 @@ namespace Handlers {
         
         [SerializeField] private RaceHUDController raceHudPrefab;
         [SerializeField] private GameObject startUIPrefab;
+        [SerializeField] private Canvas raceHudParent;
 
         [HideInInspector] public List<KartBase> karts = new List<KartBase>();
 
@@ -215,8 +216,19 @@ namespace Handlers {
                     raceHud.Init(mode);
 
                     if (LevelManager.instance.gameConfig.players.Count > 1) {
-                        raceHud.canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                        raceHud.canvas.worldCamera = kart.cameraFollowPlayer.cam;
+                        raceHud.transform.parent = raceHudParent.transform;
+
+                        var camRect = kartCam.cam.rect;
+                        var rectTransform = raceHud.canvas.GetComponent<RectTransform>();
+                        var sizeDelta = rectTransform.sizeDelta;
+                        rectTransform.position =
+                            new Vector2(sizeDelta.x * (camRect.x + 0.25f), sizeDelta.y * (camRect.y + 0.5f));
+                        rectTransform.sizeDelta = new Vector2(sizeDelta.x * camRect.width, sizeDelta.y * camRect.height);
+                        
+                        //raceHud.canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                        //raceHud.canvas.worldCamera = kart.cameraFollowPlayer.cam;
+
+                        Destroy(kart.cameraFollowPlayer.audioListener);
                     }
 
                     LapManager.Instance.OnNewLap.Add(raceHud.UpdateLap);
