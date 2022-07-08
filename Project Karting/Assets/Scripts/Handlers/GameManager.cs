@@ -123,11 +123,10 @@ namespace Handlers {
             SoundManager.Instance.PlayRaceMusic();
             RaceHUDController.nbInstances = 0;
 
-            RaceManager.Instance.currentRace.spawner.SetSpawners();
-
             var mode = LevelManager.instance.gameConfig.mode;
             if (mode == Game.GameMode.TimeTrial)
             {
+                //Debug.Log();
                 RaceManager.Instance.currentRace.road.transform.parent.Find("LOOTBOX").gameObject.SetActive(false);
             }
 
@@ -217,6 +216,8 @@ namespace Handlers {
 
                     raceHud.canvas.renderMode = RenderMode.ScreenSpaceCamera;
                     raceHud.canvas.worldCamera = kart.cameraFollowPlayer.cam;
+                    
+                    LapManager.Instance.OnNewLap.Add(raceHud.UpdateLap);
                     
                     //Adding the kart marker to the minimap
                     minimap.AddVisualObject(kart.gameObject, kart.minimapRenderer, playerConfig.Color);

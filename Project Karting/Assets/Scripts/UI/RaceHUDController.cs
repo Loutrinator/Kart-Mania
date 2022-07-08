@@ -50,5 +50,9 @@ namespace UI {
             speed.text = (int)(_info.kart.rigidBody.velocity.magnitude) + " km/h";
         }
 
+        public void UpdateLap(int playerIndex) {
+            lap.text = _info.lap + "/" + RaceManager.Instance.currentRace.laps;
+        }
+
     }
 }

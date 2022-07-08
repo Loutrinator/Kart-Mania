@@ -94,6 +94,10 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         playerDisplay.ShowSelectionMarker(currentPlayerIndex);
     }
+
+    public void ResetPlayers() {
+        currentPlayerIndex = 0;
+    }
     
     
     public void HandlePlayerJoin(PlayerInput pi)

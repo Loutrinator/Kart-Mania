@@ -43,6 +43,7 @@ namespace Handlers {
         
         public void OnRaceQuit(PlayerConfiguration configuration) {
             Init();
+            PlayerConfigurationManager.Instance.ResetPlayers();
             if(configuration != null)
                 gameConfig.players.Add(configuration);
         }
