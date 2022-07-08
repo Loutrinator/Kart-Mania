@@ -214,9 +214,11 @@ namespace Handlers {
                     
                     raceHud.Init(mode);
 
-                    raceHud.canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                    raceHud.canvas.worldCamera = kart.cameraFollowPlayer.cam;
-                    
+                    if (LevelManager.instance.gameConfig.players.Count > 1) {
+                        raceHud.canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                        raceHud.canvas.worldCamera = kart.cameraFollowPlayer.cam;
+                    }
+
                     LapManager.Instance.OnNewLap.Add(raceHud.UpdateLap);
                     
                     //Adding the kart marker to the minimap
