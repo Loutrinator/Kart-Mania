@@ -59,8 +59,9 @@ namespace UI {
         {
             Vector3 movingPartsRotation = movingParts.rotation.eulerAngles;
             movingPartsRotation.z += rotationSpeed * Time.deltaTime;
+            movingPartsRotation.y = 0;
             rotationCounter += rotationSpeed * Time.deltaTime;
-            movingParts.rotation = Quaternion.Euler(movingPartsRotation);
+            movingParts.eulerAngles = movingPartsRotation;
             if (rotationCounter > 360f)
             {
                 rotationCounter -= 360f;
