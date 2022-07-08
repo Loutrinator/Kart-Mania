@@ -330,7 +330,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9df9ac361cefffb45b826fb2ca7c1436, type: 2}
+  - {fileID: 2100000, guid: da350090af462dc4aa9c83f5a14f842a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3046,10 +3046,10 @@ MonoBehaviour:
   bezierSpline: {fileID: 4270162758006377534}
   roadWidth: 23.1
   roadThickness: 3
-  upTiling: {x: 1, y: 1}
-  leftTiling: {x: 1, y: 1}
-  rightTiling: {x: 1, y: 1}
-  bottomTiling: {x: 1, y: 1}
+  upTiling: {x: 1, y: 0.05}
+  leftTiling: {x: 0, y: 0}
+  rightTiling: {x: 0, y: 0}
+  bottomTiling: {x: 0, y: 0}
   meshCollider: {fileID: 1143776649395879159}
 --- !u!1 &5363578915512995322
 GameObject:
@@ -4413,8 +4413,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd98d97f9b14c5eb6e959fce57abff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circuitName: 01-01
-  image: {fileID: 21300000, guid: bc701fc57d6590743ac0b28d795cd46e, type: 3}
+  circuitName: Looping au bureau
+  image: {fileID: 21300000, guid: cc13c4cba1695d6449ac81429db716ff, type: 3}
   laps: 3
   road: {fileID: 4836199134749943345}
   spawnPoints:
